@@ -1,0 +1,86 @@
+{
+  "settings": {
+    "migrated": 4,
+    "iconPacksPath": ".obsidian/icons",
+    "fontSize": 16,
+    "emojiStyle": "none",
+    "iconColor": null,
+    "recentlyUsedIcons": [
+      "TiAlpha",
+      "FasCode",
+      "RaDemolish",
+      "BoBxSupport",
+      "LiSquirrel"
+    ],
+    "recentlyUsedIconsSize": 5,
+    "rules": [],
+    "extraMargin": {
+      "top": 0,
+      "right": 4,
+      "bottom": 0,
+      "left": 0
+    },
+    "iconInTabsEnabled": false,
+    "iconInTitleEnabled": false,
+    "iconInFrontmatterEnabled": false,
+    "iconsBackgroundCheckEnabled": false,
+    "iconsInNotesEnabled": true,
+    "iconIdentifier": ":"
+  },
+  "index.md": {
+    "iconName": "CoMainComponent",
+    "iconColor": "#26a69a"
+  },
+  "05 Repository Notes": {
+    "iconName": "SiReadme",
+    "iconColor": "#ab47bc"
+  },
+  "archive/001 Libraries": {
+    "iconName": "BoBxLibrary",
+    "iconColor": "#66bb6a"
+  },
+  "archive/001 Libraries/01.01 Home Assistant": {
+    "iconName": "SiHomeassistant",
+    "iconColor": "#ff5722"
+  },
+  "archive/001 Libraries/01.02 Virtual Entity": {
+    "iconName": "SiHomeassistantcommunitystore",
+    "iconColor": "#607d8b"
+  },
+  "archive/001 Libraries/01.03 Automation Logic": {
+    "iconName": "TiLogicXnor",
+    "iconColor": "#ff9800"
+  },
+  "archive/001 Libraries/01.04 Boilerplate": {
+    "iconName": "SiScpfoundation",
+    "iconColor": "#ff4081"
+  },
+  "archive/001 Libraries/01.05 Gotify": {
+    "iconName": "LiSquirrel",
+    "iconColor": "#3f51b5"
+  },
+  "archive/001 Libraries/01.09 Support": {
+    "iconName": "BoBxSupport",
+    "iconColor": "#8bc34a"
+  },
+  "archive/02 Applications": {
+    "iconName": "TiApps",
+    "iconColor": "#29b6f6"
+  },
+  "archive/02 Applications/02.01 Demo Repositories": {
+    "iconName": "RaDemolish",
+    "iconColor": "#673ab7"
+  },
+  "archive/02 Applications/02.02 Code Examples & Inspiration": {
+    "iconName": "FasCode",
+    "iconColor": "#cddc39"
+  },
+  "archive/04 Release Notes": {
+    "iconName": "SiSemanticrelease",
+    "iconColor": "#ffca28"
+  },
+  "archive/04 Release Notes/0.x": {
+    "iconName": "TiAlpha",
+    "iconColor": "#e91e63"
+  }
+}
