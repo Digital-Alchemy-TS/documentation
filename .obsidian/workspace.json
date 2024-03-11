@@ -17,7 +17,7 @@
                 "state": {
                   "type": "markdown",
                   "state": {
-                    "file": "01 Typescript Libraries/01.01 core/support/cache.md",
+                    "file": "01 Typescript Libraries/01.01 core/support/configuration.md",
                     "mode": "source",
                     "source": false
                   }
@@ -56,7 +56,7 @@
                 "state": {
                   "type": "localgraph",
                   "state": {
-                    "file": "01 Typescript Libraries/01.01 core/support/cache.md",
+                    "file": "01 Typescript Libraries/01.01 core/support/configuration.md",
                     "options": {
                       "collapse-filter": true,
                       "search": "",
@@ -92,14 +92,14 @@
                 "state": {
                   "type": "markdown",
                   "state": {
-                    "file": "archive/001 Libraries/01.04 Boilerplate/Extensions/Cache.md",
+                    "file": "archive/001 Libraries/01.04 Boilerplate/Extensions/Configuration.md",
                     "mode": "source",
                     "source": false
                   }
                 }
               }
             ],
-            "currentTab": 3
+            "currentTab": 1
           }
         ],
         "direction": "vertical"
@@ -168,7 +168,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "01 Typescript Libraries/01.01 core/support/cache.md",
+                "file": "01 Typescript Libraries/01.01 core/support/configuration.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -185,7 +185,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "01 Typescript Libraries/01.01 core/support/cache.md",
+                "file": "01 Typescript Libraries/01.01 core/support/configuration.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -208,7 +208,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "01 Typescript Libraries/01.01 core/support/cache.md"
+                "file": "01 Typescript Libraries/01.01 core/support/configuration.md"
               }
             }
           }
@@ -231,8 +231,12 @@
   },
   "active": "cb954889eb65e4f2",
   "lastOpenFiles": [
-    "01 Typescript Libraries/01.01 core/README.md",
+    "01 Typescript Libraries/01.01 core/support/cache.md",
+    "01 Typescript Libraries/01.01 core/support/configuration.md",
+    "05 Repository Notes/Typography Notes.md",
+    "archive/001 Libraries/01.04 Boilerplate/Extensions/Configuration.md",
     "archive/001 Libraries/01.04 Boilerplate/Extensions/Cache.md",
+    "01 Typescript Libraries/01.01 core/README.md",
     "archive/001 Libraries/01.04 Boilerplate/Extensions/Extensions.md",
     "archive/001 Libraries/01.04 Boilerplate/01.04 Boilerplate.md",
     "01 Typescript Libraries/01.01 core/support/services.md",
@@ -241,14 +245,11 @@
     "01 Typescript Libraries/01.01 core/support/logger.md",
     "01 Typescript Libraries/01.01 core/support/internal.md",
     "01 Typescript Libraries/01.01 core/support/fetch.md",
-    "01 Typescript Libraries/01.01 core/support/configuration.md",
-    "01 Typescript Libraries/01.01 core/support/cache.md",
     "01 Typescript Libraries/01.01 core/support/Untitled",
     "01 Typescript Libraries/01.01 core/Untitled",
     "01 Typescript Libraries/01.01 core/support",
     "06 Reference/05.01 Digital Alchemy/tty/tty.md",
     "06 Reference/05.01 Digital Alchemy/utilities/utilities.md",
-    "05 Repository Notes/Typography Notes.md",
     "05 Repository Notes/Publishing Documentation.md",
     "archive/001 Libraries/01 Libraries.md",
     "01 Typescript Libraries/01.04 wrappers",
@@ -265,7 +266,6 @@
     "archive/001 Libraries/01.03 Automation Logic/Extensions/Scene Room.md",
     "archive/001 Libraries/01.03 Automation Logic/Extensions/Solar Calculator.md",
     "archive/001 Libraries/01.02 Virtual Entity/01.02 Virtual Entity.md",
-    "archive/001 Libraries/01.09 Support/Server/Metrics/THROWN_ERRORS.md",
-    "03 Custom Components/Untitled.md"
+    "archive/001 Libraries/01.09 Support/Server/Metrics/THROWN_ERRORS.md"
   ]
 }
