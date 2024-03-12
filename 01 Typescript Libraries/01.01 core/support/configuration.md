@@ -71,25 +71,25 @@ Definitions are provided as part of the library/application creation.
 
 ```typescript
 const MY_LIB = CreateLibrary({
-	configuration: {
-		STRING_CONFIG: {
-			type: "string",
-			description: "An example string configuration",
-			default: "foo"
-		},
-		ENUM_CONFIG: {
-			type: "string",
-			description: "Another example string configuration",
-			default: "foo",
-			enum: ["foo","bar"]
-		} as StringConfig<"foo" | "bar">,
-		COMPLEX_CONFIG: {
-			type: "internal",
-			description: "A configuration object needed by a separate library",
-			default: { port: 8080 }
-		} as InternalConfig<NestedLibraryConfiguration>
-	},
-	name: "my_lib"
+  configuration: {
+    STRING_CONFIG: {
+      type: "string",
+      description: "An example string configuration",
+      default: "foo"
+    },
+    ENUM_CONFIG: {
+      type: "string",
+      description: "Another example string configuration",
+      default: "foo",
+      enum: ["foo","bar"]
+    } as StringConfig<"foo" | "bar">,
+    COMPLEX_CONFIG: {
+      type: "internal",
+      description: "A configuration object needed by a separate library",
+      default: { port: 8080 }
+    } as InternalConfig<NestedLibraryConfiguration>
+  },
+  name: "my_lib"
 });
 ```
 
@@ -116,21 +116,21 @@ Values are provided via service params and are accessible in `.project.value` fo
 ```typescript
 export function MyService({ logger, config, lifecycle }: TServiceParams) {
   lifecycle.onPostConfig(() => {
-	  // Properly cast to the string union
-	  logger.info(`value for ENUM_CONFIG is`, config.my_lib.ENUM_CONFIG);
+    // Properly cast to the string union
+    logger.info(`value for ENUM_CONFIG is`, config.my_lib.ENUM_CONFIG);
   });
 }
 ```
 ### ✏️ Modifying Configurations
 
-Some workflows may require changing values for configurations as part of their logic. This can be accomplished through the #T
+Some workflows may require changing values for configurations as part of their logic. This can be accomplished through the #TServiceParams/internal interface
 
 ServiceParams/internal methods. The `EVENT_CONFIGURATION_UPDATED` event is fired from #TServiceParams/event on each config update.
 ```typescript
 export function MyService({ logger, internal, lifecycle }: TServiceParams) {
-	lifecycle.onPreInit(() => {
-		internal.config.set("project", "CONFIG", newValue);
-	});
+  lifecycle.onPreInit(() => {
+    internal.config.set("project", "CONFIG", newValue);
+  });
 }
 ```
 ### 🛒 Custom Loaders

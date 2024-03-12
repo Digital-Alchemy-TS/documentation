@@ -17,7 +17,7 @@
                 "state": {
                   "type": "markdown",
                   "state": {
-                    "file": "01 Typescript Libraries/01.01 core/support/configuration.md",
+                    "file": "01 Typescript Libraries/01.01 core/README.md",
                     "mode": "source",
                     "source": false
                   }
@@ -56,7 +56,7 @@
                 "state": {
                   "type": "localgraph",
                   "state": {
-                    "file": "01 Typescript Libraries/01.01 core/support/configuration.md",
+                    "file": "01 Typescript Libraries/01.01 core/README.md",
                     "options": {
                       "collapse-filter": true,
                       "search": "",
@@ -92,14 +92,13 @@
                 "state": {
                   "type": "markdown",
                   "state": {
-                    "file": "archive/001 Libraries/01.04 Boilerplate/Extensions/Configuration.md",
+                    "file": "archive/001 Libraries/01.04 Boilerplate/Extensions/Fetch.md",
                     "mode": "source",
                     "source": false
                   }
                 }
               }
-            ],
-            "currentTab": 1
+            ]
           }
         ],
         "direction": "vertical"
@@ -168,7 +167,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "01 Typescript Libraries/01.01 core/support/configuration.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -185,7 +183,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "01 Typescript Libraries/01.01 core/support/configuration.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -207,9 +204,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "01 Typescript Libraries/01.01 core/support/configuration.md"
-              }
+              "state": {}
             }
           }
         ],
@@ -229,24 +224,30 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "cb954889eb65e4f2",
+  "active": "2f8eb55784fc4c22",
   "lastOpenFiles": [
-    "01 Typescript Libraries/01.01 core/support/cache.md",
-    "01 Typescript Libraries/01.01 core/support/configuration.md",
-    "05 Repository Notes/Typography Notes.md",
-    "archive/001 Libraries/01.04 Boilerplate/Extensions/Configuration.md",
-    "archive/001 Libraries/01.04 Boilerplate/Extensions/Cache.md",
     "01 Typescript Libraries/01.01 core/README.md",
-    "archive/001 Libraries/01.04 Boilerplate/Extensions/Extensions.md",
-    "archive/001 Libraries/01.04 Boilerplate/01.04 Boilerplate.md",
-    "01 Typescript Libraries/01.01 core/support/services.md",
+    "01 Typescript Libraries/01.01 core/support/internal.md",
     "01 Typescript Libraries/01.01 core/support/wiring.md",
     "01 Typescript Libraries/01.01 core/support/scheduler.md",
     "01 Typescript Libraries/01.01 core/support/logger.md",
-    "01 Typescript Libraries/01.01 core/support/internal.md",
     "01 Typescript Libraries/01.01 core/support/fetch.md",
+    "01 Typescript Libraries/01.01 core/support/configuration.md",
+    "01 Typescript Libraries/01.01 core/support/cache.md",
+    "01 Typescript Libraries/01.03 adapters/grocy/README.md",
+    "01 Typescript Libraries/01.03 adapters/gotify/README.md",
+    "01 Typescript Libraries/01.01 core/assets/example_log.png",
+    "01 Typescript Libraries/01.01 core/support/services.md",
+    "05 Repository Notes/Typography Notes.md",
+    "01 Typescript Libraries/01.01 core/assets/logs-numbered.png",
+    "01 Typescript Libraries/01.01 core/assets/Screenshot_20240311_101117.png",
+    "01 Typescript Libraries/01.01 core/assets",
+    "archive/001 Libraries/01.04 Boilerplate/Extensions/Fetch.md",
+    "archive/001 Libraries/01.04 Boilerplate/Extensions/Configuration.md",
+    "archive/001 Libraries/01.04 Boilerplate/Extensions/Cache.md",
+    "archive/001 Libraries/01.04 Boilerplate/Extensions/Extensions.md",
+    "archive/001 Libraries/01.04 Boilerplate/01.04 Boilerplate.md",
     "01 Typescript Libraries/01.01 core/support/Untitled",
-    "01 Typescript Libraries/01.01 core/Untitled",
     "01 Typescript Libraries/01.01 core/support",
     "06 Reference/05.01 Digital Alchemy/tty/tty.md",
     "06 Reference/05.01 Digital Alchemy/utilities/utilities.md",
@@ -263,9 +264,6 @@
     "archive/001 Libraries/01.03 Automation Logic/01.03 Automation Logic.md",
     "archive/001 Libraries/01.01 Home Assistant/01.01 Home Assistant.md",
     "archive/001 Libraries/01.01 Home Assistant/Extensions/Call Proxy.md",
-    "archive/001 Libraries/01.03 Automation Logic/Extensions/Scene Room.md",
-    "archive/001 Libraries/01.03 Automation Logic/Extensions/Solar Calculator.md",
-    "archive/001 Libraries/01.02 Virtual Entity/01.02 Virtual Entity.md",
-    "archive/001 Libraries/01.09 Support/Server/Metrics/THROWN_ERRORS.md"
+    "archive/001 Libraries/01.03 Automation Logic/Extensions/Scene Room.md"
   ]
 }
