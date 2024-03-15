@@ -10,6 +10,7 @@
           {
             "id": "befe60b5023e93e1",
             "type": "tabs",
+            "dimension": 64.54154727793696,
             "children": [
               {
                 "id": "cb954889eb65e4f2",
@@ -17,7 +18,7 @@
                 "state": {
                   "type": "markdown",
                   "state": {
-                    "file": "01 Typescript Libraries/01.01 core/README.md",
+                    "file": "01 Core/support/logger.md",
                     "mode": "source",
                     "source": false
                   }
@@ -29,6 +30,7 @@
           {
             "id": "cf9f6ada41b9e7ac",
             "type": "tabs",
+            "dimension": 35.458452722063036,
             "children": [
               {
                 "id": "2f8eb55784fc4c22",
@@ -39,32 +41,20 @@
                 }
               },
               {
-                "id": "8fbb941dceceb1f2",
-                "type": "leaf",
-                "state": {
-                  "type": "markdown",
-                  "state": {
-                    "file": "05 Repository Notes/Typography Notes.md",
-                    "mode": "source",
-                    "source": false
-                  }
-                }
-              },
-              {
                 "id": "df8ebe2566f488ad",
                 "type": "leaf",
                 "state": {
                   "type": "localgraph",
                   "state": {
-                    "file": "01 Typescript Libraries/01.01 core/README.md",
+                    "file": "01 Core/support/logger.md",
                     "options": {
-                      "collapse-filter": true,
+                      "collapse-filter": false,
                       "search": "",
                       "localJumps": 1,
                       "localBacklinks": true,
                       "localForelinks": true,
                       "localInterlinks": false,
-                      "showTags": false,
+                      "showTags": true,
                       "showAttachments": false,
                       "hideUnresolved": false,
                       "collapse-color-groups": true,
@@ -87,18 +77,31 @@
                 "group": "e4538bd35ee3cee8"
               },
               {
-                "id": "7714865042554652",
+                "id": "e234e0d4fcc1e865",
                 "type": "leaf",
                 "state": {
                   "type": "markdown",
                   "state": {
-                    "file": "archive/001 Libraries/01.04 Boilerplate/Extensions/Fetch.md",
+                    "file": "private/typography.md",
+                    "mode": "source",
+                    "source": false
+                  }
+                }
+              },
+              {
+                "id": "a88f37d7b1a841a2",
+                "type": "leaf",
+                "state": {
+                  "type": "markdown",
+                  "state": {
+                    "file": "01 Core/support/wiring.md",
                     "mode": "source",
                     "source": false
                   }
                 }
               }
-            ]
+            ],
+            "currentTab": 3
           }
         ],
         "direction": "vertical"
@@ -130,7 +133,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "tag:#redis  ",
+                "query": "tag:#Feature/core/PriorityInit",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -167,6 +170,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "01 Core/support/logger.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -183,6 +187,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "01 Core/support/logger.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -204,7 +209,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "01 Core/support/logger.md"
+              }
             }
           }
         ],
@@ -224,46 +231,53 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "2f8eb55784fc4c22",
+  "active": "cb954889eb65e4f2",
   "lastOpenFiles": [
-    "01 Typescript Libraries/01.01 core/README.md",
-    "01 Typescript Libraries/01.01 core/support/internal.md",
-    "01 Typescript Libraries/01.01 core/support/wiring.md",
-    "01 Typescript Libraries/01.01 core/support/scheduler.md",
-    "01 Typescript Libraries/01.01 core/support/logger.md",
-    "01 Typescript Libraries/01.01 core/support/fetch.md",
-    "01 Typescript Libraries/01.01 core/support/configuration.md",
-    "01 Typescript Libraries/01.01 core/support/cache.md",
-    "01 Typescript Libraries/01.03 adapters/grocy/README.md",
-    "01 Typescript Libraries/01.03 adapters/gotify/README.md",
-    "01 Typescript Libraries/01.01 core/assets/example_log.png",
-    "01 Typescript Libraries/01.01 core/support/services.md",
+    "01 Core/support/scheduler.md",
+    "01 Core/index.md",
+    "01 Core/support/wiring.md",
+    "private/typography.md",
+    "index.md",
+    "02 Home Automation/index.md",
+    "private",
+    "02 Home Automation/02.02 synapse/README.md",
+    "assets/cropped.jpg",
+    "assets",
+    "04 Minor Applications",
+    "03 Support Libraries",
+    "02 Home Automation",
+    "01 Core",
+    "0.2 Horton.md",
+    "addon/README.md",
+    "07 Automation Quickstart/README.md",
+    "addon",
+    "02 Home Automation/02.03 automation/README.md",
+    "02 Home Automation/02.01 hass/README.md",
+    "02 Home Automation/02.02 synapse/assets/reload.png",
+    "02 Home Automation/02.02 synapse/assets",
+    "04 Minor Applications/04.01 Type Writer/README.md",
+    "04 Minor Applications/04.01 Type Writer/assets/command.png",
+    "04 Minor Applications/04.01 Type Writer/assets/editor.png",
+    "04 Minor Applications/04.01 Type Writer/assets",
+    "02 Home Automation/02.01 hass/assets/editor.png",
+    "02 Home Automation/02.01 hass/support/Websocket API.md",
+    "01 Typescript Libraries/01.02 home automation/hass/assets/custom_types.png",
+    "01 Typescript Libraries/01.02 home automation/hass/assets/call_service.png",
+    "02 Home Automation/02.01 hass/assets",
+    "02 Home Automation/02.01 hass/support/Call Proxy.md",
+    "02 Home Automation/02.01 hass/support/Entity Manager.md",
     "05 Repository Notes/Typography Notes.md",
-    "01 Typescript Libraries/01.01 core/assets/logs-numbered.png",
-    "01 Typescript Libraries/01.01 core/assets/Screenshot_20240311_101117.png",
-    "01 Typescript Libraries/01.01 core/assets",
-    "archive/001 Libraries/01.04 Boilerplate/Extensions/Fetch.md",
-    "archive/001 Libraries/01.04 Boilerplate/Extensions/Configuration.md",
-    "archive/001 Libraries/01.04 Boilerplate/Extensions/Cache.md",
-    "archive/001 Libraries/01.04 Boilerplate/Extensions/Extensions.md",
-    "archive/001 Libraries/01.04 Boilerplate/01.04 Boilerplate.md",
-    "01 Typescript Libraries/01.01 core/support/Untitled",
-    "01 Typescript Libraries/01.01 core/support",
-    "06 Reference/05.01 Digital Alchemy/tty/tty.md",
-    "06 Reference/05.01 Digital Alchemy/utilities/utilities.md",
-    "05 Repository Notes/Publishing Documentation.md",
-    "archive/001 Libraries/01 Libraries.md",
-    "01 Typescript Libraries/01.04 wrappers",
-    "01 Typescript Libraries/01.03 adapters",
-    "02 Support Repos/pi-matrix",
-    "02 Support Repos/type-writer",
-    "02 Support Repos/automation-quickstart",
-    "02 Support Repos/synapse-extension",
-    "02 Support Repos",
-    "archive/001 Libraries/01.04 Boilerplate/Extensions/Wiring.md",
+    "01 Typescript Libraries/01.02 home automation/hass/support/Fetch API.md",
+    "archive/001 Libraries/01.02 Virtual Entity/01.02 Virtual Entity.md",
+    "archive/001 Libraries/01.03 Automation Logic/Extensions/Scene Room.md",
     "archive/001 Libraries/01.03 Automation Logic/01.03 Automation Logic.md",
-    "archive/001 Libraries/01.01 Home Assistant/01.01 Home Assistant.md",
-    "archive/001 Libraries/01.01 Home Assistant/Extensions/Call Proxy.md",
-    "archive/001 Libraries/01.03 Automation Logic/Extensions/Scene Room.md"
+    "01 Core/support/internal.md",
+    "01 Core/support/logger.md",
+    "01 Core/support/fetch.md",
+    "01 Core/support/configuration.md",
+    "01 Core/support/cache.md",
+    "01 Core/assets/example_log.png",
+    "01 Typescript Libraries/01.01 core/assets/logs-numbered.png",
+    "01 Typescript Libraries/01.01 core/assets/Screenshot_20240311_101117.png"
   ]
 }

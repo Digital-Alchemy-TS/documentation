@@ -1,4 +1,0 @@
-- #ZCC/Metrics
-- [[Prometheus]]
-- [[archive/001 Libraries/01.04 Boilerplate/Extensions/Scheduler]]
-- [[archive/001 Libraries/01.04 Boilerplate/Boilerplate|@zcc/boilerplate]]
