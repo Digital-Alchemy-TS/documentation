@@ -1,31 +1,28 @@
 ## 📓 Description
 
 - #TServiceParams/cache
+- #TServiceParams
+- #config
+- #Feature/core/Cache
 
-The cache extension provides a basic configurable caching interface. By default, the library will use [node-cache](https://www.npmjs.com/package/node-cache), with support for [redis](https://www.npmjs.com/package/redis) with some basic configuration. You can set a custom driver by using the `.setClient` method.
+The cache extension provides a basic configurable caching interface, using a memory cache by default. 
+
+> [!tip] Things work better with [redis](https://www.npmjs.com/package/redis)
+> Want something else? You can set a custom driver by using the `.setClient` method.
 
 ## 🛠️ Configuration 
 
-
-- #config/boilerplate/CACHE_PREFIX
-
-This option allows you to specify a prefix that will be used for all cache keys. If left blank, the application name will be used as the prefix instead.
-
-- #config/boilerplate/CACHE_PROVIDER
-
-The `CACHE_PROVIDER` option specifies which caching system will be used. You can choose between `redis` and `memory`. By default, it uses memory-based caching.
-
-- #config/boilerplate/CACHE_TTL
-
-The `CACHE_TTL` option sets the time-to-live (TTL) for cache entries in seconds. After this duration, cached entries will automatically expire and be removed from the cache.
-
-- #config/boilerplate/REDIS_URL
-
-This option specifies the URL of the Redis server that will be used for caching. This setting is only applicable when you've selected `redis` as your `CACHE_PROVIDER`.
+| config                             | description                                                                                                                                                                   |
+| ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| #config/boilerplate/CACHE_PREFIX   | This option allows you to specify a prefix that will be used for all cache keys. If left blank, the application name will be used as the prefix instead.                      |
+| #config/boilerplate/CACHE_PROVIDER | The `CACHE_PROVIDER` option specifies which caching system will be used. You can choose between `redis` and `memory`. By default, it uses memory-based caching.               |
+| #config/boilerplate/CACHE_TTL      | The `CACHE_TTL` option sets the time-to-live (TTL) for cache entries in seconds. After this duration, cached entries will automatically expire and be removed from the cache. |
+| #config/boilerplate/REDIS_URL      | This option specifies the URL of the Redis server that will be used for caching. This setting is only applicable when you've selected `redis` as your `CACHE_PROVIDER`.       |
 
 ## 📄 Code Examples 
 
-#Usage-Example/core/cache
+> [!example] #Usage-Example/core/cache
+> Some generic code to illustrate basic cache interactions
 
 ```typescript
 export function WeatherForecastService({ logger, cache, lifecycle }: TServiceParams) {

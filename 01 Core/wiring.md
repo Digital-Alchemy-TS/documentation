@@ -1,5 +1,8 @@
 ## 📚 Description
 
+- #Feature/core/Wiring 
+- #config/boilerplate
+
 The wiring module is responsible for defining the structure of your application and ensuring all your code runs in the correct order. Code is divided up into modules based on purpose and is referred to as **libraries** or **applications**. They are largely the same thing, with the meaningful difference being that applications can be bootstrapped and there may be only 1 of them.
 
 ## 🔠 Types
@@ -10,7 +13,8 @@ Block comments placed on keys will be carried through into service parameters as
 
 ## 🏛 CreateLibrary
 
-> [!example] Example library creation
+> [!example] #Usage-Example/core/create_library
+> #Feature/core/CreateLibrary
 
 ```typescript
 import { CreateLibrary } from "@digital-alchemy/core";
@@ -70,7 +74,8 @@ A module's name affects:
 - log context
 This name affects the configuration system, log contexts, and the key used in #TServiceParams.
 
-> [!example] `name` in action
+> [!example] #Usage-Example/core/module_name
+> Choose your name wisely
 
 ```typescript
 export const LIB_EXAMPLE = CreateLibrary({
@@ -106,6 +111,7 @@ Services listed in the array are loaded first, in the provided order. Those not 
 ## 🚀 CreateApplication
 
 > [!example] #Usage-Example/core/create_application
+> #Feature/core/CreateApplication
 
 ```typescript
 export const HOME_AUTOMATION = CreateApplication({
@@ -129,9 +135,9 @@ The structure is largely the same, with a few notable differences.
 
 See the dedicated section below for more details.
 
-### 📚 `libraries`
+### 📚 Libraries
 
-- #Feature/Library
+- #Feature/core/Library
 
 Applications must declare all library dependencies they use, explicitly. This includes all dependency libraries for libraries they import, even if they are not directly consumed within the application.
 
@@ -139,65 +145,29 @@ The version that is provided by the application in its `libraries` array is the 
 
 ## ⚙️ Bootstrap
 
-> [!tldr] #Feature/core/Bootstrap
-> - #Feature/core/Logging
-> - #Feature/core/Metrics
-> - #Feature/core/Configuration
+- #Feature/core/Bootstrap
 
 The major capability of applications to distinguish from libraries is the ability to bootstrap. This can be accomplished by calling the `.bootstrap` method attached to the application object. 
 
 `Bootstrap` accepts several parameters to affect how the application starts.
 
-| Property             | Description |
-| -------------------- | ----------- |
-| `configuration`      | Provide an alternate set of default configuration variables, overriding project-level defaults. |
-| `customLogger`       | Use your logger instead of the default built-in one. |
-| `handleGlobalErrors` | Should the library handle errors that bubble up to the global context? <br> - Log error <br> - Call `app.teardown()` <br> - Reboot |
-| `showExtraBootStats` | When bootstrap completes, log some statistics about what happened. If you are experiencing long boot times, this might help you figure out why. |
+| Property                                       | Description                                                                                                                                     |
+| ---------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| `configuration`<br>#Feature/core/Configuration | Provide an alternate set of default [[configuration]] variables, overriding project-level defaults.                                             |
+| `customLogger`<br>#Feature/core/Logging        | Use your logger instead of the default [[logger\|built-in one]].                                                                                |
+| `handleGlobalErrors`                           | Should the library handle errors that bubble up to the global context? <br> - Log error <br> - Call `app.teardown()` <br> - Reboot              |
+| `showExtraBootStats`<br>#Feature/core/Metrics  | When bootstrap completes, log some statistics about what happened. If you are experiencing long boot times, this might help you figure out why. |
 
 The promise for the `.bootstrap` method will resolve when all startup lifecycle events have been completed.
 
-### 🔄 Application Lifecycle
+### [[lifecycle|Lifecycle]]
 
-- #TServiceParams/lifecycle
-- #Feature/core/Lifecycle
+- #TServiceParams/lifecycle 
 
-| Lifecycle Event | Type | Description | Example Use |
-| --------------- | ---- | ----------- | ----------- |
-| construction | `n/a` | An informal phase, describes the time when services are building their return output. Code should be limited to general configuration & wiring. | Code definitions & function wiring |
-| `onPreInit`<br>#Lifecycle/onPreInit | startup | Ran prior to gathering user configuration. Frequently used with alternate application flows. | 1. check for `--help` flag<br>2. print configuration info<br>3. exit |
-| (configure) | `n/a` | When the [[configuration]] does its processing to load user configurations. | |
-| `onPostConfig`<br>#Lifecycle/onPostConfig | startup | User configs are populated into the library, libraries & applications can start utilizing that information to further self-configure / initialize dependencies. | Create a reference to an external library (ex: `fastify`) |
-| `onBootstrap`<br>#Lifecycle/onBootstrap | startup | Configured libraries are available, and can be interacted with. | Perform wiring actions with that library (ex: add routes) |
-| `onReady`<br>#Lifecycle/onReady | startup | Last chance to perform work before the application is officially "running". | Start servers / listen to ports / emit "hello world" messages to connected services |
-| (running) | `n/a` | | |
-| `onShutdownStart`<br>#Lifecycle/onShutdownStart | shutdown | The application has received a request to shut down. | Stop servers, save caches, emit goodbye messages |
-| `onShutdownComplete`<br>#Lifecycle/onShutdownComplete | shutdown | Last second to do something before the process exits (or the test completes). | Log a goodbye message that shows the total uptime |
-
-#### 🎖 With priorities
-
-> [!example] #Usage-Example/core/lifecycle
-
-Callbacks for lifecycle events have no guaranteed order for when they run relative to each other (within the same event), unless explicitly provided an order.
-
-```typescript
-function MyService({ logger, lifecycle }: TServiceParams) {
-  lifecycle.onBootstrap(() => {
-    logger.info("I happen whenever");
-  });
-  lifecycle.onBootstrap(() => {
-    logger.info("I happen early");
-  }, 1);
-  lifecycle.onBootstrap(() => {
-    logger.info("Higher priority is more first-er");
-  }, 2);
-}
-```
-> [!tip] If you attach a callback to a lifecycle event after it already occurred, the callback will be run immediately
-> This can be used as an "at least this far in the startup process" guarantee for code
-
-The **"ready"** state may have some asterisks depending on the particular library. Some libraries may provide a separate `onConnect` type event for it's workflows, which may have different implications than a basic `onReady` lifecycle event
+The application lifecycle is a key part to the way applications bootstrap.
 
 ## 🛑 Teardown
+
+- #Feature/core/Teardown
 
 The opposite workflow from the bootstrap. Clean up any resources, emit some "going offline" messages, flush caches, etc. The library will automatically listen for `SIGTERM`, as well as a few other events, in order to determine a proper time to run this flow.

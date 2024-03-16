@@ -10,7 +10,7 @@
           {
             "id": "befe60b5023e93e1",
             "type": "tabs",
-            "dimension": 64.54154727793696,
+            "dimension": 61.87410586552218,
             "children": [
               {
                 "id": "cb954889eb65e4f2",
@@ -18,7 +18,7 @@
                 "state": {
                   "type": "markdown",
                   "state": {
-                    "file": "01 Core/support/logger.md",
+                    "file": "01 Core/internal.md",
                     "mode": "source",
                     "source": false
                   }
@@ -28,80 +28,150 @@
             ]
           },
           {
-            "id": "cf9f6ada41b9e7ac",
-            "type": "tabs",
-            "dimension": 35.458452722063036,
+            "id": "ee90d2966efec938",
+            "type": "split",
+            "dimension": 38.125894134477825,
             "children": [
               {
-                "id": "2f8eb55784fc4c22",
-                "type": "leaf",
-                "state": {
-                  "type": "graph",
-                  "state": {}
-                }
-              },
-              {
-                "id": "df8ebe2566f488ad",
-                "type": "leaf",
-                "state": {
-                  "type": "localgraph",
-                  "state": {
-                    "file": "01 Core/support/logger.md",
-                    "options": {
-                      "collapse-filter": false,
-                      "search": "",
-                      "localJumps": 1,
-                      "localBacklinks": true,
-                      "localForelinks": true,
-                      "localInterlinks": false,
-                      "showTags": true,
-                      "showAttachments": false,
-                      "hideUnresolved": false,
-                      "collapse-color-groups": true,
-                      "colorGroups": [],
-                      "collapse-display": true,
-                      "showArrow": false,
-                      "textFadeMultiplier": 0,
-                      "nodeSizeMultiplier": 1,
-                      "lineSizeMultiplier": 1,
-                      "collapse-forces": true,
-                      "centerStrength": 0.518713248970312,
-                      "repelStrength": 10,
-                      "linkStrength": 1,
-                      "linkDistance": 250,
-                      "scale": 0.4444444444444444,
-                      "close": false
+                "id": "cf9f6ada41b9e7ac",
+                "type": "tabs",
+                "children": [
+                  {
+                    "id": "2f8eb55784fc4c22",
+                    "type": "leaf",
+                    "state": {
+                      "type": "graph",
+                      "state": {}
+                    }
+                  },
+                  {
+                    "id": "cab4741c4819f24a",
+                    "type": "leaf",
+                    "state": {
+                      "type": "markdown",
+                      "state": {
+                        "file": "01 Core/lifecycle.md",
+                        "mode": "source",
+                        "source": false
+                      }
                     }
                   }
-                },
-                "group": "e4538bd35ee3cee8"
+                ]
               },
               {
-                "id": "e234e0d4fcc1e865",
-                "type": "leaf",
-                "state": {
-                  "type": "markdown",
-                  "state": {
-                    "file": "private/typography.md",
-                    "mode": "source",
-                    "source": false
+                "id": "570d19d00cae7baa",
+                "type": "tabs",
+                "children": [
+                  {
+                    "id": "df8ebe2566f488ad",
+                    "type": "leaf",
+                    "state": {
+                      "type": "localgraph",
+                      "state": {
+                        "file": "01 Core/internal.md",
+                        "options": {
+                          "collapse-filter": true,
+                          "search": "",
+                          "localJumps": 1,
+                          "localBacklinks": true,
+                          "localForelinks": true,
+                          "localInterlinks": true,
+                          "showTags": true,
+                          "showAttachments": true,
+                          "hideUnresolved": false,
+                          "collapse-color-groups": true,
+                          "colorGroups": [
+                            {
+                              "query": "path:\"01 Core\"  ",
+                              "color": {
+                                "a": 1,
+                                "rgb": 8388863
+                              }
+                            },
+                            {
+                              "query": "path:\"02 Home Automation\"  ",
+                              "color": {
+                                "a": 1,
+                                "rgb": 33023
+                              }
+                            },
+                            {
+                              "query": "path:\"03 Support Libraries\"  ",
+                              "color": {
+                                "a": 1,
+                                "rgb": 8453888
+                              }
+                            },
+                            {
+                              "query": "path:\"04 Minor Applications\"  ",
+                              "color": {
+                                "a": 1,
+                                "rgb": 16728192
+                              }
+                            },
+                            {
+                              "query": "path:\"06 Pi Matrix\"  ",
+                              "color": {
+                                "a": 1,
+                                "rgb": 16744703
+                              }
+                            },
+                            {
+                              "query": "path:\"07 Automation Quickstart\"  ",
+                              "color": {
+                                "a": 1,
+                                "rgb": 65535
+                              }
+                            },
+                            {
+                              "query": "path:\"05 Terminal\" ",
+                              "color": {
+                                "a": 1,
+                                "rgb": 16728064
+                              }
+                            },
+                            {
+                              "query": "path:\"index\"",
+                              "color": {
+                                "a": 1,
+                                "rgb": 16711680
+                              }
+                            }
+                          ],
+                          "collapse-display": false,
+                          "showArrow": true,
+                          "textFadeMultiplier": -0.2,
+                          "nodeSizeMultiplier": 1,
+                          "lineSizeMultiplier": 1,
+                          "collapse-forces": true,
+                          "centerStrength": 0.796875,
+                          "repelStrength": 20,
+                          "linkStrength": 1,
+                          "linkDistance": 108,
+                          "scale": 0.6666666666666666,
+                          "close": false
+                        }
+                      }
+                    },
+                    "group": "e4538bd35ee3cee8"
+                  },
+                  {
+                    "id": "e234e0d4fcc1e865",
+                    "type": "leaf",
+                    "state": {
+                      "type": "markdown",
+                      "state": {
+                        "file": "private/typography.md",
+                        "mode": "source",
+                        "source": false
+                      }
+                    }
                   }
-                }
-              },
-              {
-                "id": "a88f37d7b1a841a2",
-                "type": "leaf",
-                "state": {
-                  "type": "markdown",
-                  "state": {
-                    "file": "01 Core/support/wiring.md",
-                    "mode": "source",
-                    "source": false
-                  }
-                }
+                ],
+                "currentTab": 1
               }
             ],
-            "currentTab": 3
+            "direction": "horizontal"
           }
         ],
         "direction": "vertical"
@@ -133,7 +203,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "tag:#Feature/core/PriorityInit",
+                "query": "tag:#Lifecycle/onShutdownStart",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -170,7 +240,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "01 Core/support/logger.md",
+                "file": "01 Core/internal.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -187,7 +257,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "01 Core/support/logger.md",
+                "file": "01 Core/internal.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -210,7 +280,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "01 Core/support/logger.md"
+                "file": "01 Core/internal.md"
               }
             }
           }
@@ -233,51 +303,51 @@
   },
   "active": "cb954889eb65e4f2",
   "lastOpenFiles": [
-    "01 Core/support/scheduler.md",
-    "01 Core/index.md",
-    "01 Core/support/wiring.md",
+    "01 Core/lifecycle.md",
+    "02 Home Automation/02.01 hass/Websocket API.md",
+    "01 Core/logger.md",
     "private/typography.md",
-    "index.md",
+    "02 Home Automation/02.01 hass/Rest API.md",
+    "02 Home Automation/02.01 hass/Special Logic.md",
+    "02 Home Automation/02.01 hass/Entity Manager.md",
+    "02 Home Automation/02.01 hass/Call Proxy.md",
+    "02 Home Automation/02.01 hass/index.md",
+    "07 Automation Quickstart/index.md",
     "02 Home Automation/index.md",
-    "private",
-    "02 Home Automation/02.02 synapse/README.md",
+    "07 Automation Quickstart/addon.md",
+    "01 Core/cache.md",
+    "01 Core/index.md",
+    "07 Automation Quickstart/assets/workspace_open.png",
+    "07 Automation Quickstart/assets/valid_build.png",
+    "07 Automation Quickstart/assets/addon.png",
+    "07 Automation Quickstart/assets",
+    "index.md",
+    "02 Home Automation/02.02 synapse/index.md",
+    "02 Home Automation/02.03 automation/index.md",
+    "01 Core/wiring.md",
+    "01 Core/configuration.md",
+    "01 Core/fetch.md",
+    "01 Core/scheduler.md",
+    "01 Core/internal.md",
     "assets/cropped.jpg",
+    "05 Terminal/index.md",
+    "06 Pi Matrix/index.md",
+    "04 Minor Applications/index.md",
+    "03 Support Libraries/index.md",
+    "private/nginx.conf",
+    "private",
     "assets",
     "04 Minor Applications",
     "03 Support Libraries",
     "02 Home Automation",
     "01 Core",
-    "0.2 Horton.md",
-    "addon/README.md",
-    "07 Automation Quickstart/README.md",
     "addon",
-    "02 Home Automation/02.03 automation/README.md",
-    "02 Home Automation/02.01 hass/README.md",
     "02 Home Automation/02.02 synapse/assets/reload.png",
     "02 Home Automation/02.02 synapse/assets",
-    "04 Minor Applications/04.01 Type Writer/README.md",
     "04 Minor Applications/04.01 Type Writer/assets/command.png",
     "04 Minor Applications/04.01 Type Writer/assets/editor.png",
-    "04 Minor Applications/04.01 Type Writer/assets",
     "02 Home Automation/02.01 hass/assets/editor.png",
-    "02 Home Automation/02.01 hass/support/Websocket API.md",
     "01 Typescript Libraries/01.02 home automation/hass/assets/custom_types.png",
-    "01 Typescript Libraries/01.02 home automation/hass/assets/call_service.png",
-    "02 Home Automation/02.01 hass/assets",
-    "02 Home Automation/02.01 hass/support/Call Proxy.md",
-    "02 Home Automation/02.01 hass/support/Entity Manager.md",
-    "05 Repository Notes/Typography Notes.md",
-    "01 Typescript Libraries/01.02 home automation/hass/support/Fetch API.md",
-    "archive/001 Libraries/01.02 Virtual Entity/01.02 Virtual Entity.md",
-    "archive/001 Libraries/01.03 Automation Logic/Extensions/Scene Room.md",
-    "archive/001 Libraries/01.03 Automation Logic/01.03 Automation Logic.md",
-    "01 Core/support/internal.md",
-    "01 Core/support/logger.md",
-    "01 Core/support/fetch.md",
-    "01 Core/support/configuration.md",
-    "01 Core/support/cache.md",
-    "01 Core/assets/example_log.png",
-    "01 Typescript Libraries/01.01 core/assets/logs-numbered.png",
-    "01 Typescript Libraries/01.01 core/assets/Screenshot_20240311_101117.png"
+    "01 Typescript Libraries/01.02 home automation/hass/assets/call_service.png"
   ]
 }

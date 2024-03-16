@@ -1,21 +1,32 @@
 ## 📘 Description
 
+- #LoadedModules
+- #TServiceParams/automation
+
 Welcome to `@digital-alchemy/automation`!
 
-This project builds on the utilities provided by `@digital-alchemy/hass` & `@digital-alchemy/synapse` to create home automation focused utilities for easily coordinating entities.
+This project builds on the utilities provided by to create new home automation focused methods for easily coordinating entities.
+
+- [NPM](https://www.npmjs.com/package/@digital-alchemy/automation)
+- [GitHub](https://github.com/Digital-Alchemy-TS/automation)
+- #TServiceParams/automation
 
 ## 💾 Install
 
-You can install the custom component through HACS. See the repo for more detailed install instructions of the component: https://github.com/Digital-Alchemy-TS/synapse-extension
+> [!caution] Depends on  [[02 Home Automation/02.01 hass/index|@digital-alchemy/hass]] & [[02 Home Automation/02.02 synapse/index|@digital-alchemy/synapse]]
+> As well as the [[02 Home Automation/02.09 synapse-extension/index|synapse custom component]] 
 
 This library can be installed as a simple dependency
 ```bash
-npm i @digital-alchemy/automation @digital-alchemy/synapse @digital-alchemy/hass
+npm i @digital-alchemy/automation
 ```
 ## 🛠️ Utilities
 ### 🏠 Rooms w/ coordinated scenes
 
-Create rooms, with the ability to coordinate sets of entities together in scenes. 
+- #Feature/automation/room
+
+> [!example] #Usage-Example/automation/create_room
+> Create rooms, with the ability to coordinate sets of entities together in scenes. 
 ```typescript
 import { CronExpression, TServiceParams } from "@digital-alchemy/core";
 
@@ -64,23 +75,26 @@ export function ExampleRoom({
 ```
 ### 🔧 Active Management
 
+- #Feature/automation/managed_switch
+- #Feature/automation/aggressive_scene
+
 Sometimes devices don't get the message the first time. Other times a pesky human comes by and bumps a switch, turning off a switch that really should be left on. `@digital-alchemy/automation` provides several tools to help ensure devices know what they "should" be.
 
 Scenes defined by rooms will periodically recheck entity states in their listed definitions, ensuring that the device state matches your description of what it should be. The library also provides tools for rules-based state management of switches.
+
+> [!example] #Usage-Example/automation/managed_switch
+> This example sets up a plant light should be on while the sun is up, but only until 5:30 PM
 
 ```typescript
 import { TServiceParams } from "@digital-alchemy/core";
 
 export function ExampleRoom({ automation, context }: TServiceParams) {
-  // plant light should be on while the sun is up, but only until 5:30 PM
   automation.managed_switch({
     context,
     entity_id: "switch.plant_light",
     shouldBeOn() {
-      
       // check sun position
       if (automation.solar.isBetween("dawn", "dusk")) {
-      
         // create some reference points with dayjs
         const [PM530, NOW] = automation.utils.shortTime(["PM5:30", "NOW"]);
         return NOW.isBefore(PM530);
@@ -92,11 +106,15 @@ export function ExampleRoom({ automation, context }: TServiceParams) {
 ```
 ### 💡 Circadian Lighting
 
+- #Feature/automation/circadian_lighting
+
 By default for lights defined in room scenes, if no particular color is defined, the temperature will be automatically managed for you. 
 
 You can see the current light temperature as a dedicated sensor. Updates for light temperature are rate-limited with some configurable settings. This allows you to easily keep a natural feeling light temperature in your home, without overloading your install.
 
 ### 🧩 Advanced Pattern Matching
+
+- #Feature/automation/sequence_matcher
 
 The library includes some utilities for translating a specific pattern of events in Home Assistant into callbacks. This can enable new layers of functionality remotes, allowing for creating automations based on button sequences.
 

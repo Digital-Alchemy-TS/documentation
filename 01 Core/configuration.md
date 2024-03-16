@@ -1,6 +1,9 @@
 ## 📝 Description
 
 - #TServiceParams/config
+- #TServiceParams
+- #Feature/core/Configuration
+- #config
 
 The configuration system is designed to provide a managed experience for applications. Definitions are built into modules, and the system sources values from both files and environment sources.
 
@@ -37,27 +40,33 @@ Omitting the extension (**auto**) causes the loader to attempt to guess the file
 - `~/.config/{app_name}`
 - `~/.config/{app_name}/config`
 
-> Specify your own:
-
-The loader checks the `--config` switch as part of determining which file to load. If passed, the provided file will be the only one used.
+> [!example] #Usage-Example/core/custom_config_file
+> The loader checks the `--config` switch as part of determining which file to load. If passed, the provided file will be the only one used.
 ```bash
 tsx main.ts --config ./development_configuration
 ```
 ### 🌍 Environment Based
 
-Environment variables are **case insensitive**, and `-` & `_` may be swapped. For the configuration example `boilerplate.CACHE_PROVIDER`, these are allowed variables:
+Environment variables are **case insensitive**, and `-` & `_` may be swapped. For the configuration example `boilerplate.CACHE_PROVIDER`, these are allowed variations:
 
 - `CACHE_PROVIDER`
 - `cache-provider`
 - `caChE-PrOvIDERE`
 
-These can be used as environment variables or command line switches for your application.
+> [!example] #Usage-Example/core/environment_config
+> These can be used as environment variables or command line switches for your application.
 
+**via environment variables**
 ```bash
-# Send value as an environment variable
-CACHE_PROVIDER=redis tsx main.ts
+# source from the environment variables in your session
+export CACHE_PROVIDER=redis
+tsx main.ts
 
-# Send value as a switch
+# define inline
+CACHE_PROVIDER=REDIS tsx main.ts
+```
+**via command line switches**
+```bash
 tsx main.ts --CACHE_PROVIDER=redis
 # or
 tsx main.ts --CACHE_PROVIDER redis
@@ -67,9 +76,15 @@ tsx main.ts --CACHE_PROVIDER redis
 
 ### 📐 Defining Configurations
 
-Definitions are provided as part of the library/application creation.
+> [!example] #Usage-Example/core/define_configuration
+> Definitions are provided as part of the library/application creation
 
 ```typescript
+type NestedLibraryConfiguration = {
+  port: number;
+  foo?: string;
+  bar?: boolean;
+}
 const MY_LIB = CreateLibrary({
   configuration: {
     STRING_CONFIG: {
@@ -93,7 +108,7 @@ const MY_LIB = CreateLibrary({
 });
 ```
 
-This creates the following configuration variables:
+This creates the following configuration variables (*referenced in examples below*):
 - `config.my_lib.STRING_CONFIG` (generic `string`)
 - `config.my_lib.ENUM_CONFIG` (string union)
 - `config.my_lib.COMPLEX_CONFIG` (`NestedLibraryConfiguration`)
@@ -111,7 +126,8 @@ Types may be in the following formats:
 
 ### 🔑 Accessing Configurations
 
-Values are provided via service params and are accessible in `.project.value` format.
+> [!example] #Usage-Example/core/access_config
+> Values are provided via service params and are accessible in `.project.value` format.
 
 ```typescript
 export function MyService({ logger, config, lifecycle }: TServiceParams) {
@@ -126,6 +142,8 @@ export function MyService({ logger, config, lifecycle }: TServiceParams) {
 Some workflows may require changing values for configurations as part of their logic. This can be accomplished through the #TServiceParams/internal interface
 
 ServiceParams/internal methods. The `EVENT_CONFIGURATION_UPDATED` event is fired from #TServiceParams/event on each config update.
+
+> [!example] #Usage-Example/core/update_config
 ```typescript
 export function MyService({ logger, internal, lifecycle }: TServiceParams) {
   lifecycle.onPreInit(() => {
@@ -135,18 +153,26 @@ export function MyService({ logger, internal, lifecycle }: TServiceParams) {
 ```
 ### 🛒 Custom Loaders
 
-Any function that returns a compatible configuration object can be used in place of the default `file` / `environment` loaders.
+> [!example] #Usage-Example/core/custom_config_loader
+> Any function that returns a compatible configuration object can be used in place of the default `file` / `environment` loaders.
 
 ```typescript
-async function Loader({ application, configs, logger }: ConfigLoaderParams) {
+// the loader, not registered as a service
+async function MyCustomLoader({ application, configs, logger }: ConfigLoaderParams) {
     logger.trace("sending request");
 	const data = await fetchMyConfiguration();
     logger.trace("done!");
 	return data;
 }
+
+// service to do attachment
 export function MyService({ logger, internal, lifecycle }: TServiceParams) {
-	// Attach to the bootstrap
-	internal.config.addConfigLoader([Loader,5]);
+	internal.config.setConfigLoaders([
+	  MyCustomLoader,
+	  // not using file loaders for plot reasons
+	  // ConfigLoaderFile,
+	  ConfigLoaderEnvironment,
+	]);
 }
 ```
 

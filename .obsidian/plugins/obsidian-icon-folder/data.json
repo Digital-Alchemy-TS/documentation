@@ -6,11 +6,11 @@
     "emojiStyle": "none",
     "iconColor": null,
     "recentlyUsedIcons": [
-      "FasHouseSignal",
-      "LiContainer",
-      "SiTypescript",
-      "TiAlpha",
-      "FasCode"
+      "TiAsset",
+      "TiEngine",
+      "RiGridLine",
+      "RiTerminalBoxFill",
+      "SiParsedotly"
     ],
     "recentlyUsedIconsSize": 5,
     "rules": [],
@@ -29,6 +29,58 @@
   },
   "index.md": {
     "iconName": "CoMainComponent",
-    "iconColor": "#26a69a"
+    "iconColor": "#ff0000"
+  },
+  "01 Core": {
+    "iconName": "RaCrystalBall",
+    "iconColor": "#8000ff"
+  },
+  "02 Home Automation": {
+    "iconName": "FasHouseSignal",
+    "iconColor": "#0080ff"
+  },
+  "03 Support Libraries": {
+    "iconName": "FasBuildingColumns",
+    "iconColor": "#80ff00"
+  },
+  "04 Minor Applications": {
+    "iconName": "SiParsedotly",
+    "iconColor": "#ff4180"
+  },
+  "05 Terminal": {
+    "iconName": "RiTerminalBoxFill",
+    "iconColor": "#ff4000"
+  },
+  "06 Pi Matrix": {
+    "iconName": "RiGridLine",
+    "iconColor": "#ff80ff"
+  },
+  "07 Automation Quickstart": {
+    "iconName": "TiEngine",
+    "iconColor": "#00ffff"
+  },
+  "01 Core/assets": {
+    "iconName": "TiAsset",
+    "iconColor": "#8040ff"
+  },
+  "02 Home Automation/02.01 hass/assets": {
+    "iconName": "TiAsset",
+    "iconColor": "#8040ff"
+  },
+  "02 Home Automation/02.02 synapse/assets": {
+    "iconName": "TiAsset",
+    "iconColor": "#8040ff"
+  },
+  "04 Minor Applications/04.01 Type Writer/assets": {
+    "iconName": "TiAsset",
+    "iconColor": "#8040ff"
+  },
+  "07 Automation Quickstart/assets": {
+    "iconName": "TiAsset",
+    "iconColor": "#8040ff"
+  },
+  "assets": {
+    "iconName": "TiAsset",
+    "iconColor": "#8040ff"
   }
 }

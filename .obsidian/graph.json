@@ -3,20 +3,77 @@
   "search": "",
   "showTags": true,
   "showAttachments": false,
-  "hideUnresolved": false,
+  "hideUnresolved": true,
   "showOrphans": true,
-  "collapse-color-groups": true,
-  "colorGroups": [],
+  "collapse-color-groups": false,
+  "colorGroups": [
+    {
+      "query": "path:\"01 Core\"  ",
+      "color": {
+        "a": 1,
+        "rgb": 8388863
+      }
+    },
+    {
+      "query": "path:\"02 Home Automation\"  ",
+      "color": {
+        "a": 1,
+        "rgb": 32255
+      }
+    },
+    {
+      "query": "path:\"03 Support Libraries\"  ",
+      "color": {
+        "a": 1,
+        "rgb": 8453888
+      }
+    },
+    {
+      "query": "path:\"04 Minor Applications\"  ",
+      "color": {
+        "a": 1,
+        "rgb": 16728192
+      }
+    },
+    {
+      "query": "path:\"06 Pi Matrix\"  ",
+      "color": {
+        "a": 1,
+        "rgb": 16744703
+      }
+    },
+    {
+      "query": "path:\"07 Automation Quickstart\"  ",
+      "color": {
+        "a": 1,
+        "rgb": 65535
+      }
+    },
+    {
+      "query": "path:\"05 Terminal\" ",
+      "color": {
+        "a": 1,
+        "rgb": 16728064
+      }
+    },
+    {
+      "query": "path:\"index\"",
+      "color": {
+        "a": 1,
+        "rgb": 16711680
+      }
+    }
+  ],
   "collapse-display": true,
-  "showArrow": false,
-  "textFadeMultiplier": 0,
-  "nodeSizeMultiplier": 1,
+  "showArrow": true,
+  "textFadeMultiplier": -0.6,
+  "nodeSizeMultiplier": 1.27395833333333,
   "lineSizeMultiplier": 1,
   "collapse-forces": true,
-  "centerStrength": 0.518713248970312,
-  "repelStrength": 10,
+  "centerStrength": 0.802083333333333,
+  "repelStrength": 20,
   "linkStrength": 1,
-  "linkDistance": 250,
-  "scale": 0.4444444444444444,
-  "close": false
+  "linkDistance": 108,
+  "scale": 0.1316872427983539,
+  "close": true
 }
