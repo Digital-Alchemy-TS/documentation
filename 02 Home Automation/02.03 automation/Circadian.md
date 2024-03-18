@@ -1,0 +1,6 @@
+- #config/automation/CIRCADIAN_ENABLED
+- #config/automation/CIRCADIAN_MAX_TEMP
+- #config/automation/CIRCADIAN_MIN_TEMP
+- #Lifecycle/onPostConfig
+- [[scheduler]]
+- [[Solar]]

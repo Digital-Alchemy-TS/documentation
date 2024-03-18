@@ -1,0 +1,9 @@
+- #config/automation/CIRCADIAN_MIN_TEMP 
+- #config/automation/CIRCADIAN_MAX_TEMP 
+- #config/automation/CIRCADIAN_DIFF_THRESHOLD
+- #config/automation/CIRCADIAN_ENABLED
+- #config/automation/CIRCADIAN_RATE
+- #config/automation/CIRCADIAN_THROTTLE
+- #Lifecycle/onPostConfig 
+- [[scheduler]]
+- #TServiceParams/automation
