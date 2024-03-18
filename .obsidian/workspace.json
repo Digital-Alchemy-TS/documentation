@@ -18,7 +18,7 @@
                 "state": {
                   "type": "markdown",
                   "state": {
-                    "file": "01 Core/internal.md",
+                    "file": "index.md",
                     "mode": "source",
                     "source": false
                   }
@@ -68,7 +68,7 @@
                     "state": {
                       "type": "localgraph",
                       "state": {
-                        "file": "01 Core/internal.md",
+                        "file": "index.md",
                         "options": {
                           "collapse-filter": true,
                           "search": "",
@@ -148,8 +148,8 @@
                           "repelStrength": 20,
                           "linkStrength": 1,
                           "linkDistance": 108,
-                          "scale": 0.6666666666666666,
-                          "close": false
+                          "scale": 0.4444444444444444,
+                          "close": true
                         }
                       }
                     },
@@ -167,8 +167,7 @@
                       }
                     }
                   }
-                ],
-                "currentTab": 1
+                ]
               }
             ],
             "direction": "horizontal"
@@ -203,7 +202,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "tag:#Lifecycle/onShutdownStart",
+                "query": "tag:#Usage-Example/automation/solar_on_event",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -224,7 +223,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 358.5
   },
   "right": {
     "id": "29ec4f9ced59f5b1",
@@ -240,7 +239,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "01 Core/internal.md",
+                "file": "index.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -257,7 +256,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "01 Core/internal.md",
+                "file": "index.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -280,7 +279,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "01 Core/internal.md"
+                "file": "index.md"
               }
             }
           }
@@ -301,39 +300,45 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "cb954889eb65e4f2",
+  "active": "df8ebe2566f488ad",
   "lastOpenFiles": [
-    "01 Core/lifecycle.md",
+    "02 Home Automation/02.03 automation/Sequence Matcher.md",
+    "index.md",
+    "02 Home Automation/02.03 automation/Solar.md",
+    "02 Home Automation/02.03 automation/Utils.md",
+    "02 Home Automation/02.03 automation/🧭 Automation Overview.md",
+    "02 Home Automation/02.03 automation/Aggressive Scenes.md",
+    "02 Home Automation/02.03 automation/Rooms.md",
+    "02 Home Automation/02.03 automation/Managed Switch.md",
+    "02 Home Automation/02.03 automation/Light Manager.md",
+    "02 Home Automation/02.03 automation/Circadian.md",
+    "02 Home Automation/02.02 synapse/🧭 Synapse Overview.md",
+    "02 Home Automation/02.02 synapse/domains.md",
+    "02 Home Automation/02.01 hass/🧭 Hass Overview.md",
     "02 Home Automation/02.01 hass/Websocket API.md",
-    "01 Core/logger.md",
-    "private/typography.md",
-    "02 Home Automation/02.01 hass/Rest API.md",
     "02 Home Automation/02.01 hass/Special Logic.md",
+    "02 Home Automation/02.01 hass/Rest API.md",
     "02 Home Automation/02.01 hass/Entity Manager.md",
     "02 Home Automation/02.01 hass/Call Proxy.md",
-    "02 Home Automation/02.01 hass/index.md",
-    "07 Automation Quickstart/index.md",
-    "02 Home Automation/index.md",
-    "07 Automation Quickstart/addon.md",
-    "01 Core/cache.md",
-    "01 Core/index.md",
-    "07 Automation Quickstart/assets/workspace_open.png",
-    "07 Automation Quickstart/assets/valid_build.png",
-    "07 Automation Quickstart/assets/addon.png",
-    "07 Automation Quickstart/assets",
-    "index.md",
-    "02 Home Automation/02.02 synapse/index.md",
-    "02 Home Automation/02.03 automation/index.md",
+    "02 Home Automation/02.01 hass/assets/validate_config_bad_token.png",
+    "02 Home Automation/02.01 hass/assets/validate_config_bad_address.png",
+    "02 Home Automation/02.01 hass/assets/validate_config_bad_domain.png",
+    "02 Home Automation/02.01 hass/assets/validate_config_running.png",
+    "02 Home Automation/02.01 hass/assets/Screenshot_20240311_111058.png",
+    "02 Home Automation/02.01 hass/assets/Screenshot_20240311_111457.png",
+    "02 Home Automation/02.01 hass/assets/Screenshot_20240311_101222.png",
+    "02 Home Automation/02.01 hass/assets/Screenshot_20240311_101117.png",
+    "01 Core/internal.md",
     "01 Core/wiring.md",
+    "01 Core/scheduler.md",
+    "01 Core/logger.md",
+    "01 Core/cache.md",
     "01 Core/configuration.md",
     "01 Core/fetch.md",
-    "01 Core/scheduler.md",
-    "01 Core/internal.md",
-    "assets/cropped.jpg",
-    "05 Terminal/index.md",
-    "06 Pi Matrix/index.md",
-    "04 Minor Applications/index.md",
-    "03 Support Libraries/index.md",
+    "01 Core/lifecycle.md",
+    "07 Automation Quickstart/assets/workspace_open.png",
+    "07 Automation Quickstart/assets/valid_build.png",
+    "07 Automation Quickstart/assets",
     "private/nginx.conf",
     "private",
     "assets",
@@ -342,12 +347,6 @@
     "02 Home Automation",
     "01 Core",
     "addon",
-    "02 Home Automation/02.02 synapse/assets/reload.png",
-    "02 Home Automation/02.02 synapse/assets",
-    "04 Minor Applications/04.01 Type Writer/assets/command.png",
-    "04 Minor Applications/04.01 Type Writer/assets/editor.png",
-    "02 Home Automation/02.01 hass/assets/editor.png",
-    "01 Typescript Libraries/01.02 home automation/hass/assets/custom_types.png",
-    "01 Typescript Libraries/01.02 home automation/hass/assets/call_service.png"
+    "02 Home Automation/02.02 synapse/assets"
   ]
 }

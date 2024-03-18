@@ -85,7 +85,7 @@ function Example({ hass, app, config }: TServiceParams) {
 
 The websocket gives a direct view into the inner workings of Home Assistant via its event bus. You are able to consume topic events easily directly off the socket, as well as sending generic events back to other code to consume. 
 
-> [!hint] [[02 Home Automation/02.02 synapse/index|synapse]] takes advantage of this to interact with a custom component.
+> [!hint] [[🧭 Synapse Overview|synapse]] takes advantage of this to interact with a custom component.
 
 | Export            | Description                                                                                                                                                       |
 | ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |

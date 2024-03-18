@@ -1,15 +1,31 @@
-## Description
+## 📚 Description
 
-- #config/hass/AUTO_SCAN_CALL_PROXY
-- #config/hass/CALL_PROXY_ALLOW_REST
 - #Feature/hass/CallProxy
 - #config/hass
-- #Lifecycle/onBootstrap
 
-The call proxy is a deceptively simple service to provide a natural feeling service calling interface for home assistant. It creates a general proxy interface, and passes through any valid call call through to the [[Websocket API|websocket]] as a service call.
+The call proxy is a deceptively simple service designed to provide a natural-feeling service-calling interface for Home Assistant. It creates a general [proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) interface, and passes through any valid call to the [[Websocket API|websocket]] as a service call.
 
-Parameters are not validated at runtime, the only check is to ensure that a valid `domain.service` was used to form the service call.
+> [!example] #Usage-Example/hass/call_proxy 
+```typescript
+export function Example({ hass }: TServiceParams) {
+  async function onSomeEvent() {
+    // hass.call.{service_domain}.{service_name}({ ...data })
+    await hass.call.switch.turn_on({
+      entity_id: "switch.example_switch"
+    });
+  }
+}
+```
+## 📐 Custom Types
 
-## Custom Types
+On its own, the Call Proxy isn't all that smart. It simply makes a service call based on what you provide, hoping it's valid. The real magic comes in when [[🧭 Type Writer Overview|type-writer]] gets involved. The call proxy will adjust to match the specific set of services available on your install, with accurate parameter definitions for every service.
 
-The real complexity comes from the integration with the dynamic types created by #Support/type-writer. These types allow the generic proxy to be customized to a particular instance inside of the editor
+## ⚙️ Configuration
+
+> [!info] Not connecting to the socket? 
+> - #config/hass/CALL_PROXY_ALLOW_REST
+> Send your service calls via REST instead.
+
+As part of the #Lifecycle/onBootstrap workflow, the call proxy will perform a quick scan of the services available. If this workflow doesn't apply to your application, you can disable it with: 
+
+- #config/hass/AUTO_SCAN_CALL_PROXY
