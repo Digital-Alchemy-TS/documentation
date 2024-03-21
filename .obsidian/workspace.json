@@ -18,7 +18,7 @@
                 "state": {
                   "type": "markdown",
                   "state": {
-                    "file": "index.md",
+                    "file": "02 Home Automation/02.03 automation/Utils.md",
                     "mode": "source",
                     "source": false
                   }
@@ -68,7 +68,7 @@
                     "state": {
                       "type": "localgraph",
                       "state": {
-                        "file": "index.md",
+                        "file": "02 Home Automation/02.03 automation/Utils.md",
                         "options": {
                           "collapse-filter": true,
                           "search": "",
@@ -79,7 +79,7 @@
                           "showTags": true,
                           "showAttachments": true,
                           "hideUnresolved": false,
-                          "collapse-color-groups": true,
+                          "collapse-color-groups": false,
                           "colorGroups": [
                             {
                               "query": "path:\"01 Core\"  ",
@@ -131,7 +131,14 @@
                               }
                             },
                             {
-                              "query": "path:\"index\"",
+                              "query": "path:\"08 Extended Examples\"  ",
+                              "color": {
+                                "a": 1,
+                                "rgb": 16776960
+                              }
+                            },
+                            {
+                              "query": "path: \"index\"",
                               "color": {
                                 "a": 1,
                                 "rgb": 16711680
@@ -148,7 +155,7 @@
                           "repelStrength": 20,
                           "linkStrength": 1,
                           "linkDistance": 108,
-                          "scale": 0.4444444444444444,
+                          "scale": 0.6666666666666666,
                           "close": true
                         }
                       }
@@ -167,7 +174,8 @@
                       }
                     }
                   }
-                ]
+                ],
+                "currentTab": 1
               }
             ],
             "direction": "horizontal"
@@ -202,7 +210,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "tag:#Usage-Example/automation/solar_on_event",
+                "query": "example",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -223,7 +231,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 358.5
+    "width": 324.5
   },
   "right": {
     "id": "29ec4f9ced59f5b1",
@@ -239,7 +247,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "index.md",
+                "file": "02 Home Automation/02.03 automation/Utils.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -256,7 +264,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "index.md",
+                "file": "02 Home Automation/02.03 automation/Utils.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -279,7 +287,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "index.md"
+                "file": "02 Home Automation/02.03 automation/Utils.md"
               }
             }
           }
@@ -300,30 +308,35 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "df8ebe2566f488ad",
+  "active": "cb954889eb65e4f2",
   "lastOpenFiles": [
-    "02 Home Automation/02.03 automation/Sequence Matcher.md",
-    "index.md",
-    "02 Home Automation/02.03 automation/Solar.md",
-    "02 Home Automation/02.03 automation/Utils.md",
     "02 Home Automation/02.03 automation/🧭 Automation Overview.md",
     "02 Home Automation/02.03 automation/Aggressive Scenes.md",
-    "02 Home Automation/02.03 automation/Rooms.md",
-    "02 Home Automation/02.03 automation/Managed Switch.md",
-    "02 Home Automation/02.03 automation/Light Manager.md",
     "02 Home Automation/02.03 automation/Circadian.md",
+    "02 Home Automation/02.03 automation/Light Manager.md",
+    "02 Home Automation/02.03 automation/Managed Switch.md",
+    "02 Home Automation/02.03 automation/Rooms.md",
+    "02 Home Automation/02.03 automation/Sequence Matcher.md",
+    "02 Home Automation/02.03 automation/Solar.md",
+    "02 Home Automation/02.03 automation/Utils.md",
+    "03 Support Libraries/03.02 mqtt/🧭 MQTT Overview.md",
+    "01 Core/🧭 Core Overview.md",
+    "index.md",
+    "02 Home Automation/02.01 hass/🧭 Hass Overview.md",
+    "private/typography.md",
+    "02 Home Automation/02.01 hass/assets/validate_config_bad_token.png",
+    "02 Home Automation/02.01 hass/assets/validate_config_bad_domain.png",
+    "02 Home Automation/02.01 hass/assets/editor.png",
+    "02 Home Automation/02.01 hass/assets/validate_config_running.png",
+    "02 Home Automation/02.01 hass/assets/validate_config_bad_address.png",
+    "08 Extended Examples",
     "02 Home Automation/02.02 synapse/🧭 Synapse Overview.md",
     "02 Home Automation/02.02 synapse/domains.md",
-    "02 Home Automation/02.01 hass/🧭 Hass Overview.md",
     "02 Home Automation/02.01 hass/Websocket API.md",
     "02 Home Automation/02.01 hass/Special Logic.md",
     "02 Home Automation/02.01 hass/Rest API.md",
     "02 Home Automation/02.01 hass/Entity Manager.md",
     "02 Home Automation/02.01 hass/Call Proxy.md",
-    "02 Home Automation/02.01 hass/assets/validate_config_bad_token.png",
-    "02 Home Automation/02.01 hass/assets/validate_config_bad_address.png",
-    "02 Home Automation/02.01 hass/assets/validate_config_bad_domain.png",
-    "02 Home Automation/02.01 hass/assets/validate_config_running.png",
     "02 Home Automation/02.01 hass/assets/Screenshot_20240311_111058.png",
     "02 Home Automation/02.01 hass/assets/Screenshot_20240311_111457.png",
     "02 Home Automation/02.01 hass/assets/Screenshot_20240311_101222.png",
@@ -333,11 +346,7 @@
     "01 Core/scheduler.md",
     "01 Core/logger.md",
     "01 Core/cache.md",
-    "01 Core/configuration.md",
-    "01 Core/fetch.md",
-    "01 Core/lifecycle.md",
     "07 Automation Quickstart/assets/workspace_open.png",
-    "07 Automation Quickstart/assets/valid_build.png",
     "07 Automation Quickstart/assets",
     "private/nginx.conf",
     "private",
@@ -346,7 +355,6 @@
     "03 Support Libraries",
     "02 Home Automation",
     "01 Core",
-    "addon",
-    "02 Home Automation/02.02 synapse/assets"
+    "addon"
   ]
 }

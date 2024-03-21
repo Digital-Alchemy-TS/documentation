@@ -1,6 +1,7 @@
 `@digital-alchemy` is a collection of modern Typescript based tools, which focus on Home Automation and other non-web use cases.
 
 > [!info] See the main project on GitHub https://github.com/Digital-Alchemy-TS
+> Join Discord: http://discord.digital-alchemy.app/
 
 ## 🏞 The Sights
 

@@ -1,4 +1,3 @@
-### Built In
 
 > [!note] Note callout example
 

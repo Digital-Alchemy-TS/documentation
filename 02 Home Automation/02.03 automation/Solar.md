@@ -1,11 +1,10 @@
-## Description
+## 📚 Description
 
 - #Lifecycle/onBootstrap
-- [[scheduler]]
 
-The solar extension exists to make it easy to perform time math with reference points for the sun. 
+The solar extension exists to make it easy to perform time math with reference points for the sun. It uses `lat/long` provided by Home Assistant, updating reference points nightly with the [[scheduler]].
 
-## Reference Points
+## 🌅 Reference Points
 
 | Name          | Description                                                                                          |
 | ------------- | ---------------------------------------------------------------------------------------------------- |
@@ -19,6 +18,8 @@ The solar extension exists to make it easy to perform time math with reference p
 | `sunset`      | The moment the upper edge of the sun disappears below the horizon in the evening.                    |
 | `solarNoon`   | The time when the sun reaches its highest point in the sky for the day, directly above the observer. |
 
+## 🌞 Usage
+
 > [!example] #Usage-Example/automation/solar_on_event
 ```typescript
 export function Example({ automation, context, logger }: TServiceParams) {
@@ -26,9 +27,9 @@ export function Example({ automation, context, logger }: TServiceParams) {
     context,
     eventName: "dawn",
     exec() {
-      logger.info("it is dawn!");
+      logger.info("It is dawn!");
     }
-  })
+  });
 }
 ```
 

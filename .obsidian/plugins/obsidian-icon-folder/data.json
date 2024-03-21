@@ -6,11 +6,11 @@
     "emojiStyle": "none",
     "iconColor": null,
     "recentlyUsedIcons": [
+      "FasSpaghettiMonsterFlying",
       "TiAsset",
       "TiEngine",
       "RiGridLine",
-      "RiTerminalBoxFill",
-      "SiParsedotly"
+      "RiTerminalBoxFill"
     ],
     "recentlyUsedIconsSize": 5,
     "rules": [],
@@ -82,5 +82,9 @@
   "assets": {
     "iconName": "TiAsset",
     "iconColor": "#8040ff"
+  },
+  "08 Extended Examples": {
+    "iconName": "FasSpaghettiMonsterFlying",
+    "iconColor": "#ffff00"
   }
 }
