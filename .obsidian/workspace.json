@@ -18,7 +18,7 @@
                 "state": {
                   "type": "markdown",
                   "state": {
-                    "file": "02 Home Automation/02.03 automation/Utils.md",
+                    "file": "Automation Quickstart/Automation Quickstart Overview.md",
                     "mode": "source",
                     "source": false
                   }
@@ -45,15 +45,11 @@
                     }
                   },
                   {
-                    "id": "cab4741c4819f24a",
+                    "id": "2ce145ea48eee5f0",
                     "type": "leaf",
                     "state": {
-                      "type": "markdown",
-                      "state": {
-                        "file": "01 Core/lifecycle.md",
-                        "mode": "source",
-                        "source": false
-                      }
+                      "type": "empty",
+                      "state": {}
                     }
                   }
                 ]
@@ -68,7 +64,7 @@
                     "state": {
                       "type": "localgraph",
                       "state": {
-                        "file": "02 Home Automation/02.03 automation/Utils.md",
+                        "file": "Automation Quickstart/Automation Quickstart Overview.md",
                         "options": {
                           "collapse-filter": true,
                           "search": "",
@@ -79,7 +75,7 @@
                           "showTags": true,
                           "showAttachments": true,
                           "hideUnresolved": false,
-                          "collapse-color-groups": false,
+                          "collapse-color-groups": true,
                           "colorGroups": [
                             {
                               "query": "path:\"01 Core\"  ",
@@ -145,17 +141,17 @@
                               }
                             }
                           ],
-                          "collapse-display": false,
+                          "collapse-display": true,
                           "showArrow": true,
                           "textFadeMultiplier": -0.2,
                           "nodeSizeMultiplier": 1,
-                          "lineSizeMultiplier": 1,
-                          "collapse-forces": true,
-                          "centerStrength": 0.796875,
+                          "lineSizeMultiplier": 5,
+                          "collapse-forces": false,
+                          "centerStrength": 0.203125,
                           "repelStrength": 20,
                           "linkStrength": 1,
                           "linkDistance": 108,
-                          "scale": 0.6666666666666666,
+                          "scale": 0.29629629629629584,
                           "close": true
                         }
                       }
@@ -210,7 +206,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "example",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -247,7 +243,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "02 Home Automation/02.03 automation/Utils.md",
+                "file": "Automation Quickstart/Automation Quickstart Overview.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -264,7 +260,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "02 Home Automation/02.03 automation/Utils.md",
+                "file": "Automation Quickstart/Automation Quickstart Overview.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -287,7 +283,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "02 Home Automation/02.03 automation/Utils.md"
+                "file": "Automation Quickstart/Automation Quickstart Overview.md"
               }
             }
           }
@@ -305,56 +301,57 @@
       "canvas:Create new canvas": false,
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
-      "command-palette:Open command palette": false
+      "command-palette:Open command palette": false,
+      "publish:Publish changes...": false
     }
   },
   "active": "cb954889eb65e4f2",
   "lastOpenFiles": [
-    "02 Home Automation/02.03 automation/🧭 Automation Overview.md",
-    "02 Home Automation/02.03 automation/Aggressive Scenes.md",
-    "02 Home Automation/02.03 automation/Circadian.md",
-    "02 Home Automation/02.03 automation/Light Manager.md",
-    "02 Home Automation/02.03 automation/Managed Switch.md",
-    "02 Home Automation/02.03 automation/Rooms.md",
-    "02 Home Automation/02.03 automation/Sequence Matcher.md",
-    "02 Home Automation/02.03 automation/Solar.md",
-    "02 Home Automation/02.03 automation/Utils.md",
-    "03 Support Libraries/03.02 mqtt/🧭 MQTT Overview.md",
-    "01 Core/🧭 Core Overview.md",
-    "index.md",
-    "02 Home Automation/02.01 hass/🧭 Hass Overview.md",
-    "private/typography.md",
-    "02 Home Automation/02.01 hass/assets/validate_config_bad_token.png",
-    "02 Home Automation/02.01 hass/assets/validate_config_bad_domain.png",
-    "02 Home Automation/02.01 hass/assets/editor.png",
-    "02 Home Automation/02.01 hass/assets/validate_config_running.png",
-    "02 Home Automation/02.01 hass/assets/validate_config_bad_address.png",
-    "08 Extended Examples",
-    "02 Home Automation/02.02 synapse/🧭 Synapse Overview.md",
-    "02 Home Automation/02.02 synapse/domains.md",
-    "02 Home Automation/02.01 hass/Websocket API.md",
-    "02 Home Automation/02.01 hass/Special Logic.md",
-    "02 Home Automation/02.01 hass/Rest API.md",
-    "02 Home Automation/02.01 hass/Entity Manager.md",
-    "02 Home Automation/02.01 hass/Call Proxy.md",
+    "Support Libraries/gotify/Gotify Overview.md",
+    "Support Libraries/grocy/Grocy Overview.md",
+    "Home Automation/hass/Hass Overview.md",
+    "Core/wiring.md",
+    "Core/cache.md",
+    "Core/Core Overview.md",
+    "Home.md",
+    "Automation Quickstart/Automation Quickstart Overview.md",
+    "Support Libraries/mqtt/MQTT Overview.md",
+    "Support Libraries/mqtt/config/CLIENT_OPTIONS.md",
+    "Terminal/Terminal Overview.md",
+    "Support Libraries/fastify/Fastify Overview.md",
+    "Home Automation/synapse-extension/Synapse Extension Overview.md",
+    "Support Libraries/Support Libraries Overview.md",
+    "Home Automation/automation/Automation Overview.md",
+    "Home Automation/synapse/Synapse Overview.md",
+    "Home Automation/type-writer/Type Writer Overview.md",
+    "Home Automation/Home Automation Overview.md",
+    "Home Automation/hass/Entity Manager.md",
+    "Home Automation/hass/Call Proxy.md",
+    "Home Automation/hass/Rest API.md",
+    "Home Automation/hass/Special Logic.md",
+    "Home Automation/hass/Websocket API.md",
+    "Home Automation/type-writer/assets/editor.png",
+    "Automation Quickstart/Addon.md",
+    "Core/configuration.md",
+    "Support Libraries/gotify/config/CHANNEL_MAPPING.md",
+    "04 Minor Applications/04.01 Type Writer/Untitled",
+    "Terminal/config",
+    "Home Automation/type-writer/config",
+    "Support Libraries/grocy/config",
+    "Support Libraries/gotify/config",
+    "Support Libraries/fastify/config",
+    "Support Libraries/mqtt/config",
+    "Home Automation/automation/config",
+    "Home Automation/synapse/config",
+    "Home Automation/hass/config",
+    "07 Automation Quickstart/assets/quickstart_high_quality.gif",
+    "Home Automation/hass/assets/validate_config_bad_token.png",
+    "Home Automation/hass/assets/validate_config_bad_domain.png",
+    "Home Automation/hass/assets/editor.png",
+    "Home Automation/hass/assets/validate_config_running.png",
+    "Home Automation/hass/assets/validate_config_bad_address.png",
     "02 Home Automation/02.01 hass/assets/Screenshot_20240311_111058.png",
     "02 Home Automation/02.01 hass/assets/Screenshot_20240311_111457.png",
-    "02 Home Automation/02.01 hass/assets/Screenshot_20240311_101222.png",
-    "02 Home Automation/02.01 hass/assets/Screenshot_20240311_101117.png",
-    "01 Core/internal.md",
-    "01 Core/wiring.md",
-    "01 Core/scheduler.md",
-    "01 Core/logger.md",
-    "01 Core/cache.md",
-    "07 Automation Quickstart/assets/workspace_open.png",
-    "07 Automation Quickstart/assets",
-    "private/nginx.conf",
-    "private",
-    "assets",
-    "04 Minor Applications",
-    "03 Support Libraries",
-    "02 Home Automation",
-    "01 Core",
-    "addon"
+    "02 Home Automation/02.01 hass/assets/Screenshot_20240311_101222.png"
   ]
 }

@@ -6,11 +6,11 @@
     "emojiStyle": "none",
     "iconColor": null,
     "recentlyUsedIcons": [
+      "RaGears",
+      "RaOvermind",
       "FasSpaghettiMonsterFlying",
       "TiAsset",
-      "TiEngine",
-      "RiGridLine",
-      "RiTerminalBoxFill"
+      "TiEngine"
     ],
     "recentlyUsedIconsSize": 5,
     "rules": [],
@@ -27,64 +27,156 @@
     "iconsInNotesEnabled": true,
     "iconIdentifier": ":"
   },
-  "index.md": {
-    "iconName": "CoMainComponent",
-    "iconColor": "#ff0000"
-  },
-  "01 Core": {
-    "iconName": "RaCrystalBall",
-    "iconColor": "#8000ff"
-  },
-  "02 Home Automation": {
-    "iconName": "FasHouseSignal",
-    "iconColor": "#0080ff"
-  },
-  "03 Support Libraries": {
-    "iconName": "FasBuildingColumns",
-    "iconColor": "#80ff00"
-  },
-  "04 Minor Applications": {
-    "iconName": "SiParsedotly",
-    "iconColor": "#ff4180"
-  },
-  "05 Terminal": {
-    "iconName": "RiTerminalBoxFill",
-    "iconColor": "#ff4000"
-  },
-  "06 Pi Matrix": {
-    "iconName": "RiGridLine",
-    "iconColor": "#ff80ff"
-  },
-  "07 Automation Quickstart": {
-    "iconName": "TiEngine",
-    "iconColor": "#00ffff"
-  },
-  "01 Core/assets": {
-    "iconName": "TiAsset",
-    "iconColor": "#8040ff"
-  },
-  "02 Home Automation/02.01 hass/assets": {
-    "iconName": "TiAsset",
-    "iconColor": "#8040ff"
-  },
-  "02 Home Automation/02.02 synapse/assets": {
-    "iconName": "TiAsset",
-    "iconColor": "#8040ff"
-  },
-  "04 Minor Applications/04.01 Type Writer/assets": {
-    "iconName": "TiAsset",
-    "iconColor": "#8040ff"
-  },
-  "07 Automation Quickstart/assets": {
-    "iconName": "TiAsset",
-    "iconColor": "#8040ff"
-  },
   "assets": {
     "iconName": "TiAsset",
     "iconColor": "#8040ff"
   },
-  "08 Extended Examples": {
-    "iconName": "FasSpaghettiMonsterFlying",
-    "iconColor": "#ffff00"
+  "Home.md": {
+    "iconName": "CoMainComponent",
+    "iconColor": "#ff0000"
+  },
+  "Core": {
+    "iconName": "RaCrystalBall",
+    "iconColor": "#8000ff"
+  },
+  "Core/assets": {
+    "iconName": "TiAsset",
+    "iconColor": "#8040ff"
+  },
+  "Core/Core Overview.md": {
+    "iconName": "RaOvermind",
+    "iconColor": "#00ff00"
+  },
+  "Core/config": {
+    "iconName": "RaGears",
+    "iconColor": "#0000ff"
+  },
+  "Home Automation": {
+    "iconName": "FasHouseSignal",
+    "iconColor": "#0080ff"
+  },
+  "Home Automation/Home Automation Overview.md": {
+    "iconName": "RaOvermind",
+    "iconColor": "#00ff00"
+  },
+  "Support Libraries": {
+    "iconName": "FasBuildingColumns",
+    "iconColor": "#80ff00"
+  },
+  "Support Libraries/Support Libraries Overview.md": {
+    "iconName": "RaOvermind",
+    "iconColor": "#00ff00"
+  },
+  "Terminal": {
+    "iconName": "RiTerminalBoxFill",
+    "iconColor": "#ff4000"
+  },
+  "Terminal/Terminal Overview.md": {
+    "iconName": "RaOvermind",
+    "iconColor": "#00ff00"
+  },
+  "Terminal/config": {
+    "iconName": "RaGears",
+    "iconColor": "#0000ff"
+  },
+  "Pi Matrix": {
+    "iconName": "RiGridLine",
+    "iconColor": "#ff80ff"
+  },
+  "Pi Matrix/Pi Matrix Overview.md": {
+    "iconName": "RaOvermind",
+    "iconColor": "#00ff00"
+  },
+  "Automation Quickstart": {
+    "iconName": "TiEngine",
+    "iconColor": "#00ffff"
+  },
+  "Automation Quickstart/assets": {
+    "iconName": "TiAsset",
+    "iconColor": "#8040ff"
+  },
+  "Automation Quickstart/Automation Quickstart Overview.md": {
+    "iconName": "RaOvermind",
+    "iconColor": "#00ff00"
+  },
+  "Home Automation/hass/assets": {
+    "iconName": "TiAsset",
+    "iconColor": "#8040ff"
+  },
+  "Home Automation/hass/Hass Overview.md": {
+    "iconName": "RaOvermind",
+    "iconColor": "#00ff00"
+  },
+  "Home Automation/hass/config": {
+    "iconName": "RaGears",
+    "iconColor": "#0000ff"
+  },
+  "Home Automation/synapse/assets": {
+    "iconName": "TiAsset",
+    "iconColor": "#8040ff"
+  },
+  "Home Automation/synapse/Synapse Overview.md": {
+    "iconName": "RaOvermind",
+    "iconColor": "#00ff00"
+  },
+  "Home Automation/synapse/config": {
+    "iconName": "RaGears",
+    "iconColor": "#0000ff"
+  },
+  "Home Automation/automation/Automation Overview.md": {
+    "iconName": "RaOvermind",
+    "iconColor": "#00ff00"
+  },
+  "Home Automation/automation/config": {
+    "iconName": "RaGears",
+    "iconColor": "#0000ff"
+  },
+  "Home Automation/synapse-extension/Synapse Extension Overview.md": {
+    "iconName": "RaOvermind",
+    "iconColor": "#00ff00"
+  },
+  "Support Libraries/fastify/Fastify Overview.md": {
+    "iconName": "RaOvermind",
+    "iconColor": "#00ff00"
+  },
+  "Support Libraries/fastify/config": {
+    "iconName": "RaGears",
+    "iconColor": "#0000ff"
+  },
+  "Support Libraries/grocy/Grocy Overview.md": {
+    "iconName": "RaOvermind",
+    "iconColor": "#00ff00"
+  },
+  "Support Libraries/grocy/config": {
+    "iconName": "RaGears",
+    "iconColor": "#0000ff"
+  },
+  "Support Libraries/gotify/Gotify Overview.md": {
+    "iconName": "RaOvermind",
+    "iconColor": "#00ff00"
+  },
+  "Support Libraries/gotify/config": {
+    "iconName": "RaGears",
+    "iconColor": "#0000ff"
+  },
+  "Support Libraries/mqtt/MQTT Overview.md": {
+    "iconName": "RaOvermind",
+    "iconColor": "#00ff00"
+  },
+  "Support Libraries/mqtt/config": {
+    "iconName": "RaGears",
+    "iconColor": "#0000ff"
+  },
+  "Home Automation/type-writer/assets": {
+    "iconName": "TiAsset",
+    "iconColor": "#8040ff"
+  },
+  "Home Automation/type-writer/Type Writer Overview.md": {
+    "iconName": "RaOvermind",
+    "iconColor": "#00ff00"
+  },
+  "Home Automation/type-writer/config": {
+    "iconName": "RaGears",
+    "iconColor": "#0000ff"
   }
 }
