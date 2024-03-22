@@ -18,7 +18,7 @@
                 "state": {
                   "type": "markdown",
                   "state": {
-                    "file": "Automation Quickstart/Automation Quickstart Overview.md",
+                    "file": "Core/Configuration.md",
                     "mode": "source",
                     "source": false
                   }
@@ -40,8 +40,12 @@
                     "id": "2f8eb55784fc4c22",
                     "type": "leaf",
                     "state": {
-                      "type": "graph",
-                      "state": {}
+                      "type": "markdown",
+                      "state": {
+                        "file": "Core/config/CONFIG.md",
+                        "mode": "source",
+                        "source": false
+                      }
                     }
                   },
                   {
@@ -64,7 +68,7 @@
                     "state": {
                       "type": "localgraph",
                       "state": {
-                        "file": "Automation Quickstart/Automation Quickstart Overview.md",
+                        "file": "Core/Configuration.md",
                         "options": {
                           "collapse-filter": true,
                           "search": "",
@@ -243,7 +247,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Automation Quickstart/Automation Quickstart Overview.md",
+                "file": "Core/Configuration.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -260,7 +264,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Automation Quickstart/Automation Quickstart Overview.md",
+                "file": "Core/Configuration.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -283,7 +287,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Automation Quickstart/Automation Quickstart Overview.md"
+                "file": "Core/Configuration.md"
               }
             }
           }
@@ -307,51 +311,51 @@
   },
   "active": "cb954889eb65e4f2",
   "lastOpenFiles": [
-    "Support Libraries/gotify/Gotify Overview.md",
-    "Support Libraries/grocy/Grocy Overview.md",
-    "Home Automation/hass/Hass Overview.md",
-    "Core/wiring.md",
-    "Core/cache.md",
-    "Core/Core Overview.md",
-    "Home.md",
-    "Automation Quickstart/Automation Quickstart Overview.md",
-    "Support Libraries/mqtt/MQTT Overview.md",
-    "Support Libraries/mqtt/config/CLIENT_OPTIONS.md",
+    "Quickstart/Generic/Generic Quickstart.md",
+    "Core/config/CONFIG.md",
     "Terminal/Terminal Overview.md",
-    "Support Libraries/fastify/Fastify Overview.md",
-    "Home Automation/synapse-extension/Synapse Extension Overview.md",
-    "Support Libraries/Support Libraries Overview.md",
-    "Home Automation/automation/Automation Overview.md",
-    "Home Automation/synapse/Synapse Overview.md",
-    "Home Automation/type-writer/Type Writer Overview.md",
-    "Home Automation/Home Automation Overview.md",
-    "Home Automation/hass/Entity Manager.md",
-    "Home Automation/hass/Call Proxy.md",
-    "Home Automation/hass/Rest API.md",
-    "Home Automation/hass/Special Logic.md",
-    "Home Automation/hass/Websocket API.md",
-    "Home Automation/type-writer/assets/editor.png",
-    "Automation Quickstart/Addon.md",
-    "Core/configuration.md",
-    "Support Libraries/gotify/config/CHANNEL_MAPPING.md",
+    "Terminal/Application Manager.md",
+    "Terminal/editors/String.md",
+    "Terminal/components/Pick Many.md",
+    "Terminal/components/Object Builder.md",
+    "Terminal/components/Menu.md",
+    "Terminal/editors/Date.md",
+    "Terminal/components/Confirm.md",
+    "Terminal/Prompts.md",
+    "Terminal/assets/boolean.png",
+    "Terminal/components/Array Builder.md",
+    "Terminal/components/Acknowledge.md",
+    "Core/exports/TServiceParams.md",
+    "Terminal/assets/date_fuzzy.gif",
+    "Terminal/assets/date_granular.gif",
+    "Terminal/assets/string.gif",
+    "Terminal/assets/acknowledge.png",
+    "Terminal/assets/array_builder_base.png",
+    "Terminal/assets/array_builder_edit.png",
+    "Terminal/assets/confirm.png",
+    "Terminal/assets/date_fuzzy.png",
+    "Terminal/assets/date_granular.png",
+    "Terminal/assets",
+    "Quickstart/Terminal",
+    "Quickstart/Generic",
+    "Quickstart",
+    "Terminal/config/MENU_ENTRY_NORMAL.md",
+    "Terminal/config/MENU_ENTRY_OTHER.md",
+    "Terminal/config/MENU_ENTRY_SELECTED.md",
+    "Terminal/config/MENU_ENTRY_TYPE.md",
+    "Terminal/config/MENU_ENTRY_TYPE_OTHER.md",
+    "Terminal/config/MENU_SEARCHBOX_CONTENT.md",
+    "Terminal/config/MENU_SEARCHBOX_EMPTY.md",
+    "Terminal/config/MENU_SEARCHBOX_NORMAL.md",
+    "Terminal/config/PAGE_SIZE.md",
+    "Terminal/config/PROMPT_QUESTION.md",
+    "Terminal/config/STRING_EDITOR_CONTENT.md",
+    "Terminal/config/STRING_EDITOR_EMPTY.md",
+    "Terminal/components",
+    "Terminal/editors",
     "04 Minor Applications/04.01 Type Writer/Untitled",
     "Terminal/config",
-    "Home Automation/type-writer/config",
-    "Support Libraries/grocy/config",
-    "Support Libraries/gotify/config",
-    "Support Libraries/fastify/config",
-    "Support Libraries/mqtt/config",
-    "Home Automation/automation/config",
-    "Home Automation/synapse/config",
-    "Home Automation/hass/config",
-    "07 Automation Quickstart/assets/quickstart_high_quality.gif",
-    "Home Automation/hass/assets/validate_config_bad_token.png",
-    "Home Automation/hass/assets/validate_config_bad_domain.png",
-    "Home Automation/hass/assets/editor.png",
-    "Home Automation/hass/assets/validate_config_running.png",
-    "Home Automation/hass/assets/validate_config_bad_address.png",
-    "02 Home Automation/02.01 hass/assets/Screenshot_20240311_111058.png",
-    "02 Home Automation/02.01 hass/assets/Screenshot_20240311_111457.png",
-    "02 Home Automation/02.01 hass/assets/Screenshot_20240311_101222.png"
+    "Home Automation/Type Writer/config",
+    "Support Libraries/Grocy/config"
   ]
 }

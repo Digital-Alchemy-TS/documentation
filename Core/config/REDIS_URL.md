@@ -30,7 +30,7 @@ tsx src/main.ts --redis_url=redis://myredisserver:6379
 tsx src/main.ts --redis_url redis://myredisserver:6379
 ```
 ### 📁 File
-> [!tip] If your file does not have an extension, [[configuration]] will do auto
+> [!tip] If your file does not have an extension, [[Configuration]] will do auto
 #### 📘 ini
 
 > [!example] 

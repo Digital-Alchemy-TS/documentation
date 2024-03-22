@@ -28,13 +28,13 @@ Services are attached to the modules and are defined as functions that take in a
 > [!summary] 
 > Deeper dives on `core` features
 
- - [[cache\|Cache]] - Basic cache adapter with support for memory and Redis drivers.
- - [[configuration\|Configuration]] - Strongly typed configurations, with a priority-based configuration loader supporting a variety of sources.
- - [[fetch|Fetch Wrapper]] - Easily configurable wrapper for `fetch`.
- - [[logger\|Logger]] - Context-aware pretty logger, with a flexible interface.
- - [[scheduler\|Scheduler]] - Lifecycle-aware task scheduling, featuring precise timing and robust error handling.
- - [[wiring\|Wiring and Modularization]] - Defines the application's structure, ensuring clean code separation and modular development.
- - [[internal\|Internal Utilities]] - Application metadata, support, and utility functions.
+ - [[Cache|Cache]] - Basic cache adapter with support for memory and Redis drivers.
+ - [[Configuration|Configuration]] - Strongly typed configurations, with a priority-based configuration loader supporting a variety of sources.
+ - [[Fetch|Fetch Wrapper]] - Easily configurable wrapper for `fetch`.
+ - [[Logger|Logger]] - Context-aware pretty logger, with a flexible interface.
+ - [[Scheduler|Scheduler]] - Lifecycle-aware task scheduling, featuring precise timing and robust error handling.
+ - [[Wiring|Wiring and Modularization]] - Defines the application's structure, ensuring clean code separation and modular development.
+ - [[Internal|Internal Utilities]] - Application metadata, support, and utility functions.
 
 ### 🛠 Helpers / everything else
 

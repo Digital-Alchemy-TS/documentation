@@ -31,7 +31,7 @@ tsx src/main.ts --cache_provider=redis
 tsx src/main.ts --cache_provider redis
 ```
 ### 📁 File
-> [!tip] If your file does not have an extension, [[configuration]] will do auto
+> [!tip] If your file does not have an extension, [[Configuration]] will do auto
 #### 📘 ini
 
 > [!example] 

@@ -14,9 +14,9 @@ aliases: []
 
 The core library provides all the basic library, application, and service wiring tools; allowing the easy construction of standardized services. Also provided are a comprehensive set of boilerplate utilities, covering:
 
-- [[configuration]]
-- [[logger|logging]]
-- [[cache|caching]]
+- [[Configuration]]
+- [[Logger|logging]]
+- [[Cache|caching]]
 - and more!
 ### 🏡 [[Home Automation Overview|Home Automation]]
 
@@ -40,9 +40,10 @@ The core library provides all the basic library, application, and service wiring
 > [!tldr] 
  Code support for other useful services too!
 
-| Project                       | Description                                                                                             |
-| ----------------------------- | ------------------------------------------------------------------------------------------------------- |
-| [[Fastify Overview\|Fastify]] | Reference to [fastify](https://fastify.dev/) instance. Respects configuration and application lifecycle |
-| [[MQTT Overview\|MQTT]]       | Easy configured bindings for [mqtt](https://www.npmjs.com/package/mqtt)                                 |
-| [[Gotify Overview\|Gotify]]   | API bindings for [gotify](https://gotify.net/)                                                          |
-| [[Grocy Overview\|Grocy]]     | API bindings for [grocy](https://grocy.info/)                                                           |
+| Project                         | Description                                                                                             |
+| ------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| [[Fastify Overview\|Fastify]]   | Reference to [fastify](https://fastify.dev/) instance. Respects configuration and application lifecycle |
+| [[MQTT Overview\|MQTT]]         | Easy configured bindings for [mqtt](https://www.npmjs.com/package/mqtt)                                 |
+| [[Gotify Overview\|Gotify]]     | API bindings for [gotify](https://gotify.net/)                                                          |
+| [[Grocy Overview\|Grocy]]       | API bindings for [grocy](https://grocy.info/)                                                           |
+| [[Terminal Overview\|Terminal]] | Advanced terminal utilities                                                                             |

@@ -30,7 +30,7 @@ tsx src/main.ts --cache_prefix=myCachePrefix
 tsx src/main.ts --cache_prefix myCachePrefix
 ```
 ### 📁 File
-> [!tip] If your file does not have an extension, [[configuration]] will do auto
+> [!tip] If your file does not have an extension, [[Configuration]] will do auto
 #### 📘 ini
 
 > [!example] 
