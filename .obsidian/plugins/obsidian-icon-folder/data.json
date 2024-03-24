@@ -6,11 +6,11 @@
     "emojiStyle": "none",
     "iconColor": null,
     "recentlyUsedIcons": [
+      "TiStatusChange",
       "FasHouseSignal",
       "RaGears",
       "RaOvermind",
-      "FasSpaghettiMonsterFlying",
-      "TiAsset"
+      "FasSpaghettiMonsterFlying"
     ],
     "recentlyUsedIconsSize": 5,
     "rules": [],
@@ -183,5 +183,53 @@
   "Terminal/assets": {
     "iconName": "TiAsset",
     "iconColor": "#8040ff"
+  },
+  "Core/changelog": {
+    "iconName": "TiStatusChange",
+    "iconColor": "#ff8080"
+  },
+  "Home Automation/Hass/changelog": {
+    "iconName": "TiStatusChange",
+    "iconColor": "#ff8080"
+  },
+  "Home Automation/Synapse/changelog": {
+    "iconName": "TiStatusChange",
+    "iconColor": "#ff8080"
+  },
+  "Home Automation/Synapse Extension/changelog": {
+    "iconName": "TiStatusChange",
+    "iconColor": "#ff8080"
+  },
+  "Pi Matrix/changelog": {
+    "iconName": "TiStatusChange",
+    "iconColor": "#ff8080"
+  },
+  "Terminal/changelog": {
+    "iconName": "TiStatusChange",
+    "iconColor": "#ff8080"
+  },
+  "Support Libraries/MQTT/changelog": {
+    "iconName": "TiStatusChange",
+    "iconColor": "#ff8080"
+  },
+  "Support Libraries/Grocy/changelog": {
+    "iconName": "TiStatusChange",
+    "iconColor": "#ff8080"
+  },
+  "Support Libraries/Gotify/changelog": {
+    "iconName": "TiStatusChange",
+    "iconColor": "#ff8080"
+  },
+  "Support Libraries/Fastify/changelog": {
+    "iconName": "TiStatusChange",
+    "iconColor": "#ff8080"
+  },
+  "Quickstart/Automation/changelog": {
+    "iconName": "TiStatusChange",
+    "iconColor": "#ff8080"
+  },
+  "Home Automation/Automation/changelog": {
+    "iconName": "TiStatusChange",
+    "iconColor": "#ff8080"
   }
 }

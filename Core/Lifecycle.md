@@ -28,14 +28,31 @@ If you attach a callback to a lifecycle event after it already occurred, the cal
 
 ```typescript
 function MyService({ logger, lifecycle }: TServiceParams) {
+  // sorted into execution order
+
   lifecycle.onBootstrap(() => {
-    logger.info("I happen whenever");
-  });
+    logger.info("I happen first");
+  }, 2);
+  
   lifecycle.onBootstrap(() => {
     logger.info("I happen early");
   }, 1);
+  
   lifecycle.onBootstrap(() => {
-    logger.info("Higher priority is more first-er");
-  }, 2);
+    logger.info("I exist too");
+  }, 0);
+
+  // in between 0 & negative numbers
+  lifecycle.onBootstrap(() => {
+    logger.info("I happen after the priority callbacks");
+  });
+  
+  lifecycle.onBootstrap(() => {
+    logger.info("I happen late");
+  }, -1);
+  
+  lifecycle.onBootstrap(() => {
+    logger.info("I happen really late");
+  }, -2);
 }
 ```

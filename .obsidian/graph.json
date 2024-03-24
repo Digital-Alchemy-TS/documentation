@@ -15,10 +15,10 @@
       }
     },
     {
-      "query": "path:\"Home Automation\"   ",
+      "query": "path:\"changelog/\" ",
       "color": {
         "a": 1,
-        "rgb": 32255
+        "rgb": 16776960
       }
     },
     {
@@ -64,7 +64,42 @@
       }
     },
     {
-      "query": "path:\"Home\"",
+      "query": "path:\"Home Automation\"",
+      "color": {
+        "a": 1,
+        "rgb": 32255
+      }
+    },
+    {
+      "query": "path:\"Home\"   ",
+      "color": {
+        "a": 1,
+        "rgb": 16711680
+      }
+    },
+    {
+      "query": "path:\"Project Links\"",
+      "color": {
+        "a": 1,
+        "rgb": 16711680
+      }
+    },
+    {
+      "query": "path:\"Changelog\"",
+      "color": {
+        "a": 1,
+        "rgb": 16776960
+      }
+    },
+    {
+      "query": "path:\"Contributors\"",
+      "color": {
+        "a": 1,
+        "rgb": 6084188
+      }
+    },
+    {
+      "query": "path: \"private\"",
       "color": {
         "a": 1,
         "rgb": 16711680
@@ -81,6 +116,6 @@
   "repelStrength": 20,
   "linkStrength": 1,
   "linkDistance": 108,
-  "scale": 0.13168724279835364,
-  "close": false
+  "scale": 0.13168724279835353,
+  "close": true
 }

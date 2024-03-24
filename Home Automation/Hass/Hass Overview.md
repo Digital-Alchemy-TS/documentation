@@ -9,6 +9,7 @@ Welcome to `@digital-alchemy/hass`!
 
 This repository contains generic extensions for interacting with Home Assistant, including websocket & REST API adapters, entity & event management, backup workflows, and more. 
 
+- [[Hass 0.3.x|0.3.x changelog]]
 ## Install
 
 Add as a dependency, and add to your imports. Nice and easy

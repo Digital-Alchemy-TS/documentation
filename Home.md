@@ -34,6 +34,7 @@ The core library provides all the basic library, application, and service wiring
 | --------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
 | [[Synapse Extension Overview\|Synapse Custom Component]]  | The HACS integration for interacting with synapse library                                       |
 | [[Automation Quickstart Overview\|Automation Quickstart]] | Quickstart repo for creating new Home Automation applications. Perfect for supervised installs! |
+| [[Generic Quickstart]]                                    | A blank project that only utilizes core                                                         |
 
 ### 💼 [[Support Libraries Overview|Support Libraries]]
 

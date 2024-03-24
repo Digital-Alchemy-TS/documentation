@@ -8,6 +8,8 @@ aliases:
 > https://grocy.info/
 > Grocy is a web-based self-hosted groceries & household management solution for your home. 
 
+- [[Grocy 0.3.x|0.3.x changelog]]
+
 API adapters for the Grocy application. Contains basic adapters for:
 - `Battery`
 - `Chores`

@@ -7,6 +7,8 @@ aliases:
 
 Welcome to `@digital-alchemy/type-writer`!
 
+- [[Type Writer 0.3.x|0.3.x changelog]]
+
 This application is a support tool for [[Hass Overview|@digital-alchemy/hass]], providing a detailed description of your setup for your editor to take advantage of. This is strictly a development tool, aimed at enhancing the editor experience.
 
 This script should be run after updating dependencies, any time you alter your setup, right before you open your editor, or whenever you feel like it. Nobody is judging.

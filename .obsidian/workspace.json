@@ -18,7 +18,7 @@
                 "state": {
                   "type": "markdown",
                   "state": {
-                    "file": "Core/Configuration.md",
+                    "file": "Blog/Building Automations - Next Steps.md",
                     "mode": "source",
                     "source": false
                   }
@@ -40,19 +40,7 @@
                     "id": "2f8eb55784fc4c22",
                     "type": "leaf",
                     "state": {
-                      "type": "markdown",
-                      "state": {
-                        "file": "Core/config/CONFIG.md",
-                        "mode": "source",
-                        "source": false
-                      }
-                    }
-                  },
-                  {
-                    "id": "2ce145ea48eee5f0",
-                    "type": "leaf",
-                    "state": {
-                      "type": "empty",
+                      "type": "graph",
                       "state": {}
                     }
                   }
@@ -68,7 +56,7 @@
                     "state": {
                       "type": "localgraph",
                       "state": {
-                        "file": "Core/Configuration.md",
+                        "file": "Blog/Building Automations - Next Steps.md",
                         "options": {
                           "collapse-filter": true,
                           "search": "",
@@ -155,7 +143,7 @@
                           "repelStrength": 20,
                           "linkStrength": 1,
                           "linkDistance": 108,
-                          "scale": 0.29629629629629584,
+                          "scale": 0.44444444444444375,
                           "close": true
                         }
                       }
@@ -210,7 +198,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "tag:#Changelog",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -247,7 +235,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Core/Configuration.md",
+                "file": "Blog/Building Automations - Next Steps.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -264,7 +252,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Core/Configuration.md",
+                "file": "Blog/Building Automations - Next Steps.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -287,7 +275,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Core/Configuration.md"
+                "file": "Blog/Building Automations - Next Steps.md"
               }
             }
           }
@@ -311,21 +299,44 @@
   },
   "active": "cb954889eb65e4f2",
   "lastOpenFiles": [
-    "Quickstart/Generic/Generic Quickstart.md",
-    "Core/config/CONFIG.md",
-    "Terminal/Terminal Overview.md",
-    "Terminal/Application Manager.md",
-    "Terminal/editors/String.md",
-    "Terminal/components/Pick Many.md",
-    "Terminal/components/Object Builder.md",
-    "Terminal/components/Menu.md",
-    "Terminal/editors/Date.md",
-    "Terminal/components/Confirm.md",
-    "Terminal/Prompts.md",
+    "Blog/Ideas/Adding mqtt.md",
+    "Blog/Building Automations - Next Steps.md",
+    "Blog/Ideas/Adding a  webserver to your app.md",
+    "Blog/Ideas",
+    "Quickstart/Automation/Automation Quickstart Overview.md",
+    "Quickstart/Automation/assets/npm_scripts.png",
+    "Home.md",
+    "Blog/Ideas/01 Creating unit tested automations.md",
+    "Core/changelog/Core 0.3.x.md",
+    "Blog",
+    "private/typography.md",
+    "Core/Lifecycle.md",
+    "Changelog.md",
+    "Home Automation/Synapse/changelog/Synapse 0.3.x.md",
+    "Home Automation/Type Writer/changelog/Type Writer 0.3.x.md",
+    "Home Automation/Synapse Extension/changelog/Synapse Extension 0.3.x.md",
+    "Support Libraries/MQTT/changelog/MQTT 0.3.x.md",
+    "Home Automation/Hass/changelog/Hass 0.3.x.md",
+    "Support Libraries/Grocy/changelog/Grocy 0.3.x.md",
+    "Support Libraries/Gotify/changelog/Gotify 0.3.x.md",
+    "Support Libraries/Fastify/changelog/Fastify 0.3.x.md",
+    "Quickstart/Automation/changelog/Automation Quickstart 0.3.x.md",
+    "Home Automation/Automation/changelog/Automation 0.3.x.md",
+    "Home Automation/Automation/Automation Overview.md",
+    "Core/Core Overview.md",
+    "Home Automation/Hass/Hass Overview.md",
+    "Home Automation/Synapse/Synapse Overview.md",
+    "Home Automation/Synapse Extension/Synapse Extension Overview.md",
+    "Home Automation/Type Writer/Type Writer Overview.md",
+    "Home Automation/Automation/changelog",
+    "Terminal/changelog",
+    "Support Libraries/Grocy/changelog",
+    "Support Libraries/Gotify/changelog",
+    "Support Libraries/Fastify/changelog",
+    "Quickstart/Terminal/Untitled",
+    "Quickstart/Generic/changelog",
+    "Quickstart/Automation/changelog",
     "Terminal/assets/boolean.png",
-    "Terminal/components/Array Builder.md",
-    "Terminal/components/Acknowledge.md",
-    "Core/exports/TServiceParams.md",
     "Terminal/assets/date_fuzzy.gif",
     "Terminal/assets/date_granular.gif",
     "Terminal/assets/string.gif",
@@ -333,29 +344,6 @@
     "Terminal/assets/array_builder_base.png",
     "Terminal/assets/array_builder_edit.png",
     "Terminal/assets/confirm.png",
-    "Terminal/assets/date_fuzzy.png",
-    "Terminal/assets/date_granular.png",
-    "Terminal/assets",
-    "Quickstart/Terminal",
-    "Quickstart/Generic",
-    "Quickstart",
-    "Terminal/config/MENU_ENTRY_NORMAL.md",
-    "Terminal/config/MENU_ENTRY_OTHER.md",
-    "Terminal/config/MENU_ENTRY_SELECTED.md",
-    "Terminal/config/MENU_ENTRY_TYPE.md",
-    "Terminal/config/MENU_ENTRY_TYPE_OTHER.md",
-    "Terminal/config/MENU_SEARCHBOX_CONTENT.md",
-    "Terminal/config/MENU_SEARCHBOX_EMPTY.md",
-    "Terminal/config/MENU_SEARCHBOX_NORMAL.md",
-    "Terminal/config/PAGE_SIZE.md",
-    "Terminal/config/PROMPT_QUESTION.md",
-    "Terminal/config/STRING_EDITOR_CONTENT.md",
-    "Terminal/config/STRING_EDITOR_EMPTY.md",
-    "Terminal/components",
-    "Terminal/editors",
-    "04 Minor Applications/04.01 Type Writer/Untitled",
-    "Terminal/config",
-    "Home Automation/Type Writer/config",
-    "Support Libraries/Grocy/config"
+    "Terminal/assets/date_fuzzy.png"
   ]
 }

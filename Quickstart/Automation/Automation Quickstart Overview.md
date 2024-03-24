@@ -11,6 +11,10 @@ This project is designed to work with **Supervised** and **HA OS** based install
 
 These instructions assume that [Studio Code Server Addon](https://github.com/hassio-addons/addon-vscode) has been installed on your setup, serving as both editor and workspace management tool.
 
+- Github repo: https://github.com/Digital-Alchemy-TS/automation-quickstart
+- Discord: https://discord.digital-alchemy.app
+- [[Automation Quickstart 0.3.x|0.3.x changelog]]
+
 ## 🚀 Setup
 
 > [!note] 

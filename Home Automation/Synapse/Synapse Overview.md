@@ -9,6 +9,8 @@ Welcome to `@digital-alchemy/synapse`!
 
 This project builds on the functions provided by [[Hass Overview|hass]] to provide the ability to generate entities within your Home Assistant install. With the help of a [custom component](https://github.com/Digital-Alchemy-TS/synapse-extension), you can gate logic behind switches, report states with sensors, attach functions to buttons, and more!
 
+- [[Synapse 0.3.x|0.3.x changelog]]
+
 ## 💾 Install
 
 > [!attention]

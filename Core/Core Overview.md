@@ -11,6 +11,8 @@ This core library is a standard utilities library used by the other TypeScript r
 
 The library is built as a TypeScript-first set of tools, leveraging a series of utility types and interfaces to make it easy to wire your application and see what features are available.
 
+- [[Core 0.3.x|0.3.x changelog]]
+
 ## 🌐 Core Library Overview
 
 Code is organized into 3 distinct types:

@@ -33,7 +33,8 @@
 > [!quote] Quote callout example
 > Alias: cite
 
-- config
-- TServiceParams
-- Support/
-- Usage-Example/
+
+> - 🐛 Bugs
+>  - 🛠 Maintenance
+>  - 📑 Documentation
+>  - 📈 Improvement

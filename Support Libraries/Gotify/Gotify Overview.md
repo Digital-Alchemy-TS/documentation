@@ -12,6 +12,7 @@ Welcome to `@digital-alchemy/gotify-extension`!
 
 - [GitHub](https://github.com/Digital-Alchemy-TS/gotify)
 - [NPM](https://www.npmjs.com/package/@digital-alchemy/gotify-extension)
+- [[Gotify 0.3.x|0.3.x changelog]]
 
 ## 💾 Install
 

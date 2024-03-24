@@ -2,12 +2,13 @@
 aliases:
   - Synapse-Extension
 ---
-
 ## 📘 Description
 
 Welcome to the Synapse custom component for Home Assistant!
 
 This library works with [[Synapse Overview|@digital-alchemy/synapse]] to allow Typescript based applications to create custom entities.
+
+- [[Synapse Extension 0.3.x|0.3.x changelog]]
 
 ## 🚀 Installing Synapse
 

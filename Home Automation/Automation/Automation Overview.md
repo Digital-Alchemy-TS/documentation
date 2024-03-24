@@ -11,6 +11,7 @@ This project builds on the utilities provided by to create new home automation f
 
 - [NPM](https://www.npmjs.com/package/@digital-alchemy/automation)
 - [GitHub](https://github.com/Digital-Alchemy-TS/automation)
+- [[Automation 0.3.x|0.3.x changelog]]
 
 ## 💾 Install
 

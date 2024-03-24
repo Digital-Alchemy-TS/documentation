@@ -9,7 +9,7 @@ Welcome to `@digital-alchemy/mqtt-extension`!
 
 - [GitHub](https://github.com/Digital-Alchemy-TS/mqtt)
 - [NPM](https://www.npmjs.com/package/@digital-alchemy/mqtt-extension)
-
+- [[MQTT 0.3.x|0.3.x changelog]]
 ## 💾 Install
 
 This library can be installed as a simple dependency
