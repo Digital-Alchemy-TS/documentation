@@ -2,18 +2,21 @@
 aliases:
   - Quickstart
   - Automation-Quickstart
+  - /blog/0
+  - /Blog/Automation-Quickstart
 ---
 ## 📘 Overview 
 
-Welcome to the `@digital-alchemy` [[Home Automation Overview|Home Automation]] quickstart repo
+Welcome to the `@digital-alchemy` [[Home Automation Overview|Home Automation]] quickstart project!
 
-This project is designed to work with **Supervised** and **HA OS** based installs, where **Addons** are supported. If you used a different installation method, you will need to make tweaks to the process
+This project is designed to work with **Supervised** and **HA OS** based installs, where **Addons** are supported. If you used a different installation method, you will need to make tweaks to the process.
 
 These instructions assume that [Studio Code Server Addon](https://github.com/hassio-addons/addon-vscode) has been installed on your setup, serving as both editor and workspace management tool.
 
-- Github repo: https://github.com/Digital-Alchemy-TS/automation-quickstart
-- Discord: https://discord.digital-alchemy.app
-- [[Automation Quickstart 0.3.x|0.3.x changelog]]
+**Links!**
+- [Github repo](https://github.com/Digital-Alchemy-TS/automation-quickstart)
+- [Discord](https://discord.digital-alchemy.app)
+- [[Automation Quickstart 0.3.x|Automation quickstart changelog]]
 
 ## 🚀 Setup
 
@@ -40,7 +43,12 @@ This script will:
 The final install step is for you to install the addon.
 ![[addon.png]]
 
+> [!success]
+> You are now able to run Typescript code on your Home Assistant instance! 🎉
+> Check out the [[01 Automation Next Steps|next steps guide]] for an orientation on the project you just set up
 ### 📺 In action
+
+No sound orientation videos, for a bit of context on what things should look like when everything goes right.
 
 > [!tldr] Tldw: Setup Process
 > Speed run of the setup process, taking a break to run the code manually and in the background with the addon
@@ -79,3 +87,9 @@ Once your environment is set up, you can use the commands in the `package.json` 
 | **`lint`**          | 😱 Check your workspace for non-critical issues                                                                                     |
 | **`lint:fix`**      | 🪛 Run `eslint --fix` to resolve minor issues                                                                                       |
 | **`type-writer`**   | 🖨️ Rebuild custom type definitions for Home Assistant<br>**Run any time you modify your setup for more accurate definitions**      |
+
+---
+> [!todo]
+> See [[01 Automation Next Steps|next ]]
+
+- #Blog
