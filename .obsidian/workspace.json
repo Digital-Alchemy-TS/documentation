@@ -18,7 +18,7 @@
                 "state": {
                   "type": "markdown",
                   "state": {
-                    "file": "Core/changelog/Core 0.3.x.md",
+                    "file": "Blog/01 Building a Basic Automation.md",
                     "mode": "source",
                     "source": false
                   }
@@ -46,7 +46,7 @@
                 "state": {
                   "type": "localgraph",
                   "state": {
-                    "file": "Core/changelog/Core 0.3.x.md",
+                    "file": "Blog/01 Building a Basic Automation.md",
                     "options": {
                       "collapse-filter": true,
                       "search": "",
@@ -152,7 +152,8 @@
                   }
                 }
               }
-            ]
+            ],
+            "currentTab": 2
           }
         ],
         "direction": "vertical"
@@ -184,7 +185,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "tag:#Changelog",
+                "query": "discord",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -221,6 +222,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "Blog/01 Building a Basic Automation.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -237,6 +239,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "Blog/01 Building a Basic Automation.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -258,7 +261,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "Blog/01 Building a Basic Automation.md"
+              }
             }
           }
         ],
@@ -279,16 +284,31 @@
       "publish:Publish changes...": false
     }
   },
-  "active": "2f8eb55784fc4c22",
+  "active": "cb954889eb65e4f2",
   "lastOpenFiles": [
+    "Quickstart/Automation/Next Steps.md",
+    "Blog/Home.md",
+    "Quickstart/Automation/Automation Quickstart Overview.md",
+    "Blog/01 Building a Basic Automation.md",
+    "private/typography elements.md",
+    "Terminal/Prompts.md",
+    "Core/exports/TServiceParams.md",
+    "Changelog.md",
+    "Quickstart/Automation/Addon.md",
+    "Quickstart/Automation/assets/slowstart.png",
+    "Core/Scheduler.md",
+    "Core/Wiring.md",
+    "Core/Logger.md",
     "Core/changelog/Core 0.3.x.md",
+    "Core/Lifecycle.md",
+    "Core/Core Overview.md",
+    "Core/Configuration.md",
+    "Quickstart/Automation/assets/whats_in_this.png",
+    "Quickstart/Automation/assets/valid_build.png",
     "Home Automation/Hass/changelog/Hass 0.3.x.md",
     "Core/changelog/Core 0.4.x.md",
     "Home Automation/Hass/changelog/Hass 0.4.x.md",
-    "private/typography elements.md",
-    "Blog/01 Automation Next Steps.md",
     "Core/Utilities.md",
-    "Quickstart/Automation/Automation Quickstart Overview.md",
     "Quickstart/Automation/assets/npm_scripts.png",
     "Blog.md",
     "Blog/Ideas/01 Creating unit tested automations.md",
@@ -296,20 +316,8 @@
     "Blog/Ideas/Adding mqtt.md",
     "Blog/Ideas/Gathering metrics.md",
     "Blog/Ideas/Creating a deployment dashboard.md",
-    "Quickstart/Automation/Addon.md",
     "Blog/Ideas",
-    "Home.md",
     "Blog",
-    "Core/Lifecycle.md",
-    "Changelog.md",
-    "Home Automation/Synapse/changelog/Synapse 0.3.x.md",
-    "Home Automation/Type Writer/changelog/Type Writer 0.3.x.md",
-    "Home Automation/Synapse Extension/changelog/Synapse Extension 0.3.x.md",
-    "Support Libraries/MQTT/changelog/MQTT 0.3.x.md",
-    "Support Libraries/Grocy/changelog/Grocy 0.3.x.md",
-    "Support Libraries/Gotify/changelog/Gotify 0.3.x.md",
-    "Support Libraries/Fastify/changelog/Fastify 0.3.x.md",
-    "Quickstart/Automation/changelog/Automation Quickstart 0.3.x.md",
     "Home Automation/Automation/changelog",
     "Terminal/changelog",
     "Support Libraries/Grocy/changelog",
@@ -323,9 +331,6 @@
     "Terminal/assets/date_granular.gif",
     "Terminal/assets/string.gif",
     "Terminal/assets/acknowledge.png",
-    "Terminal/assets/array_builder_base.png",
-    "Terminal/assets/array_builder_edit.png",
-    "Terminal/assets/confirm.png",
-    "Terminal/assets/date_fuzzy.png"
+    "Terminal/assets/array_builder_base.png"
   ]
 }

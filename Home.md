@@ -6,7 +6,7 @@ aliases: []
 `@digital-alchemy` is a Typescript based project that targets hobby / home automation type use cases. It is built up as a series of smaller projects that can be mixed together in various combinations.
 
 - [Project GitHub](https://github.com/Digital-Alchemy-TS)
-- [Discord](http://discord.digital-alchemy.app)
+- [Discord](https://discord.com/invite/mtWHk36upW)
 
 ## 📇 The Sights
 

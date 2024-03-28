@@ -2,8 +2,8 @@
 aliases:
   - Quickstart
   - Automation-Quickstart
-  - /blog/0
-  - /Blog/Automation-Quickstart
+  - blog/00
+  - blog/Quickstart
 ---
 ## 📘 Overview 
 
@@ -15,7 +15,7 @@ These instructions assume that [Studio Code Server Addon](https://github.com/has
 
 **Links!**
 - [Github repo](https://github.com/Digital-Alchemy-TS/automation-quickstart)
-- [Discord](https://discord.digital-alchemy.app)
+- [Discord](https://discord.com/invite/mtWHk36upW)
 - [[Automation Quickstart 0.3.x|Automation quickstart changelog]]
 
 ## 🚀 Setup
@@ -45,7 +45,7 @@ The final install step is for you to install the addon.
 
 > [!success]
 > You are now able to run Typescript code on your Home Assistant instance! 🎉
-> Check out the [[01 Automation Next Steps|next steps guide]] for an orientation on the project you just set up
+> Check out the [[Next Steps|next steps guide]] for an orientation on the project you just set up
 ### 📺 In action
 
 No sound orientation videos, for a bit of context on what things should look like when everything goes right.
@@ -90,6 +90,6 @@ Once your environment is set up, you can use the commands in the `package.json` 
 
 ---
 > [!todo]
-> See [[01 Automation Next Steps|next ]]
+> See [[Next Steps|next ]]
 
 - #Blog

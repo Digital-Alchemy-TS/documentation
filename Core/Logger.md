@@ -118,6 +118,11 @@ This table describes the priority order (highest -> lowest) of log levels and th
 Unless changed, log levels will default to `trace`. Providing `boilerplate.LOG_LEVEL` as a bootstrap configuration value can affect the logger from the very start of the bootstrap.
 
 > [!attention] The level may change through the app lifecycle
-> Values sourced from the user config will only affect the logger after the configuration step. This could result in lots of trace logs at the very start, then having them stop
+> Values sourced from the user config will only affect the logger after the configuration step. This could result in lots of trace logs at the very start, then having them stop partway through bootstrap as the configurations update.
 
- partway through bootstrap as the configurations update.
+### Log level printing
+
+By default, log levels will be be prefixed to contexts in order to preserve information where colors may not be available. If you prefer to only utilize colors in your setup, there is a flag to disable this functionality as part of boostrap params
+
+> [!tip]
+> Interested in increased customization for logger? Chime in here [#25](https://github.com/Digital-Alchemy-TS/core/issues/25)

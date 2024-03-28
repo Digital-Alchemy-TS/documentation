@@ -1,16 +1,17 @@
 ---
 aliases:
-  - /Blog/01
+  - Next-Steps
 ---
 > [!success]
-> You got the [[Automation Quickstart Overview|quickstart]] project pulled down, what now? 
+> You got the [[Automation Quickstart Overview|quickstart]] project pulled down, what what is this mess? 
  
 ## 👀 The sights
 
-Before diving into the how to write, let's take a moment to go over the important but less fun parts of the project.
+Let's take a quick tour of the repo to 
+
 ### 🏗 [package.json](https://github.com/Digital-Alchemy-TS/automation-quickstart/blob/main/package.json)
 
-| The package.json contains useful workspace commands | [![[npm_scripts.png]]](../Quickstart/Automation/assets/npm_scripts.png) |
+| The package.json contains useful workspace commands | [![[npm_scripts.png]]](npm_scripts.png) |
 | --------------------------------------------------- | ----------------------------------------------------------------------- |
 You can run the commands from the command line if you are comfortable, or by using the buttons provided by VSCode. 
 
@@ -21,9 +22,6 @@ Don't see the panel?
 ### 📁 [scripts/](https://github.com/Digital-Alchemy-TS/automation-quickstart/tree/main/scripts)
 This folder contains helper scripts for managing your workspace, and is utilized by the various commands in `package.json`. Re-running the setup script will upgrade the provided scripts with the newest version from the [[Automation Quickstart Overview|quickstart]] repo. The most important one is the `environment.sh`, which is used to managed the NodeJS environment 
 
-> [!example] #Usage-Example/automation-quickstart
-> Using the script to fix your environment, from the project root
-
 ```bash
 ./scripts/environment.sh
 ```
@@ -31,14 +29,26 @@ This folder contains helper scripts for managing your workspace, and is utilized
 ### 📁 [addon/](https://github.com/Digital-Alchemy-TS/automation-quickstart/tree/main/addon)
 This is your [[Addon|code runner addon]], the source is provided as part of the project so you are able to tune the capabilities to your specific needs. By default, it is set up in a very minimal capacity. You are able to add incoming ports, ingress urls for dashboards, and more as part of the config file.
 
-### 💻 Code
+## 💻 Code
 You can find your project code under [`src/`](https://github.com/Digital-Alchemy-TS/automation-quickstart/tree/main/src).
-#### 🧾 main.ts
+### 🛢 Service functions
+
+Service functions are where all your logic goes. They have a relatively simple anatomy, a function that takes in [[TServiceParams]] as it's argument. You can read more about the nuances [[Core Overview|here]].
+```typescript
+function ServiceFunction({ logger }: TServiceParams) {
+  logger.info("hello world");
+}
+```
+
+These functions contain your logic, and can be wired together into larger applications. Your services are provided back to you as property in the input. If you want a complete list of what's available, this is a simple trick -
+
+![[whats_in_this.png]]
+### 🧾 main.ts
 
 This file contains all the wiring for your application. You can define new configurations, import libraries, and attach your service functions so they run. Logic is **NOT SUPPOSED TO GO HERE**
 
 It is structured in 3 parts:
-##### Application Definition
+#### Application Definition
 
 Below is the most important items for defining your application, see the type definitions in your editor or [[Wiring|wiring docs]] for more details
 
@@ -73,7 +83,7 @@ const SUPER_AWESOME_APP = CreateApplication({
 });
 ```
 
-For reference, here is an implementation `Testing` to show how accessing your services via [[TServiceParams]] works. 
+For reference, here is an implementation of `Testing` to show how accessing your services via [[TServiceParams]] works. 
 
 > [!important]
 > 1. Utilizing dashes in your project/service names is discouraged
@@ -104,10 +114,7 @@ export function Example({ my_super_awesome_app, logger, lifecycle }: TServicePar
 }
 ```
 
-##### Module Loading
-
-> [!example] #Usage-Example/core 
-> Loading type definitions for an application
+#### Module Loading
 
 The key you use for the loaded modules must match the application name. Typescript will flag the name in your application definition if they do not. This step is required to get the library to load your application into type definitions for your services to take advantage of.
 
@@ -119,12 +126,12 @@ declare module "@digital-alchemy/core" {
 }
 ```
 
-##### Bootstrap
+> [!error]
+> What happens when names don't align
+> ![[slowstart.png]]
+#### Bootstrap
 
-> [!example] #Usage-Example/core 
-> 🥾 Kick things off!
-
-This step functionally gets your application started. You may provide some properties in to influence the way your application boot, such as overriding some default config properties. **Use configuration files to store keys**
+This step functionally gets your application started. You may provide some properties in to influence the way your application boot, such as overriding some default config properties. **Do not put secrets/keys here**
 
 ```typescript
 setImmediate(
@@ -136,106 +143,6 @@ setImmediate(
     }),
 );
 ```
-
-## 🛠 Building an automation
-
-Now that we have a foundation on **what is a service** / **how to wire them together**, let's build on that by building a basic automation. 
-
-### 🌐 Connecting to Home Assistant
-
-For this, we'll need to import the [[Hass Overview|hass]] library (see link for details on configuration), this comes installed and already set up if you used the [[Automation Quickstart Overview|quickstart]] script. 
-
-```typescript
-import { CreateApplication } from "@digital-alchemy/core";
-// Import library definition
-import { LIB_HASS } from "@digital-alchemy/hass";
-
-const SUPER_AWESOME_APP = CreateApplication({
-  // add to libraries
-  libraries: [LIB_HASS],
-  name: "my_super_awesome_app",
-  // ...
-});
-```
-
-> [!success]
-> What changed:
-> - your application will attempt to connect to home assistant during bootstrap
-> - `hass` is added to [[TServiceParams]], providing you basic tools to interact with home assistant with
-
-### 🤖 Creating logic
-
-It's finally time! let's actually make the application do something productive! 
-
-> [!example] #Usage-Example/hass 
-> This is a basic service that will send notifications every 5 minutes as long as I am away from home, and the garage is open
-
-```typescript
-import { TServiceParams } from "@digital-alchemy/core";
-
-// 5 MINUTES
-const REPEAT_NOTIFICATION_INTERVAL = 1000 * 60 * 5;
-
-export function GaragePester({ scheduler, logger, hass, internal }: TServiceParams) {
-  const isHome = hass.entity.byId("binary_sensor.zoe_is_asleep");
-  const garageIsOpen = hass.entity.byId("binary_sensor.garage_is_open");
-  let stop: () => void;
-
-  // UPDATE TRIGGER
-  isHome.onUpdate((new_state, old_state) => {
-    if (new_state.state === "off") {
-      // am home, stop notifying and clean up
-      if (stop) {
-        logger.info("welcome back home!");
-        stop();
-        stop = undefined;
-      }
-      return;
-    }
-    if (old_state.state !== "off" || stop) {
-      return;
-    }
-    
-    // send a notification every 5 minutes
-    // ex: "You left 20m ago with the garage open"
-    const notifyingSince = new Date();
-    stop = scheduler.interval({
-      async exec() {
-        logger.info("still a problem");
-        // calculate a friendly string that describes how long
-        const timeAgo = internal.utils.relativeDate(notifyingSince);
-
-        // call the `notify.notify` service
-        await hass.call.notify.notify({
-          message: `You left ${timeAgo} with the garage open`,
-          title: "Come back and close the garage!",
-        });
-      },
-      interval: REPEAT_NOTIFICATION_INTERVAL,
-    });
-  });
-
-  garageIsOpen.onUpdate(() => {
-    // stop notifying if I remotely close the garage
-    if (garageIsOpen.state === "off" && stop) {
-      logger.info("stopping garage reminders");
-      stop();
-      stop = undefined;
-    }
-  });
-}
-```
-
-### Creating schedules
-
-#### Timers
-
-> [!example] #Usage-Example/core 
-> 
-#### Solar
-
-> [!example] #Usage-Example/core 
-
 
 ---
 - #Blog

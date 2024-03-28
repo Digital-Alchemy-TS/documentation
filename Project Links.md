@@ -5,7 +5,7 @@ aliases:
 
 ## 🔗 General
 
-- Discord: https://discord.digital-alchemy.app
+- [Discord](https://discord.com/invite/mtWHk36upW)
 - Project Home: https://github.com/Digital-Alchemy-TS
 ## 🗂️ Projects
 
