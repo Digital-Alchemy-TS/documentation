@@ -1,6 +1,6 @@
 ## Overview
 
-This project details the construction of Pi Matrix compatible hardware, and provides the software to do the rendering (coming soon)
+This project details the construction of [[Pi Matrix Overview|Pi Matrix]] compatible hardware, and provides the software to do the rendering (coming soon)
 
 
 > Links provided for easy to find product reference, project can be made much more cost efficiently
@@ -14,30 +14,12 @@ This project details the construction of Pi Matrix compatible hardware, and prov
 ## Hardware
 
 ### Controller (v3)
+**Completed build pics**
 
-| Front         | ![[front.jpg]]  |
-| ------------- | --------------- |
-| ![[side.jpg]] | Side            |
-| Look good! 💅 | ![[willow.jpg]] |
-### Parts
-
-
-### Odds and ends
-
-| Name         | Purchase Link                                  | Required | Notes                                                       | Image                 |
-| ------------ | ---------------------------------------------- | -------- | ----------------------------------------------------------- | --------------------- |
-| Power Supply | [Amazon](https://www.amazon.com/dp/B06XK2DDW4) | Y        | Any 5V power source should be fine with sufficient amperage | ![[power_supply.jpg]] |
-- Power cord
-- Hot glue (sanity)
-- Zip tie (sanity)
-- Wire nuts (power)
-- Extra wire (power)
-- [SD card](https://www.amazon.com/dp/B08KSSX9PH)
-- Metallic sharpie (marking aluminum)
-- Hacksaw (cutting extruded aluminum)
-- Clear nail polish (coat any labels written with sharpie)
-
-## Controller Construction
+| Front         | Side           |
+| ------------- | -------------- |
+| ![[side.jpg]] | ![[front.jpg]] |
+**Parts list**
 
 | Name           | Purchase Link                                          | Required | Notes                                                                                                                                | Image                 |
 | -------------- | ------------------------------------------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------ | --------------------- |
@@ -46,11 +28,44 @@ This project details the construction of Pi Matrix compatible hardware, and prov
 | USB Speaker    | [Amazon](https://www.amazon.com/gp/product/B075M7FHM1) | N        | Used for audio alerts                                                                                                                | ![[speaker.jpg]]      |
 | Ribbon Cable   | [Amazon](https://www.amazon.com/dp/B07D991KMR)         | N        | For orgnization. Can use jumpers to go from device directly to 16 pin cable if desired                                               | ![[ribbon_cable.jpg]] |
 
-## Matrix Contruction
+#### 💅 Look good! 
 
-The matrix is made up of 2 layers: the aluminum frame, and the rgb matrix panel.
-### Frame
-Diving into the frame first, this acts as the skeleton for the panel grid. Fortunately, it's pretty straight forward
+> [!tip]
+> Highly recommended step: break out the metallic markers! 🎨
+
+![[willow.jpg]]
+### 🧺 Odds and ends
+
+Random odds and ends used in the build. 
+
+| Name         | Purchase Link                                  | Required | Notes                                                       | Image                 |
+| ------------ | ---------------------------------------------- | -------- | ----------------------------------------------------------- | --------------------- |
+| Power Supply | [Amazon](https://www.amazon.com/dp/B06XK2DDW4) | Y        | Any 5V power source should be fine with sufficient amperage | ![[power_supply.jpg]] |
+| SD Card      | --                                             |          | You need some boot device                                   |                       |
+- Power cord
+- Hot glue
+- Zip ties
+- Velcro ties
+- Wire nuts / wago connectors
+- Network cable
+- Independent power supply for Raspberry Pi
+- Extra wire
+- Hacksaw
+
+## 🚦 Display Construction
+
+The matrix is made up of 2 layers: the aluminum frame, and the rgb matrix display. Magnets on standoffs are used to provide a hot swap friendly connection
+
+### 🏗️ Frame
+
+The frame is a fairly straightforward build. The dual channel aluminum isn't technically needed, but I personally enjoy the aesthetics with the slot clovers in the final build
+
+| Corner bracket joins   | Dry fitting           |
+| ---------------------- | --------------------- |
+| ![[aluminum_join.jpg]] | ![[construction.jpg]] |
+
+
+**Parts list**
 
 | Name           | Purchase Link                                          | Required | Notes                                                                                                                                | Image                 |
 | -------------- | ------------------------------------------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------ | --------------------- |
@@ -60,24 +75,68 @@ Diving into the frame first, this acts as the skeleton for the panel grid. Fortu
 | End Cap                  | [Amazon](https://www.amazon.com/gp/product/B09JS8L4XT) | N        | Aesthetics                                                                                                 | ![[end_cap.jpg]]            |
 | Slot cover               | [Amazon](https://www.amazon.com/gp/product/B09KPZBTB9) | N        | Aesthetics                                                                                                 | ![[slot_cover.jpg]]         |
 
+It's dimensions are going to be determined by the positions of the mounts on your panels. It's recommended to get at least 4 points of contact on each panel for proper stability. It's not required to get all points, and may make final assembly more difficult.
 
-| Corner bracket joins   | Dry fitting           |
-| ---------------------- | --------------------- |
-| ![[aluminum_join.jpg]] | ![[construction.jpg]] |
+This part is a time consuming process, tweaking the individual pieces into position and locking them down. 
+Cutting to final dimensions should be saved for the very end of this. Once dimensions are determined, mark everything with a silver sharpie and cut to size. 🪚
 
-### Assembly
+### 🧲 Magnetic mounts
 
-#### Interface
+The panels are intended to be hot swappable, and use a mounting system intended for tool free maintenance. No fussing with screwdrivers and small parts on a ladder! 🪜
 
-| Name           | Purchase Link                                          | Required | Notes                                                                                                                                | Image                 |
-| -------------- | ------------------------------------------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------ | --------------------- |
-| Countersunk Magnets      | [Amazon](https://www.amazon.com/gp/product/B0816HQ5RD) | Y        | Magnetic mount                                                                                             | ![[countersunk_magnet.jpg]] |
-| M3 screw                 | [Amazon](https://www.amazon.com/gp/product/B018RSXQ02) | Y        | Magnetic mount                                                                                             | ![[m3_screw.jpg]]           |
-| M3 washers               | [Amazon](https://www.amazon.com/gp/product/B07WST3YJJ) | Y        | Magnetic mount                                                                                             | ![[m3_washer.jpg]]          |
-| M3 T-nut                 | [Amazon](https://www.amazon.com/gp/product/B08NZMD2BJ) | Y        | Magnetic mount                                                                                             | ![[m3_t_nut.jpg]]           |
-| M3 standoff              | [Amazon](https://www.amazon.com/dp/B07WR5Q2SY)         | Y        | Magnetic mount                                                                                             | ![[m3_standoff.jpg]]        |
+> [!warning]
+> 
+> **Keep an eye on the polarity & orientation of the magnets!**
+> Not all magnets are polarized the same in cheap magnet sets. It is easy to get combinations where a single pair repel each other 😡
+> ---
+> **Washer will bend if over tightened**
+> Just enough to be secure is perfect
 
-#### Display
+| Magnet interface     | Frame side mount     |
+| -------------------- | -------------------- |
+| ![[frame_mount.jpg]] | ![[panel_mount.jpg]] |
+**Parts list**
+
+| Name                | Purchase Link                                          | Required | Notes                                             | Image                       |
+| ------------------- | ------------------------------------------------------ | -------- | ------------------------------------------------- | --------------------------- |
+| Countersunk Magnets | [Amazon](https://www.amazon.com/gp/product/B0816HQ5RD) | Y        | The countersink is nice for getting a flush mount | ![[countersunk_magnet.jpg]] |
+| M3 screw            | [Amazon](https://www.amazon.com/gp/product/B018RSXQ02) | Y        | Attaching magnets to standoffs and panels         | ![[m3_screw.jpg]]           |
+| M3 washers          | [Amazon](https://www.amazon.com/gp/product/B07WST3YJJ) | Y        | For clamping to frame                             | ![[m3_washer.jpg]]          |
+| M3 T-nut            | [Amazon](https://www.amazon.com/gp/product/B08NZMD2BJ) | Y        | Add to extruded aluminum to create sliding mounts | ![[m3_t_nut.jpg]]           |
+| M3 standoff         | [Amazon](https://www.amazon.com/dp/B07WR5Q2SY)         | Y        | Attach to t-nuts to create mount points           | ![[m3_standoff.jpg]]        |
+#### 🧷 Attached controller mod
+
+The controller can also be attached to the frame via a similar magnetic mount to the panels
+
+| Name       | Purchase Link                                          | Notes                                               | Image                  |
+| ---------- | ------------------------------------------------------ | --------------------------------------------------- | ---------------------- |
+| Heat sink  | [Amazon](https://www.amazon.com/gp/product/B07PCMTZHF) | Removed fan, passive cooling is enough for use case | ![[fan_heat_sync.jpg]] |
+| Power Cord | [Amazon](https://www.amazon.com/gp/product/B07V2CKPLG) | For a clean look                                    | ![[180_cable.jpg]]     |
+![[magnetic_pi_mount.jpg]]
+
+
+### 📱 Final Assembly
+
+Time to finally put the display on the frame and wire it together! 
+
+The first part of this is finding a wide flat surface for the frame to lay down on when you get to the wiring phase
+
+| Partial assembly       | Assembled Display          |
+| ---------------------- | -------------------------- |
+| ![[display_parts.jpg]] | ![[display_assembled.jpg]] |
+Assuming everything went to plan, then you should have a flat display with none of the panels having an obvious visual gap. Adding a bit of hot glue can help everything stay together
+
+| ![[secured.jpg]]                                                                    | Adding extra security to the joints                                                                                                                                               |
+| ----------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Power wiring<br><br>Left and right joined together<br>- 5x`5v` out<br>- 5x`gnd` out | ![[power_wiring.jpg]]                                                                                                                                                             |
+| ![[data_wiring.jpg]]                                                                | Data wiring. Gray ribbons (shipped with panels) used to join left/right sides, rainbow ribbons used to join rows<br><br>You can see the data input for the pi in the bottom/right |
+
+> [!question]
+> The final design of the panel wires 2 panels together, and uses a 5v + ground wire from a pc power supply. For a total of 5x5v lines from power supply
+
+| The sacraficial power supply | ![[with_supply.jpg]] |
+| ---------------------------- | -------------------- |
+**Parts list**
 
 | Name           | Purchase Link                                          | Required | Notes                                                                                                                                | Image                 |
 | -------------- | ------------------------------------------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------ | --------------------- |
@@ -88,38 +147,6 @@ Diving into the frame first, this acts as the skeleton for the panel grid. Fortu
 | Matrix bonnet            | [Adafruit](https://www.adafruit.com/product/3211)      | N        | Can adapt from 40 pin cable to the 16 + additional uses                                                    | ![[matrix_bonnet.jpg]]      |
 
 
-| Completed prototype hardware | Completed frame   |
-| ---------------------------- | ----------------- |
-| ![[prototype.jpg]]           | ![[backside.jpg]] |
+> [!success] 🧟‍♀️ It's Alive!!!
+> ![[party_parrot.gif]]
 
-### It's Alive!!!
-![[party_parrot.gif]]
-
-
-### Magnetic mounts
-
-**On the frame side**
-- The mount is made from a T-nut, with a standoff threaded into it through a washer.
-- A magnet is screwed into the top of the standoff.
-
-On the rgb matrix, the magnet can simply be screwed into the panel.
-
-Keep an eye on the polarity & orientation of the magnets.
-Not all magnets are polarized the same, and it is important to not have both countersunk sides on the inside (screws contact at interface).
-
-| Magnet interface     | Frame side mount     |
-| -------------------- | -------------------- |
-| ![[frame_mount.jpg]] | ![[panel_mount.jpg]] |
-
-### Attached controller
-
-The controller can also be attached to the frame via a similar mechanism
-
-| Name | Purchase Link | Notes |
-| --- | --- | --- |
-| Heat sink | [Amazon](https://www.amazon.com/gp/product/B07PCMTZHF) | Removed fan, passive cooling is enough |
-| Power Cord | [Amazon](https://www.amazon.com/gp/product/B07V2CKPLG) | For a clean look |
-
-| ![[magnetic_pi_mount.jpg]] | Side mount |
-| -------------------------- | ---------- |
-|                            |            |
