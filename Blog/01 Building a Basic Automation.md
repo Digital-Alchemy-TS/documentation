@@ -9,7 +9,7 @@ aliases:
 > 1. Check out the [[Automation Quickstart Overview|quickstart]] guide to create your own project
 > 2. The [[Next Steps|next steps]] page can give you more context on how these work
 
-Now that we have a foundation on **what is a service** / **how to wire them together**, let's build on that by building a basic automation. 
+Now that we have a foundation on **what is a service** / **how to wire them together**, let's build on that by creating a basic automation. 
 
 ## 🌐 Connecting to Home Assistant
 

@@ -18,7 +18,7 @@
                 "state": {
                   "type": "markdown",
                   "state": {
-                    "file": "Blog/01 Building a Basic Automation.md",
+                    "file": "Pi Matrix/Hardware Build Guide.md",
                     "mode": "source",
                     "source": false
                   }
@@ -46,7 +46,7 @@
                 "state": {
                   "type": "localgraph",
                   "state": {
-                    "file": "Blog/01 Building a Basic Automation.md",
+                    "file": "Pi Matrix/Hardware Build Guide.md",
                     "options": {
                       "collapse-filter": true,
                       "search": "",
@@ -222,7 +222,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Blog/01 Building a Basic Automation.md",
+                "file": "Pi Matrix/Hardware Build Guide.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -239,7 +239,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Blog/01 Building a Basic Automation.md",
+                "file": "Pi Matrix/Hardware Build Guide.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -262,7 +262,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Blog/01 Building a Basic Automation.md"
+                "file": "Pi Matrix/Hardware Build Guide.md"
               }
             }
           }
@@ -286,16 +286,30 @@
   },
   "active": "cb954889eb65e4f2",
   "lastOpenFiles": [
+    "Pi Matrix/Hardware Setup.md",
+    "Pi Matrix/Hardware Build Guide.md",
+    "Pi Matrix/assets/willow.jpg",
+    "Pi Matrix/assets/countersunk_magnet.jpg",
+    "Pi Matrix/assets/m3_standoff.jpg",
+    "Pi Matrix/assets/cable_connector.jpg",
+    "Pi Matrix/assets/ribbon_cable_long.jpg",
+    "Pi Matrix/assets/ribbon_connector.jpg",
+    "Pi Matrix/assets/slot_cover.jpg",
+    "Pi Matrix/assets/matrix_bonnet.jpg",
+    "Pi Matrix/assets/rgb_matrix.jpg",
+    "Pi Matrix/assets/m3_t_nut.jpg",
+    "Pi Matrix/Pi Matrix Overview.md",
+    "Pi Matrix/assets",
+    "Pi Matrix/Build",
+    "Blog/01 Building a Basic Automation.md",
     "Quickstart/Automation/Next Steps.md",
     "Blog/Home.md",
     "Quickstart/Automation/Automation Quickstart Overview.md",
-    "Blog/01 Building a Basic Automation.md",
     "private/typography elements.md",
     "Terminal/Prompts.md",
     "Core/exports/TServiceParams.md",
     "Changelog.md",
     "Quickstart/Automation/Addon.md",
-    "Quickstart/Automation/assets/slowstart.png",
     "Core/Scheduler.md",
     "Core/Wiring.md",
     "Core/Logger.md",
@@ -303,19 +317,12 @@
     "Core/Lifecycle.md",
     "Core/Core Overview.md",
     "Core/Configuration.md",
-    "Quickstart/Automation/assets/whats_in_this.png",
-    "Quickstart/Automation/assets/valid_build.png",
     "Home Automation/Hass/changelog/Hass 0.3.x.md",
     "Core/changelog/Core 0.4.x.md",
     "Home Automation/Hass/changelog/Hass 0.4.x.md",
     "Core/Utilities.md",
-    "Quickstart/Automation/assets/npm_scripts.png",
     "Blog.md",
     "Blog/Ideas/01 Creating unit tested automations.md",
-    "Blog/Ideas/Adding a  webserver to your app.md",
-    "Blog/Ideas/Adding mqtt.md",
-    "Blog/Ideas/Gathering metrics.md",
-    "Blog/Ideas/Creating a deployment dashboard.md",
     "Blog/Ideas",
     "Blog",
     "Home Automation/Automation/changelog",
@@ -323,14 +330,6 @@
     "Support Libraries/Grocy/changelog",
     "Support Libraries/Gotify/changelog",
     "Support Libraries/Fastify/changelog",
-    "Quickstart/Terminal/Untitled",
-    "Quickstart/Generic/changelog",
-    "Quickstart/Automation/changelog",
-    "Terminal/assets/boolean.png",
-    "Terminal/assets/date_fuzzy.gif",
-    "Terminal/assets/date_granular.gif",
-    "Terminal/assets/string.gif",
-    "Terminal/assets/acknowledge.png",
-    "Terminal/assets/array_builder_base.png"
+    "Quickstart/Terminal/Untitled"
   ]
 }
