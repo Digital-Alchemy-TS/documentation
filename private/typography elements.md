@@ -5,41 +5,41 @@
 >  - 📈 Improvement
 >  - 💣 Breaking
 
-> [!note] 
+> **Note**:
 
 > [!abstract]
 
 > [!summary]
 
-> [!tldr]
+> **TLDR**:
 
-> [!info] 
+> [!info]
 
-> [!todo] 
+> [!todo]
 
-> [!tip] 
+>
 
-> [!hint]
+> **Hint**:
 
-> [!important]
+> **Important**:
 
-> [!success]
+> 🎉
 
-> [!check]
+> ✅
 
 > [!done]
 
 > [!question]
 
-> [!faq]
+> **FAT**:
 
 > [!help]
 
-> [!warning]
+> **Warning**:
 
-> [!caution]
+> **Caution**:
 
-> [!attention]
+> **Attention**:
 
 > [!failure]
 
@@ -47,14 +47,13 @@
 
 > [!missing]
 
-> [!error] 
+> **ERROR**:
 
 > [!danger]
 
-> [!bug] 
+> [!bug]
 
-> [!example]
 
-> [!quote] 
+> [!quote]
 
 > [!cite]
