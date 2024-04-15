@@ -24,7 +24,7 @@ This will be accomplished through creating button sequence patterns that can be 
 | `stop` -> `stop` -> `stop`   | Set all **other rooms** to off                                                          |
 | `stop` -> `high`             | Toggle `switch.guest_mode`                                                              |
 | `stop` -> `lower` -> `raise` | I lost my phone, make my phone ring                                                     |
-| `stop` -> `off`              | Wait 30 seconds<br>Lock the doors and turn off lights<br>Send confirmation notification |
+| `stop` -> `off`              | Wait 30 seconds -> Lock the doors and turn off lights -> Send confirmation notification |
 ## 🔍 Deeper Dive
 
 ### 🤔 What is a valid pattern?
@@ -41,9 +41,9 @@ In order to be a valid pattern, the messages need to come together as a sequence
 
 ### 🛠 Creating a matcher
 
-This part requires a bit of background research on your part. 
+This part requires a bit of background research on your part.
 
-> [!example] 
+> [!example]
 > Event YAML
 
 ```yaml
@@ -62,22 +62,22 @@ data:
 
 We are going to take advantage of `action`, `button_type`, and `device_id` to build our matcher. The basic format looks like this:
 
-> [!example] #Usage-Example/automation 
+> [!example] #Usage-Example/automation
 > Sequence match proof of concept
 
 ```typescript
-const id = "1ed57ad2484d82d75ee052fb1a15c02b"; 
+const id = "1ed57ad2484d82d75ee052fb1a15c02b";
 function Example({ context, automation, logger }: TServiceParams) {
   automation.sequence({
     context,
-    event_type: "lutron_caseta_button_event", 
-    match: ["stop", "lower", "raise"], 
-    filter: ({ data: { device_id, action } }) => { 
+    event_type: "lutron_caseta_button_event",
+    match: ["stop", "lower", "raise"],
+    filter: ({ data: { device_id, action } }) => {
 	  // Ensure the action is "press" and the device ID matches.
-      return action === "press" && device_id === id; 
+      return action === "press" && device_id === id;
     },
     exec: () => {
-	  logger.info("sequence triggered"); 
+	  logger.info("sequence triggered");
     }
   });
 }
@@ -93,7 +93,7 @@ That's a bit ugly to create bindings for. Fortunately, it's a relatively standar
 ```typescript
 import { TBlackHole, TContext, TServiceParams } from "@digital-alchemy/core";
 
-type DeviceName = keyof typeof PicoIds; 
+type DeviceName = keyof typeof PicoIds;
 
 export type PicoEvent<NAME extends DeviceName> = {
   action: "press" | "release";
@@ -126,12 +126,12 @@ export enum Buttons {
 
 type PicoWatcher = {
   exec: () => TBlackHole;
-  match: `${Buttons}`[]; 
-  context: TContext; 
+  match: `${Buttons}`[];
+  context: TContext;
 };
 type PicoBindings = Record<DeviceName, (options: PicoWatcher) => TBlackHole>;
 type TEventData<NAME extends DeviceName> = {
-  data: PicoEvent<NAME>; 
+  data: PicoEvent<NAME>;
 };
 
 export function LutronPicoBindings({
@@ -144,18 +144,18 @@ export function LutronPicoBindings({
     return function ({ match, exec, context }: PicoWatcher) {
       return automation.sequence({
         context,
-        event_type: "lutron_caseta_button_event", 
+        event_type: "lutron_caseta_button_event",
         exec: async () => {
-          await internal.safeExec(async () => await exec()); 
+          await internal.safeExec(async () => await exec());
         },
         filter: ({ data: { device_id, action } }: TEventData<NAME>) => {
 		  // Ensure the action is "press" and the device ID matches the name
-          return action === "press" && device_id === PicoIds[target_device]; 
+          return action === "press" && device_id === PicoIds[target_device];
         },
-        label: target_device, 
-        match, 
+        label: target_device,
+        match,
         // path to property to use as property to generate the match string from
-        path: "data.button_type", 
+        path: "data.button_type",
       });
     };
   }
@@ -178,16 +178,16 @@ function Example({ context, logger, home_automation, hass}: TServiceParams) {
   home_automation.pico.living({
     context,
     match: ["on"],
-    exec: () => (room.scene = "high") 
+    exec: () => (room.scene = "high")
   });
-  
+
   // Trigger actions after a sequence and a delay.
   home_automation.pico.living({
     context,
     match: ["stop", "off"],
     exec: async () => {
       await sleep(30*1000); // Wait for 30 seconds.
-      await hass.call.lock.lock({ 
+      await hass.call.lock.lock({
           entity_id: [
             "lock.front_door"
           ]
@@ -201,15 +201,15 @@ function Example({ context, logger, home_automation, hass}: TServiceParams) {
 	  });
 	}
   });
-  
+
   // Example for a lost phone.
   home_automation.pico.living({
     context,
     match: ["stop","lower","raise"],
     exec: async () => {
-      logger.info(`lost your phone in the couch again?`); 
+      logger.info(`lost your phone in the couch again?`);
       // Trigger phone ring.
-      await execa("kdeconnect-cli", ["-d", PHONE_ID, "--ring"]); 
+      await execa("kdeconnect-cli", ["-d", PHONE_ID, "--ring"]);
 	}
   });
 }

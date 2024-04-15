@@ -13,7 +13,7 @@ Block comments placed on keys will be carried through into service parameters as
 
 ## 🏛 CreateLibrary
 
-> [!example] #Usage-Example/core 
+> [!example] #Usage-Example/core
 
 ```typescript
 import { CreateLibrary } from "@digital-alchemy/core";
@@ -50,7 +50,7 @@ declare module "@digital-alchemy/core" {
 }
 ```
 
-> [!info] 
+> [!info]
 > For more details on the `configuration` block, see [[Configuration|Configuration]]
 
 ### 📦 `depends`
@@ -139,16 +139,16 @@ The version that is provided by the application in its `libraries` array is the 
 
 ## ⚙️ Bootstrap
 
-The major capability of applications to distinguish from libraries is the ability to bootstrap. This can be accomplished by calling the `.bootstrap` method attached to the application object. 
+The major capability of applications to distinguish from libraries is the ability to bootstrap. This can be accomplished by calling the `.bootstrap` method attached to the application object.
 
 `Bootstrap` accepts several parameters to affect how the application starts.
 
 | Property                 | Description                                                                                                                                     |
 | ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| `configuration`<br>      | Provide an alternate set of default [[Configuration]] variables, overriding project-level defaults.                                             |
-| `customLogger`<br>       | Use your logger instead of the default [[Logger|built-in one]].                                                                                |
-| `handleGlobalErrors`     | Should the library handle errors that bubble up to the global context? <br> - Log error <br> - Call `app.teardown()` <br> - Reboot              |
-| `showExtraBootStats`<br> | When bootstrap completes, log some statistics about what happened. If you are experiencing long boot times, this might help you figure out why. |
+| `configuration`      | Provide an alternate set of default [[Configuration]] variables, overriding project-level defaults.                                             |
+| `customLogger`       | Use your logger instead of the default [[Logger|built-in one]].                                                                                |
+| `handleGlobalErrors`     | Should the library handle errors that bubble up to the global context?            |
+| `showExtraBootStats` | When bootstrap completes, log some statistics about what happened. If you are experiencing long boot times, this might help you figure out why. |
 
 The promise for the `.bootstrap` method will resolve when all startup lifecycle events have been completed.
 

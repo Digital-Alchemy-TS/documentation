@@ -9,7 +9,7 @@ This project details the construction of [[Matrix Rendering Overview|Pi Matrix]]
 
 
 > [!warning]
-> This build requires some hand wiring and interacting with wires that contains high voltage. This is **not** an introductory guide, 
+> This build requires some hand wiring and interacting with wires that contains high voltage. This is **not** an introductory guide,
 
 ## Hardware
 
@@ -28,7 +28,7 @@ This project details the construction of [[Matrix Rendering Overview|Pi Matrix]]
 | USB Speaker    | [Amazon](https://www.amazon.com/gp/product/B075M7FHM1) | N        | Used for audio alerts                                                                                                                | ![[speaker.jpg]]      |
 | Ribbon Cable   | [Amazon](https://www.amazon.com/dp/B07D991KMR)         | N        | For orgnization. Can use jumpers to go from device directly to 16 pin cable if desired                                               | ![[ribbon_cable.jpg]] |
 
-#### 💅 Look good! 
+#### 💅 Look good!
 
 > [!tip]
 > Highly recommended step: break out the metallic markers! 🎨
@@ -36,7 +36,7 @@ This project details the construction of [[Matrix Rendering Overview|Pi Matrix]]
 ![[willow.jpg]]
 ### 🧺 Odds and ends
 
-Random odds and ends used in the build. 
+Random odds and ends used in the build.
 
 | Name         | Purchase Link                                  | Required | Notes                                                       | Image                 |
 | ------------ | ---------------------------------------------- | -------- | ----------------------------------------------------------- | --------------------- |
@@ -77,7 +77,7 @@ The frame is a fairly straightforward build. The dual channel aluminum isn't tec
 
 It's dimensions are going to be determined by the positions of the mounts on your panels. It's recommended to get at least 4 points of contact on each panel for proper stability. It's not required to get all points, and may make final assembly more difficult.
 
-This part is a time consuming process, tweaking the individual pieces into position and locking them down. 
+This part is a time consuming process, tweaking the individual pieces into position and locking them down.
 Cutting to final dimensions should be saved for the very end of this. Once dimensions are determined, mark everything with a silver sharpie and cut to size. 🪚
 
 ### 🧲 Magnetic mounts
@@ -85,7 +85,7 @@ Cutting to final dimensions should be saved for the very end of this. Once dimen
 The panels are intended to be hot swappable, and use a mounting system intended for tool free maintenance. No fussing with screwdrivers and small parts on a ladder! 🪜
 
 > [!warning]
-> 
+>
 > **Keep an eye on the polarity & orientation of the magnets!**
 > Not all magnets are polarized the same in cheap magnet sets. It is easy to get combinations where a single pair repel each other 😡
 > ---
@@ -117,7 +117,7 @@ The controller can also be attached to the frame via a similar magnetic mount to
 
 ### 📱 Final Assembly
 
-Time to finally put the display on the frame and wire it together! 
+Time to finally put the display on the frame and wire it together!
 
 The first part of this is finding a wide flat surface for the frame to lay down on when you get to the wiring phase
 
@@ -131,9 +131,13 @@ Assuming everything went to plan, then you should have a flat display with none 
 
 | ![[secured.jpg]]                                                                    | Adding extra security to the joints                                                                                                                                               |
 | ----------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Power wiring<br><br>Left and right joined together<br>- 5x`5v` out<br>- 5x`gnd` out | ![[power_wiring.jpg]]                                                                                                                                                             |
-| ![[data_wiring.jpg]]                                                                | Data wiring. Gray ribbons (shipped with panels) used to join left/right sides, rainbow ribbons used to join rows<br><br>You can see the data input for the pi in the bottom/right |
+| Power wiring | ![[power_wiring.jpg]]                                                                                                                                                             |
+| ![[data_wiring.jpg]]                                                                | Data wiring. Gray ribbons (shipped with panels) used to join left/right sides, rainbow ribbons used to join rows -- You can see the data input for the pi in the bottom/right |
 | The sacraficial power supply                                                        | ![[with_supply.jpg]]                                                                                                                                                              |
+
+- Left and right joined together
+- 5x`5v` out
+- 5x`gnd` out
 
 **Parts list**
 
@@ -148,4 +152,3 @@ Assuming everything went to plan, then you should have a flat display with none 
 
 > [!success] 🧟‍♀️ It's Alive!!!
 > ![[party_parrot.gif]]
-

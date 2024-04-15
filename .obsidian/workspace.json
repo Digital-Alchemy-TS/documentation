@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Project Links.md",
+                "file": "Home.md",
                 "mode": "source",
                 "source": false
               }
@@ -65,8 +65,7 @@
               "state": {}
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
@@ -86,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Project Links.md",
+                "file": "Home.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Project Links.md",
+                "file": "Home.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -126,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Project Links.md"
+                "file": "Home.md"
               }
             }
           }
@@ -150,6 +149,7 @@
   },
   "active": "cb954889eb65e4f2",
   "lastOpenFiles": [
+    "Project Links.md",
     "Home.md",
     "Quickstart/Automation/Automation Quickstart Overview.md",
     "Home Automation/Synapse/changelog/Synapse 0.3.x.md",
@@ -187,7 +187,6 @@
     "Terminal/Prompts.md",
     "Core/exports/TServiceParams.md",
     "Changelog.md",
-    "Quickstart/Automation/Addon.md",
     "Blog/Ideas",
     "Blog",
     "Home Automation/Automation/changelog",

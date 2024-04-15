@@ -3,24 +3,24 @@ aliases:
   - Next-Steps
 ---
 > [!success]
-> You got the [[Automation Quickstart Overview|quickstart]] project pulled down, what what is this mess? 
- 
+> You got the [[Automation Quickstart Overview|quickstart]] project pulled down, what what is this mess?
+
 ## 👀 The sights
 
-Let's take a quick tour of the repo to 
+Let's take a quick tour of the repo to
 
 ### 🏗 [package.json](https://github.com/Digital-Alchemy-TS/automation-quickstart/blob/main/package.json)
 
 | The package.json contains useful workspace commands | [![[npm_scripts.png]]](npm_scripts.png) |
 | --------------------------------------------------- | ----------------------------------------------------------------------- |
-You can run the commands from the command line if you are comfortable, or by using the buttons provided by VSCode. 
+You can run the commands from the command line if you are comfortable, or by using the buttons provided by VSCode.
 
 > [!faq]
-Don't see the panel? 
+Don't see the panel?
 > - Make sure the `NPM Scripts` option is checked.
 > - Sometimes VSCode may not make the panel visible until you open `package.json`
 ### 📁 [scripts/](https://github.com/Digital-Alchemy-TS/automation-quickstart/tree/main/scripts)
-This folder contains helper scripts for managing your workspace, and is utilized by the various commands in `package.json`. Re-running the setup script will upgrade the provided scripts with the newest version from the [[Automation Quickstart Overview|quickstart]] repo. The most important one is the `environment.sh`, which is used to managed the NodeJS environment 
+This folder contains helper scripts for managing your workspace, and is utilized by the various commands in `package.json`. Re-running the setup script will upgrade the provided scripts with the newest version from the [[Automation Quickstart Overview|quickstart]] repo. The most important one is the `environment.sh`, which is used to managed the NodeJS environment
 
 ```bash
 ./scripts/environment.sh
@@ -55,14 +55,14 @@ Below is the most important items for defining your application, see the type de
 | Property        | Description                                                                                                                                                                                                 |
 | --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `configuration` | Declare variables you would like the [[Configuration\|config]] loader to collect values for                                                                                                                 |
-| `libraries`     | An array of additional libraries to load into your application. These may be provided in any order<br><br>Adding to this array will add more properties to [[TServiceParams]] for use in your service files |
+| `libraries`     | An array of additional libraries to load into your application. These may be provided in any order (**Adding to this array will add more properties to [[TServiceParams]] for use in your service files**) |
 | `name`          | This value defines the property in [[TServiceParams]] that your service will attach to, as well as the name of the configuration file that will be used                                                     |
 | `services`      | A mapping of **context name** to service definitions                                                                                                                                                        |
 | `priorityInit`  | Forces a provided construction order for your services. Services not in the list will be built after the list is completed                                                                                  |
 > [!example] #Usage-Example/core
 > An example of a basic application definition, loading 3 additional services
 
-The context name used in the service definition is for your own reference, and may use any standard for declaring services that works for you. 
+The context name used in the service definition is for your own reference, and may use any standard for declaring services that works for you.
 
 ```typescript
 import { CreateApplication } from "@digital-alchemy/core";
@@ -83,7 +83,7 @@ const SUPER_AWESOME_APP = CreateApplication({
 });
 ```
 
-For reference, here is an implementation of `Testing` to show how accessing your services via [[TServiceParams]] works. 
+For reference, here is an implementation of `Testing` to show how accessing your services via [[TServiceParams]] works.
 
 > [!important]
 > 1. Utilizing dashes in your project/service names is discouraged
@@ -105,7 +105,7 @@ export function Example({ my_super_awesome_app, logger, lifecycle }: TServicePar
   // {project name}.{service name}.{return object usage}
 	  my_super_awesome_app.Testing.superAwesomeFunction();
   });
-  
+
   return {
     superAwesomeFunction() {
 	  logger.info("Running via service call");

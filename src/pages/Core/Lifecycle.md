@@ -9,7 +9,7 @@ The `lifecycle` is available on [[TServiceParams]], and helps to coordinate the 
 | Lifecycle Phase        | Phase       | Description                                                                                                                                                     | Example Use                                                                         |
 | ---------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
 | [[construct]]          | `bootstrap` | An informal phase, describes the time when services are building their return output. Code should be limited to general configuration & wiring.                 | Code definitions & function wiring                                                  |
-| [[onPreInit]]          | `bootstrap` | Ran prior to gathering user configuration. Frequently used with alternate application flows.                                                                    | 1. check for `--help` flag<br>2. print configuration info<br>3. exit                |
+| [[onPreInit]]          | `bootstrap` | Ran prior to gathering user configuration. Frequently used with alternate application flows.                                                                    | 1. check for `--help` flag, print configuration info, exit                |
 | (configure)            | `bootstrap` | When the [[Configuration]] does its processing to load user configurations.                                                                                     |                                                                                     |
 | [[onPostConfig]]       | `bootstrap` | User configs are populated into the library, libraries & applications can start utilizing that information to further self-configure / initialize dependencies. | Create a reference to an external library (ex: `fastify`)                           |
 | [[onBootstrap]]        | `bootstrap` | Configured libraries are available, and can be interacted with.                                                                                                 | Perform wiring actions with that library (ex: add routes)                           |
@@ -33,11 +33,11 @@ function MyService({ logger, lifecycle }: TServiceParams) {
   lifecycle.onBootstrap(() => {
     logger.info("I happen first");
   }, 2);
-  
+
   lifecycle.onBootstrap(() => {
     logger.info("I happen early");
   }, 1);
-  
+
   lifecycle.onBootstrap(() => {
     logger.info("I exist too");
   }, 0);
@@ -46,11 +46,11 @@ function MyService({ logger, lifecycle }: TServiceParams) {
   lifecycle.onBootstrap(() => {
     logger.info("I happen after the priority callbacks");
   });
-  
+
   lifecycle.onBootstrap(() => {
     logger.info("I happen late");
   }, -1);
-  
+
   lifecycle.onBootstrap(() => {
     logger.info("I happen really late");
   }, -2);

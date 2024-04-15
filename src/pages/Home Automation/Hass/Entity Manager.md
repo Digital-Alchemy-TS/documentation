@@ -29,8 +29,8 @@ export function MyService({ hass, logger }: TServiceParams) {
 
   mySensor.onUpdate((new_state, old_state) => {
     logger.info(
-      { state: mySensor.state }, 
-      `special sensor updated (previously %s)`, 
+      { state: mySensor.state },
+      `special sensor updated (previously %s)`,
       mySensor.previous.state
     )
   });
@@ -38,14 +38,14 @@ export function MyService({ hass, logger }: TServiceParams) {
 ```
 ## 🛠 Methods
 
-> [!hint] 
+> [!hint]
 > Grab entity references at any time, the values will track current state
 
 **Entity methods**
 
 | Method      | Description                                                                                                                                                                    |
 | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `onUpdate`  | Registers a callback to be run whenever the entity's state is updated, providing the new state as a parameter.<br>Passes `new_state` / `old_state` as params to help decisions |
+| `onUpdate`  | Registers a callback to be run whenever the entity's state is updated, providing the new state as a parameter. -- Passes `new_state` / `old_state` as params to help decisions |
 | `once`      | Similar to `onUpdate`, but the callback is run only once for the next update of the entity's state.                                                                            |
 | `nextState` | Returns a promise that resolves with the next state of the entity, without any time limit on when the next state update will occur.                                            |
 | `previous`  | Access the immediate previous version of an entity, same data as `old_state`                                                                                                   |
