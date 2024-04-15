@@ -16,7 +16,7 @@ There is an internal feature set target for `1.0` (which includes adding unit te
 ### 0.3.x
 
 > [!faq] Breaking changes with previous
-> - Breaking restructure of [[Internal]] to a more final structure, 
+> - Breaking restructure of [Internal](/core/internal) to a more final structure,
 > - Removal of legacy global variables that caused issues when multiple versions of the core were loaded (through node_modules and npm link flows)
 
 Github org created, build out of documentation, initial public releases.

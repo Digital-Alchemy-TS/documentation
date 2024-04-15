@@ -5,7 +5,7 @@
 >  - 📈 Improvement
 >  - 💣 Breaking
 
-> [!note] 
+> [!note]
 
 > [!abstract]
 
@@ -13,11 +13,11 @@
 
 > [!tldr]
 
-> [!info] 
+> [!info]
 
-> [!todo] 
+> [!todo]
 
-> [!tip] 
+>
 
 > [!hint]
 
@@ -39,7 +39,7 @@
 
 > [!caution]
 
-> [!attention]
+> **Attention**:
 
 > [!failure]
 
@@ -47,14 +47,13 @@
 
 > [!missing]
 
-> [!error] 
+> [!error]
 
 > [!danger]
 
-> [!bug] 
+> [!bug]
 
-> [!example]
 
-> [!quote] 
+> [!quote]
 
 > [!cite]

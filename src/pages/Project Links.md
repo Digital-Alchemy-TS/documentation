@@ -42,7 +42,7 @@ aliases:
 
 | Name                                | GitHub                                         | NPM                                                                     |
 | ----------------------------------- | ---------------------------------------------- | ----------------------------------------------------------------------- |
-| 4️⃣ [[Core Overview\|Core]]         | https://github.com/Digital-Alchemy-TS/core     | [NPM](https://github.com/Digital-Alchemy-TS/mqtt)                       |
+| 4️⃣ [[Overview|Core]]         | https://github.com/Digital-Alchemy-TS/core     | [NPM](https://github.com/Digital-Alchemy-TS/mqtt)                       |
 | 3️⃣ [[Fastify Overview\|Fastify]]   | https://github.com/Digital-Alchemy-TS/fastify  | [NPM](https://www.npmjs.com/package/@digital-alchemy/fastify-extension) |
 | 3️⃣ [[MQTT Overview\|MQTT]]         | https://github.com/Digital-Alchemy-TS/mqtt     | [NPM](https://www.npmjs.com/package/@digital-alchemy/mqtt-extension)    |
 | 3️⃣ [[Gotify Overview\|Gotify]]     | https://github.com/Digital-Alchemy-TS/core     | [NPM](https://www.npmjs.com/package/@digital-alchemy/gotify-extension)  |
