@@ -1,6 +1,15 @@
 > [!tldr] Tldr #Changelog for [[Hass Overview|@digital-alchemy/hass]]
 > -  [[Changelog|Changelog Hub]]
 
+## 0.3.8
+- added quickboot command
+	- run from the `tsx` command line to call services and test things out. returns copy of [[TServiceParams]] to test issuing commands with
+```typescript
+const { QuickBoot } = await import("@digital-alchemy/hass");
+const { hass } = await QuickBoot("home_automation");
+hass.call.scene.turn_on({ entity_id: "scene.office_off" });
+```
+
 ## 0.3.6 
 - [#8](https://github.com/Digital-Alchemy-TS/hass/pull/8)
 - **enhancement**: entity proxies will now accept attempts to set state / attributes. this utilizes a rest call internally, and is an async process

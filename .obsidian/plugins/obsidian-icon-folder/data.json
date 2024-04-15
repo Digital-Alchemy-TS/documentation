@@ -79,14 +79,6 @@
     "iconName": "RaGears",
     "iconColor": "#0000ff"
   },
-  "Pi Matrix": {
-    "iconName": "RiGridLine",
-    "iconColor": "#ff80ff"
-  },
-  "Pi Matrix/Pi Matrix Overview.md": {
-    "iconName": "RaOvermind",
-    "iconColor": "#00ff00"
-  },
   "Quickstart/Automation": "FasHouseSignal",
   "Quickstart/Automation/assets": {
     "iconName": "TiAsset",
@@ -200,10 +192,6 @@
     "iconName": "TiStatusChange",
     "iconColor": "#ff8080"
   },
-  "Pi Matrix/changelog": {
-    "iconName": "TiStatusChange",
-    "iconColor": "#ff8080"
-  },
   "Terminal/changelog": {
     "iconName": "TiStatusChange",
     "iconColor": "#ff8080"
@@ -231,5 +219,17 @@
   "Home Automation/Automation/changelog": {
     "iconName": "TiStatusChange",
     "iconColor": "#ff8080"
+  },
+  "Matrix Rendering": {
+    "iconName": "RiGridLine",
+    "iconColor": "#ff80ff"
+  },
+  "Matrix Rendering/changelog": {
+    "iconName": "TiStatusChange",
+    "iconColor": "#ff8080"
+  },
+  "Matrix Rendering/Matrix Rendering Overview.md": {
+    "iconName": "RaOvermind",
+    "iconColor": "#00ff00"
   }
 }

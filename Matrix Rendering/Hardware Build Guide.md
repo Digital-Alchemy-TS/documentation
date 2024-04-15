@@ -1,6 +1,6 @@
 ## Overview
 
-This project details the construction of [[Pi Matrix Overview|Pi Matrix]] compatible hardware, and provides the software to do the rendering (coming soon)
+This project details the construction of [[Matrix Rendering Overview|Pi Matrix]] compatible hardware, and provides the software to do the rendering (coming soon)
 
 
 > Links provided for easy to find product reference, project can be made much more cost efficiently
@@ -126,16 +126,15 @@ The first part of this is finding a wide flat surface for the frame to lay down 
 | ![[display_parts.jpg]] | ![[display_assembled.jpg]] |
 Assuming everything went to plan, then you should have a flat display with none of the panels having an obvious visual gap. Adding a bit of hot glue can help everything stay together
 
+> [!fail]
+> Says "**hot swappable**", adds glue
+
 | ![[secured.jpg]]                                                                    | Adding extra security to the joints                                                                                                                                               |
 | ----------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Power wiring<br><br>Left and right joined together<br>- 5x`5v` out<br>- 5x`gnd` out | ![[power_wiring.jpg]]                                                                                                                                                             |
 | ![[data_wiring.jpg]]                                                                | Data wiring. Gray ribbons (shipped with panels) used to join left/right sides, rainbow ribbons used to join rows<br><br>You can see the data input for the pi in the bottom/right |
+| The sacraficial power supply                                                        | ![[with_supply.jpg]]                                                                                                                                                              |
 
-> [!question]
-> The final design of the panel wires 2 panels together, and uses a 5v + ground wire from a pc power supply. For a total of 5x5v lines from power supply
-
-| The sacraficial power supply | ![[with_supply.jpg]] |
-| ---------------------------- | -------------------- |
 **Parts list**
 
 | Name           | Purchase Link                                          | Required | Notes                                                                                                                                | Image                 |

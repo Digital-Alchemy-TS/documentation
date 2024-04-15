@@ -1,6 +1,13 @@
 > [!tldr] Tldr #Changelog for [[Type Writer Overview|@digital-alchemy/type-writer]]
 > -  [[Changelog|Changelog Hub]]
 
+## 0.3.10
+- 📈  Expanded on the way the file loader looks for files
+	- All paths may be now be a folder, with the config file placed at `config` inside that
+	- May be used to group additional application related information
+## 0.3.9
+- 📈  fixes related to `customLogger`
+
 ## 0.3.8 
 - 🛠 test coverage for [[Wiring]] & [[Configuration]] systems ([#23](https://github.com/Digital-Alchemy-TS/core/pull/23))
 	- 🐛💣 the sorting order for lifecycle events is has been reversed to properly align with documentation

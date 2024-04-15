@@ -1,10 +1,10 @@
 ## 📜 Description
 
-Seconds between heartbeats.
+If using file storage, a base folder to store data at is required. Defaults to `./.{app_name}`
 
-- **type**: `number`
+- **type**: `string`
 - **required**: `false`
-- **default**: `5`
+- **default**: **undefined**
 - **project**: [[Synapse Overview]]
 
 ### 💡 Example Usage
@@ -13,7 +13,7 @@ Seconds between heartbeats.
 
 > [!summary] Set up as an environment variable for your shell, then run the script
 ```bash
-export HEARTBEAT_INTERVAL=5
+export STORAGE=file
 tsx src/main.ts
 ```
 > [!summary] Set up as an environment variable for just the single run
@@ -25,9 +25,9 @@ HEARTBEAT_INTERVAL=5 tsx src/main.ts
 
 > [!summary] Provide your config as a switch
 ```bash
-tsx src/main.ts --heartbeat_interval=5
+tsx src/main.ts --storage=file
 # or
-tsx src/main.ts --heartbeat_interval 5
+tsx src/main.ts --storage file
 ```
 ### 📁 File
 > [!tip] If your file does not have an extension, [[Configuration]] will do auto
@@ -38,7 +38,7 @@ tsx src/main.ts --heartbeat_interval 5
 
 ```ini
 [synapse]
-  HEARTBEAT_INTERVAL=5
+  STORAGE=file
 ```
 #### 📄 yaml
 
@@ -47,7 +47,7 @@ tsx src/main.ts --heartbeat_interval 5
 
 ```yaml
 synapse:
-  HEARTBEAT_INTERVAL: 5
+  STORAGE: file
 ```
 ### 🗃️ json
 
@@ -57,7 +57,7 @@ synapse:
 ```json
 {
   "synapse": {
-    "HEARTBEAT_INTERVAL": 5
+    "STORAGE": file
   }
 }
 ```

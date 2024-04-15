@@ -15,7 +15,7 @@ These instructions assume that [Studio Code Server Addon](https://github.com/has
 
 **Links!**
 - [Github repo](https://github.com/Digital-Alchemy-TS/automation-quickstart)
-- [Discord](https://discord.com/invite/mtWHk36upW)
+- [Discord]([Fetching Title#lpnh](https://discord.gg/JkZ35Gv97Y))
 - [[Automation Quickstart 0.3.x|Automation quickstart changelog]]
 
 ## 🚀 Setup

@@ -4,159 +4,22 @@
     "type": "split",
     "children": [
       {
-        "id": "1a15c6aea0328aae",
-        "type": "split",
+        "id": "befe60b5023e93e1",
+        "type": "tabs",
         "children": [
           {
-            "id": "befe60b5023e93e1",
-            "type": "tabs",
-            "dimension": 61.87410586552218,
-            "children": [
-              {
-                "id": "cb954889eb65e4f2",
-                "type": "leaf",
-                "state": {
-                  "type": "markdown",
-                  "state": {
-                    "file": "Pi Matrix/Hardware Build Guide.md",
-                    "mode": "source",
-                    "source": false
-                  }
-                },
-                "group": "e4538bd35ee3cee8"
+            "id": "cb954889eb65e4f2",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Project Links.md",
+                "mode": "source",
+                "source": false
               }
-            ]
-          },
-          {
-            "id": "cf9f6ada41b9e7ac",
-            "type": "tabs",
-            "dimension": 38.125894134477825,
-            "children": [
-              {
-                "id": "2f8eb55784fc4c22",
-                "type": "leaf",
-                "state": {
-                  "type": "graph",
-                  "state": {}
-                }
-              },
-              {
-                "id": "df8ebe2566f488ad",
-                "type": "leaf",
-                "state": {
-                  "type": "localgraph",
-                  "state": {
-                    "file": "Pi Matrix/Hardware Build Guide.md",
-                    "options": {
-                      "collapse-filter": true,
-                      "search": "",
-                      "localJumps": 1,
-                      "localBacklinks": true,
-                      "localForelinks": true,
-                      "localInterlinks": true,
-                      "showTags": true,
-                      "showAttachments": true,
-                      "hideUnresolved": false,
-                      "collapse-color-groups": true,
-                      "colorGroups": [
-                        {
-                          "query": "path:\"01 Core\"  ",
-                          "color": {
-                            "a": 1,
-                            "rgb": 8388863
-                          }
-                        },
-                        {
-                          "query": "path:\"02 Home Automation\"  ",
-                          "color": {
-                            "a": 1,
-                            "rgb": 33023
-                          }
-                        },
-                        {
-                          "query": "path:\"03 Support Libraries\"  ",
-                          "color": {
-                            "a": 1,
-                            "rgb": 8453888
-                          }
-                        },
-                        {
-                          "query": "path:\"04 Minor Applications\"  ",
-                          "color": {
-                            "a": 1,
-                            "rgb": 16728192
-                          }
-                        },
-                        {
-                          "query": "path:\"06 Pi Matrix\"  ",
-                          "color": {
-                            "a": 1,
-                            "rgb": 16744703
-                          }
-                        },
-                        {
-                          "query": "path:\"07 Automation Quickstart\"  ",
-                          "color": {
-                            "a": 1,
-                            "rgb": 65535
-                          }
-                        },
-                        {
-                          "query": "path:\"05 Terminal\" ",
-                          "color": {
-                            "a": 1,
-                            "rgb": 16728064
-                          }
-                        },
-                        {
-                          "query": "path:\"08 Extended Examples\"  ",
-                          "color": {
-                            "a": 1,
-                            "rgb": 16776960
-                          }
-                        },
-                        {
-                          "query": "path: \"index\"",
-                          "color": {
-                            "a": 1,
-                            "rgb": 16711680
-                          }
-                        }
-                      ],
-                      "collapse-display": true,
-                      "showArrow": true,
-                      "textFadeMultiplier": -0.2,
-                      "nodeSizeMultiplier": 1,
-                      "lineSizeMultiplier": 5,
-                      "collapse-forces": false,
-                      "centerStrength": 0.203125,
-                      "repelStrength": 20,
-                      "linkStrength": 1,
-                      "linkDistance": 108,
-                      "scale": 0.6666666666666656,
-                      "close": true
-                    }
-                  }
-                },
-                "group": "e4538bd35ee3cee8"
-              },
-              {
-                "id": "e234e0d4fcc1e865",
-                "type": "leaf",
-                "state": {
-                  "type": "markdown",
-                  "state": {
-                    "file": "private/typography elements.md",
-                    "mode": "source",
-                    "source": false
-                  }
-                }
-              }
-            ],
-            "currentTab": 2
+            }
           }
-        ],
-        "direction": "vertical"
+        ]
       }
     ],
     "direction": "vertical"
@@ -185,7 +48,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "discord",
+                "query": "discord.",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -202,7 +65,8 @@
               "state": {}
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -222,7 +86,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Pi Matrix/Hardware Build Guide.md",
+                "file": "Project Links.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -239,7 +103,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Pi Matrix/Hardware Build Guide.md",
+                "file": "Project Links.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -262,7 +126,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Pi Matrix/Hardware Build Guide.md"
+                "file": "Project Links.md"
               }
             }
           }
@@ -286,44 +150,44 @@
   },
   "active": "cb954889eb65e4f2",
   "lastOpenFiles": [
-    "Pi Matrix/assets/with_supply.jpg",
-    "Pi Matrix/assets/data_wiring.jpg",
-    "Pi Matrix/assets/power_wiring.jpg",
-    "Pi Matrix/assets/secured.jpg",
-    "Pi Matrix/assets/display_assembled.jpg",
-    "Pi Matrix/assets/display_parts.jpg",
-    "Pi Matrix/assets/180_cable.jpg",
-    "Pi Matrix/assets/fan_heat_sync.jpg",
-    "Pi Matrix/assets/backside.jpg",
-    "Pi Matrix/Hardware Build Guide.md",
-    "Pi Matrix/Hardware Setup.md",
-    "Pi Matrix/assets/willow.jpg",
-    "Pi Matrix/assets/countersunk_magnet.jpg",
-    "Pi Matrix/Pi Matrix Overview.md",
-    "Pi Matrix/assets",
+    "Home.md",
+    "Quickstart/Automation/Automation Quickstart Overview.md",
+    "Home Automation/Synapse/changelog/Synapse 0.3.x.md",
+    "Core/changelog/Core 0.3.x.md",
+    "Home Automation/Synapse/Value Storage.md",
+    "Home Automation/Synapse/config/STORAGE_FILE_LOCATION.md",
+    "Home Automation/Synapse/config/STORAGE.md",
+    "Home Automation/Synapse/config/HEARTBEAT_INTERVAL.md",
+    "Home Automation/Synapse/Synapse Overview.md",
+    "Home Automation/Hass/changelog/Hass 0.3.x.md",
+    "Home Automation/Hass/Special Logic.md",
+    "Home Automation/Hass/Quickboot.md",
+    "Matrix Rendering/Matrix Rendering Overview.md",
+    "Support Libraries/Gotify/changelog/Gotify 0.3.x.md",
+    "private/typography elements.md",
+    "Support Libraries/Gotify/Gotify Overview.md",
+    "Support Libraries/Gotify/config/BASE_URL.md",
+    "Matrix Rendering/Hardware Build Guide.md",
+    "Matrix Rendering/assets/with_supply.jpg",
+    "Matrix Rendering/assets/data_wiring.jpg",
+    "Matrix Rendering/assets/power_wiring.jpg",
+    "Matrix Rendering/assets/secured.jpg",
+    "Matrix Rendering/assets/display_assembled.jpg",
+    "Matrix Rendering/assets/display_parts.jpg",
+    "Matrix Rendering/assets/180_cable.jpg",
+    "Matrix Rendering/assets/fan_heat_sync.jpg",
+    "Matrix Rendering/assets/backside.jpg",
+    "Matrix Rendering/Hardware Setup.md",
+    "Matrix Rendering/assets/willow.jpg",
+    "Matrix Rendering/assets",
     "Pi Matrix/Build",
     "Blog/01 Building a Basic Automation.md",
     "Quickstart/Automation/Next Steps.md",
     "Blog/Home.md",
-    "Quickstart/Automation/Automation Quickstart Overview.md",
-    "private/typography elements.md",
     "Terminal/Prompts.md",
     "Core/exports/TServiceParams.md",
     "Changelog.md",
     "Quickstart/Automation/Addon.md",
-    "Core/Scheduler.md",
-    "Core/Wiring.md",
-    "Core/Logger.md",
-    "Core/changelog/Core 0.3.x.md",
-    "Core/Lifecycle.md",
-    "Core/Core Overview.md",
-    "Core/Configuration.md",
-    "Home Automation/Hass/changelog/Hass 0.3.x.md",
-    "Core/changelog/Core 0.4.x.md",
-    "Home Automation/Hass/changelog/Hass 0.4.x.md",
-    "Core/Utilities.md",
-    "Blog.md",
-    "Blog/Ideas/01 Creating unit tested automations.md",
     "Blog/Ideas",
     "Blog",
     "Home Automation/Automation/changelog",
