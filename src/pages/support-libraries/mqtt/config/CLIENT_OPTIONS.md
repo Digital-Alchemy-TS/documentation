@@ -5,9 +5,9 @@ Configuration options for the MQTT client, as defined by the `IClientOptions` in
 - **type**: `internal`
 - required: `false`
 - default: `{"host": "localhost", "password": null, "port": 1883}`
-- project: [[MQTT Overview]]
+- project: [MQTT](/support-libraries/mqtt)
 
-> [!note]
+> **Note**:
 > You can see the full type definition [on GitHub](https://github.com/mqttjs/MQTT.js/blob/9a18610daf7b350476c1d92347dc24f56882887b/src/lib/client.ts#L111)
 
 ### 💡 Example Usage

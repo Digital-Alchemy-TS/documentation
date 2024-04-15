@@ -7,7 +7,7 @@ Socket service will commit sudoku if more than this many outgoing messages are s
 - **type**: `number`
 - required: `false`
 - default: `500`
-- project: [[Hass Overview]]
+- project: [Hass](/home-automation/hass)
 
 ### 💡 Example Usage
 

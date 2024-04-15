@@ -7,13 +7,12 @@ The entity manager actively maintains a copy of the current state inside the app
 
 ## 🔄 State Management
 
-As part of [onPostConfig](/core/lifecycle/onPostConfig), the entity manager will pre-populate with the current state. It receives priority treatment for receiving update events via the [[Websocket API|websocket]].
+As part of [onPostConfig](/core/lifecycle/onPostConfig), the entity manager will pre-populate with the current state. It receives priority treatment for receiving update events via the [websocket](/home-automation/hass/websocket-api).
 
 ## 📝 Entity References
 
 You can retrieve an entity reference by using the `.byId` method. The returned reference will have all the `state` & `attributes` maintained up to date with the current state. You can keep your logic simple, and do the lookup only once.
 
-> [!example] #Usage-Example/hass
 > - Grab an entity reference by id
 > - Read the current state
 > - Listen for updates
@@ -38,7 +37,7 @@ export function MyService({ hass, logger }: TServiceParams) {
 ```
 ## 🛠 Methods
 
-> [!hint]
+> **Hint**:
 > Grab entity references at any time, the values will track current state
 
 **Entity methods**

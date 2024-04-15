@@ -8,14 +8,14 @@ The Websocket API is a self-managed method of communicating with Home Assistant.
 ## 🌐 Connection Management
 
 > [!help]
-> Connection manager only active with [[AUTO_CONNECT_SOCKET]]
+> Connection manager only active with [AUTO_CONNECT_SOCKET](/home-automation/hass/config/AUTO_CONNECT_SOCKET)
 
 **Extra configurations**:
-- [[WEBSOCKET_URL]] | [[Home Automation/Hass/config/BASE_URL|BASE_URL]]
-- [[Home Automation/Hass/config/TOKEN|TOKEN]]
-- [[RETRY_INTERVAL]]
+- [WEBSOCKET_URL](/home-automation/hass/config/WEBSOCKET_URL) | [BASE_URL](/home-automation/hass/config/BASE_URL)
+- [TOKEN](/home-automation/hass/config/TOKEN)
+- [RETRY_INTERVAL](/home-automation/hass/config/RETRY_INTERVAL)
 
-The socket will initially form a connection on [onPostConfig](/core/lifecycle/onPostConfig), and work with a [[Scheduler|schedule]] to ensure that the connection stays valid. If/when Home Assistant restarts, the socket will work to re-establish the connection and mitigate the impact on the application.
+The socket will initially form a connection on [onPostConfig](/core/lifecycle/onPostConfig), and work with a [schedule](/core/scheduler) to ensure that the connection stays valid. If/when Home Assistant restarts, the socket will work to re-establish the connection and mitigate the impact on the application.
 
 The socket will automatically teardown [onShutdownStart](/core/lifecycle/onShutdownStart).
 
@@ -34,7 +34,7 @@ If your code cares more about the "fresh connection", instead of "initial boot",
 
 ### ⚖️ Load-based safety
 
-> [!warning]
+> **Warning**:
 > Application may commit sudoku if it detects too much traffic.
 > In an attempt to not nuke your Home Assistant install, the websocket will keep a running average of traffic. Too much = 💣
 
@@ -42,15 +42,15 @@ The load based safety mechanism prevents an accidental infinite loops from emitt
 
 | Config                            | Description                                          |
 | --------------------------------- | ---------------------------------------------------- |
-| [[SOCKET_WARN_REQUESTS_PER_SEC]]  | Threshold to emit warnings at.                       |
-| [[SOCKET_CRASH_REQUESTS_PER_SEC]] | Threshold to actually terminate at.                  |
-| [[SOCKET_AVG_DURATION]]           | How many seconds of data to take into consideration. |
+| [SOCKET_WARN_REQUESTS_PER_SEC](/home-automation/hass/config/SOCKET_WARN_REQUESTS_PER_SEC)  | Threshold to emit warnings at.                       |
+| [SOCKET_CRASH_REQUESTS_PER_SEC](/home-automation/hass/config/SOCKET_CRASH_REQUESTS_PER_SEC) | Threshold to actually terminate at.                  |
+| [SOCKET_AVG_DURATION](/home-automation/hass/config/SOCKET_AVG_DURATION)           | How many seconds of data to take into consideration. |
 
 ## 🕒 Wait for response
 
 By default, the `socket.sendMessage` will return a promise that resolves when Home Assistant responds back to the message that was sent. You have the ability to disable this logic if you desire, leading to no return response from your request.
 
-`sendMessage` will wait for [[EXPECT_RESPONSE_AFTER]] seconds to receive a response from Home Assistant. If one is not received, a warning is logged and the response promise is discarded. This can occur when there are issues with the connection.
+`sendMessage` will wait for [EXPECT_RESPONSE_AFTER](/home-automation/hass/config/EXPECT_RESPONSE_AFTER) seconds to receive a response from Home Assistant. If one is not received, a warning is logged and the response promise is discarded. This can occur when there are issues with the connection.
 
 ## ⏸ Pause traffic
 
@@ -61,7 +61,6 @@ The websocket supports the flag `pauseMessages: boolean`. If this is set to true
 - Block all outgoing websocket messages aside from `ping`/`pong` heartbeats.
 - Block events coming from events/entity updates.
 
-> [!example] #Usage-Example/hass
 > In this contrived example, there is a sibling service that exists to track when all instances of this application are online. If a dev server is started at the same time a "production" is running, the production will defer
 
 ```typescript
@@ -86,8 +85,7 @@ function Example({ hass, app, config }: TServiceParams) {
 
 The websocket gives a direct view into the inner workings of Home Assistant via its event bus. You are able to consume topic events easily directly off the socket, as well as sending generic events back to other code to consume.
 
-> [!hint]
-> [[Synapse Overview|synapse]] takes advantage of this to interact with a custom component.
+> [synapse](/home-automation/synapse) takes advantage of this to interact with a custom component.
 
 | Export      | Description                                                                                                                                  |
 | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------- |

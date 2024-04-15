@@ -5,7 +5,7 @@ Background color for search boxes when there is no content.
 - **type**: `string`
 - required: `false`
 - default: `"bgBlue"`
-- project: [[Terminal Overview]]
+- project: [Terminal](/terminal)
 
 ### 💡 Example Usage
 

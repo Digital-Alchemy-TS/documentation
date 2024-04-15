@@ -91,18 +91,18 @@ export function Example({ logger }: TServiceParams) {
   }
 }
 ```
-> [!tldr] Below is a block of logs intended to show the general rules for formatting
+> **TLDR**: Below is a block of logs intended to show the general rules for formatting
 >
 > - **General format**
 > `[TIMESTAMP]`  `[project:service]` `(name)`: `message`
 >   ... `extra object data`
 >   ... `extra object data`
 
-![[example_log.png]]
+![example_log](/img/example_log.png)
 
 ## 🔊 Log Levels
 
-- [[LOG_LEVEL]]
+- [LOG_LEVEL](/core/config/LOG_LEVEL)
 
 This table describes the priority order (highest -> lowest) of log levels and the color provided to the `context`. Setting the `LOG_LEVEL` to a higher level will cause the lower-level ones to not be emitted.
 

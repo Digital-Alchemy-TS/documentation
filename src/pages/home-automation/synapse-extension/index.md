@@ -6,9 +6,9 @@ aliases:
 
 Welcome to the Synapse custom component for Home Assistant!
 
-This library works with [[Synapse Overview|@digital-alchemy/synapse]] to allow Typescript based applications to create custom entities.
+This library works with [@digital-alchemy/synapse](/home-automation/synapse) to allow Typescript based applications to create custom entities.
 
-- [[Synapse Extension 0.3.x|0.3.x changelog]]
+- [Changelog](/home-automation/synapse-extension/changelog/0.3.x)
 
 ## 🚀 Installing Synapse
 
@@ -43,7 +43,7 @@ Currently, Synapse supports managing various entity types within Home Assistant,
 - **Sensors (with attributes)**: Entities providing readings from external data sources, including associated metadata.
 - **Binary Sensors**: Represent binary states (on/off) of external conditions or inputs.
 - **Buttons**: Triggerable entities that execute actions within external services.
-- **Scenes**: Predefined configurations that adjust multiple entities to specific states (implementation by [[Automation Overview|@digital-alchemy/automation]]).
+- **Scenes**: Predefined configurations that adjust multiple entities to specific states (implementation by [@digital-alchemy/automation](/home-automation/automation)).
 
 Future enhancements will expand support to additional domains, enhancing the integration's versatility and applicability to a broader range of automation scenarios.
 
@@ -53,7 +53,7 @@ Once enabled, the Synapse integration automatically coordinates with the connect
 
 Switches can be manipulated via the Lovelace UI or service domain calls, just like native Home Assistant switches. Sensors follow a push model, with updates sent from the Node.js application to Home Assistant.
 
-For more advanced automation and entity grouping, refer to [[Automation Overview|@digital-alchemy/automation]], which provides tools for creating "rooms" and managing entity states and scene activation.
+For more advanced automation and entity grouping, refer to [@digital-alchemy/automation](/home-automation/automation), which provides tools for creating "rooms" and managing entity states and scene activation.
 
 ## 📚 Documentation and Support
 

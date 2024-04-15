@@ -5,7 +5,7 @@ Color for the smaller lower header.
 - **type**: `string`
 - required: `false`
 - default: `"magenta"`
-- project: [[Terminal Overview]]
+- project: [Terminal](/terminal)
 
 ### 💡 Example Usage
 

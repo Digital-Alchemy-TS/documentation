@@ -3,20 +3,21 @@ import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
-  title: 'My Site',
-  tagline: 'Dinosaurs are cool',
-  favicon: 'img/favicon.ico',
+  title: 'Digital Alchemy',
+  tagline: 'Automating with Typescript',
+  favicon: 'assets/cropped.jpg',
+  // favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
-  url: 'https://your-docusaurus-site.example.com',
+  url: 'https://docusarus.digital-alchemy.app',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'facebook', // Usually your GitHub org/user name.
-  projectName: 'docusaurus', // Usually your repo name.
+  organizationName: 'DigitalAlchemyTS', // Usually your GitHub org/user name.
+  projectName: 'Digital Alchemy', // Usually your repo name.
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -28,6 +29,8 @@ const config: Config = {
     defaultLocale: 'en',
     locales: ['en'],
   },
+  plugins:[
+  ],
 
   presets: [
     [

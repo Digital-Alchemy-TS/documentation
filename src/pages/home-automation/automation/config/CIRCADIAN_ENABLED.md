@@ -5,7 +5,7 @@ Take responsibility for generating [CIRCADIAN_SENSOR] and emitting updates.
 - **type**: `boolean`
 - required: `false`
 - default: `true`
-- project: [[Automation Overview]]
+- project: [Automation](/home-automation/automation)
 
 ### 💡 Example Usage
 

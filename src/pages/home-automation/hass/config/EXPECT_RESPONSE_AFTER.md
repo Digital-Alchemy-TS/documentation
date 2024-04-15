@@ -5,7 +5,7 @@ If sendMessage was set to expect a response, a warning will be emitted after thi
 - **type**: `number`
 - required: `false`
 - default: `5`
-- project: [[Hass Overview]]
+- project: [Hass](/home-automation/hass)
 
 ### 💡 Example Usage
 

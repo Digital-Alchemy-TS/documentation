@@ -5,7 +5,7 @@ Util.inspect object depth.
 - **type**: `number`
 - required: `false`
 - default: `5`
-- project: [[Terminal Overview]]
+- project: [Terminal](/terminal)
 
 ### 💡 Example Usage
 

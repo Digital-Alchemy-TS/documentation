@@ -5,7 +5,7 @@ Current light temperature must be at least this much off target in order to be e
 - **type**: `number`
 - required: `false`
 - default: `50`
-- project: [[Automation Overview]]
+- project: [Automation](/home-automation/automation)
 
 ### 💡 Example Usage
 

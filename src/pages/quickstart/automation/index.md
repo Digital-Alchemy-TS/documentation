@@ -5,9 +5,11 @@ aliases:
   - blog/00
   - blog/Quickstart
 ---
+import ReactPlayer from 'react-player'
+
 ## 📘 Overview
 
-Welcome to the `@digital-alchemy` [[pages/Home Automation/index|Home Automation]] quickstart project!
+Welcome to the `@digital-alchemy` [Home Automation](/home-automation) quickstart project!
 
 This project is designed to work with **Supervised** and **HA OS** based installs, where **Addons** are supported. If you used a different installation method, you will need to make tweaks to the process.
 
@@ -15,12 +17,12 @@ These instructions assume that [Studio Code Server Addon](https://github.com/has
 
 **Links!**
 - [Github repo](https://github.com/Digital-Alchemy-TS/automation-quickstart)
-- [Discord]([Fetching Title#lpnh](https://discord.gg/JkZ35Gv97Y))
-- [[Automation Quickstart 0.3.x|Automation quickstart changelog]]
+- [Discord](https://discord.gg/JkZ35Gv97Y)
+- [Changelog](/home-automation/)
 
 ## 🚀 Setup
 
-> [!note]
+> **Note**:
 > The below command works for:
 > - Initial setup
 > - Fixing a broken environment
@@ -38,31 +40,31 @@ This script will:
 - Install NodeJS on your system
 - Pull down the [starter template](https://github.com/Digital-Alchemy-TS/automation-quickstart)
 - Install all necessary dependencies
-- Add the [[Addon|local code runner]] addon as a local addon
+- Add the [local code runner](/quickstart/automation/addon) addon as a local addon
 
 The final install step is for you to install the addon.
-![[addon.png]]
+![addon](/img/addon.png)
 
-> [!success]
+> 🎉
 > You are now able to run Typescript code on your Home Assistant instance! 🎉
-> Check out the [[Next Steps|next steps guide]] for an orientation on the project you just set up
+> Check out the [next steps guide](/quickstart/automation/next-steps) for an orientation on the project you just set up
 ### 📺 In action
 
 No sound orientation videos, for a bit of context on what things should look like when everything goes right.
 
-> [!tldr] Tldw: Setup Process
+> **TLDR**: Tldw: Setup Process
 > Speed run of the setup process, taking a break to run the code manually and in the background with the addon
 
-![[zeroconf.mp4]]
+<ReactPlayer playing controls url='/zeroconf.mp4' />
 
-> [!tldr] Tldw: Editing Experience
+> **TLDR**: Tldw: Editing Experience
 > Have your editor provide handy suggestions about your current setup as you type
 
-![[intro.mp4]]
+<ReactPlayer playing controls url='/intro.mp4' />
 
 ## ⚒️ Workspace Management
 
-> [!warning]
+> **Warning**:
 > The NodeJS environment within the Code Server addon does not survive reboots and may occasionally need to be set up again.
 >
 
@@ -87,9 +89,3 @@ Once your environment is set up, you can use the commands in the `package.json` 
 | **`lint`**          | 😱 Check your workspace for non-critical issues                                                                                     |
 | **`lint:fix`**      | 🪛 Run `eslint --fix` to resolve minor issues                                                                                       |
 | **`type-writer`**   | 🖨️ Rebuild custom type definitions for Home Assistant -- **Run any time you modify your setup for more accurate definitions**      |
-
----
-> [!todo]
-> See [[Next Steps|next ]]
-
-- #Blog

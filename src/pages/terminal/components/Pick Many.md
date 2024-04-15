@@ -1,8 +1,0 @@
-- [[PAGE_SIZE]]
-- [[MENU_ENTRY_TYPE]]
-- [[MENU_ENTRY_TYPE_OTHER]]
-- [[MENU_ENTRY_SELECTED]]
-- [[MENU_ENTRY_NORMAL]]
-- [[MENU_ENTRY_OTHER]]
-
-![[pick_many.png]]

@@ -5,7 +5,7 @@ Minimum color temperature for circadian lighting. Used while it's dark out.
 - **type**: `number`
 - required: `false`
 - default: `2000`
-- project: [[Automation Overview]]
+- project: [Automation](/home-automation/automation)
 
 ### 💡 Example Usage
 

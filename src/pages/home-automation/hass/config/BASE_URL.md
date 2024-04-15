@@ -5,7 +5,7 @@ Url to reach Home Assistant at.
 - **type**: `string`
 - required: `false`
 - default: `http://homeassistant.local:8123`
-- project: [[Hass Overview]]
+- project: [Hass](/home-automation/hass)
 
 ### 💡 Example Usage
 

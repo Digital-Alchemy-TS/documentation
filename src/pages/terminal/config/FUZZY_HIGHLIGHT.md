@@ -5,7 +5,7 @@ Chalk highlighting to apply to fuzzy search.
 - **type**: `string`
 - required: `false`
 - default: `"red.bold.underline"`
-- project: [[Terminal Overview]]
+- project: [Terminal](/terminal)
 
 ### 💡 Example Usage
 

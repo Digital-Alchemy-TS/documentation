@@ -5,7 +5,7 @@ Text to display in front of individual items in the keymap.
 - **type**: `string`
 - required: `false`
 - default: `{blue.dim > }`
-- project: [[Terminal Overview]]
+- project: [Terminal](/terminal)
 
 ### 💡 Example Usage
 

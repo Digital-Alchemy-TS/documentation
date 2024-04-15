@@ -5,7 +5,7 @@ How often to retry connecting on connection failure (ms).
 - **type**: `number`
 - required: `false`
 - default: `5`
-- project: [[Hass Overview]]
+- project: [Hass](/home-automation/hass)
 
 ### 💡 Example Usage
 

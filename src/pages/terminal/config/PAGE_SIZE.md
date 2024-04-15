@@ -5,7 +5,7 @@ Item quantity in menus / lists.
 - **type**: `number`
 - required: `false`
 - default: `20`
-- project: [[Terminal Overview]]
+- project: [Terminal](/terminal)
 
 ### 💡 Example Usage
 

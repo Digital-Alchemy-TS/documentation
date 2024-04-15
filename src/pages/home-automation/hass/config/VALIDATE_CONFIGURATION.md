@@ -5,7 +5,7 @@ Validate the credentials, then quit.
 - **type**: `boolean`
 - required: `false`
 - default: `false`
-- project: [[Hass Overview]]
+- project: [Hass](/home-automation/hass)
 
 ### 💡 Example Usage
 

@@ -5,7 +5,7 @@ Used to generate unique ids in home assistant. Defaults to application name.
 - **type**: `string`
 - required: `false`
 - default: `undefined`
-- project: [[Synapse Overview]]
+- project: [Synapse](/home-automation/synapse)
 
 ### 💡 Example Usage
 

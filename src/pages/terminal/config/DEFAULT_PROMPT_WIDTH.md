@@ -5,7 +5,7 @@ Box width for prompts short text inputs.
 - **type**: `number`
 - required: `false`
 - default: `50`
-- project: [[Terminal Overview]]
+- project: [Terminal](/terminal)
 
 ### 💡 Example Usage
 

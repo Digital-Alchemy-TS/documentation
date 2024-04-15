@@ -5,7 +5,7 @@ Verify continue to match their desired state as defined by the room's current sc
 - **type**: `boolean`
 - required: `false`
 - default: `true`
-- project: [[Automation Overview]]
+- project: [Automation](/home-automation/automation)
 
 ### 💡 Example Usage
 

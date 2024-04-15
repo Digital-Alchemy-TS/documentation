@@ -1,5 +1,5 @@
-> [!tldr] Tldr #Changelog for [[Automation Quickstart Overview|Automation Quickstart]]
-> -  [[Changelog|Changelog Hub]]
+> **TLDR**: Tldr #Changelog for [Automation Quickstart](/quickstart/automation)
+> -  [Changelog Hub](/changelog)
 
 ## 0.3.3
 

@@ -4,4 +4,4 @@ aliases:
 ---
 ## Description
 
-- [[Fastify 0.3.x|0.3.x changelog]]
+- [Changelog](/support-libraries/fastify/changelog/0.3.x)

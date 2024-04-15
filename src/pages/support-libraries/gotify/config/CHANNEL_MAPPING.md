@@ -5,7 +5,7 @@ Mapping of application names to tokens. Keep your keys out of the code!
 - **type**: `record`
 - required: `false`
 - default: `{}`
-- project: [[Gotify Overview]]
+- project: [Gotify](/support-libraries/gotify)
 
 ### 💡 Example Usage
 

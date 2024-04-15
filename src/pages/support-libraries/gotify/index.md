@@ -4,7 +4,6 @@ aliases:
 ---
 ## Description
 
-> [!info]
 > https://gotify.net/
 > Gotify is a simple server for sending & receiving messages
 
@@ -12,7 +11,7 @@ Welcome to `@digital-alchemy/gotify-extension`!
 
 - [GitHub](https://github.com/Digital-Alchemy-TS/gotify)
 - [NPM](https://www.npmjs.com/package/@digital-alchemy/gotify-extension)
-- [[Gotify 0.3.x|0.3.x changelog]]
+- [Changelog](/support-libraries/gotify/changelog/0.3.x)
 
 ## 💾 Install
 
@@ -36,16 +35,16 @@ export const MY_LIBRARY = CreateLibrary({
   name: "special_logic",
 })
 ```
-> [!success]
+> 🎉
 > Listing as an import will automatically load into [LoadedModules](/core/exports/LoadedModules) and make the library features available as `gotify` on [TServiceParams](/core/exports/TServiceParams).
 
 
 ## Configuration
 
-- [[Support Libraries/Gotify/config/BASE_URL|BASE_URL]]
+- [BASE_URL](/support-libraries/gotify/config/BASE_URL)
 Target server for api
 
-- [[CHANNEL_MAPPING]]
+- [CHANNEL_MAPPING](/support-libraries/gotify/config/CHANNEL_MAPPING)
 Map tokens to friendly names to use within the application
 ```ini
 [gotify.CHANNEL_MAPPING]
@@ -53,7 +52,7 @@ Map tokens to friendly names to use within the application
   another_app=token
   app_the_third=token
 ```
-- [[Support Libraries/Gotify/config/TOKEN|TOKEN]]
+- [TOKEN](/support-libraries/gotify/config/TOKEN)
 Application token
 
 ## Services
@@ -64,7 +63,6 @@ Application token
 
 ## Multi-channel type friendly messages
 
-> [!example] #Usage-Example/gotify
 > Create a wrapper to send messages from a particular application. Uses the correct credentials, and quick to type
 ```typescript
 enum MyGotifyApps {
@@ -89,15 +87,14 @@ export function MyGotifyServices({ gotify, config }: TServiceParams) {
 }
 ```
 
-> [!example] #Usage-Example/gotify
 > Send messages
 
 ```typescript
-export function MyService({ app, lifecycle }: TServiceParams) {
+export function MyService({ app, lifecycle, internal }: TServiceParams) {
   lifecycle.onReady(async() => {
 
     await app.gotify.reminders({
-      message: `Failed to create countdown timer for ${ZCC.utils.relativeDate(target)}`,
+      message: `Failed to create countdown timer for ${internal.utils.relativeDate(target)}`,
     });
   })
 }

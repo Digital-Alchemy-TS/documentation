@@ -5,7 +5,7 @@ Color for the big header.
 - **type**: `string`
 - required: `false`
 - default: `"cyan"`
-- project: [[Terminal Overview]]
+- project: [Terminal](/terminal)
 
 ### 💡 Example Usage
 

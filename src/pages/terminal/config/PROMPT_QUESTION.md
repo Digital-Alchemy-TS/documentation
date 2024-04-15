@@ -5,7 +5,7 @@ Text to add in front of prompt messages.
 - **type**: `string`
 - required: `false`
 - default: `{blue ?}`
-- project: [[Terminal Overview]]
+- project: [Terminal](/terminal)
 
 ### 💡 Example Usage
 

@@ -5,7 +5,7 @@ Emit the entity list update every time this application is booted. digital-alche
 - **type**: `boolean`
 - required: `false`
 - default: `false`
-- project: [[Synapse Overview]]
+- project: [Synapse](/home-automation/synapse)
 
 ### 💡 Example Usage
 

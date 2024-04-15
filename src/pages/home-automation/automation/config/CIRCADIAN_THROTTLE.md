@@ -5,7 +5,7 @@ Artificial delay to add.
 - **type**: `number`
 - required: `false`
 - default: `300`
-- project: [[Automation Overview]]
+- project: [Automation](/home-automation/automation)
 
 ### 💡 Example Usage
 

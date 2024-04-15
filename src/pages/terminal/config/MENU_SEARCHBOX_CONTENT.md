@@ -5,7 +5,7 @@ Background color for search boxes when there is content.
 - **type**: `string`
 - required: `false`
 - default: `"bgCyan"`
-- project: [[Terminal Overview]]
+- project: [Terminal](/terminal)
 
 ### 💡 Example Usage
 

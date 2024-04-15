@@ -5,7 +5,7 @@ Sensor for reading / writing current light temperature to.
 - **type**: `string`
 - required: `false`
 - default: `"Light temperature"`
-- project: [[Automation Overview]]
+- project: [Automation](/home-automation/automation)
 
 ### 💡 Example Usage
 

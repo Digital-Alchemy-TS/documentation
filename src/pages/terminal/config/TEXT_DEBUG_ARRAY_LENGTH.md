@@ -5,7 +5,7 @@ Util.inspect array length.
 - **type**: `number`
 - required: `false`
 - default: `2`
-- project: [[Terminal Overview]]
+- project: [Terminal](/terminal)
 
 ### 💡 Example Usage
 

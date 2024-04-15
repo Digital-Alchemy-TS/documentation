@@ -7,14 +7,14 @@ aliases:
 
 Welcome to `@digital-alchemy/synapse`!
 
-This project builds on the functions provided by [[Hass Overview|hass]] to provide the ability to generate entities within your Home Assistant install. With the help of a [custom component](https://github.com/Digital-Alchemy-TS/synapse-extension), you can gate logic behind switches, report states with sensors, attach functions to buttons, and more!
+This project builds on the functions provided by [hass](/home-automation/hass/) to provide the ability to generate entities within your Home Assistant install. With the help of a [custom component](https://github.com/Digital-Alchemy-TS/synapse-extension), you can gate logic behind switches, report states with sensors, attach functions to buttons, and more!
 
-- [[Synapse 0.3.x|0.3.x changelog]]
+- [Changelog](/home-automation/synapse/changelog/0.3.x)
 
 ## 💾 Install
 
 > **Attention**:
-> Depends on  [[Hass Overview|@digital-alchemy/hass]] and the [[Synapse Extension Overview|synapse custom component]]
+> Depends on  [@digital-alchemy/hass](/home-automation/hass/) and the [synapse custom component](/home-automation/synapse-extension)
 
 Add as a dependency, and add to your imports. Nice and easy
 ```bash
@@ -37,12 +37,11 @@ export const MY_LIBRARY = CreateLibrary({
   name: "special_logic",
 })
 ```
-> [!success]
+> 🎉
 > Listing as an import will automatically load into [LoadedModules](/core/exports/LoadedModules) and make the library features available as `synapse` on [TServiceParams](/core/exports/TServiceParams).
 
 ### Usage
 
-> [!example] #Usage-Example/synapse
 > Creating new entities with the library is easy! The library will automatically handle communication with Home Assistant, reporting values, and attaching callbacks.
 
 ```typescript
@@ -79,7 +78,7 @@ export function Example({ scheduler, context, synapse }: TServiceParams) {
 }
 ```
 
-> [!caution]
+> **Caution**:
 > Names should be unique per domain!
 
 ### 🔄 Automatic availability reporting
@@ -94,7 +93,7 @@ When your application disconnects, it emits a "going offline" message to automat
 
 By default, applications don't automatically send their current list of entities to Home Assistant. To trigger an update/resync with your application and the custom component, use the `reload` button.
 
-![[reload.png]]
+![reload](/img/reload.png)
 
 ## 📜 Supported Domains
 
@@ -110,13 +109,13 @@ Current support includes
 
 ## ⚙️ Configuration
 
-- [[ANNOUNCE_AT_CONNECT]]
+- [ANNOUNCE_AT_CONNECT](/home-automation/synapse/config/ANNOUNCE_AT_CONNECT)
 Instead of waiting for the reload button to be clicked to gather new entities, your application will automatically send them every time it connects to the socket.
 
 This can lead to odd interactions in edge cases, `false` by default.
 
-- [[APPLICATION_IDENTIFIER]]
-Change the identifier your app uses to communicate with the [[Synapse Extension Overview|extension]] as.
+- [APPLICATION_IDENTIFIER](/home-automation/synapse/config/APPLICATION_IDENTIFIER)
+Change the identifier your app uses to communicate with the [extension](/home-automation/synapse-extension) as.
 
-- [[EMIT_HEARTBEAT]]
+- [EMIT_HEARTBEAT](/home-automation/synapse/config/EMIT_HEARTBEAT)
 Emit regular heartbeats to keep the entities flagged as available.

@@ -1,0 +1,11 @@
+- [MENU_SEARCHBOX_NORMAL](/terminal/config/MENU_SEARCHBOX_NORMAL)
+- [MENU_SEARCHBOX_EMPTY](/terminal/config/MENU_SEARCHBOX_EMPTY)
+- [MENU_SEARCHBOX_CONTENT](/terminal/config/MENU_SEARCHBOX_CONTENT)
+- [HELP_DIVIDER](/terminal/config/HELP_DIVIDER)
+- [MENU_ENTRY_SELECTED](/terminal/config/MENU_ENTRY_SELECTED)
+- [MENU_ENTRY_NORMAL](/terminal/config/MENU_ENTRY_NORMAL)
+- [MENU_ENTRY_TYPE](/terminal/config/MENU_ENTRY_TYPE)
+- [MENU_ENTRY_TYPE_OTHER](/terminal/config/MENU_ENTRY_TYPE_OTHER)
+- [MENU_ENTRY_OTHER](/terminal/config/MENU_ENTRY_OTHER)
+
+![menu](/img/menu.png)

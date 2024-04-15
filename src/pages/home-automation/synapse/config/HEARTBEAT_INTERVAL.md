@@ -5,7 +5,7 @@ Seconds between heartbeats.
 - **type**: `number`
 - **required**: `false`
 - **default**: `5`
-- **project**: [[Synapse Overview]]
+- **project**: [Synapse](/home-automation/synapse)
 
 ### 💡 Example Usage
 

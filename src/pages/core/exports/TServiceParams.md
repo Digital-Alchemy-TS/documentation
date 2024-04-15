@@ -4,7 +4,7 @@ aliases:
 ---
 ## 📚 Description
 
-`TServiceParams` is the type definition used to define the value provided to services. It comes with some basic capabilities provided by [[Core Overview|Core]], and will automatically gain new properties through loading new modules.
+`TServiceParams` is the type definition used to define the value provided to services. It comes with some basic capabilities provided by [core](/core/), and will automatically gain new properties through loading new modules.
 
 ## 🏪 Provided by default
 

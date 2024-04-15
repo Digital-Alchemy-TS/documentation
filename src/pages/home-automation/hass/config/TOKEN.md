@@ -5,7 +5,7 @@ Long-lived access token to Home Assistant.
 - **type**: `string`
 - required: `true`
 - default: `undefined`
-- project: [[Hass Overview]]
+- project: [Hass](/home-automation/hass)
 
 ### 💡 Example Usage
 

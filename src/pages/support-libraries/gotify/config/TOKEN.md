@@ -5,7 +5,7 @@ Application token.
 - **type**: `string`
 - required: `true`
 - default: `undefined`
-- project: [[Gotify Overview]]
+- project: [Gotify](/support-libraries/gotify)
 
 ### 💡 Example Usage
 

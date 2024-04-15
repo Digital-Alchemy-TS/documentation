@@ -5,7 +5,7 @@ Alternate color for menus search box colors.
 - **type**: `string`
 - required: `false`
 - default: `"bgMagenta"`
-- project: [[Terminal Overview]]
+- project: [Terminal](/terminal)
 
 ### 💡 Example Usage
 

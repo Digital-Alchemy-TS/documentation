@@ -5,13 +5,13 @@
 >  - 📈 Improvement
 >  - 💣 Breaking
 
-> [!note]
+> **Note**:
 
 > [!abstract]
 
 > [!summary]
 
-> [!tldr]
+> **TLDR**:
 
 > [!info]
 
@@ -19,25 +19,25 @@
 
 >
 
-> [!hint]
+> **Hint**:
 
-> [!important]
+> **Important**:
 
-> [!success]
+> 🎉
 
-> [!check]
+> ✅
 
 > [!done]
 
 > [!question]
 
-> [!faq]
+> **FAT**:
 
 > [!help]
 
-> [!warning]
+> **Warning**:
 
-> [!caution]
+> **Caution**:
 
 > **Attention**:
 
@@ -47,7 +47,7 @@
 
 > [!missing]
 
-> [!error]
+> **ERROR**:
 
 > [!danger]
 

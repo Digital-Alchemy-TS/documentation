@@ -5,7 +5,7 @@ Define a file to write types to. Autodetect = default behavior.
 - **type**: `string`
 - required: `false`
 - default: `Autodetect`
-- project: [[Type Writer Overview]]
+- project: [Type Writer](/home-automation/type-writer)
 
 ### 💡 Example Usage
 

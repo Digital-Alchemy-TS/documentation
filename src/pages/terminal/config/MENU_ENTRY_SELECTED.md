@@ -5,7 +5,7 @@ Color for menu entries, selected item.
 - **type**: `string`
 - required: `false`
 - default: `"bgBlueBright.black"`
-- project: [[Terminal Overview]]
+- project: [Terminal](/terminal)
 
 ### 💡 Example Usage
 

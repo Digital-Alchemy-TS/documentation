@@ -5,7 +5,7 @@ Websocket must be manually initialized if set to false.
 - **type**: `boolean`
 - required: `false`
 - default: `true`
-- project: [[Hass Overview]]
+- project: [Hass](/home-automation/hass)
 
 ### 💡 Example Usage
 

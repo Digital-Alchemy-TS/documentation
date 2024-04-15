@@ -5,7 +5,7 @@ Left/right divider for menus.
 - **type**: `string`
 - required: `false`
 - default: `"{blue.dim |}"`
-- project: [[Terminal Overview]]
+- project: [Terminal](/terminal)
 
 ### 💡 Example Usage
 

@@ -5,7 +5,7 @@ How many seconds worth of requests to use in avg for math in REQ_PER_SEC calcula
 - **type**: `number`
 - required: `false`
 - default: `5`
-- project: [[Hass Overview]]
+- project: [Hass](/home-automation/hass)
 
 ### 💡 Example Usage
 

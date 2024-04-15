@@ -9,7 +9,7 @@ Welcome to `@digital-alchemy/mqtt-extension`!
 
 - [GitHub](https://github.com/Digital-Alchemy-TS/mqtt)
 - [NPM](https://www.npmjs.com/package/@digital-alchemy/mqtt-extension)
-- [[MQTT 0.3.x|0.3.x changelog]]
+- [Changelog](/support-libraries/mqtt/changelog/0.3.x)
 ## 💾 Install
 
 This library can be installed as a simple dependency
@@ -32,13 +32,12 @@ export const MY_LIBRARY = CreateLibrary({
   name: "special_logic",
 })
 ```
-> [!success]
+> 🎉
 > Listing as an import will automatically load into [LoadedModules](/core/exports/LoadedModules) and make the library features available as `mqtt` on [TServiceParams](/core/exports/TServiceParams).
 
 ## ⚙️ Configuration
 
-> [!example] #Usage-Example/mqtt
-> [[CLIENT_OPTIONS]] gets passed straight to mqtt library.
+> [CLIENT_OPTIONS](/support-libraries/mqtt/config/CLIENT_OPTIONS) gets passed straight to mqtt library.
 
 This configuration block can be added to your
 ```ini
@@ -50,7 +49,7 @@ This configuration block can be added to your
 ```
 ## 🛠 Usage
 
-> [!caution] Library is in an "experimental" state
+> **Caution**: Library is in an "experimental" state
 > More useful services will be added in the future
 
 ### 🔄 Bindings
@@ -65,8 +64,6 @@ The subscribe method will automatically listen to topics for you, and pass throu
 - `+` - single level  (`device/+/turned_off` )
 - `#` - multi level wildcard (`device/thingie/#`)
 
-
-> [!example] #Usage-Example/mqtt
 
 ```typescript
 import { TServiceParams } from "@digital-alchemy/core";
@@ -87,8 +84,6 @@ export function Example({ logger, mqtt, context }: TServiceParams) {
 
 Simple wrapper for the `publish` method on the mqtt client.
 
-> [!example] #Usage-Example/mqtt
-
 ```typescript
 import { TServiceParams } from "@digital-alchemy/core";
 
@@ -106,8 +101,6 @@ export function Example({ logger, mqtt, lifecycle }: TServiceParams) {
 ```
 
 #### 🔍 getClient
-
-> [!example] #Usage-Example/mqtt
 
 Need something more complicated? Retrieve the already configured mqtt instance
 

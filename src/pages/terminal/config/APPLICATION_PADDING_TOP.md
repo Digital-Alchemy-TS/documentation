@@ -5,7 +5,7 @@ Automatic offsets for header. POC / deprecated.
 - **type**: `number`
 - required: `false`
 - default: `1`
-- project: [[Terminal Overview]]
+- project: [Terminal](/terminal)
 
 ### 💡 Example Usage
 

@@ -5,7 +5,7 @@ Default quantity of rows to render in prompts like arrayBuilder.
 - **type**: `number`
 - required: `false`
 - default: `20`
-- project: [[Terminal Overview]]
+- project: [Terminal](/terminal)
 
 ### 💡 Example Usage
 

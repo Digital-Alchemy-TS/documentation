@@ -5,7 +5,7 @@ Override calculated value if it's breaking or you want something custom. Make su
 - **type**: `string`
 - required: `false`
 - default: `undefined`
-- project: [[Hass Overview]]
+- project: [Hass](/home-automation/hass)
 
 ### 💡 Example Usage
 

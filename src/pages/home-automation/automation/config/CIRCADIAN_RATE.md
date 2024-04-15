@@ -5,7 +5,7 @@ Number of entities to adjust at the same time. Higher values increase load.
 - **type**: `number`
 - required: `false`
 - default: `3`
-- project: [[Automation Overview]]
+- project: [Automation](/home-automation/automation)
 
 ### 💡 Example Usage
 

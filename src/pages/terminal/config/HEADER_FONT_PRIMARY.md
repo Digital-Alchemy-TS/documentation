@@ -5,7 +5,7 @@ Figlet font for the primary header.
 - **type**: `string`
 - required: `false`
 - default: `"ANSI Regular"`
-- project: [[Terminal Overview]]
+- project: [Terminal](/terminal)
 
 ### 💡 Example Usage
 

@@ -5,7 +5,7 @@ Utilize font awesome icons in prompts. Requires font to be installed.
 - **type**: `boolean`
 - required: `false`
 - default: `true`
-- project: [[Terminal Overview]]
+- project: [Terminal](/terminal)
 
 ### 💡 Example Usage
 

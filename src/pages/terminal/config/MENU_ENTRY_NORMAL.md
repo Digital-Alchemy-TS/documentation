@@ -5,7 +5,7 @@ Color for menu entries, same column as cursor, not selected.
 - **type**: `string`
 - required: `false`
 - default: `"white"`
-- project: [[Terminal Overview]]
+- project: [Terminal](/terminal)
 
 ### 💡 Example Usage
 

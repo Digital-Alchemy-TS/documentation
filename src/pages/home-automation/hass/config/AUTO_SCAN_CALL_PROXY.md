@@ -5,7 +5,7 @@ Should the call proxy request a service listing at bootstrap?
 - **type**: `boolean`
 - required: `false`
 - default: `true`
-- project: [[Hass Overview]]
+- project: [Hass](/home-automation/hass)
 
 ### 💡 Example Usage
 

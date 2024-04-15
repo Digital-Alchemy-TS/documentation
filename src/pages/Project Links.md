@@ -23,17 +23,17 @@ aliases:
 
 | Name                                                  | GitHub                                                  | NPM                                                               |
 | ----------------------------------------------------- | ------------------------------------------------------- | ----------------------------------------------------------------- |
-| 4️⃣ [[Hass Overview\|Hass]]                           | https://github.com/Digital-Alchemy-TS/hass              | [NPM](https://www.npmjs.com/package/@digital-alchemy/hass)        |
-| 4️⃣ [[Synapse Overview\|Synapse]]                     | https://github.com/Digital-Alchemy-TS/synapse           | [NPM](https://www.npmjs.com/package/@digital-alchemy/synapse)     |
-| 3️⃣ [[Automation Overview\|Automation]]               | https://github.com/Digital-Alchemy-TS/automation        | [NPM](https://www.npmjs.com/package/@digital-alchemy/automation)  |
-| 4️⃣ [[Type Writer Overview\|Type-Writer]]             | https://github.com/Digital-Alchemy-TS/type-writer       | [NPM](https://www.npmjs.com/package/@digital-alchemy/type-writer) |
-| 4️⃣ [[Synapse Extension Overview\|Synapse Extension]] | https://github.com/Digital-Alchemy-TS/synapse-extension |                                                                   |
+| 4️⃣ [Hass](/home-automation/hass)                           | https://github.com/Digital-Alchemy-TS/hass              | [NPM](https://www.npmjs.com/package/@digital-alchemy/hass)        |
+| 4️⃣ [Synapse](/home-automation/synapse)                     | https://github.com/Digital-Alchemy-TS/synapse           | [NPM](https://www.npmjs.com/package/@digital-alchemy/synapse)     |
+| 3️⃣ [Automation](/home-automation/automation)               | https://github.com/Digital-Alchemy-TS/automation        | [NPM](https://www.npmjs.com/package/@digital-alchemy/automation)  |
+| 4️⃣ [Type Writer](/home-automation/type-writer)             | https://github.com/Digital-Alchemy-TS/type-writer       | [NPM](https://www.npmjs.com/package/@digital-alchemy/type-writer) |
+| 4️⃣ [Synapse Extension](/home-automation/synapse-extension) | https://github.com/Digital-Alchemy-TS/synapse-extension |                                                                   |
 
 ### 🏎️ Quickstart Projects
 
 | Name                                                          | GitHub                                                      |
 | ------------------------------------------------------------- | ----------------------------------------------------------- |
-| 4️⃣ [[Automation Quickstart Overview\|Automation-Quickstart]] | https://github.com/Digital-Alchemy-TS/automation-quickstart |
+| 4️⃣ [Automation Quickstart](/quickstart/automation) | https://github.com/Digital-Alchemy-TS/automation-quickstart |
 
 ### 🛒 Utility Projects
 
@@ -42,11 +42,9 @@ aliases:
 
 | Name                                | GitHub                                         | NPM                                                                     |
 | ----------------------------------- | ---------------------------------------------- | ----------------------------------------------------------------------- |
-| 4️⃣ [[Overview|Core]]         | https://github.com/Digital-Alchemy-TS/core     | [NPM](https://github.com/Digital-Alchemy-TS/mqtt)                       |
-| 3️⃣ [[Fastify Overview\|Fastify]]   | https://github.com/Digital-Alchemy-TS/fastify  | [NPM](https://www.npmjs.com/package/@digital-alchemy/fastify-extension) |
-| 3️⃣ [[MQTT Overview\|MQTT]]         | https://github.com/Digital-Alchemy-TS/mqtt     | [NPM](https://www.npmjs.com/package/@digital-alchemy/mqtt-extension)    |
-| 3️⃣ [[Gotify Overview\|Gotify]]     | https://github.com/Digital-Alchemy-TS/core     | [NPM](https://www.npmjs.com/package/@digital-alchemy/gotify-extension)  |
-| 3️⃣ [[Grocy Overview\|Grocy]]       | https://github.com/Digital-Alchemy-TS/grocy    | [NPM](https://www.npmjs.com/package/@digital-alchemy/grocy)             |
-| 2️⃣ [[Terminal Overview\|Terminal]] | https://github.com/Digital-Alchemy-TS/terminal | [NPM](https://www.npmjs.com/package/@digital-alchemy/terminal)          |
-
----
+| 4️⃣ [Core](/core)         | https://github.com/Digital-Alchemy-TS/core     | [NPM](https://github.com/Digital-Alchemy-TS/mqtt)                       |
+| 3️⃣ [Fastify](/support-libraries/fastify)   | https://github.com/Digital-Alchemy-TS/fastify  | [NPM](https://www.npmjs.com/package/@digital-alchemy/fastify-extension) |
+| 3️⃣ [MQTT](/support-libraries/mqtt)         | https://github.com/Digital-Alchemy-TS/mqtt     | [NPM](https://www.npmjs.com/package/@digital-alchemy/mqtt-extension)    |
+| 3️⃣ [Gotify](/support-libraries/gotify)     | https://github.com/Digital-Alchemy-TS/core     | [NPM](https://www.npmjs.com/package/@digital-alchemy/gotify-extension)  |
+| 3️⃣ [Grocy](/support-libraries/grocy)       | https://github.com/Digital-Alchemy-TS/grocy    | [NPM](https://www.npmjs.com/package/@digital-alchemy/grocy)             |
+| 2️⃣ [Terminal](/support-libraries/terminal) | https://github.com/Digital-Alchemy-TS/terminal | [NPM](https://www.npmjs.com/package/@digital-alchemy/terminal)          |

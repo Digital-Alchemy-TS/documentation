@@ -6,7 +6,7 @@ Persistence type
 - **required**: `false`
 - **default**: `cache`
 - **enum**: `cache`, `none`, `file`, `external`
-- **project**: [[Synapse Overview]]
+- **project**: [Synapse](/home-automation/synapse)
 
 ### 💡 Example Usage
 

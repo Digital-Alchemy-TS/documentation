@@ -5,7 +5,7 @@ Emit warnings if the home controller attempts to send more than X messages to Ho
 - **type**: `number`
 - required: `false`
 - default: `300`
-- project: [[Hass Overview]]
+- project: [Hass](/home-automation/hass)
 
 ### 💡 Example Usage
 

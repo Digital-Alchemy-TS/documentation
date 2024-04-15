@@ -2,8 +2,8 @@
 aliases:
   - Next-Steps
 ---
-> [!success]
-> You got the [[Automation Quickstart Overview|quickstart]] project pulled down, what what is this mess?
+> 🎉
+> You got the [quickstart](/quickstart/automation) project pulled down, what what is this mess?
 
 ## 👀 The sights
 
@@ -11,29 +11,29 @@ Let's take a quick tour of the repo to
 
 ### 🏗 [package.json](https://github.com/Digital-Alchemy-TS/automation-quickstart/blob/main/package.json)
 
-| The package.json contains useful workspace commands | [![[npm_scripts.png]]](npm_scripts.png) |
+| The package.json contains useful workspace commands | [![npm_scripts](/img/npm_scripts.png)](/img/npm_scripts.png) |
 | --------------------------------------------------- | ----------------------------------------------------------------------- |
 You can run the commands from the command line if you are comfortable, or by using the buttons provided by VSCode.
 
-> [!faq]
+> **FAT**:
 Don't see the panel?
 > - Make sure the `NPM Scripts` option is checked.
 > - Sometimes VSCode may not make the panel visible until you open `package.json`
 ### 📁 [scripts/](https://github.com/Digital-Alchemy-TS/automation-quickstart/tree/main/scripts)
-This folder contains helper scripts for managing your workspace, and is utilized by the various commands in `package.json`. Re-running the setup script will upgrade the provided scripts with the newest version from the [[Automation Quickstart Overview|quickstart]] repo. The most important one is the `environment.sh`, which is used to managed the NodeJS environment
+This folder contains helper scripts for managing your workspace, and is utilized by the various commands in `package.json`. Re-running the setup script will upgrade the provided scripts with the newest version from the [quickstart](/quickstart/automation) repo. The most important one is the `environment.sh`, which is used to managed the NodeJS environment
 
 ```bash
 ./scripts/environment.sh
 ```
 
 ### 📁 [addon/](https://github.com/Digital-Alchemy-TS/automation-quickstart/tree/main/addon)
-This is your [[Addon|code runner addon]], the source is provided as part of the project so you are able to tune the capabilities to your specific needs. By default, it is set up in a very minimal capacity. You are able to add incoming ports, ingress urls for dashboards, and more as part of the config file.
+This is your [code runner addon](/quickstart/automation/addon), the source is provided as part of the project so you are able to tune the capabilities to your specific needs. By default, it is set up in a very minimal capacity. You are able to add incoming ports, ingress urls for dashboards, and more as part of the config file.
 
 ## 💻 Code
 You can find your project code under [`src/`](https://github.com/Digital-Alchemy-TS/automation-quickstart/tree/main/src).
 ### 🛢 Service functions
 
-Service functions are where all your logic goes. They have a relatively simple anatomy, a function that takes in [TServiceParams](/core/exports/TServiceParams) as it's argument. You can read more about the nuances [[Core Overview|here]].
+Service functions are where all your logic goes. They have a relatively simple anatomy, a function that takes in [TServiceParams](/core/exports/TServiceParams) as it's argument. You can read more about the nuances [here](/core).
 ```typescript
 function ServiceFunction({ logger }: TServiceParams) {
   logger.info("hello world");
@@ -42,7 +42,7 @@ function ServiceFunction({ logger }: TServiceParams) {
 
 These functions contain your logic, and can be wired together into larger applications. Your services are provided back to you as property in the input. If you want a complete list of what's available, this is a simple trick -
 
-![[whats_in_this.png]]
+![whats_in_this](/img/whats_in_this.png)
 ### 🧾 main.ts
 
 This file contains all the wiring for your application. You can define new configurations, import libraries, and attach your service functions so they run. Logic is **NOT SUPPOSED TO GO HERE**
@@ -50,16 +50,15 @@ This file contains all the wiring for your application. You can define new confi
 It is structured in 3 parts:
 #### Application Definition
 
-Below is the most important items for defining your application, see the type definitions in your editor or [[Wiring|wiring docs]] for more details
+Below is the most important items for defining your application, see the type definitions in your editor or [wiring docs](/core/wiring) for more details
 
 | Property        | Description                                                                                                                                                                                                 |
 | --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `configuration` | Declare variables you would like the [[Configuration\|config]] loader to collect values for                                                                                                                 |
+| `configuration` | Declare variables you would like the [config](/core/configuration) loader to collect values for                                                                                                                 |
 | `libraries`     | An array of additional libraries to load into your application. These may be provided in any order (**Adding to this array will add more properties to [TServiceParams](/core/exports/TServiceParams) for use in your service files**) |
 | `name`          | This value defines the property in [TServiceParams](/core/exports/TServiceParams) that your service will attach to, as well as the name of the configuration file that will be used                                                     |
 | `services`      | A mapping of **context name** to service definitions                                                                                                                                                        |
 | `priorityInit`  | Forces a provided construction order for your services. Services not in the list will be built after the list is completed                                                                                  |
-> [!example] #Usage-Example/core
 > An example of a basic application definition, loading 3 additional services
 
 The context name used in the service definition is for your own reference, and may use any standard for declaring services that works for you.
@@ -85,7 +84,7 @@ const SUPER_AWESOME_APP = CreateApplication({
 
 For reference, here is an implementation of `Testing` to show how accessing your services via [TServiceParams](/core/exports/TServiceParams) works.
 
-> [!important]
+> **Important**:
 > 1. Utilizing dashes in your project/service names is discouraged
 > 2. Service function function definitions may be async
 > 3. Limit service return types to **undefined**/**void**, **function**, or **object** types
@@ -126,9 +125,11 @@ declare module "@digital-alchemy/core" {
 }
 ```
 
-> [!error]
+> **ERROR**:
 > What happens when names don't align
-> ![[slowstart.png]]
+>
+> ![slowstart](/img/slowstart.png)
+
 #### Bootstrap
 
 This step functionally gets your application started. You may provide some properties in to influence the way your application boot, such as overriding some default config properties. **Do not put secrets/keys here**
@@ -143,6 +144,3 @@ setImmediate(
     }),
 );
 ```
-
----
-- #Blog

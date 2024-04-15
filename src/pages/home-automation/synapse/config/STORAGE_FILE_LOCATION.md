@@ -5,7 +5,7 @@ If using file storage, a base folder to store data at is required. Defaults to `
 - **type**: `string`
 - **required**: `false`
 - **default**: **undefined**
-- **project**: [[Synapse Overview]]
+- **project**: [Synapse](/home-automation/synapse)
 
 ### 💡 Example Usage
 

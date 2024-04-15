@@ -5,7 +5,7 @@ Maximum color temperature for circadian lighting. Used at solar noon.
 - **type**: `number`
 - required: `false`
 - default: `5500`
-- project: [[Automation Overview]]
+- project: [Automation](/home-automation/automation)
 
 ### 💡 Example Usage
 

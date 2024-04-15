@@ -5,7 +5,7 @@ Figlet font for the secondary header.
 - **type**: `string`
 - required: `false`
 - default: `"Pagga"`
-- project: [[Terminal Overview]]
+- project: [Terminal](/terminal)
 
 ### 💡 Example Usage
 

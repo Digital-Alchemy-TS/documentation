@@ -5,7 +5,7 @@ Color for string inputs when there is content.
 - **type**: `string`
 - required: `false`
 - default: `"bgWhite"`
-- project: [[Terminal Overview]]
+- project: [Terminal](/terminal)
 
 ### 💡 Example Usage
 

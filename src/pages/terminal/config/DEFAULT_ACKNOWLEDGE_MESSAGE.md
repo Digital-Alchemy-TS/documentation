@@ -5,7 +5,7 @@ Text for the acknowledge component to display if nothing is provided.
 - **type**: `string`
 - required: `false`
 - default: `"Any key to continue"`
-- project: [[Terminal Overview]]
+- project: [Terminal](/terminal)
 
 ### 💡 Example Usage
 

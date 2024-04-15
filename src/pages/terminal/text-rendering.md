@@ -1,0 +1,5 @@
+- [FUZZY_HIGHLIGHT](/terminal/config/FUZZY_HIGHLIGHT)
+- [MENU_COLUMN_DIVIDER](/terminal/config/MENU_COLUMN_DIVIDER)
+- [TEXT_DEBUG_DEPTH](/terminal/config/TEXT_DEBUG_DEPTH)
+- [TEXT_DEBUG_ARRAY_LENGTH](/terminal/config/TEXT_DEBUG_ARRAY_LENGTH)
+- [PAGE_SIZE](/terminal/config/PAGE_SIZE)

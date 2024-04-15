@@ -6,7 +6,7 @@ Color for the blue horizontal divider in the help display.
 - **type**: `string`
 - required: `false`
 - default: `"blue.dim"`
-- project: [[Terminal Overview]]
+- project: [Terminal](/terminal)
 
 ### 💡 Example Usage
 

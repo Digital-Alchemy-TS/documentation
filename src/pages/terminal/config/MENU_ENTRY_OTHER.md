@@ -5,7 +5,7 @@ Color for menu entries, other column from cursor.
 - **type**: `string`
 - required: `false`
 - default: `"gray"`
-- project: [[Terminal Overview]]
+- project: [Terminal](/terminal)
 
 ### 💡 Example Usage
 

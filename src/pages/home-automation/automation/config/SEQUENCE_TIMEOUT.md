@@ -5,7 +5,7 @@ When tracking state changes for a sequence event, another change must happen ins
 - **type**: `number`
 - required: `false`
 - default: `1500`
-- project: [[Automation Overview]]
+- project: [Automation](/home-automation/automation)
 
 ### 💡 Example Usage
 

@@ -5,7 +5,7 @@ Color for menu entry category types on the other side.
 - **type**: `string`
 - required: `false`
 - default: `"gray.bold"`
-- project: [[Terminal Overview]]
+- project: [Terminal](/terminal)
 
 ### 💡 Example Usage
 

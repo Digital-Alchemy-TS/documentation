@@ -5,7 +5,7 @@ Send commands from hass.call via rest instead of socket. Allow = only if socket 
 - **type**: `string`
 - required: `false`
 - default: `allow`
-- project: [[Hass Overview]]
+- project: [Hass](/home-automation/hass)
 - enum: `prefer` | `forbid` | `allow`
 
 ### 💡 Example Usage

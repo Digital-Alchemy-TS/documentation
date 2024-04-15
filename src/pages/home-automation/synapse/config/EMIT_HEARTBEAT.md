@@ -5,7 +5,7 @@ Emit a pulse so the extension knows the service is alive.
 - **type**: `boolean`
 - required: `false`
 - default: `true`
-- project: [[Synapse Overview]]
+- project: [Synapse](/home-automation/synapse)
 
 ### 💡 Example Usage
 

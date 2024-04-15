@@ -3,12 +3,13 @@ tags: []
 ---
 ## 📖 Description
 
-The REST API is a basic configurable [[Fetch]] wrapper, tuned for some useful REST API endpoints in Home Assistant.
+The REST API is a basic configurable [Fetch](/core/fetch) wrapper, tuned for some useful REST API endpoints in Home Assistant.
 
 ## 🛠 Methods
 
-> [!check] APIs available [onBootstrap](/core/lifecycle/onBootstrap)
-> **Consumes configs:** [[Home Automation/Hass/config/BASE_URL|BASE_URL]], [[Home Automation/Hass/config/TOKEN|TOKEN]]
+> ✅ APIs available [onBootstrap](/core/lifecycle/onBootstrap)
+>
+> **Consumes configs:** [BASE_URL](/home-automation/hass/config/BASE_URL), [TOKEN](/home-automation/hass/config/TOKEN)
 
 | Exported Function Name      | Description                                                                                        |
 | --------------------------- | -------------------------------------------------------------------------------------------------- |
