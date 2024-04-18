@@ -13,10 +13,12 @@ words:
   - fastify
   - hacs
   - pino
+  - dominikmicuta
   - wago
   - keyof
   - quickboot
   - execa
+  - keymap
   - lutron
   - pico
   - swappable
