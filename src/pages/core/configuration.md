@@ -1,6 +1,5 @@
 ---
-tags: []
-aliases:
+title: Core/Configuration
 ---
 ## 📝 Description
 
@@ -15,9 +14,9 @@ The configuration system uses a set of priorities to determine the value of a gi
 1. Hard-coded default in the library/application.
 2. Values provided to the bootstrap function (#Lifecycle/Bootstrap).
 3. User data (determined after [onPreInit](/core/lifecycle/onPreInit), and before [onPostConfig](/core/lifecycle/onPostConfig)):
-	1. Files
-	2. Environment variables
-	3. Command line switches
+    1. Files
+    2. Environment variables
+    3. Command line switches
 
 > Note: Some code may manually set values during construction or [onPreInit](/core/lifecycle/onPreInit).
 
@@ -26,23 +25,28 @@ The configuration system uses a set of priorities to determine the value of a gi
 The file loader supports `ini`, `yaml`, and `json` formats. It searches for files in the following order:
 
 > Set of extensions checked for each file:
+
 - **auto** > `.json` > `.ini` > `.yaml` > `.yml`
 
 Omitting the extension (**auto**) causes the loader to attempt to guess the file format:
+
 1. Attempt `json`
 2. Attempt `yaml`
 3. Fallback to `ini`
 
 > Search paths:
+
 - `cwd()`/`.app_name`
 - `cwd()`/`..` (recursively to root)/`.app_name`
 - `~/.config/{app_name}`
 - `~/.config/{app_name}/config`
 
 > The loader checks the [--config](/core/config/CONFIG) switch as part of determining which file to load. If passed, the provided file will be the only one used.
+
 ```bash
 tsx main.ts --config ./development_configuration
 ```
+
 ### 🌍 Environment Based
 
 Environment variables are **case insensitive**, and `-` & `_` may be swapped. For the configuration example [CACHE_PROVIDER](/core/config/CACHE_PROVIDER), these are allowed variations:
@@ -53,7 +57,8 @@ Environment variables are **case insensitive**, and `-` & `_` may be swapped. Fo
 
 > These can be used as environment variables or command line switches for your application.
 
-**via environment variables**
+#### via environment variables
+
 ```bash
 # source from the environment variables in your session
 export CACHE_PROVIDER=redis
@@ -62,7 +67,9 @@ tsx main.ts
 # define inline
 CACHE_PROVIDER=REDIS tsx main.ts
 ```
-**via command line switches**
+
+#### via command line switches
+
 ```bash
 tsx main.ts --CACHE_PROVIDER=redis
 # or
@@ -105,6 +112,7 @@ const MY_LIB = CreateLibrary({
 ```
 
 This creates the following configuration variables (*referenced in examples below*):
+
 - `config.my_lib.STRING_CONFIG` (generic `string`)
 - `config.my_lib.ENUM_CONFIG` (string union)
 - `config.my_lib.COMPLEX_CONFIG` (`NestedLibraryConfiguration`)
@@ -132,6 +140,7 @@ export function MyService({ logger, config, lifecycle }: TServiceParams) {
   });
 }
 ```
+
 ### ✏️ Modifying Configurations
 
 Some workflows may require changing values for configurations as part of their logic. This can be accomplished through [Internal](/core/internal)
@@ -145,6 +154,7 @@ export function MyService({ logger, internal, lifecycle }: TServiceParams) {
   });
 }
 ```
+
 ### 🛒 Custom Loaders
 
 > Any function that returns a compatible configuration object can be used in place of the default `file` / `environment` loaders.
@@ -152,20 +162,20 @@ export function MyService({ logger, internal, lifecycle }: TServiceParams) {
 ```typescript
 // the loader, not registered as a service
 async function MyCustomLoader({ application, configs, logger }: ConfigLoaderParams) {
-    logger.trace("sending request");
-	const data = await fetchMyConfiguration();
-    logger.trace("done!");
-	return data;
+  logger.trace("sending request");
+  const data = await fetchMyConfiguration();
+  logger.trace("done!");
+  return data;
 }
 
 // service to do attachment
 export function MyService({ logger, internal, lifecycle }: TServiceParams) {
-	internal.config.setConfigLoaders([
-	  MyCustomLoader,
-	  // not using file loaders for plot reasons
-	  // ConfigLoaderFile,
-	  ConfigLoaderEnvironment,
-	]);
+  internal.config.setConfigLoaders([
+    MyCustomLoader,
+    // not using file loaders for plot reasons
+    // ConfigLoaderFile,
+    ConfigLoaderEnvironment,
+  ]);
 }
 ```
 

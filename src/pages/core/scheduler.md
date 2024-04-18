@@ -1,7 +1,7 @@
 ---
-tags:
-  - "#Support/prometheus"
+title: Core/Scheduler
 ---
+
 ## 📚 Description
 
 The scheduler is provided as a lifecycle aware method of executing functions on regular intervals. When using the scheduler:
@@ -15,7 +15,6 @@ The scheduler is provided as a lifecycle aware method of executing functions on 
 
 ### ⏰ Cron
 
-> [!example] #Usage-Example/core
 > A canned set of expressions are provided in the `CronExpression` enum. You may also provide an expression.
 
 ```typescript
@@ -31,9 +30,9 @@ export function Example({ scheduler, logger }: TServiceParams) {
   });
 }
 ```
+
 ### ⏳ Interval
 
-> [!example] #Usage-Example/core
 > `setInterval`, but goes away on shutdown.
 
 ```typescript

@@ -1,6 +1,5 @@
 ---
-tags: []
-aliases:
+title: Core/Cache
 ---
 ## 📓 Description
 
@@ -18,6 +17,7 @@ The cache extension provides a basic configurable caching interface, using a mem
 - [CACHE_PROVIDER](/core/config/CACHE_PROVIDER)
 - [CACHE_TTL](/core/config/CACHE_TTL)
 - [REDIS_URL](/core/config/REDIS_URL)
+
 ## 📄 Code Examples
 
 > Some generic code to illustrate basic cache interactions

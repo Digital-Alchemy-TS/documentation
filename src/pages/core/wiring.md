@@ -1,6 +1,7 @@
 ---
-tags: []
+title: Core/Wiring
 ---
+
 ## 📚 Description
 
 The wiring module is responsible for defining the structure of your application and ensuring all your code runs in the correct order. Code is divided up into modules based on purpose and is referred to as **libraries** or **applications**. They are largely the same thing, with the meaningful difference being that applications can be bootstrapped and there may be only 1 of them.
@@ -30,10 +31,6 @@ export const LIB_AUTOMATION = CreateLibrary({
   priorityInit: ["utils"],
   services: {
     // ...more services
-
-    /**
-     * Helper functions
-     */
     utils: Utils,
   },
 });
@@ -52,8 +49,8 @@ declare module "@digital-alchemy/core" {
 
 ### 📦 `depends`
 
-
 This block contains a list of all libraries this one depends on. Providing items in this array will:
+
 - add that library to the [TServiceParams](/core/exports/TServiceParams) type definitions so they can be used internally
 - set this library up to only be loaded after dependency libraries are loaded
 
@@ -66,8 +63,10 @@ Bootstrap will ensure the application explicitly loads each of these libraries a
 > **Attention**: Name for the library, must match the key used in [LoadedModules](/core/exports/LoadedModules)
 
 A module's name affects:
+
 - where the config system sources data from
 - log context
+
 This name affects the configuration system, log contexts, and the key used in [TServiceParams](/core/exports/TServiceParams).
 
 > Choose your name wisely
@@ -102,7 +101,6 @@ This list defines a loading order for services. Some configurations of code may 
 Services listed in the array are loaded first, in the provided order. Those not listed will be loaded next, in no guaranteed order.
 
 ## 🚀 CreateApplication
-
 
 ```typescript
 export const HOME_AUTOMATION = CreateApplication({

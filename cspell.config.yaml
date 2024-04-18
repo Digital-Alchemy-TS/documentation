@@ -1,0 +1,31 @@
+version: "0.2"
+ignorePaths: []
+dictionaryDefinitions: []
+dictionaries: []
+words:
+  - codez
+  - webbertakken
+  - webber
+  - takken
+  - hass
+  - quickstart
+  - grocy
+  - fastify
+  - hacs
+  - pino
+  - wago
+  - keyof
+  - quickboot
+  - execa
+  - lutron
+  - pico
+  - swappable
+  - caseta
+  - hassio
+  - tsdoc
+  - tldr
+  - gotify
+  - typeof
+  - nestjs
+ignoreWords: []
+import: []

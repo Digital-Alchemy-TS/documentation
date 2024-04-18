@@ -16,7 +16,7 @@ const config: Config = {
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'DigitalAlchemyTS', // Usually your GitHub org/user name.
+  organizationName: 'Digital-Alchemy-TS', // Usually your GitHub org/user name.
   projectName: 'Digital Alchemy', // Usually your repo name.
 
   onBrokenLinks: 'throw',
@@ -56,6 +56,7 @@ const config: Config = {
       } satisfies Preset.Options,
     ],
   ],
+  titleDelimiter: "🔮",
 
   themeConfig: {
     // Replace with your project's social card
@@ -69,8 +70,9 @@ const config: Config = {
       items: [
         {to: '/core', label: 'Core', position: 'left'},
         {to: '/home-automation', label: 'Home Automation', position: 'left'},
-        {to: '/quickstart/automation', label: 'Quickstart', position: 'left'},
+        {to: '/automation-quickstart', label: 'Quickstart', position: 'left'},
         {to: '/support-libraries', label: 'Utilities', position: 'left'},
+        {to: '/support-libraries', label: 'Side Projects', position: 'left'},
         {
           href: 'https://github.com/Digital-Alchemy-TS',
           label: 'GitHub',
@@ -82,29 +84,16 @@ const config: Config = {
       style: 'dark',
       links: [
         {
-          title: 'Docs',
-          items: [
-            {
-              label: 'Tutorial',
-              to: '/docs/intros',
-            },
-          ],
-        },
-        {
           title: 'Community',
           items: [
-            // {
-            //   label: 'Stack Overflow',
-            //   href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-            // },
             {
               label: 'Discord',
               href: 'https://discord.gg/JkZ35Gv97Y',
             },
-            // {
-            //   label: 'Twitter',
-            //   href: 'https://twitter.com/docusaurus',
-            // },
+            {
+              label: 'HASS Community Guide',
+              href: 'https://community.home-assistant.io/t/building-automations-in-typescript-with-digital-alchemy/709902/4',
+            },
           ],
         },
         {
@@ -115,8 +104,12 @@ const config: Config = {
               to: '/blog',
             },
             {
-              label: 'GitHub',
-              href: 'https://github.com/Digital-Alchemy-TS/documentation',
+              label: 'Changelog',
+              to: '/changelog',
+            },
+            {
+              label: 'GitHub Org',
+              href: 'https://github.com/Digital-Alchemy-TS',
             },
           ],
         },

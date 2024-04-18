@@ -1,6 +1,7 @@
 ---
-tags: []
+title: Core/Logger
 ---
+
 ## 📚 Description
 
 The provided logger is a standardized interface that wraps the Node.js console object. It is aware of the service it was provided to. The underlying logging interface can be swapped out for other drivers (recommended [pino](https://www.npmjs.com/package/pino)) for more customized functionality.
@@ -11,7 +12,6 @@ The logger is able to take in both objects and strings in order to generate log 
 
 `logger.method([data],[message[, ...format strings]])`
 
-> [!example] #Usage-Example/core
 > A few examples of how parameters can be passed into the logger
 
 ```typescript
@@ -43,8 +43,6 @@ Both objects and strings are allowed as the 1st parameter, but the object must c
 | `%%`   | Plain `%` symbol, does not consume an arg    |
 
 ## 📑 Reference Log
-
-> [!example] #Usage-Example/core
 
 ```typescript
 export function Example({ logger }: TServiceParams) {
@@ -91,6 +89,7 @@ export function Example({ logger }: TServiceParams) {
   }
 }
 ```
+
 > **TLDR**: Below is a block of logs intended to show the general rules for formatting
 >
 > - **General format**
@@ -122,7 +121,4 @@ Unless changed, log levels will default to `trace`. Providing `boilerplate.LOG_L
 
 ### Log level printing
 
-By default, log levels will be be prefixed to contexts in order to preserve information where colors may not be available. If you prefer to only utilize colors in your setup, there is a flag to disable this functionality as part of boostrap params
-
->
-> Interested in increased customization for logger? Chime in here [#25](https://github.com/Digital-Alchemy-TS/core/issues/25)
+By default, log levels will be be prefixed to contexts in order to preserve information where colors may not be available. If you prefer to only utilize colors in your setup, there is a flag to disable this functionality as part of bootstrap params

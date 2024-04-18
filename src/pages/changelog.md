@@ -1,11 +1,14 @@
-> [!summary]
-> #Changelog for the higher level project
-> - 🐛 Bugs
->  - 🛠 Maintenance
->  - 📑 Documentation
->  - 📈 Improvement
+---
+title: Changelog Hub
+---
 
-# 0.x
+> - 🐛 Bugs
+> - 🛠 Maintenance
+> - 📑 Documentation
+> - 📈 Improvement
+
+## 0.x
+
 - [Prioritized backlog · Home Automation](https://github.com/orgs/Digital-Alchemy-TS/projects/1)
 - [Prioritized backlog · Side Projects](https://github.com/orgs/Digital-Alchemy-TS/projects/2)
 
@@ -15,30 +18,45 @@ There is an internal feature set target for `1.0` (which includes adding unit te
 
 ### 0.3.x
 
-> **FAT**: Breaking changes with previous
+> Breaking changes with previous
+>
 > - Breaking restructure of [Internal](/core/internal) to a more final structure,
 > - Removal of legacy global variables that caused issues when multiple versions of the core were loaded (through node_modules and npm link flows)
 
-Github org created, build out of documentation, initial public releases.
+Github org created, build out of documentation, public releases.
+
+- [Core](/core/changelog/0.3.x)
+- [Hass](/hass/changelog/0.3.x)
+- [Synapse](/synapse/changelog/0.3.x)
+- [Synapse Extension](/synapse-extension/changelog/0.3.x)
+- [Automation](/automation/changelog/0.3.x)
+- [MQTT](/mqtt/changelog/0.3.x)
+- [Fastify](/fastify/changelog/0.3.x)
+- [Gotify](/gotify/changelog/0.3.x)
+- [Grocy](/grocy/changelog/0.3.x)
+- [Terminal](/terminal/changelog/0.3.x)
+- [Matrix Rendering](/matrix-rendering/changelog/0.3.x)
 
 ### 0.2.x
-> **FAT**: Breaking changes with previous:
-> - Breaking down the monorepo approach for many smaller / independant repos under a shared namespace
+
+> Breaking changes with previous:
+>
+> - Breaking down the monorepo approach for many smaller / independent repos under a shared namespace
 
 Short lived minor, mostly focused on code cleanup efforts.
 
 ### 0.1.x
-> **FAT**: Breaking changes with previous:
+
+> Breaking changes with previous:
+>
 > - Namespace change -> `@digital-alchemy`
 
 Focused on code upgrades from initial usability testing and closing the functionality gap with legacy codebase
 
 ### 0.0.x
-> **FAT**: Breaking changes with previous:
+
+> Breaking changes with previous:
+>
 > - Dropped class / nestjs based approach for a full custom bootstrap + functional approach
+
 Building out core library based on proof of concept work
-
----
-
-> [!missing]
-> The previous major project versions are prototypes in a separate code base

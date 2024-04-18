@@ -1,7 +1,5 @@
 ---
-tags:
-aliases:
-  - Core
+title: Core
 ---
 ## 📘 Overview
 
@@ -29,14 +27,14 @@ Services are attached to the modules and are defined as functions that take in a
 
 > Deeper dives on `core` features
 
- - [Cache](/core/cache) - Basic cache adapter with support for memory and Redis drivers.
- - [Configuration](/core/configuration) - Strongly typed configurations, with a priority-based configuration loader supporting a variety of sources.
- - [Fetch Wrapper](/core/fetch) - Easily configurable wrapper for `fetch`.
- - [Internal](/core/internal) - Application metadata, support, and utility functions.
- - [Lifecycle](/core/lifecycle) - Controls for application bootstrapping.
- - [Logger](/core/logger) - Context-aware pretty logger, with a flexible interface.
- - [Scheduler](/core/scheduler) - Lifecycle-aware task scheduling, featuring precise timing and robust error handling.
- - [Wiring](/core/wiring) - Defines the application's structure, ensuring clean code separation and modular development.
+- [Cache](/core/cache) - Basic cache adapter with support for memory and Redis drivers.
+- [Configuration](/core/configuration) - Strongly typed configurations, with a priority-based configuration loader supporting a variety of sources.
+- [Fetch Wrapper](/core/fetch) - Easily configurable wrapper for `fetch`.
+- [Internal](/core/internal) - Application metadata, support, and utility functions.
+- [Lifecycle](/core/lifecycle) - Controls for application bootstrapping.
+- [Logger](/core/logger) - Context-aware pretty logger, with a flexible interface.
+- [Scheduler](/core/scheduler) - Lifecycle-aware task scheduling, featuring precise timing and robust error handling.
+- [Wiring](/core/wiring) - Defines the application's structure, ensuring clean code separation and modular development.
 
 ### 🛠 Helpers / everything else
 
@@ -46,15 +44,15 @@ Primarily type definitions, constants, etc. A few come as part of the `core` lib
 
 > `@digital-alchemy` requires Node 20+
 
-1. For Home Assistant-focused applications, see the [Automation Quickstart](/quickstart/automation) project for a quick setup solution.
+1. For Home Assistant-focused applications, see the [Automation Quickstart](/automation-quickstart) project for a quick setup solution.
 2. The core library comes with everything needed to wire a basic application. Starting with strict mode TypeScript, and nice linting & prettier settings from the start is recommended.
-
 
 ### 📦 A basic app
 
 > Below are all the required parts to start an application.
-
+>
 > **main.ts**
+
 ```typescript
 import { CreateApplication } from "@digital-alchemy/core";
 import { Entry } from "./entry";
@@ -74,7 +72,9 @@ declare module "@digital-alchemy/core" {
   }
 }
 ```
+
 > **entry.ts**
+
 ```typescript
 import { TServiceParams } from "@digital-alchemy/core";
 

@@ -1,9 +1,10 @@
 ---
-tags: []
+title: Core/Lifecycle
 ---
 ## 📚 Description
 
 The `lifecycle` is available on [TServiceParams](/core/exports/TServiceParams), and helps to coordinate the way various elements of the application load relative to each other. It is divided into distinct phases, and different callbacks may be prioritized relative to each other to ensure all your dependencies have what they need, when they need it.
+
 ## 🌐 Phase overview
 
 | Lifecycle Phase        | Phase       | Description                                                                                                                                                     | Example Use                                                                         |
