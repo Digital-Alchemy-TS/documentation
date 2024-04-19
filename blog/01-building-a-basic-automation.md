@@ -4,8 +4,9 @@ title: Building a basic Automation
 authors: [zoe-codez]
 ---
 
-> [!todo]
-> 1. Check out the quickstart](/automation-quickstart) guide to create your own project
+> This guide is part of a series. Check out the previous steps here
+>
+> 1. Check out the [quickstart](/automation-quickstart) guide to create your own project
 > 2. The quickstart](/automation-quickstart/next-steps) page can give you more context on how these work
 
 Now that we have a foundation on **what is a service** / **how to wire them together**, let's build on that by creating a basic automation.
