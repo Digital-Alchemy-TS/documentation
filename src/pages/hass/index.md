@@ -96,3 +96,7 @@ For code running elsewhere, manual configuration is required. You will need a **
   BASE_URL=http://localhost:8123
   TOKEN=YOUR LONG LIVED ACCESS TOKEN
 ```
+
+### Unit Testing
+
+See the dedicated [unit testing guide](/hass/unit-testing)
