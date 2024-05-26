@@ -198,3 +198,4 @@ The integration REQUIRES a connection to your application in order to operate pr
 - updates to open / map ports on the quickstart aren't implemented yet
 - some entity configurations have no effect without matching `supported_features` set
 - `icon` isn't typed more specific than `string` (wontfix)
+- no support for rest only applications
