@@ -7,16 +7,9 @@ Welcome to the Synapse custom component for Home Assistant!
 
 This library works with [@digital-alchemy/synapse](/synapse) to allow Typescript based applications to create custom entities.
 
-- [Changelog](/synapse-extension/changelog/0.3.x)
-
 ## 🚀 Installing Synapse
 
-To integrate Synapse with Home Assistant, add the following to your `configuration.yaml` and choose one of the install methods
-
-```yaml
-# Add to configuration.yaml (no additional configuration)
-synapse:
-```
+> Synapse integrates as a modern UI config flow driven integration.
 
 ### 📦 Via HACS (Recommended)
 
@@ -35,26 +28,63 @@ If you prefer or need to install the integration manually:
 2. Copy the `custom_components/synapse/` directory from the repository into the `<config_dir>/custom_components/` directory of your Home Assistant installation.
 3. Restart Home Assistant.
 
-### 📚 Supported Domains
+## ⛰️ Scope
 
-Currently, Synapse supports managing various entity types within Home Assistant, including:
+The scope of this project is to help bridge the gap between NodeJS/Typescript based applications, and the Home Assistant internals, with a specific focus on entity creation tools.
 
-- **Switches**: Toggleable entities reflecting the state of external devices or services.
-- **Sensors (with attributes)**: Entities providing readings from external data sources, including associated metadata.
-- **Binary Sensors**: Represent binary states (on/off) of external conditions or inputs.
-- **Buttons**: Triggerable entities that execute actions within external services.
-- **Scenes**: Predefined configurations that adjust multiple entities to specific states (implementation by [@digital-alchemy/automation](/automation)).
+It is intended to be a very thin adapter, receiving state updates via the internal event bus, and sending out messages in response to service calls.
+Entity availability is tied to the connection state of the application to the websocket.
 
-Future enhancements will expand support to additional domains, enhancing the integration's versatility and applicability to a broader range of automation scenarios.
+## 🍝 Workflows
 
-## 📖 Usage
+You are able to integrate as many applications as you like with Home Assistant.
+Internally, each application acts as a bridge to connect a top level default device,generated sub-devices, and entities.
+In order to connect a new application, you will need to provide an address to gather information from (`ip:port`, `http(s)://address`).
 
-Once enabled, the Synapse integration automatically coordinates with the connected Node.js application to manage entities. This includes generating unique IDs, tracking history, and ensuring entities appear on dashboards and persist across Home Assistant restarts.
+- **Note**: Your application needs to be online to receive this request or this will fail
 
-Switches can be manipulated via the Lovelace UI or service domain calls, just like native Home Assistant switches. Sensors follow a push model, with updates sent from the Node.js application to Home Assistant.
+After the initial setup, `synapse` will generate a series of devices and entities to reflect what was created inside your application
 
-For more advanced automation and entity grouping, refer to [@digital-alchemy/automation](/automation), which provides tools for creating "rooms" and managing entity states and scene activation.
+![integration example](/img/synapse_integration_example.png)
 
-## 📚 Documentation and Support
+Looking into the default device, you can see the associated entities and sub-device
 
-For more detailed documentation and support, visit the [GitHub repository](https://github.com/Digital-Alchemy-TS/synapse-extension). Please report any issues or feature requests there.
+![default device](/img/synapse_default_device.png)
+
+## 📚 Domain Support
+
+### Verified
+
+- Binary Sensor
+- Button
+- Date
+- Datetime
+- Lock
+- Number
+- Scene
+- Select
+- Switch
+- Text
+- Time
+
+### Untested / WIP
+
+- Alarm Control Panel
+- Camera
+- Climate
+- Cover
+- Fan
+- Humidifier
+- Image
+- Lawn Mower
+- Light
+- Media Player
+- Notify
+- Remote
+- Sensor
+- Siren
+- Todo List
+- Update
+- Vacuum
+- Valve
+- Water Heater
