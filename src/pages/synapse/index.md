@@ -10,39 +10,16 @@ This project builds on the functions provided by [hass](/hass/) to provide the a
 🏗️ You are able to create entities from a wide variety of domains, ranging from helpers to real world device types.
 Easily update state in response to events, or use internal triggers to manage for you!
 
-## 💾 Install
+## 🚀 Setup
 
-> **Attention**:
-> Depends on  [@digital-alchemy/hass](/hass/) and the [synapse custom component](/synapse-extension)
+Synapse has 2 major components to install in order to achieve proper functionality.
 
-Add as a dependency, and add to your imports. Nice and easy
+1. Custom component: [synapse-extension](/synapse-extension)
+2. Typescript library: [install guide](/synapse/install)
 
-```bash
-npm i @digital-alchemy/synapse
-```
+[Configuration & fine tuning guide](./configuration)
 
-> **Add to code**
-
-```typescript
-import { LIB_HASS } from "@digital-alchemy/hass";
-import { LIB_SYNAPSE } from "@digital-alchemy/synapse";
-
-// application
-const MY_APP = CreateApplication({
-  libraries: [LIB_HASS, LIB_SYNAPSE],
-  name: "home_automation",
-})
-
-// library
-export const MY_LIBRARY = CreateLibrary({
-  depends: [LIB_HASS, LIB_SYNAPSE],
-  name: "special_logic",
-})
-```
-
-🎉 Listing as an import will automatically load into [LoadedModules](/core/exports/LoadedModules) and make the library features available as `synapse` on [TServiceParams](/core/exports/TServiceParams).
-
-### 👩‍🔧 Usage
+## 👩‍🔧 Basic Usage
 
 Creating a new entity is easy! You can even attach to events inline with
 

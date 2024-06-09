@@ -26,7 +26,6 @@ There is an internal feature set target for `1.0` (which includes adding unit te
 Github org created, build out of documentation, public releases.
 
 - [Core](/core/changelog/0.3.x)
-- [Hass](/hass/changelog/0.3.x)
 - [Automation](/automation/changelog/0.3.x)
 - [MQTT](/mqtt/changelog/0.3.x)
 - [Fastify](/fastify/changelog/0.3.x)

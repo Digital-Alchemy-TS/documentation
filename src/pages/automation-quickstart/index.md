@@ -55,12 +55,12 @@ No sound orientation videos, for a bit of context on what things should look lik
 > **TLDR**: Tldw: Setup Process
 > Speed run of the setup process, taking a break to run the code manually and in the background with the addon
 
-<ReactPlayer playing controls url='/zeroconf.mp4' />
+<ReactPlayer playing controls url='/zeroconf.mp4' playing={false} />
 
 > **TLDR**: Tldw: Editing Experience
 > Have your editor provide handy suggestions about your current setup as you type
 
-<ReactPlayer playing controls url='/intro.mp4' />
+<ReactPlayer playing controls url='/intro.mp4' playing={false} />
 
 ## ⚒️ Workspace Management
 

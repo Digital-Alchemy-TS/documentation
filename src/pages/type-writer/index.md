@@ -19,7 +19,7 @@ This script should be run after updating dependencies, any time you alter your s
 
 Pictures really only tell half the story, here is the editing experience in VSCode. See the Intellisense in action
 
-<ReactPlayer playing controls url='/intro.mp4' />
+<ReactPlayer playing controls url='/intro.mp4' playing={false} />
 
 ## 🚀 Usage
 
