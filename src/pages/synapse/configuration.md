@@ -66,8 +66,8 @@ HEARTBEAT_INTERVAL=20
 ```
 
 ```bash
-# Use the --env-file switch to provide the .env file
-tsx src/main.ts --env-file .env
+# --env-file provided by runtime will load extra vars
+tsx --env-file .env src/main.ts
 ```
 
 ### 🎛️ CLI Switch

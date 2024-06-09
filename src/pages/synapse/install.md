@@ -36,3 +36,10 @@ export const MY_LIBRARY = CreateLibrary({
 ## ⚙️ Configure
 
 See [configuration guide](./configuration)
+
+## 🌐 HTTP
+
+In order to facilitate some of the initial setup & discovery features in Home Assistant, `synapse` has a HTTP dependency.
+See [fastify](/fastify) documentation for notes on how to configure / add your own routes.
+
+Applications will use port `3000` by default.

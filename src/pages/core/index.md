@@ -1,5 +1,6 @@
 ---
 title: Core
+id: core
 ---
 ## 📘 Overview
 
