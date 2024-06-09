@@ -27,8 +27,6 @@ Github org created, build out of documentation, public releases.
 
 - [Core](/core/changelog/0.3.x)
 - [Hass](/hass/changelog/0.3.x)
-- [Synapse](/synapse/changelog/0.3.x)
-- [Synapse Extension](/synapse-extension/changelog/0.3.x)
 - [Automation](/automation/changelog/0.3.x)
 - [MQTT](/mqtt/changelog/0.3.x)
 - [Fastify](/fastify/changelog/0.3.x)

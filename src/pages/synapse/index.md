@@ -5,9 +5,10 @@ title: Synapse
 
 Welcome to `@digital-alchemy/synapse`!
 
-This project builds on the functions provided by [hass](/hass/) to provide the ability to generate entities within your Home Assistant install. With the help of a [custom component](https://github.com/Digital-Alchemy-TS/synapse-extension), you can gate logic behind switches, report states with sensors, attach functions to buttons, and more!
+This project builds on the functions provided by [hass](/hass/) to provide the ability to generate entities within your Home Assistant install.
 
-- [Changelog](/synapse/changelog/0.3.x)
+🏗️ You are able to create entities from a wide variety of domains, ranging from helpers to real world device types.
+Easily update state in response to events, or use internal triggers to manage for you!
 
 ## 💾 Install
 
@@ -39,85 +40,65 @@ export const MY_LIBRARY = CreateLibrary({
 })
 ```
 
-> 🎉
-> Listing as an import will automatically load into [LoadedModules](/core/exports/LoadedModules) and make the library features available as `synapse` on [TServiceParams](/core/exports/TServiceParams).
+🎉 Listing as an import will automatically load into [LoadedModules](/core/exports/LoadedModules) and make the library features available as `synapse` on [TServiceParams](/core/exports/TServiceParams).
 
-### Usage
+### 👩‍🔧 Usage
 
-> Creating new entities with the library is easy! The library will automatically handle communication with Home Assistant, reporting values, and attaching callbacks.
+Creating a new entity is easy! You can even attach to events inline with
 
 ```typescript
 import { CronExpression, TServiceParams } from "@digital-alchemy/core";
-import { faker } from "@faker-js/faker";
 
-export function Example({ scheduler, context, synapse }: TServiceParams) {
-  // Create a new switch entity
-  const useHacker = synapse.switch({ context, name: "Use hacker phrase" });
-  // Create a new sensor entity
-  const sensor = synapse.sensor({ context, name: "Current catchphrase" });
-
-  // Create a new phrase
-  // Taking into consideration the current state of the switch
-  const regenerate = () => {
-    sensor.state =
-      useHacker.state === "on"
-        ? faker.hacker.phrase()
-        : faker.company.catchPhrase();
-  };
-
-  // Update sensor every 10 minutes
-  scheduler.cron({
-    exec: regenerate,
-    schedule: CronExpression.EVERY_10_MINUTES,
-  });
-
-  // Provide button for immediate updates
+export function ExampleService({ scheduler, context, synapse, logger }: TServiceParams) {
   synapse.button({
     context,
-    exec: regenerate,
-    name: "Update phrase",
+    press: () => logger.info("that tickles!"),
+    name: "Press me",
   });
 }
 ```
 
-> **Caution**:
-> Names should be unique per domain!
+See the [usage guide](/synapse/usage) for more details about managing configurations and events
 
 ### 🔄 Automatic availability reporting
 
-- [onPreShutdown](/core/lifecycle/onPreShutdown)
-
-A `binary_sensor.{app_name}_online` will be created and managed by the extension. This binary sensor will display the connected state of your application and is always available. All other entities owned by this application will have their `availability` state tied to the online state.
-
-When your application disconnects, it emits a "going offline" message to automatically flag entities. Applications also emit a heartbeat that the custom component uses to identify more sudden failures.
-
-### 🔁 Reloading in Home Assistant
-
-By default, applications don't automatically send their current list of entities to Home Assistant. To trigger an update/resync with your application and the custom component, use the `reload` button.
-
-![reload](/img/reload.png)
+As part of the application lifecycle, a "coming online" / "going offline" message is emitted to Home Assistant to help manage entity availability.
+The application will also emit a regular heartbeat, which will cause the entities to automatically go offline after a short time if it goes missing
 
 ## 📜 Supported Domains
 
-Current support includes
+### ✅ Verified
 
-| Domain          | Notes                                                         |
-| --------------- | ------------------------------------------------------------- |
-| `binary_sensor` | Reports an `on`/`off` state, not much else                    |
-| `button`        | Create a quick callback to some code on your dashboard        |
-| `sensor`        | Report `string`/`number`/`date` states, as well as attributes |
-| `switch`        | Create virtual switches to gate logic with                    |
-| `scene`         | Slightly different buttons, bring your own scene setting logic|
+- Binary Sensor
+- Button
+- Date
+- Datetime
+- Lock
+- Number
+- Scene
+- Select
+- Switch
+- Text
+- Time
 
-## ⚙️ Configuration
+### ⚠️ Untested / WIP
 
-- [ANNOUNCE_AT_CONNECT](/synapse/config/ANNOUNCE_AT_CONNECT)
-Instead of waiting for the reload button to be clicked to gather new entities, your application will automatically send them every time it connects to the socket.
-
-This can lead to odd interactions in edge cases, `false` by default.
-
-- [APPLICATION_IDENTIFIER](/synapse/config/APPLICATION_IDENTIFIER)
-Change the identifier your app uses to communicate with the [extension](/synapse-extension) as.
-
-- [EMIT_HEARTBEAT](/synapse/config/EMIT_HEARTBEAT)
-Emit regular heartbeats to keep the entities flagged as available.
+- Alarm Control Panel
+- Camera
+- Climate
+- Cover
+- Fan
+- Humidifier
+- Image
+- Lawn Mower
+- Light
+- Media Player
+- Notify
+- Remote
+- Sensor
+- Siren
+- Todo List
+- Update
+- Vacuum
+- Valve
+- Water Heater
