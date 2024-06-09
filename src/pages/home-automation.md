@@ -22,5 +22,5 @@ Welcome to the `@digital-alchemy` collection of Home Automation tools. This is a
 
 | Project                                                   | Description                                                                                     |
 | --------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| [Synapse Custom Component](/synapse-extension)  | The HACS integration for interacting with synapse library                                       |
+| [Synapse Custom Component](/synapse/extension)  | The HACS integration for interacting with synapse library                                       |
 | [Automation Quickstart](/automation-quickstart) | Quickstart repo for creating new Home Automation applications. Perfect for supervised installs! |

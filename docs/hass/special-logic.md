@@ -1,5 +1,5 @@
 ---
-title: Hass/Special Logic
+title: Special Logic
 ---
 ## 📚 Description
 

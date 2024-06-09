@@ -1,5 +1,5 @@
 ---
-title: "Synapse Configuration"
+title: "Configuration"
 ---
 
 ## 📜 Description

@@ -1,8 +1,6 @@
 ---
-title: Synapse Entity Definitions
+title: Usage
 ---
-# 📚 Synapse Entity Definitions
-
 ## 📄 Description
 
 This document covers the basic usage of the synapse library, creating entities, managing configurations, and attaching to events.

@@ -27,7 +27,7 @@ title: Project Links
 | 4️⃣ [Synapse](/synapse)                     | https://github.com/Digital-Alchemy-TS/synapse           | [NPM](https://www.npmjs.com/package/@digital-alchemy/synapse)     |
 | 3️⃣ [Automation](/automation)               | https://github.com/Digital-Alchemy-TS/automation        | [NPM](https://www.npmjs.com/package/@digital-alchemy/automation)  |
 | 4️⃣ [Type Writer](/type-writer)             | https://github.com/Digital-Alchemy-TS/type-writer       | [NPM](https://www.npmjs.com/package/@digital-alchemy/type-writer) |
-| 4️⃣ [Synapse Extension](/synapse-extension) | https://github.com/Digital-Alchemy-TS/synapse-extension |                                                                   |
+| 4️⃣ [Synapse Extension](/synapse/extension) | https://github.com/Digital-Alchemy-TS/synapse/extension |                                                                   |
 
 ### 🏎️ Quickstart Projects
 

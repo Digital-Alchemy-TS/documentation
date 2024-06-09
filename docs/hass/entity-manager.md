@@ -1,5 +1,5 @@
 ---
-title: Hass/Entity Manager
+title: Entity Manager
 ---
 ## 📚 Description
 

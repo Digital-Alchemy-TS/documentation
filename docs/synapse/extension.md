@@ -1,5 +1,5 @@
 ---
-title: Synapse-Extension
+title: Extension
 ---
 ## 📘 Description
 

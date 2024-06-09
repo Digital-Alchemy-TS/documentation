@@ -14,7 +14,7 @@ Easily update state in response to events, or use internal triggers to manage fo
 
 Synapse has 2 major components to install in order to achieve proper functionality.
 
-1. Custom component: [synapse-extension](/synapse-extension)
+1. Custom component: [synapse-extension](/synapse/extension)
 2. Typescript library: [install guide](/synapse/install)
 
 [Configuration & fine tuning guide](/synapse/configuration)

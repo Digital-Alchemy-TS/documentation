@@ -1,5 +1,5 @@
 ---
-title: Hass/Websocket API
+title: Websocket API
 ---
 ## 📚 Description
 

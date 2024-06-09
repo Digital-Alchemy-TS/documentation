@@ -15,7 +15,7 @@ This project builds on the utilities provided by to create new home automation f
 
 > **Attention**:
 > Depends on  [@digital-alchemy/hass](/hass) & [@digital-alchemy/synapse](/synapse)
-> As well as the [synapse custom component](/synapse-extension)
+> As well as the [synapse custom component](/synapse/extension)
 
 Add as a dependency, and add to your imports. Nice and easy
 

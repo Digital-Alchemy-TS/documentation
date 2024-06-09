@@ -25,15 +25,6 @@ There is an internal feature set target for `1.0` (which includes adding unit te
 
 Github org created, build out of documentation, public releases.
 
-- [Core](/core/changelog/0.3.x)
-- [Automation](/automation/changelog/0.3.x)
-- [MQTT](/mqtt/changelog/0.3.x)
-- [Fastify](/fastify/changelog/0.3.x)
-- [Gotify](/gotify/changelog/0.3.x)
-- [Grocy](/grocy/changelog/0.3.x)
-- [Terminal](/terminal/changelog/0.3.x)
-- [Matrix Rendering](/matrix-rendering/changelog/0.3.x)
-
 ### 0.2.x
 
 > Breaking changes with previous:

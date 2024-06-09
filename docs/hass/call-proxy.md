@@ -1,5 +1,5 @@
 ---
-title: Hass/Call Proxy
+title: Call Proxy
 ---
 ## 📚 Description
 

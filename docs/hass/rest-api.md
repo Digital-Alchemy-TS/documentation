@@ -1,5 +1,5 @@
 ---
-title: Hass/REST API
+title: REST API
 ---
 ## 📖 Description
 

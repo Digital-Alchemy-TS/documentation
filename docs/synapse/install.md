@@ -1,10 +1,10 @@
 ---
-title: Synapse Installation
+title: Installation
 ---
 ## 💾 Install
 
 > **Attention**:
-> Depends on  [@digital-alchemy/hass](/hass/) and the [synapse custom component](/synapse-extension)
+> Depends on  [@digital-alchemy/hass](/hass/) and the [synapse custom component](/synapse/extension)
 
 Add as a dependency, and add to your imports. Nice and easy
 
@@ -15,18 +15,21 @@ npm i @digital-alchemy/synapse
 > **Add to code**
 
 ```typescript
+import { LIB_FASTIFY } from "@digital-alchemy/fastify-extension";
 import { LIB_HASS } from "@digital-alchemy/hass";
 import { LIB_SYNAPSE } from "@digital-alchemy/synapse";
 
+
 // application
 const MY_APP = CreateApplication({
-  libraries: [LIB_HASS, LIB_SYNAPSE],
+  libraries: [LIB_FASTIFY, LIB_HASS, LIB_SYNAPSE],
   name: "home_automation",
 })
 
 // library
 export const MY_LIBRARY = CreateLibrary({
-  depends: [LIB_HASS, LIB_SYNAPSE],
+  // fastify does not need to be declared unless you also need it
+  depends: [LIB_HASS, LIB_SYNAPSE/*, LIB_FASTIFY*/],
   name: "special_logic",
 })
 ```

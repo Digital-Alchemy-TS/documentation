@@ -1,3 +1,6 @@
+---
+title: Mock Assistant
+---
 ## Overview
 
 Mock Assistant is a companion project that comes as part of the `@digital-alchemy/hass` project.
