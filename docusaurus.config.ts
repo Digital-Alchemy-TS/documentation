@@ -6,7 +6,6 @@ const config: Config = {
   title: "Digital Alchemy",
   tagline: "Automating with Typescript",
   favicon: "assets/cropped.jpg",
-  // favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
   url: "https://docs.digital-alchemy.app",
@@ -16,8 +15,8 @@ const config: Config = {
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: "Digital-Alchemy-TS", // Usually your GitHub org/user name.
-  projectName: "Digital Alchemy", // Usually your repo name.
+  organizationName: "Digital-Alchemy-TS",
+  projectName: "Digital Alchemy",
 
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
