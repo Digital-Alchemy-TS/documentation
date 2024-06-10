@@ -1,5 +1,6 @@
 ---
-title: Special Logic
+title: "🚏 Special Logic"
+sidebar_position: 7
 ---
 ## 📚 Description
 

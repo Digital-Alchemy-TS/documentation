@@ -1,5 +1,6 @@
 ---
-title: REST API
+title: "✈️ REST API"
+sidebar_position: 6
 ---
 ## 📖 Description
 

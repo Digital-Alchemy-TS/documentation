@@ -1,5 +1,6 @@
 ---
-title: Call Proxy
+title: "📣 Call Proxy"
+sidebar_position: 2
 ---
 ## 📚 Description
 

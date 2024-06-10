@@ -1,34 +1,38 @@
 ---
-title: Extension
+title: "🧱 Custom Component"
+sidebar_position: 2
 ---
 ## 📘 Description
 
 Welcome to the Synapse custom component for Home Assistant!
 
-This library works with [@digital-alchemy/synapse](/synapse) to allow Typescript based applications to create custom entities.
+This library works with [@digital-alchemy/synapse](/docs/home-automation/synapse) to allow Typescript based applications to create custom entities.
+Synapse integrates as a modern UI config flow driven integration.
 
-## 🚀 Installing Synapse
+## 🚀 Installation
 
-> Synapse integrates as a modern UI config flow driven integration.
+### 📦 HACS (Recommended)
 
-### 📦 Via HACS (Recommended)
+> Ensure you have [HACS](https://hacs.xyz/) installed in Home Assistant.
 
-1. Ensure you have [HACS](https://hacs.xyz/) installed in Home Assistant.
-2. Open HACS from the Home Assistant sidebar.
-3. Navigate to `Integrations`> `+ Explore & add repositories.`
-4. Search for "**Digital Alchemy Synapse**" and select it from the list.
-5. Click `Install this repository in HACS.`
-6. Restart Home Assistant to apply the changes.
+In the top/right corner menu of the HACS screen: **Custom repositories**
 
-### 📁 Manual Installation
+1. Add github repository: https://github.com/Digital-Alchemy-TS/synapse-extension
+2. Select `Integration`.
+3. Click `ADD`.
+4. Restart Home Assistant.
+
+![hacs add](/img/hacs_add.png)
+
+### 📁 Manual
 
 If you prefer or need to install the integration manually:
 
-1. Clone or download this repository.
+1. Clone or download the repository.
 2. Copy the `custom_components/synapse/` directory from the repository into the `<config_dir>/custom_components/` directory of your Home Assistant installation.
 3. Restart Home Assistant.
 
-## ⛰️ Scope
+## ⛰️ Project Scope
 
 The scope of this project is to help bridge the gap between NodeJS/Typescript based applications, and the Home Assistant internals, with a specific focus on entity creation tools.
 
@@ -50,41 +54,3 @@ After the initial setup, `synapse` will generate a series of devices and entitie
 Looking into the default device, you can see the associated entities and sub-device
 
 ![default device](/img/synapse_default_device.png)
-
-## 📚 Domain Support
-
-### Verified
-
-- Binary Sensor
-- Button
-- Date
-- Datetime
-- Lock
-- Number
-- Scene
-- Select
-- Switch
-- Text
-- Time
-
-### Untested / WIP
-
-- Alarm Control Panel
-- Camera
-- Climate
-- Cover
-- Fan
-- Humidifier
-- Image
-- Lawn Mower
-- Light
-- Media Player
-- Notify
-- Remote
-- Sensor
-- Siren
-- Todo List
-- Update
-- Vacuum
-- Valve
-- Water Heater

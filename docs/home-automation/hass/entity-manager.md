@@ -1,5 +1,6 @@
 ---
-title: Entity Manager
+title: "🌡️ Entity Manager"
+sidebar_position: 1
 ---
 ## 📚 Description
 

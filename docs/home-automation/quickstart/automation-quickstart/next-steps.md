@@ -1,4 +1,5 @@
 ---
+title: Next Steps
 aliases:
   - Next-Steps
 ---

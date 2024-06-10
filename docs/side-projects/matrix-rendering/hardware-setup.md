@@ -1,3 +1,7 @@
+---
+title: Device Setup
+---
+
 > [!wip]
 
 ## Commands

@@ -1,5 +1,5 @@
 ---
-title: Matrix Rendering/Hardware Build Guide
+title: Hardware Build
 ---
 ## Overview
 

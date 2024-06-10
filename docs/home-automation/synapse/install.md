@@ -1,10 +1,11 @@
 ---
-title: Installation
+title: "🚀 Installation"
+sidebar_position: 1
 ---
 ## 💾 Install
 
 > **Attention**:
-> Depends on  [@digital-alchemy/hass](/hass/) and the [synapse custom component](/synapse/extension)
+> Depends on  [@digital-alchemy/hass](/docs/home-automation/hass/) and the [synapse custom component](/docs/home-automation/synapse/extension)
 
 Add as a dependency, and add to your imports. Nice and easy
 
@@ -19,22 +20,19 @@ import { LIB_FASTIFY } from "@digital-alchemy/fastify-extension";
 import { LIB_HASS } from "@digital-alchemy/hass";
 import { LIB_SYNAPSE } from "@digital-alchemy/synapse";
 
-
-// application
+// 🏘️ applications
 const MY_APP = CreateApplication({
-  libraries: [LIB_FASTIFY, LIB_HASS, LIB_SYNAPSE],
-  name: "home_automation",
+  libraries: [LIB_HASS, LIB_SYNAPSE, LIB_FASTIFY],
+  ...
 })
 
-// library
+// 📚 libraries
 export const MY_LIBRARY = CreateLibrary({
-  // fastify does not need to be declared unless you also need it
+  // fastify does not need to be declared here
   depends: [LIB_HASS, LIB_SYNAPSE/*, LIB_FASTIFY*/],
-  name: "special_logic",
+  ...
 })
 ```
-
-🎉 Listing as an import will automatically load into [LoadedModules](/core/exports/LoadedModules) and make the library features available as `synapse` on [TServiceParams](/core/exports/TServiceParams).
 
 ## ⚙️ Configure
 
@@ -43,6 +41,6 @@ See [configuration guide](./configuration)
 ## 🌐 HTTP
 
 In order to facilitate some of the initial setup & discovery features in Home Assistant, `synapse` has a HTTP dependency.
-See [fastify](/fastify) documentation for notes on how to configure / add your own routes.
+See [fastify](/docs/support/fastify/) documentation for notes on how to configure / add your own routes.
 
 Applications will use port `3000` by default.

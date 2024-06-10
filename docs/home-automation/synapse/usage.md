@@ -1,5 +1,6 @@
 ---
-title: Usage
+title: "🔧 Usage"
+sidebar_position: 3
 ---
 ## 📄 Description
 
@@ -51,15 +52,23 @@ const binary_sensor = synapse.binary_sensor({
   // set default state
   is_on: false
 });
-scheduler.interval({
-  exec: () => binary_sensor.is_on = !binary_sensor.is_on,
-  interval: 1000,
-});
+
+event.on("my_event", () =>
+  // read and write to the same property
+  binary_sensor.is_on = !binary_sensor.is_on
+);
 ```
+
+Synapse will automatically flush the configuration update to Home Assistant in the background.
 
 ### 🔄 Reactive Updates
 
 The final method of attaching entity updates is by providing a function to automatically recalculate the value when it updates.
+
+In the below example, the binary sensor will listen for updates from 2 other entities.
+One is a native entity provided by Home Assistant, another is a synapse entity we just created.
+
+The state of the binary sensor depends on some combination of the two states.
 
 ```typescript
 const entityA = hass.entity.byId( ... );
@@ -67,8 +76,6 @@ const switchB = synapse.switch( ... );
 synapse.binary_sensor({
   is_on: {
     onUpdate: [entityA, switchB],
-    // always return false if switch is off
-    // return true example sensor is set to away
     current() {
       return switchB.is_on ? entityA.state === "away" : false;
     }
@@ -76,7 +83,7 @@ synapse.binary_sensor({
 });
 ```
 
-`current()` is called when any of the provided entities update, or on a schedule (default every 30 seconds).
+The value will recalculate every 30 seconds in addition to whenever update events happen.
 
 ## 🔔 Event Binding
 

@@ -1,4 +1,5 @@
 ---
+title: HAOS Simplified
 aliases:
   - Quickstart
   - Automation-Quickstart

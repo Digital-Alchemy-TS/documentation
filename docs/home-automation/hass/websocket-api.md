@@ -1,5 +1,6 @@
 ---
-title: Websocket API
+title: "🚄 Websocket API"
+sidebar_position: 5
 ---
 ## 📚 Description
 

@@ -1,3 +1,7 @@
+---
+title: Addon
+---
+
 ## 🌐 Overview
 
 This addon acts as a simple configurable execution container for applications based on Digital Alchemy. The code runner addon comes with `NodeJS` installed inside of the container already, just hit go

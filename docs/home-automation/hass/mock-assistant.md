@@ -1,5 +1,6 @@
 ---
-title: Mock Assistant
+title: "🤡 Mock Assistant"
+sidebar_position: 9
 ---
 ## Overview
 

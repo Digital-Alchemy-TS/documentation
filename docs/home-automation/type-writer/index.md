@@ -1,5 +1,6 @@
 ---
 title: Type Writer
+sidebar_position: 3
 ---
 import ReactPlayer from 'react-player'
 
