@@ -10,13 +10,13 @@ You are able to create references that will maintain always accurate state, allo
 
 ## 📝 Creating References
 
-`hass.entity` service provides a range of tools for interacting with and searching for entities.
-The primary tool for obtaining references to entities is the `hass.entity.byId` call.
+Entity references provide provides a range of tools for interacting with and issuing calls.
+The primary tool for obtaining references to entities is the `hass.refBy.id` call.
 It takes in entity ids, and provides references back.
 
 ```typescript
 function Example({ hass }: TServiceParams) {
-  const mySensor = hass.entity.byId("sensor.my_special_sensor");
+  const mySensor = hass.refBy.id("sensor.my_special_sensor");
   // that's it!
 }
 ```
@@ -30,7 +30,7 @@ ID references are type checked to ensure you provided an entity that actually ex
 Entity will always reflect the current state. No need to have special logic to keep track, just grab and go
 
 ```typescript
-const mySwitch = hass.entity.byId("switch.example");
+const mySwitch = hass.refBy.id("switch.example");
 logger.info(`current state is ${mySwitch.state}`); // on
 
 // make changes
@@ -55,7 +55,7 @@ A common situation for automations is needing to know the immediate previous sta
 This is accessible directly in the events (below), but it is also available directly on the entity
 
 ```typescript
-const mySensor = hass.entity.byId("sensor.power_level");
+const mySensor = hass.refBy.id("sensor.power_level");
 logger.info({
   current: mySwitch.state,
   previous: mySwitch.previous.state
@@ -133,8 +133,26 @@ Entity ID not required as part of the call!
 You are even able to pass in service params
 
 ```typescript
-const light = hass.entity.byId("light.office");
+const light = hass.refBy.id("light.office");
 light.turn_on({ brightness: 150 });
 ```
 
 ![entity service call](/img/entity_service_call.png)
+
+## 💒 Related Methods
+
+Each of the following performs a lookup, optionally filtering by domain, returning an array of entity ids.
+
+- `hass.idBy.area(area, ...domains)`
+- `hass.idBy.device(device, ...domains)`
+- `hass.idBy.label(label, ...domains)`
+- `hass.idBy.floor(floor, ...domains)`
+- `hass.idBy.platform(platform, ...domains)`
+
+These related methods will do the same lookup, returning an array of entity references.
+
+- `hass.refBy.area(area, ...domains)`
+- `hass.refBy.device(device, ...domains)`
+- `hass.refBy.label(label, ...domains)`
+- `hass.refBy.floor(floor, ...domains)`
+- `hass.refBy.platform(platform, ...domains)`

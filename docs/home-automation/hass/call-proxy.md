@@ -23,7 +23,11 @@ export function Example({ hass }: TServiceParams) {
 
 ### Custom Types
 
-On its own, the Call Proxy isn't all that smart. It simply makes a service call based on what you provide, hoping it's valid. The real magic comes in when [type-writer](/type-writer) gets involved. The call proxy will adjust to match the specific set of services available on your install, with accurate parameter definitions for every service.
+On its own, the Call Proxy isn't all that smart. It simply makes a service call based on what you provide, hoping it's valid.
+The real magic comes in when [type-writer](/type-writer) gets involved.
+The call proxy will adjust to match the specific set of services available on your install, with accurate parameter definitions for every service.
+
+![custom services](/img/custom_services.png)
 
 ## ⚠️ Gotchas
 

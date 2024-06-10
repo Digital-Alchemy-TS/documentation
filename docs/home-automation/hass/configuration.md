@@ -31,16 +31,20 @@ This documentation provides a comprehensive overview of all configuration option
 ### 🌍 Environment
 
 > Set up as an environment variable for your shell, then run the script
+
 ```bash
 export AUTO_CONNECT_SOCKET=false
 tsx src/main.ts
 ```
+
 > Set up as an environment variable for just the single run
 
 ```bash
 BASE_URL="http://custom.homeassistant.local:8123" tsx src/main.ts
 ```
+
 > Use a `.env` file to set multiple variables
+
 ```bash
 # .env file
 AUTO_CONNECT_SOCKET=false
@@ -58,6 +62,7 @@ TRACK_ENTITIES=false
 VALIDATE_CONFIGURATION=true
 WEBSOCKET_URL="wss://custom.websocket.url"
 ```
+
 ```bash
 # Use the --env-file switch to provide the .env file
 tsx src/main.ts --env-file .env
@@ -66,6 +71,7 @@ tsx src/main.ts --env-file .env
 ### 🎛️ CLI Switch
 
 > Provide your config as a switch
+
 ```bash
 tsx src/main.ts --retry_interval 15
 ```
