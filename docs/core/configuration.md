@@ -1,5 +1,5 @@
 ---
-title: Core/Configuration
+title: Configuration
 ---
 ## 📝 Description
 

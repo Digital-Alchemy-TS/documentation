@@ -1,5 +1,5 @@
 ---
-title: Core/Internal
+title: Internal
 ---
 
 ## 📘 Overview

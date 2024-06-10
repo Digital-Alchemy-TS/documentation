@@ -1,5 +1,7 @@
 ---
-title: Core/Cache
+title: Cache
+sidebar_position: 1
+description: "Library cache interfaces"
 ---
 ## 📓 Description
 
@@ -12,11 +14,6 @@ The cache extension provides a basic configurable caching interface, using a mem
 ## 🛠️ Configuration
 
 > Caching is not available until [onBootstrap](/core/lifecycle/onBootstrap)
-
-- [CACHE_PREFIX](/core/config/CACHE_PREFIX)
-- [CACHE_PROVIDER](/core/config/CACHE_PROVIDER)
-- [CACHE_TTL](/core/config/CACHE_TTL)
-- [REDIS_URL](/core/config/REDIS_URL)
 
 ## 📄 Code Examples
 

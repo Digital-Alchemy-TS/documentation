@@ -1,5 +1,5 @@
 ---
-title: Core/Wiring
+title: Wiring
 ---
 
 ## 📚 Description

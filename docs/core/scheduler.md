@@ -1,5 +1,5 @@
 ---
-title: Core/Scheduler
+title: Scheduler
 ---
 
 ## 📚 Description

@@ -1,5 +1,5 @@
 ---
-title: Core/Logger
+title: Logger
 ---
 
 ## 📚 Description

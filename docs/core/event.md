@@ -1,5 +1,5 @@
 ---
-title: Core/Event
+title: Event
 ---
 ## 📝 Description
 

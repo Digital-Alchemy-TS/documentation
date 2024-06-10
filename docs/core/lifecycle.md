@@ -1,5 +1,5 @@
 ---
-title: Core/Lifecycle
+title: Lifecycle
 ---
 ## 📚 Description
 
