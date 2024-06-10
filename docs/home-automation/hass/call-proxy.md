@@ -1,5 +1,6 @@
 ---
 title: "📣 Call Proxy"
+authors: [zoe-codez]
 sidebar_position: 2
 ---
 ## 📚 Description
@@ -20,17 +21,35 @@ export function Example({ hass }: TServiceParams) {
 }
 ```
 
-## ⚠️ Services With Responses
+### Custom Types
+
+On its own, the Call Proxy isn't all that smart. It simply makes a service call based on what you provide, hoping it's valid. The real magic comes in when [type-writer](/type-writer) gets involved. The call proxy will adjust to match the specific set of services available on your install, with accurate parameter definitions for every service.
+
+## ⚠️ Gotchas
+
+### Services With Responses
 
 Some services provide response data as part of the service call, for example `weather.get_forecasts`.
 See [issue](https://github.com/Digital-Alchemy-TS/hass/issues/34)
 
-## 📐 Custom Types
+### Lifecycle availability
 
-On its own, the Call Proxy isn't all that smart. It simply makes a service call based on what you provide, hoping it's valid. The real magic comes in when [type-writer](/type-writer) gets involved. The call proxy will adjust to match the specific set of services available on your install, with accurate parameter definitions for every service.
+Calling services cannot be done prior to the `onReady` lifecycle event.
+Attempts to do that will not work, and will result an error message + stack trace.
 
-## ⚙️ Configuration
+```typescript
+export function Example({ hass, lifecycle }: TServiceParams) {
+  // 🛑 will not work
+  hass.call.switch.turn_on(...)
 
-> Home assistant supports service calls via rest. You can request all commands be emitted this way via configuration [CALL_PROXY_ALLOW_REST](/hass/config/CALL_PROXY_ALLOW_REST)
+  lifecycle.onReady(() => {
+    // ✅ services can be called now
+    hass.call.switch.turn_on(...)
+  });
 
-As part of the [onBootstrap](/docs/core/lifecycle) workflow, the call proxy will perform a quick scan of the services available. If this workflow doesn't apply to your application, you can disable it with: [AUTO_SCAN_CALL_PROXY](/hass/config/AUTO_SCAN_CALL_PROXY)
+  hass.entity.byId(...).onUpdate(() => {
+    // ✅ here works too
+    hass.call.switch.turn_on(...)
+  });
+}
+```
