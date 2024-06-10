@@ -1,6 +1,7 @@
 ---
 title: "🔧 Usage"
 sidebar_position: 3
+authors: [zoe-codez]
 ---
 ## 📄 Description
 

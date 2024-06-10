@@ -27,7 +27,7 @@ tsx src/main.ts --channel_mapping='{"made_up_app_name": "hashthing", "made_up_ap
 ```
 
 ### 📁 File
->  If your file does not have an extension, [Configuration](/core/configuration) will do auto
+>  If your file does not have an extension, [Configuration](/docs/core/configuration) will do auto
 #### 📘 ini
 
 > `.my_app_name`, `~/.config/my_app_name`

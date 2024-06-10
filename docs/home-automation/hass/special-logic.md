@@ -12,7 +12,7 @@ You can request your Home Assistant instance start a new backup using the comman
 
 ## 🔧 Automatic configuration for supervised
 
-If `HASSIO_TOKEN` or `SUPERVISOR_TOKEN` is detected as an environment variable (provided by Home Assistant for addons), then the library will update [Configuration](/core/configuration) appropriately. Automatic values for [BASE_URL](/hass/config/BASE_URL) & [TOKEN](/hass/config/TOKEN). Occurs [onPreInit](/core/lifecycle/onPreInit)
+If `HASSIO_TOKEN` or `SUPERVISOR_TOKEN` is detected as an environment variable (provided by Home Assistant for addons), then the library will update [Configuration](/docs/core/configuration) appropriately. Automatic values for [BASE_URL](/hass/config/BASE_URL) & [TOKEN](/hass/config/TOKEN). Occurs [onPreInit](/docs/core/lifecycle/onPreInit)
 
 ## ✔️ Validate Configuration
 

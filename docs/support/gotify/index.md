@@ -39,7 +39,7 @@ export const MY_LIBRARY = CreateLibrary({
 ```
 
 > 🎉
-> Listing as an import will automatically load into [LoadedModules](/core/exports/LoadedModules) and make the library features available as `gotify` on [TServiceParams](/core/exports/TServiceParams).
+> Listing as an import will automatically load into [LoadedModules](/docs/core/exports/LoadedModules) and make the library features available as `gotify` on [TServiceParams](/docs/core/exports/TServiceParams).
 
 ## Configuration
 

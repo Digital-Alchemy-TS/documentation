@@ -13,12 +13,12 @@ The configuration system uses a set of priorities to determine the value of a gi
 
 1. Hard-coded default in the library/application.
 2. Values provided to the bootstrap function (#Lifecycle/Bootstrap).
-3. User data (determined after [onPreInit](/core/lifecycle/onPreInit), and before [onPostConfig](/core/lifecycle/onPostConfig)):
+3. User data (determined after [onPreInit](/docs/core/lifecycle/onPreInit), and before [onPostConfig](/docs/core/lifecycle/onPostConfig)):
     1. Files
     2. Environment variables
     3. Command line switches
 
-> Note: Some code may manually set values during construction or [onPreInit](/core/lifecycle/onPreInit).
+> Note: Some code may manually set values during construction or [onPreInit](/docs/core/lifecycle/onPreInit).
 
 ### 📂 File Based
 
@@ -41,7 +41,7 @@ Omitting the extension (**auto**) causes the loader to attempt to guess the file
 - `~/.config/{app_name}`
 - `~/.config/{app_name}/config`
 
-> The loader checks the [--config](/core/config/CONFIG) switch as part of determining which file to load. If passed, the provided file will be the only one used.
+> The loader checks the [--config](/docs/core/config/CONFIG) switch as part of determining which file to load. If passed, the provided file will be the only one used.
 
 ```bash
 tsx main.ts --config ./development_configuration
@@ -49,7 +49,7 @@ tsx main.ts --config ./development_configuration
 
 ### 🌍 Environment Based
 
-Environment variables are **case insensitive**, and `-` & `_` may be swapped. For the configuration example [CACHE_PROVIDER](/core/config/CACHE_PROVIDER), these are allowed variations:
+Environment variables are **case insensitive**, and `-` & `_` may be swapped. For the configuration example [CACHE_PROVIDER](/docs/core/config/CACHE_PROVIDER), these are allowed variations:
 
 - `CACHE_PROVIDER`
 - `cache-provider`
@@ -143,9 +143,9 @@ export function MyService({ logger, config, lifecycle }: TServiceParams) {
 
 ### ✏️ Modifying Configurations
 
-Some workflows may require changing values for configurations as part of their logic. This can be accomplished through [Internal](/core/internal)
+Some workflows may require changing values for configurations as part of their logic. This can be accomplished through [Internal](/docs/core/internal)
 
-ServiceParams/internal methods. The `EVENT_CONFIGURATION_UPDATED` event is fired from [Event](/core/event) on each config update.
+ServiceParams/internal methods. The `EVENT_CONFIGURATION_UPDATED` event is fired from [Event](/docs/core/event) on each config update.
 
 ```typescript
 export function MyService({ logger, internal, lifecycle }: TServiceParams) {
@@ -181,4 +181,4 @@ export function MyService({ logger, internal, lifecycle }: TServiceParams) {
 
 > **Warning**: Adding your own loader will cause the default loaders not to attach by default.
 >
-> You can add them back with their priority relative to yours by using [ConfigLoaderFile](/core/config/ConfigLoaderFile) & [ConfigLoaderEnvironment](/core/config/ConfigLoaderEnvironment).
+> You can add them back with their priority relative to yours by using [ConfigLoaderFile](/docs/core/config/ConfigLoaderFile) & [ConfigLoaderEnvironment](/docs/core/config/ConfigLoaderEnvironment).

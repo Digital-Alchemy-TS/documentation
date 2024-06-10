@@ -30,7 +30,7 @@ tsx src/main.ts --circadian_min_temp=2000
 tsx src/main.ts --circadian_min_temp 2000
 ```
 ### 📁 File
->  If your file does not have an extension, [Configuration](/core/configuration) will do auto
+>  If your file does not have an extension, [Configuration](/docs/core/configuration) will do auto
 #### 📘 ini
 
 > `.my_app_name`, `~/.config/my_app_name`

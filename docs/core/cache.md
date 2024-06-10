@@ -5,7 +5,7 @@ description: "Library cache interfaces"
 ---
 ## 📓 Description
 
-The cache extension provides a basic configurable caching interface, using a memory cache by default. Adds `cache` to [TServiceParams](/core/exports/TServiceParams)
+The cache extension provides a basic configurable caching interface, using a memory cache by default. Adds `cache` to [TServiceParams](/docs/core/exports/TServiceParams)
 
 >
 > Things work better with [redis](https://www.npmjs.com/package/redis)
@@ -13,7 +13,7 @@ The cache extension provides a basic configurable caching interface, using a mem
 
 ## 🛠️ Configuration
 
-> Caching is not available until [onBootstrap](/core/lifecycle/onBootstrap)
+> Caching is not available until [onBootstrap](/docs/core/lifecycle/onBootstrap)
 
 ## 📄 Code Examples
 

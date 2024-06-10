@@ -39,7 +39,7 @@ export const MY_LIBRARY = CreateLibrary({
 ```
 
 > 🎉 **Success**
-> Listing as an import will automatically load into [LoadedModules](/core/exports/LoadedModules) and make the library features available as `hass` on [TServiceParams](/core/exports/TServiceParams).
+> Listing as an import will automatically load into [LoadedModules](/docs/core/exports/LoadedModules) and make the library features available as `hass` on [TServiceParams](/docs/core/exports/TServiceParams).
 
 ## ⭐ Features
 
@@ -86,7 +86,7 @@ Custom types only affect the development experience and have no impact on the wa
 
 If your code is running within a Home Assistant addon environment, it will automatically connect with no additional configuration needed.
 
-### 🔧 [Manual Configuration](/core/configuration)
+### 🔧 [Manual Configuration](/docs/core/configuration)
 
 For code running elsewhere, manual configuration is required. You will need a **Long Lived Access Token**, which can be generated on your user profile.
 

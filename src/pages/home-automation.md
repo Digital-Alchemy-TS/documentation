@@ -9,7 +9,7 @@ Welcome to the `@digital-alchemy` collection of Home Automation tools. This is a
 
 ## 📦 Typescript Libraries
 
-> Typescript libraries built off [@digital-alchemy/core](/core)
+> Typescript libraries built off [@digital-alchemy/core](/docs/core)
 
 | Project                               | Description                                                                                              |
 | ------------------------------------- | -------------------------------------------------------------------------------------------------------- |

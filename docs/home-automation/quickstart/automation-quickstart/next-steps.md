@@ -34,7 +34,7 @@ This is your [code runner addon](/automation-quickstart/addon), the source is pr
 You can find your project code under [`src/`](https://github.com/Digital-Alchemy-TS/automation-quickstart/tree/main/src).
 ### 🛢 Service functions
 
-Service functions are where all your logic goes. They have a relatively simple anatomy, a function that takes in [TServiceParams](/core/exports/TServiceParams) as it's argument. You can read more about the nuances [here](/core).
+Service functions are where all your logic goes. They have a relatively simple anatomy, a function that takes in [TServiceParams](/docs/core/exports/TServiceParams) as it's argument. You can read more about the nuances [here](/docs/core).
 ```typescript
 function ServiceFunction({ logger }: TServiceParams) {
   logger.info("hello world");
@@ -51,13 +51,13 @@ This file contains all the wiring for your application. You can define new confi
 It is structured in 3 parts:
 #### Application Definition
 
-Below is the most important items for defining your application, see the type definitions in your editor or [wiring docs](/core/wiring) for more details
+Below is the most important items for defining your application, see the type definitions in your editor or [wiring docs](/docs/core/wiring) for more details
 
 | Property        | Description                                                                                                                                                                                                 |
 | --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `configuration` | Declare variables you would like the [config](/core/configuration) loader to collect values for                                                                                                                 |
-| `libraries`     | An array of additional libraries to load into your application. These may be provided in any order (**Adding to this array will add more properties to [TServiceParams](/core/exports/TServiceParams) for use in your service files**) |
-| `name`          | This value defines the property in [TServiceParams](/core/exports/TServiceParams) that your service will attach to, as well as the name of the configuration file that will be used                                                     |
+| `configuration` | Declare variables you would like the [config](/docs/core/configuration) loader to collect values for                                                                                                                 |
+| `libraries`     | An array of additional libraries to load into your application. These may be provided in any order (**Adding to this array will add more properties to [TServiceParams](/docs/core/exports/TServiceParams) for use in your service files**) |
+| `name`          | This value defines the property in [TServiceParams](/docs/core/exports/TServiceParams) that your service will attach to, as well as the name of the configuration file that will be used                                                     |
 | `services`      | A mapping of **context name** to service definitions                                                                                                                                                        |
 | `priorityInit`  | Forces a provided construction order for your services. Services not in the list will be built after the list is completed                                                                                  |
 > An example of a basic application definition, loading 3 additional services
@@ -83,13 +83,13 @@ const SUPER_AWESOME_APP = CreateApplication({
 });
 ```
 
-For reference, here is an implementation of `Testing` to show how accessing your services via [TServiceParams](/core/exports/TServiceParams) works.
+For reference, here is an implementation of `Testing` to show how accessing your services via [TServiceParams](/docs/core/exports/TServiceParams) works.
 
 > **Important**:
 > 1. Utilizing dashes in your project/service names is discouraged
 > 2. Service function function definitions may be async
 > 3. Limit service return types to **undefined**/**void**, **function**, or **object** types
-> 4. Services are defined as: `functions` that take [TServiceParams](/core/exports/TServiceParams) as the argument. Pretty simple
+> 4. Services are defined as: `functions` that take [TServiceParams](/docs/core/exports/TServiceParams) as the argument. Pretty simple
 
 ```typescript
 import { TServiceParams } from "@digital-alchemy/core";

@@ -7,7 +7,7 @@ title: Scheduler
 The scheduler is provided as a lifecycle aware method of executing functions on regular intervals. When using the scheduler:
 
 - Automatic error trapping
-- Callbacks only start when it hits the "ready" state (after [onReady](/core/lifecycle/onReady) completes)
+- Callbacks only start when it hits the "ready" state (after [onReady](/docs/core/lifecycle/onReady) completes)
 - Automatic termination on application teardown
 - Optional metrics on frequency and performance
 

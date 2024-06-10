@@ -1,5 +1,6 @@
 ---
 title: "⚙️ Configuration"
+authors: [zoe-codez]
 sidebar_position: 4
 ---
 

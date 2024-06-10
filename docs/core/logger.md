@@ -101,7 +101,7 @@ export function Example({ logger }: TServiceParams) {
 
 ## 🔊 Log Levels
 
-- [LOG_LEVEL](/core/config/LOG_LEVEL)
+- [LOG_LEVEL](/docs/core/config/LOG_LEVEL)
 
 This table describes the priority order (highest -> lowest) of log levels and the color provided to the `context`. Setting the `LOG_LEVEL` to a higher level will cause the lower-level ones to not be emitted.
 

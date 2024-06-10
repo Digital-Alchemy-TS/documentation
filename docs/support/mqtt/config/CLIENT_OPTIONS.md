@@ -33,7 +33,7 @@ tsx src/main.ts --client_options='{"host": "localhost", "password": null, "port"
 ```
 
 ### 📁 File
->  If your file does not have an extension, [Configuration](/core/configuration) will do auto
+>  If your file does not have an extension, [Configuration](/docs/core/configuration) will do auto
 #### 📘 ini
 
 > `.my_app_name`, `~/.config/my_app_name`

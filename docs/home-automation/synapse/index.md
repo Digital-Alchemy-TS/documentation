@@ -1,6 +1,7 @@
 ---
 title: Synapse
 sidebar_position: 2
+authors: [zoe-codez]
 ---
 ## 📚 Description
 

@@ -41,7 +41,7 @@ title: Project Links
 
 | Name                                | GitHub                                         | NPM                                                                     |
 | ----------------------------------- | ---------------------------------------------- | ----------------------------------------------------------------------- |
-| 4️⃣ [Core](/core)         | https://github.com/Digital-Alchemy-TS/core     | [NPM](https://github.com/Digital-Alchemy-TS/mqtt)                       |
+| 4️⃣ [Core](/docs/core)         | https://github.com/Digital-Alchemy-TS/core     | [NPM](https://github.com/Digital-Alchemy-TS/mqtt)                       |
 | 3️⃣ [Fastify](/fastify)   | https://github.com/Digital-Alchemy-TS/fastify  | [NPM](https://www.npmjs.com/package/@digital-alchemy/fastify-extension) |
 | 3️⃣ [MQTT](/mqtt)         | https://github.com/Digital-Alchemy-TS/mqtt     | [NPM](https://www.npmjs.com/package/@digital-alchemy/mqtt-extension)    |
 | 3️⃣ [Gotify](/gotify)     | https://github.com/Digital-Alchemy-TS/core     | [NPM](https://www.npmjs.com/package/@digital-alchemy/gotify-extension)  |

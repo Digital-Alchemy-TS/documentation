@@ -31,7 +31,7 @@ const SUPER_AWESOME_APP = CreateApplication({
 > 🎉
 > **What changed:**
 > - your application will connect to home assistant during bootstrap
-> - `hass` is added to [TServiceParams](/core/exports/TServiceParams), providing you basic tools to interact with home assistant with
+> - `hass` is added to [TServiceParams](/docs/core/exports/TServiceParams), providing you basic tools to interact with home assistant with
 
 ## 🤖 Creating logic
 ### 🌋 Responding to events
@@ -173,7 +173,7 @@ export function WeatherReport({ scheduler, logger, hass }: TServiceParams) {
 }
 ```
 
-> See [Scheduler](/core/scheduler) for more specific documentation.
+> See [Scheduler](/docs/core/scheduler) for more specific documentation.
 
 ## 🎬 Bringing it all together
 

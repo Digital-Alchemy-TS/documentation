@@ -8,7 +8,7 @@ The wiring module is responsible for defining the structure of your application 
 
 ## 🔠 Types
 
-As part of importing modules, they will also augment onto a global [LoadedModules](/core/exports/LoadedModules) interface. A collection of utility types will process the definitions and use this to provide accurate definitions of all services & configurations as part of [TServiceParams](/core/exports/TServiceParams).
+As part of importing modules, they will also augment onto a global [LoadedModules](/docs/core/exports/LoadedModules) interface. A collection of utility types will process the definitions and use this to provide accurate definitions of all services & configurations as part of [TServiceParams](/docs/core/exports/TServiceParams).
 
 Block comments placed on keys will be carried through into service parameters as tsdoc comments.
 
@@ -45,13 +45,13 @@ declare module "@digital-alchemy/core" {
 }
 ```
 
-> For more details on the `configuration` block, see [configuration](/core/configuration)
+> For more details on the `configuration` block, see [configuration](/docs/core/configuration)
 
 ### 📦 `depends`
 
 This block contains a list of all libraries this one depends on. Providing items in this array will:
 
-- add that library to the [TServiceParams](/core/exports/TServiceParams) type definitions so they can be used internally
+- add that library to the [TServiceParams](/docs/core/exports/TServiceParams) type definitions so they can be used internally
 - set this library up to only be loaded after dependency libraries are loaded
 
 > **Attention**: applications must list all dependencies explicitly
@@ -60,14 +60,14 @@ Bootstrap will ensure the application explicitly loads each of these libraries a
 
 ### 🏷 `name`
 
-> **Attention**: Name for the library, must match the key used in [LoadedModules](/core/exports/LoadedModules)
+> **Attention**: Name for the library, must match the key used in [LoadedModules](/docs/core/exports/LoadedModules)
 
 A module's name affects:
 
 - where the config system sources data from
 - log context
 
-This name affects the configuration system, log contexts, and the key used in [TServiceParams](/core/exports/TServiceParams).
+This name affects the configuration system, log contexts, and the key used in [TServiceParams](/docs/core/exports/TServiceParams).
 
 > Choose your name wisely
 
@@ -138,14 +138,14 @@ The major capability of applications to distinguish from libraries is the abilit
 
 | Property                 | Description                                                                                                                                     |
 | ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| `configuration`      | Provide an alternate set of default [Configuration](/core/configuration) variables, overriding project-level defaults.                                             |
-| `customLogger`       | Use your logger instead of the default [built in one](/core/logger).                                                                                |
+| `configuration`      | Provide an alternate set of default [Configuration](/docs/core/configuration) variables, overriding project-level defaults.                                             |
+| `customLogger`       | Use your logger instead of the default [built in one](/docs/core/logger).                                                                                |
 | `handleGlobalErrors`     | Should the library handle errors that bubble up to the global context?            |
 | `showExtraBootStats` | When bootstrap completes, log some statistics about what happened. If you are experiencing long boot times, this might help you figure out why. |
 
 The promise for the `.bootstrap` method will resolve when all startup lifecycle events have been completed.
 
-### [Lifecycle](/core/lifecycle)
+### [Lifecycle](/docs/core/lifecycle)
 
 The application lifecycle is a key part to the way applications bootstrap.
 

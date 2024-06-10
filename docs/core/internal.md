@@ -4,7 +4,7 @@ title: Internal
 
 ## 📘 Overview
 
-The `internal` is available on [TServiceParams](/core/exports/TServiceParams) and provides some basic internal utilities and information by the core library.
+The `internal` is available on [TServiceParams](/docs/core/exports/TServiceParams) and provides some basic internal utilities and information by the core library.
 
 ## 🌱 Root
 
@@ -20,7 +20,7 @@ The `internal` is available on [TServiceParams](/core/exports/TServiceParams) an
 
 | Property | Description                                                          |
 | -------- | -------------------------------------------------------------------- |
-| `event`  | Same as the `event` reference passed in at top of [TServiceParams](/core/exports/TServiceParams) |
+| `event`  | Same as the `event` reference passed in at top of [TServiceParams](/docs/core/exports/TServiceParams) |
 
 ## 🚀 Boot
 
@@ -43,6 +43,6 @@ The `internal` is available on [TServiceParams](/core/exports/TServiceParams) an
 
 | Property        | Description                                                              |
 | --------------- | ------------------------------------------------------------------------ |
-| `fetch`         | Create a new instance of [fetcher](/core/fetch)                      |
-| `configuration` | Interact with the [configuration](/core/configuration) system, get metadata / update values |
-| `logger`        | Make tweaks to the way the [logger](/core/logger) works                              |
+| `fetch`         | Create a new instance of [fetcher](/docs/core/fetch)                      |
+| `configuration` | Interact with the [configuration](/docs/core/configuration) system, get metadata / update values |
+| `logger`        | Make tweaks to the way the [logger](/docs/core/logger) works                              |

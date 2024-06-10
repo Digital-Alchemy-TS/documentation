@@ -37,7 +37,7 @@ export const MY_LIBRARY = CreateLibrary({
 ```
 
 > 🎉
-> Listing as an import will automatically load into [LoadedModules](/core/exports/LoadedModules) and make the library features available as `terminal` on [TServiceParams](/core/exports/TServiceParams).
+> Listing as an import will automatically load into [LoadedModules](/docs/core/exports/LoadedModules) and make the library features available as `terminal` on [TServiceParams](/docs/core/exports/TServiceParams).
 
 ## Exports
 

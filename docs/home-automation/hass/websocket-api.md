@@ -16,20 +16,20 @@ The Websocket API is a self-managed method of communicating with Home Assistant.
 - [TOKEN](/hass/config/TOKEN)
 - [RETRY_INTERVAL](/hass/config/RETRY_INTERVAL)
 
-The socket will initially form a connection on [onPostConfig](/core/lifecycle/onPostConfig), and work with a [schedule](/core/scheduler) to ensure that the connection stays valid. If/when Home Assistant restarts, the socket will work to re-establish the connection and mitigate the impact on the application.
+The socket will initially form a connection on [onPostConfig](/docs/core/lifecycle/onPostConfig), and work with a [schedule](/docs/core/scheduler) to ensure that the connection stays valid. If/when Home Assistant restarts, the socket will work to re-establish the connection and mitigate the impact on the application.
 
-The socket will automatically teardown [onShutdownStart](/core/lifecycle/onShutdownStart).
+The socket will automatically teardown [onShutdownStart](/docs/core/lifecycle/onShutdownStart).
 
 ### Lifecycle interactions
 
 >
 > `hass.socket.onConnect` may run more than once more than once
 
-The initial websocket connection fully completes it's authentication flow as part of the [onPostConfig](/core/lifecycle/onPostConfig), allowing you to place
+The initial websocket connection fully completes it's authentication flow as part of the [onPostConfig](/docs/core/lifecycle/onPostConfig), allowing you to place
 
 ### 🔄 `onConnect`
 
-The websocket connection and authentication flow is kicked off by the [onBootstrap](/core/lifecycle/onBootstrap) event (to be available by [onReady](/core/lifecycle/onReady)), but the websocket may reconnect several times through an application's lifecycle.
+The websocket connection and authentication flow is kicked off by the [onBootstrap](/docs/core/lifecycle/onBootstrap) event (to be available by [onReady](/docs/core/lifecycle/onReady)), but the websocket may reconnect several times through an application's lifecycle.
 
 If your code cares more about the "fresh connection", instead of "initial boot", it is best to use `hass.socket.onConnect` as your event source.
 

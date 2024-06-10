@@ -1,5 +1,6 @@
 ---
 title: "📜 Supported Domains"
+authors: [zoe-codez]
 sidebar_position: 5
 ---
 

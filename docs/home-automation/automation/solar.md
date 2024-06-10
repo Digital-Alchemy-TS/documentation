@@ -4,10 +4,10 @@ title: Automation/Solar
 
 ## 📚 Description
 
-The solar extension exists to make it easy to perform time math with reference points for the sun. It uses `lat/long` provided by Home Assistant, updating reference points nightly with the [Scheduler](/core/scheduler).
+The solar extension exists to make it easy to perform time math with reference points for the sun. It uses `lat/long` provided by Home Assistant, updating reference points nightly with the [Scheduler](/docs/core/scheduler).
 
 > **Warning**:
-> Data not valid until [onReady](/core/lifecycle/onReady)
+> Data not valid until [onReady](/docs/core/lifecycle/onReady)
 
 ## 🌅 Reference Points
 
