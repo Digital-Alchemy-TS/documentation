@@ -9,10 +9,6 @@ The REST API is a basic configurable [Fetch](/docs/core/fetch) wrapper, tuned fo
 
 ## 🛠 Methods
 
-> ✅ APIs available [onBootstrap](/docs/core/lifecycle/onBootstrap)
->
-> **Consumes configs:** [BASE_URL](/hass/config/BASE_URL), [TOKEN](/hass/config/TOKEN)
-
 | Exported Function Name      | Description                                                                                        |
 | --------------------------- | -------------------------------------------------------------------------------------------------- |
 | `calendarSearch`            | Searches for calendar events within a specified date range and returns them sorted by start date.  |

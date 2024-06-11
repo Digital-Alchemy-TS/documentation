@@ -4,7 +4,7 @@ aliases:
   - Next-Steps
 ---
 > 🎉
-> You got the [quickstart](/automation-quickstart) project pulled down, what what is this mess?
+> You got the [quickstart](/docs/home-automation/quickstart/automation-quickstart/) project pulled down, what what is this mess?
 
 ## 👀 The sights
 
@@ -21,7 +21,7 @@ Don't see the panel?
 > - Make sure the `NPM Scripts` option is checked.
 > - Sometimes VSCode may not make the panel visible until you open `package.json`
 ### 📁 [scripts/](https://github.com/Digital-Alchemy-TS/automation-quickstart/tree/main/scripts)
-This folder contains helper scripts for managing your workspace, and is utilized by the various commands in `package.json`. Re-running the setup script will upgrade the provided scripts with the newest version from the [quickstart](/automation-quickstart) repo. The most important one is the `environment.sh`, which is used to managed the NodeJS environment
+This folder contains helper scripts for managing your workspace, and is utilized by the various commands in `package.json`. Re-running the setup script will upgrade the provided scripts with the newest version from the [quickstart](/docs/home-automation/quickstart/automation-quickstart/) repo. The most important one is the `environment.sh`, which is used to managed the NodeJS environment
 
 ```bash
 ./scripts/environment.sh

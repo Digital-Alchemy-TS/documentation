@@ -1,1 +1,1 @@
-- [USE_FONTAWESOME_ICONS](/terminal/config/USE_FONTAWESOME_ICONS)
+- [USE_FONTAWESOME_ICONS](/docs/side-projects/terminal//config/USE_FONTAWESOME_ICONS)

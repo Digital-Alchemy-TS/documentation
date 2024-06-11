@@ -23,17 +23,17 @@ title: Project Links
 
 | Name                                                  | GitHub                                                  | NPM                                                               |
 | ----------------------------------------------------- | ------------------------------------------------------- | ----------------------------------------------------------------- |
-| 4️⃣ [Hass](/hass)                           | https://github.com/Digital-Alchemy-TS/hass              | [NPM](https://www.npmjs.com/package/@digital-alchemy/hass)        |
-| 4️⃣ [Synapse](/synapse)                     | https://github.com/Digital-Alchemy-TS/synapse           | [NPM](https://www.npmjs.com/package/@digital-alchemy/synapse)     |
+| 4️⃣ [Hass](/docs/home-automation/hass/)                           | https://github.com/Digital-Alchemy-TS/hass              | [NPM](https://www.npmjs.com/package/@digital-alchemy/hass)        |
+| 4️⃣ [Synapse](/docs/home-automation/synapse/)                     | https://github.com/Digital-Alchemy-TS/synapse           | [NPM](https://www.npmjs.com/package/@digital-alchemy/synapse)     |
 | 3️⃣ [Automation](/automation)               | https://github.com/Digital-Alchemy-TS/automation        | [NPM](https://www.npmjs.com/package/@digital-alchemy/automation)  |
 | 4️⃣ [Type Writer](/type-writer)             | https://github.com/Digital-Alchemy-TS/type-writer       | [NPM](https://www.npmjs.com/package/@digital-alchemy/type-writer) |
-| 4️⃣ [Synapse Extension](/synapse/extension) | https://github.com/Digital-Alchemy-TS/synapse/extension |                                                                   |
+| 4️⃣ [Synapse Extension](/docs/home-automation/synapse//extension) | https://github.com/Digital-Alchemy-TS/synapse/extension |                                                                   |
 
 ### 🏎️ Quickstart Projects
 
 | Name                                                          | GitHub                                                      |
 | ------------------------------------------------------------- | ----------------------------------------------------------- |
-| 4️⃣ [Automation Quickstart](/automation-quickstart) | https://github.com/Digital-Alchemy-TS/automation-quickstart |
+| 4️⃣ [Automation Quickstart](/docs/home-automation/quickstart/automation-quickstart/) | https://github.com/Digital-Alchemy-TS/automation-quickstart |
 
 ### 🛒 Utility Projects
 
@@ -46,4 +46,4 @@ title: Project Links
 | 3️⃣ [MQTT](/mqtt)         | https://github.com/Digital-Alchemy-TS/mqtt     | [NPM](https://www.npmjs.com/package/@digital-alchemy/mqtt-extension)    |
 | 3️⃣ [Gotify](/gotify)     | https://github.com/Digital-Alchemy-TS/core     | [NPM](https://www.npmjs.com/package/@digital-alchemy/gotify-extension)  |
 | 3️⃣ [Grocy](/grocy)       | https://github.com/Digital-Alchemy-TS/grocy    | [NPM](https://www.npmjs.com/package/@digital-alchemy/grocy)             |
-| 2️⃣ [Terminal](/terminal) | https://github.com/Digital-Alchemy-TS/terminal | [NPM](https://www.npmjs.com/package/@digital-alchemy/terminal)          |
+| 2️⃣ [Terminal](/docs/side-projects/terminal/) | https://github.com/Digital-Alchemy-TS/terminal | [NPM](https://www.npmjs.com/package/@digital-alchemy/terminal)          |

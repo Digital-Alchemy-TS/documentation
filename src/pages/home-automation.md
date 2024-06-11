@@ -13,8 +13,8 @@ Welcome to the `@digital-alchemy` collection of Home Automation tools. This is a
 
 | Project                               | Description                                                                                              |
 | ------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| [hass](/hass)               | Rest & websocket adapters for Home Assistant                                                             |
-| [synapse](/synapse)         | Entity generation tools                                                                                  |
+| [hass](/docs/home-automation/hass/)               | Rest & websocket adapters for Home Assistant                                                             |
+| [synapse](/docs/home-automation/synapse/)         | Entity generation tools                                                                                  |
 | [automation](/automation)   | Higher level automation logic                                                                            |
 | [type-writer](/type-writer) | Describe your Home Assistant install in typescript types. Writes to the hass library directly by default |
 
@@ -22,5 +22,5 @@ Welcome to the `@digital-alchemy` collection of Home Automation tools. This is a
 
 | Project                                                   | Description                                                                                     |
 | --------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| [Synapse Custom Component](/synapse/extension)  | The HACS integration for interacting with synapse library                                       |
-| [Automation Quickstart](/automation-quickstart) | Quickstart repo for creating new Home Automation applications. Perfect for supervised installs! |
+| [Synapse Custom Component](/docs/home-automation/synapse//extension)  | The HACS integration for interacting with synapse library                                       |
+| [Automation Quickstart](/docs/home-automation/quickstart/automation-quickstart/) | Quickstart repo for creating new Home Automation applications. Perfect for supervised installs! |

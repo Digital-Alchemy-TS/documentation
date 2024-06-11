@@ -1,1 +1,1 @@
-- [HELP_DIVIDER](/terminal/config/HELP_DIVIDER)
+- [HELP_DIVIDER](/docs/side-projects/terminal//config/HELP_DIVIDER)

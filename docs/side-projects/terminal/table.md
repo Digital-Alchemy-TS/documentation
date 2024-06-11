@@ -1,1 +1,1 @@
-- [PAGE_SIZE](/terminal/config/PAGE_SIZE)
+- [PAGE_SIZE](/docs/side-projects/terminal//config/PAGE_SIZE)

@@ -66,11 +66,9 @@ const config: Config = {
         src: "img/cropped.jpg",
       },
       items: [
-        { to: "/core", label: "Core", position: "left" },
-        { to: "/home-automation", label: "Home Automation", position: "left" },
-        { to: "/automation-quickstart", label: "Quickstart", position: "left" },
-        { to: "/support-libraries", label: "Utilities", position: "left" },
-        { to: "/support-libraries", label: "Side Projects", position: "left" },
+        { to: "/docs/core", label: "Core", position: "left" },
+        { to: "/docs/home-automation", label: "Home Automation", position: "left" },
+        { to: "/docs/support", label: "Support Libraries", position: "left" },
         {
           href: "https://github.com/Digital-Alchemy-TS",
           label: "GitHub",

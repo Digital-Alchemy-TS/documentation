@@ -1,2 +1,2 @@
-- [KEYMAP_TICK](/terminal/config/KEYMAP_TICK)
-- [HELP_DIVIDER](/terminal/config/HELP_DIVIDER)
+- [KEYMAP_TICK](/docs/side-projects/terminal//config/KEYMAP_TICK)
+- [HELP_DIVIDER](/docs/side-projects/terminal//config/HELP_DIVIDER)

@@ -1,4 +1,5 @@
-- [PROMPT_QUESTION](/terminal/config/PROMPT_QUESTION)
+- PROMPT_QUESTION
+
 ![date_fuzzy](/img/date_fuzzy.png)
 
 ![date_fuzzy](/img/date_fuzzy.gif)

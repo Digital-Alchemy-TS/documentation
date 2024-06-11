@@ -45,7 +45,7 @@ Primarily type definitions, constants, etc. A few come as part of the `core` lib
 
 > `@digital-alchemy` requires Node 20+
 
-1. For Home Assistant-focused applications, see the [Automation Quickstart](/automation-quickstart) project for a quick setup solution.
+1. For Home Assistant-focused applications, see the [Automation Quickstart](/docs/home-automation/quickstart/automation-quickstart/) project for a quick setup solution.
 2. The core library comes with everything needed to wire a basic application. Starting with strict mode TypeScript, and nice linting & prettier settings from the start is recommended.
 
 ### 📦 A basic app

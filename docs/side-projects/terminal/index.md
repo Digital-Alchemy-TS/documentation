@@ -8,7 +8,7 @@ Welcome to `@digital-alchemy/terminal`!
 > **Warning**:
 > These docs are very WIP, and will be improved over time
 
-- [Changelog](/terminal/changelog/0.3.x)
+- [Changelog](/docs/side-projects/terminal//changelog/0.3.x)
 
 ## 💾 Install
 
@@ -45,37 +45,37 @@ export const MY_LIBRARY = CreateLibrary({
 
 | Name                                                  | Description |
 | ----------------------------------------------------- | ----------- |
-| [Acknowledge](/terminal/components/acknowledge)       |             |
-| [Array Builder](/terminal/components/array-builder)   |             |
-| [Confirm](/terminal/components/confirm)               |             |
-| [Menu](/terminal/components/menu)                     |             |
-| [Object Builder](/terminal/components/object-builder) |             |
-| [Pick Many](/terminal/components/pick-many)           |             |
+| [Acknowledge](/docs/side-projects/terminal//components/acknowledge)       |             |
+| [Array Builder](/docs/side-projects/terminal//components/array-builder)   |             |
+| [Confirm](/docs/side-projects/terminal//components/confirm)               |             |
+| [Menu](/docs/side-projects/terminal//components/menu)                     |             |
+| [Object Builder](/docs/side-projects/terminal//components/object-builder) |             |
+| [Pick Many](/docs/side-projects/terminal//components/pick-many)           |             |
 
 ### Editors
 
 | Name                               | Description |
 | ---------------------------------- | ----------- |
-| [Date](/terminal/editors/date)     |             |
-| [Number](/terminal/editors/number) |             |
-| [String](/terminal/editors/string) |             |
+| [Date](/docs/side-projects/terminal//editors/date)     |             |
+| [Number](/docs/side-projects/terminal//editors/number) |             |
+| [String](/docs/side-projects/terminal//editors/string) |             |
 
 ### Support Code
 
 | Name                                                 | Description |
 | ---------------------------------------------------- | ----------- |
-| [Ansi Functions](/terminal/ansi-functions)           |             |
-| [Application Manager](/terminal/application-manager) |             |
-| [Colors](/terminal/colors)                           |             |
-| [Comparison Tools](/terminal/comparison-tools)       |             |
-| [Environment](/terminal/environment)                 |             |
-| [Form](/terminal/form)                               |             |
-| [Icons](/terminal/icons)                             |             |
-| [Internals](/terminal/internals)                     |             |
-| [Keyboard Manager](/terminal/keyboard-manager)       |             |
-| [Keymap](/terminal/keymap)                           |             |
-| [Prompts](/terminal/prompts)                         |             |
-| [Registry](/terminal/registry)                       |             |
-| [Screen](/terminal/screen)                           |             |
-| [Table](/terminal/table)                             |             |
-| [Text Rendering](/terminal/text-rendering)           |             |
+| [Ansi Functions](/docs/side-projects/terminal//ansi-functions)           |             |
+| [Application Manager](/docs/side-projects/terminal//application-manager) |             |
+| [Colors](/docs/side-projects/terminal//colors)                           |             |
+| [Comparison Tools](/docs/side-projects/terminal//comparison-tools)       |             |
+| [Environment](/docs/side-projects/terminal//environment)                 |             |
+| [Form](/docs/side-projects/terminal//form)                               |             |
+| [Icons](/docs/side-projects/terminal//icons)                             |             |
+| [Internals](/docs/side-projects/terminal//internals)                     |             |
+| [Keyboard Manager](/docs/side-projects/terminal//keyboard-manager)       |             |
+| [Keymap](/docs/side-projects/terminal//keymap)                           |             |
+| [Prompts](/docs/side-projects/terminal//prompts)                         |             |
+| [Registry](/docs/side-projects/terminal//registry)                       |             |
+| [Screen](/docs/side-projects/terminal//screen)                           |             |
+| [Table](/docs/side-projects/terminal//table)                             |             |
+| [Text Rendering](/docs/side-projects/terminal//text-rendering)           |             |

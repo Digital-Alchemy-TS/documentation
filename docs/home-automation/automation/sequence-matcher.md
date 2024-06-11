@@ -31,8 +31,6 @@ This will be accomplished through creating button sequence patterns that can be 
 
 ### 🤔 What is a valid pattern?
 
-- [SEQUENCE_TIMEOUT](/automation/config/SEQUENCE_TIMEOUT)
-
 In order to be a valid pattern, the messages need to come together as a sequence, grouped together in time. By default, the matcher uses a `1.5s` timeout between events. In order to trigger the "**I lost my phone**" flow:
 
 1. `stop` button press
