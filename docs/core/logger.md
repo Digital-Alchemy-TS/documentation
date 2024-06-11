@@ -1,8 +1,6 @@
 ---
-title: Logger
+title: 🧾 Logger
 ---
-
-## 📚 Description
 
 The provided logger is a standardized interface that wraps the Node.js console object. It is aware of the service it was provided to. The underlying logging interface can be swapped out for other drivers (recommended [pino](https://www.npmjs.com/package/pino)) for more customized functionality.
 
@@ -100,8 +98,6 @@ export function Example({ logger }: TServiceParams) {
 ![example_log](/img/example_log.png)
 
 ## 🔊 Log Levels
-
-- [LOG_LEVEL](/docs/core/config/LOG_LEVEL)
 
 This table describes the priority order (highest -> lowest) of log levels and the color provided to the `context`. Setting the `LOG_LEVEL` to a higher level will cause the lower-level ones to not be emitted.
 

@@ -1,10 +1,8 @@
 ---
-title: Internal
+title: 🗂️ Internal
 ---
 
-## 📘 Overview
-
-The `internal` is available on [TServiceParams](/docs/core/exports/TServiceParams) and provides some basic internal utilities and information by the core library.
+The `internal` is available on `TServiceParams` and provides some basic internal utilities and information by the core library.
 
 ## 🌱 Root
 

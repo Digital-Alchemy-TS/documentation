@@ -1,14 +1,14 @@
 ---
-title: Wiring
+title: 🖇️ Wiring
 ---
 
-## 📚 Description
 
 The wiring module is responsible for defining the structure of your application and ensuring all your code runs in the correct order. Code is divided up into modules based on purpose and is referred to as **libraries** or **applications**. They are largely the same thing, with the meaningful difference being that applications can be bootstrapped and there may be only 1 of them.
 
 ## 🔠 Types
 
-As part of importing modules, they will also augment onto a global [LoadedModules](/docs/core/exports/LoadedModules) interface. A collection of utility types will process the definitions and use this to provide accurate definitions of all services & configurations as part of [TServiceParams](/docs/core/exports/TServiceParams).
+As part of importing modules, they will also augment onto a global `LoadedModules` interface.
+A collection of utility types will process the definitions and use this to provide accurate definitions of all services & configurations as part of `TServiceParams`.
 
 Block comments placed on keys will be carried through into service parameters as tsdoc comments.
 
@@ -145,7 +145,7 @@ The major capability of applications to distinguish from libraries is the abilit
 
 The promise for the `.bootstrap` method will resolve when all startup lifecycle events have been completed.
 
-### [Lifecycle](/docs/core/lifecycle)
+### 👶 [Lifecycle](/docs/core/lifecycle)
 
 The application lifecycle is a key part to the way applications bootstrap.
 
