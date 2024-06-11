@@ -4,11 +4,12 @@ sidebar_position: 5
 ---
 ## 📚 Description
 
-Rooms offer a method to coordinate multiple entities together. This is primarily accomplished through the generation of scenes entities. The room will use your code definition as a source of truth, working to update any entities that don't match using the [aggressive scenes](/automation/aggressive-scenes) extension
+Rooms offer a method to coordinate multiple entities together.
+This is primarily accomplished through the generation of scenes and other related entities, then using those to coordinate other entities.
 
 ## 🌐 Room Details
 
-For the most part, rooms are intended to manage themselves and there are no directly required interactions for the object itself. Everything can be be accomplished through standard service calls and entity interactions through the [hass](/hass) library
+For the most part, rooms are intended to manage themselves and there are no directly required interactions for the object itself.
 
 | Property                 | Type            | Description                                                                          |
 | ------------------------ | --------------- | ------------------------------------------------------------------------------------ |

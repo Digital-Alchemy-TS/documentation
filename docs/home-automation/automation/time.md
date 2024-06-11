@@ -2,52 +2,35 @@
 title: 🕟 Time
 sidebar_position: 2
 ---
-## 🌐 Overview
+The `automation.time` extension provides tools for quickly performing automation calculations involving time.
 
-The utils extension provides tools for efficiently creating reference time points for doing math with.
+## ShortTime syntax
 
-## ⏰ refTime
+Valid values:
 
-`refTime` takes in a string of hour/minute/second in this format:
+- "`NOW`"
+- "`TOMORROW`"
+- Pattern: `(AM|PM)[H]H[:(00|15|30|45)]`
 
-> `HH[:mm[:ss]]`
+Examples: `AM8`, `AM09`, `PM5:30`
 
-Time is calculated relative to midnight.
-
-| Example | Resolved             |
-| ------- | -------------------- |
-| `8`     | 8AM                  |
-| `08:30` | 8:30AM               |
-| `15`    | 3PM                  |
-| `24`    | Tomorrow at midnight |
-| `48`    | etc.                 |
-
-## 🕑 shortTime
-
-`shortTime` is similar in concept to `refTime`, being used to calculate dates relative to midnight. The difference is how times are formatted.
-
-> `(AM|PM)[H]H[:(00|15|30|45)]`
-> `NOW`
-> `TOMORROW`
-
-| Example  | Resolved     |
-| -------- | ------------ |
-| `NOW`    | Current time |
-| `AM8`    | 8AM          |
-| `AM8:30` | 8:30AM       |
-| `PM9:45` | 9:45PM       |
-
-> [!example] #Usage-Example/automation
+## Creating References
 
 ```typescript
-function Example({ automation }: TServiceParams) {
-  function isInRange() {
-    const [NOW, AM830, PM3] = automation.utils.shortTime([
-      "NOW",
-      "AM8:30",
-      "PM3",
-    ]);
-    return NOW.isBetween(AM830, PM3);
+const [AM8, PM5, NOW] = automation.time.refTime(["AM8", "PM5", "NOW"]);
+```
+
+## Time tests
+
+- `isBefore(time: TShortTime)`
+- `isAfter(time: TShortTime)`
+- `isBetween(start: TShortTime, end: TShortTime)`
+
+```typescript
+function shouldDoThing() {
+  if (automation.time.isAfter("AM10:30")) {
+    return false;
   }
+  return automation.time.isBefore("PM5");
 }
 ```

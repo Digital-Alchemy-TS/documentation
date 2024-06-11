@@ -2,6 +2,10 @@
 title: 🚀 Install
 sidebar_position: 0
 ---
+
+| [NPM](https://www.npmjs.com/package/@digital-alchemy/hass) | [GitHub](https://github.com/Digital-Alchemy-TS/hass) |
+| --- | --- |
+
 ## 🥡 Import Code
 
 Add as a dependency, and add to your imports. Nice and easy

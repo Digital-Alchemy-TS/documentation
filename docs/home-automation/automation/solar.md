@@ -3,12 +3,8 @@ title: 🌝 Solar
 sidebar_position: 3
 ---
 
-## 📚 Description
-
-The solar extension exists to make it easy to perform time math with reference points for the sun. It uses `lat/long` provided by Home Assistant, updating reference points nightly with the [Scheduler](/docs/core/scheduler).
-
-> **Warning**:
-> Data not valid until [onReady](/docs/core/lifecycle/onReady)
+The solar extension exists to make it easy to perform time math with reference points for the sun.
+It uses `lat/long` provided by Home Assistant, updating reference points nightly with the [Scheduler](/docs/core/scheduler).
 
 ## 🌅 Reference Points
 
@@ -26,22 +22,73 @@ The solar extension exists to make it easy to perform time math with reference p
 
 ## 🌞 Usage
 
+### Gathering reference points
+
 ```typescript
-export function Example({ automation, context, logger }: TServiceParams) {
-  automation.solar.onEvent({
-    context,
-    eventName: "dawn",
-    exec() {
-      logger.info("It is dawn!");
-    }
-  });
+function whenIsDawn() {
+  return `dawn is at ${automation.solar.dawn.format("hh:mm")}`;
 }
 ```
 
+### Quick math
+
+Similar to working with `automation.time`, `solar` makes a few functions available for testing reference points.
+
 ```typescript
-export function Example({ automation, context, logger }: TServiceParams) {
-  function isDaytime() {
-    return automation.solar.isBetween("dawn", "dusk");
-  }
+function isDaytime() {
+  return automation.solar.isBetween("dawn", "dusk");
 }
+```
+
+### Attaching to events
+
+You can also use reference points as events!
+
+```typescript
+automation.solar.onEvent({
+  context,
+  eventName: "dawn",
+  exec() {
+    logger.info("It is dawn!");
+  }
+});
+```
+
+#### With offsets
+
+`solar.onEvent` can take in offset times in a variety of formats:
+
+| Format | Description |
+| --- | --- |
+| `number` | `ms` |
+| `tuple` | [`quantity`, `unit`] |
+| `string` | `ISO 8601` partial duration string: `(#H)(#M)(#S)` |
+| `object` | mapping of units to quantities |
+| `Duration` | `dayjs.duration` object |
+| `function` | a function that returns any of the above |
+
+```typescript
+automation.solar.onEvent({
+  eventName: "dawn",
+  offset: "2h10m",
+  exec: () => logger.info("2 hours 10 mins after dawn")
+});
+```
+
+```typescript
+automation.solar.onEvent({
+  eventName: "dusk",
+  offset: "-15m",
+  exec: () => logger.info("15 mins before dusk")
+});
+```
+
+Using a function, you can provide a different offset every day
+
+```typescript
+automation.solar.onEvent({
+  eventName: "dusk",
+  offset: () => Math.floor(Math.random() * HOUR),
+  exec: () => logger.info("within an hour after dusk")
+});
 ```

@@ -3,6 +3,10 @@ title: "🚀 Installation"
 sidebar_position: 1
 authors: [zoe-codez]
 ---
+
+| [NPM](https://www.npmjs.com/package/@digital-alchemy/synapse) | [GitHub](https://github.com/Digital-Alchemy-TS/synapse) |
+| --- | --- |
+
 ## 💾 Install
 
 > **Attention**:
