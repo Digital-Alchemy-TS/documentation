@@ -1,5 +1,5 @@
 ---
-title: Automation
+title: 🤖 Automation
 sidebar_position: 4
 ---
 ## 📘 Description

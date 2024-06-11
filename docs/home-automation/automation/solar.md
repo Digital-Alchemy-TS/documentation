@@ -1,5 +1,6 @@
 ---
-title: Automation/Solar
+title: 🌝 Solar
+sidebar_position: 3
 ---
 
 ## 📚 Description

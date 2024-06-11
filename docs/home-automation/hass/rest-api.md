@@ -1,5 +1,6 @@
 ---
 title: "✈️ REST API"
+authors: [zoe-codez]
 sidebar_position: 6
 ---
 ## 📖 Description

@@ -1,5 +1,6 @@
 ---
 title: "🤡 Mock Assistant"
+authors: [zoe-codez]
 sidebar_position: 9
 ---
 ## Overview

@@ -1,5 +1,6 @@
 ---
-title: Automation/Managed Switch
+title: 💡 Managed Switch
+sidebar_position: 1
 ---
 ### 📄 Description
 

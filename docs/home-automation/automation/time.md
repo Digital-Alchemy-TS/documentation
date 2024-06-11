@@ -1,5 +1,6 @@
 ---
-title: Automation/Utils
+title: 🕟 Time
+sidebar_position: 2
 ---
 ## 🌐 Overview
 
