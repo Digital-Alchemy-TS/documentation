@@ -1,1 +1,0 @@
-- [PAGE_SIZE](/terminal/config/PAGE_SIZE)

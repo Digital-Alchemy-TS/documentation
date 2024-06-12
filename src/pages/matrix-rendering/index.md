@@ -1,4 +1,0 @@
----
-aliases:
-  - Matrix-Rendering
----

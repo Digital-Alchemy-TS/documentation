@@ -1,1 +1,0 @@
-- [HELP_DIVIDER](/terminal/config/HELP_DIVIDER)

@@ -12,50 +12,54 @@ The project is organized as a framework, containing a generic core wiring librar
 
 ---
 
-## 📇 The Sights
+## 🔮 The Sights
 
-<div style={{display:"flex",flexWrap:"wrap"}}>
-  <div style={{width:"45%",margin:"4px"}}>
-    ### 🏗 [Core Library](</core>)
-    The core library provides all the tools needed to wire your logic together and:
+### [Core Wiring](/docs/core/)
 
-    - [Configuration](/core/configuration)
-    - [Logging](/core/logger)
-    - [Caching](/core/cache)
-    - and more!
-    <hr />
+The starting point for applications!
+Rules and types for building modules and wring them together in an ergonomic and automatically type safe way. Also contains helpers for:
 
-    ### 🥏 Quickstart Projects
+- ⏰ scheduling
+- ⚙️ configuration
+- 🧾 logging
+- 👶 lifecycle events
 
-    | Project                                                   | Description                                                                                     |
-    | --------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-    | [Automation Quickstart](/automation-quickstart) | Quickstart repo for creating new Home Automation applications. Perfect for supervised installs! |
-  </div>
-  <div style={{width:"45%",margin:"4px"}}>
-    ### 🏡 [Home Automation](/home-automation)
-    | Project                               | Description                                                                                              |
-    | ------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-    | [Hass](/hass)               | Rest & websocket adapters for Home Assistant                                                             |
-    | [Hass Unit Testing](/hass/unit-testing)               | Tools and techniques for automated testing for your logic                                                             |
-    | [Synapse](/synapse)         | Entity generation tools                                                                                  |
-    | [Automation](/automation)   | Higher level automation logic                                                                            |
-    | [Type Writer](/type-writer) | Describe your Home Assistant install in typescript types. Writes to the hass library directly by default |
-    | [Synapse Custom Component](/synapse-extension)  | The HACS integration for interacting with synapse library                                       |
-  </div>
-  <div style={{width:"45%",margin:"4px"}}>
-    ### 💼 Utilities
-    | Project                                                   | Description                                                                                     |
-    | --------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-    | [Fastify](/fastify/)   | Reference to [fastify](https://fastify.dev/) instance. Respects configuration and application lifecycle |
-    | [MQTT](/mqtt)         | Easy configured bindings for [mqtt](https://www.npmjs.com/package/mqtt)                                 |
-    | [Gotify](/gotify)     | API bindings for [gotify](https://gotify.net/)                                                          |
-    | [Grocy](/grocy)       | API bindings for [grocy](https://grocy.info/)                                                           |
-  </div>
-  <div style={{width:"45%",margin:"4px"}}>
-    ### 🪕 Side Projects
-    | Project                                                   | Description                                                                                     |
-    | --------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-    | [Terminal](/terminal) | Advanced terminal utilities                                                                             |
-    | [Matrix Rendering](/matrix-rendering) | Rendering utilities for rgb matrix panels                                                                             |
-  </div>
-</div>
+### [Home Automation](/docs/home-automation/)
+
+> 🌐 [Hass](/docs/home-automation/hass/)
+
+Tools for interacting with Home Assistant: **entity** & **service** calling proxies, **registry** apis, **unit testing**, and more.
+
+> 🧠 [Synapse](/docs/home-automation/synapse/) + [Custom Component](/docs/home-automation/synapse/extension)
+
+Create and manage virtual entities within Home Assistant. Modern config flow based integration with availability tied to the connection state of your app.
+
+> 🤖 [Automation](/docs/home-automation/automation/)
+
+Build more complex logic with less code. Utility methods for doing solar & time calculations, coordinating areas, actively managed switches, and more.
+
+> 🚀 [Quickstart](/docs/home-automation/quickstart/automation-quickstart/)
+
+Install Digital Alchemy inside of a HAOS install. Use the built in Studio Code Server to edit your code, then build and run it within a dedicated Addon.
+
+> 🎬 [Type-Writer](/docs/home-automation/type-writer/)
+
+Support script for translating your Home Assistant setup into Typescript to power your edit
+
+### [Support Libraries](/docs/support/)
+
+> [Fastify](/docs/support/fastify/)
+
+Configuration and lifecycle friendly bindings for Fastify.
+
+> [MQTT](/docs/support/mqtt/)
+
+Bindings for publishing messages to MQTT & listening for messages
+
+> [Grocy](/docs/support/grocy/)
+
+Api adapters for [Grocy](https://grocy.info/)
+
+> [Gotify](/docs/support/gotify/)
+
+Api adapters & types for [Gotify](https://gotify.net/)
