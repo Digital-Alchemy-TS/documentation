@@ -39,27 +39,7 @@ export const MY_LIBRARY = CreateLibrary({
 ```
 
 > 🎉
-> Listing as an import will automatically load into [LoadedModules](/docs/core/exports/LoadedModules) and make the library features available as `gotify` on [TServiceParams](/docs/core/exports/TServiceParams).
-
-## Configuration
-
-- [BASE_URL](/gotify/config/BASE_URL)
-Target server for api
-
-- [CHANNEL_MAPPING](/gotify/config/CHANNEL_MAPPING)
-
-Map tokens to friendly names to use within the application
-
-```ini
-[gotify.CHANNEL_MAPPING]
-  app_name=token
-  another_app=token
-  app_the_third=token
-```
-
-- [TOKEN](/gotify/config/TOKEN)
-
-Application token
+> Listing as an import will automatically load into `LoadedModules` and make the library features available as `gotify` on `TServiceParams`.
 
 ## Services
 

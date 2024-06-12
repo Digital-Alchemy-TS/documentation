@@ -1,12 +1,3 @@
-- [PROMPT_QUESTION](/docs/side-projects/terminal//config/PROMPT_QUESTION)
-![boolean](/img/boolean.png)
-- [Acknowledge](/docs/side-projects/terminal//components/acknowledge)
-- [Array Builder](/docs/side-projects/terminal//components/array-builder)
-- [Menu](/docs/side-projects/terminal//components/menu)
-- [Confirm](/docs/side-projects/terminal//components/confirm)
-- [Date](/docs/side-projects/terminal//editors/date)
-- [Number](/docs/side-projects/terminal//editors/number)
-- [Object Builder](/docs/side-projects/terminal//components/object-builder)
-- [Pick Many](/docs/side-projects/terminal//components/pick-many)
-- [String](/docs/side-projects/terminal//editors/string)
-- [Icons](/docs/side-projects/terminal//icons)
+---
+title: Prompts
+---

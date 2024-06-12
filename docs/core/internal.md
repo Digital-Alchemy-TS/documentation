@@ -10,16 +10,6 @@ The `internal` is available on `TServiceParams` and provides some basic internal
 | ---------- | ----------------------------------------------------------------------------------------- |
 | `safeExec` | Generic function to wrap a callback with **try/catch**, and optionally keep metrics on it |
 
-## 🛠 Utilities
-
-> **Property**: `internal.utils`
->
-> Extra helper functions that are used internally
-
-| Property | Description                                                          |
-| -------- | -------------------------------------------------------------------- |
-| `event`  | Same as the `event` reference passed in at top of [TServiceParams](/docs/core/exports/TServiceParams) |
-
 ## 🚀 Boot
 
 > **Property**: `internal.boot`

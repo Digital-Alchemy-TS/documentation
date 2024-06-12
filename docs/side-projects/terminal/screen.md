@@ -1,1 +1,3 @@
-- [HELP_DIVIDER](/docs/side-projects/terminal//config/HELP_DIVIDER)
+---
+title: Screen
+---

@@ -22,21 +22,6 @@ These are created with the `CreateLibrary` / `CreateApplication` functions and d
 
 For applications, the module has a `.bootstrap({ ... })` method available. Libraries are able to list other libraries as dependencies and ultimately be imported into an end application.
 
-### 🛠 Services
-
-Services are attached to the modules and are defined as functions that take in a parameter typed as [TServiceParams](/docs/core/exports/TServiceParams). The `core` library exports its definitions to the top level, where all imported libraries must provide their definitions as a group.
-
-> Deeper dives on `core` features
-
-- [Cache](/docs/core/cache) - Basic cache adapter with support for memory and Redis drivers.
-- [Configuration](/docs/core/configuration) - Strongly typed configurations, with a priority-based configuration loader supporting a variety of sources.
-- [Fetch Wrapper](/docs/core/fetch) - Easily configurable wrapper for `fetch`.
-- [Internal](/docs/core/internal) - Application metadata, support, and utility functions.
-- [Lifecycle](/docs/core/lifecycle) - Controls for application bootstrapping.
-- [Logger](/docs/core/logger) - Context-aware pretty logger, with a flexible interface.
-- [Scheduler](/docs/core/scheduler) - Lifecycle-aware task scheduling, featuring precise timing and robust error handling.
-- [Wiring](/docs/core/wiring) - Defines the application's structure, ensuring clean code separation and modular development.
-
 ### 🛠 Helpers / everything else
 
 Primarily type definitions, constants, etc. A few come as part of the `core` library, but all the important pieces of the library come as part of the services.

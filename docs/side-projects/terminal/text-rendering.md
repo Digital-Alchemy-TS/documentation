@@ -1,5 +1,3 @@
-- [FUZZY_HIGHLIGHT](/docs/side-projects/terminal//config/FUZZY_HIGHLIGHT)
-- [MENU_COLUMN_DIVIDER](/docs/side-projects/terminal//config/MENU_COLUMN_DIVIDER)
-- [TEXT_DEBUG_DEPTH](/docs/side-projects/terminal//config/TEXT_DEBUG_DEPTH)
-- [TEXT_DEBUG_ARRAY_LENGTH](/docs/side-projects/terminal//config/TEXT_DEBUG_ARRAY_LENGTH)
-- [PAGE_SIZE](/docs/side-projects/terminal//config/PAGE_SIZE)
+---
+title: Text Rendering
+---

@@ -1,6 +1,3 @@
-- [APPLICATION_PADDING_LEFT](/docs/side-projects/terminal//config/APPLICATION_PADDING_LEFT)
-- [APPLICATION_PADDING_TOP](/docs/side-projects/terminal//config/APPLICATION_PADDING_TOP)
-- [HEADER_FONT_PRIMARY](/docs/side-projects/terminal//config/HEADER_FONT_PRIMARY)
-- [HEADER_COLOR_PRIMARY](/docs/side-projects/terminal//config/HEADER_COLOR_PRIMARY)
-- [HEADER_FONT_SECONDARY](/docs/side-projects/terminal//config/HEADER_FONT_SECONDARY)
-- [HEADER_COLOR_SECONDARY](/docs/side-projects/terminal//config/HEADER_COLOR_SECONDARY)
+---
+title: Application Manager
+---

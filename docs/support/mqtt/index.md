@@ -37,11 +37,10 @@ export const MY_LIBRARY = CreateLibrary({
 ```
 
 > 🎉
-> Listing as an import will automatically load into [LoadedModules](/docs/core/exports/LoadedModules) and make the library features available as `mqtt` on [TServiceParams](/docs/core/exports/TServiceParams).
+> Listing as an import will automatically load into `LoadedModules` and make the library features available as `mqtt` on `TServiceParams`.
 
 ## ⚙️ Configuration
 
-> [CLIENT_OPTIONS](/mqtt/config/CLIENT_OPTIONS) gets passed straight to mqtt library.
 
 This configuration block can be added to your
 
@@ -62,7 +61,7 @@ This configuration block can be added to your
 
 The bindings file is an "everything in one file". It handles
 
-- Connection at [onPostConfig](/docs/core/lifecycle/onPostConfig)
+- Connection at `onPostConfig`
 - logging standard events (error messages, reconnect events, etc)
 
 #### ➕ subscribe

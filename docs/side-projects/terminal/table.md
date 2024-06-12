@@ -1,1 +1,3 @@
-- [PAGE_SIZE](/docs/side-projects/terminal//config/PAGE_SIZE)
+---
+title: Table
+---

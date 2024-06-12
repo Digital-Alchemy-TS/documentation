@@ -51,7 +51,7 @@ declare module "@digital-alchemy/core" {
 
 This block contains a list of all libraries this one depends on. Providing items in this array will:
 
-- add that library to the [TServiceParams](/docs/core/exports/TServiceParams) type definitions so they can be used internally
+- add that library to the `TServiceParams` type definitions so they can be used internally
 - set this library up to only be loaded after dependency libraries are loaded
 
 > **Attention**: applications must list all dependencies explicitly
@@ -60,14 +60,14 @@ Bootstrap will ensure the application explicitly loads each of these libraries a
 
 ### 🏷 `name`
 
-> **Attention**: Name for the library, must match the key used in [LoadedModules](/docs/core/exports/LoadedModules)
+> **Attention**: Name for the library, must match the key used in `LoadedModules`
 
 A module's name affects:
 
 - where the config system sources data from
 - log context
 
-This name affects the configuration system, log contexts, and the key used in [TServiceParams](/docs/core/exports/TServiceParams).
+This name affects the configuration system, log contexts, and the key used in `TServiceParams`.
 
 > Choose your name wisely
 
