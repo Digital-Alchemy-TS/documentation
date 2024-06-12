@@ -38,7 +38,6 @@ export const MY_LIBRARY = CreateLibrary({
 
 ## ⚙️ Configuration
 
-
 This configuration block can be added to your
 
 ```ini

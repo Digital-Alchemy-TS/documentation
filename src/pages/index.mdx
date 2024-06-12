@@ -16,10 +16,50 @@ The project is organized as a framework, containing a generic core wiring librar
 
 ### [Core Wiring](/docs/core/)
 
+The starting point for applications!
+Rules and types for building modules and wring them together in an ergonomic and automatically type safe way. Also contains helpers for:
 
+- ⏰ scheduling
+- ⚙️ configuration
+- 🧾 logging
+- 👶 lifecycle events
 
 ### [Home Automation](/docs/home-automation/)
 
+> 🌐 [Hass](/docs/home-automation/hass/)
+
+Tools for interacting with Home Assistant: **entity** & **service** calling proxies, **registry** apis, **unit testing**, and more.
+
+> 🧠 [Synapse](/docs/home-automation/synapse/) + [Custom Component](/docs/home-automation/synapse/extension)
+
+Create and manage virtual entities within Home Assistant. Modern config flow based integration with availability tied to the connection state of your app.
+
+> 🤖 [Automation](/docs/home-automation/automation/)
+
+Build more complex logic with less code. Utility methods for doing solar & time calculations, coordinating areas, actively managed switches, and more.
+
+> 🚀 [Quickstart](/docs/home-automation/quickstart/automation-quickstart/)
+
+Install Digital Alchemy inside of a HAOS install. Use the built in Studio Code Server to edit your code, then build and run it within a dedicated Addon.
+
+> 🎬 [Type-Writer](/docs/home-automation/type-writer/)
+
+Support script for translating your Home Assistant setup into Typescript to power your edit
+
 ### [Support Libraries](/docs/support/)
 
-### [Side Projects](/docs/side-projects/)
+> [Fastify](/docs/support/fastify/)
+
+Configuration and lifecycle friendly bindings for Fastify.
+
+> [MQTT](/docs/support/mqtt/)
+
+Bindings for publishing messages to MQTT & listening for messages
+
+> [Grocy](/docs/support/grocy/)
+
+Api adapters for [Grocy](https://grocy.info/)
+
+> [Gotify](/docs/support/gotify/)
+
+Api adapters & types for [Gotify](https://gotify.net/)

@@ -154,7 +154,6 @@ Assuming everything went to plan, then you should have a flat display with none 
 | RGB matrix               | [Adafruit](https://www.adafruit.com/product/2278)      | Y        | Anything compatible with [hzeller/rpi-rgb-led-matrix](https://github.com/hzeller/rpi-rgb-led-matrix)       | ![rgb_matrix](/img/rgb_matrix.jpg)         |
 | Matrix bonnet            | [Adafruit](https://www.adafruit.com/product/3211)      | N        | Can adapt from 40 pin cable to the 16 + additional uses                                                    | ![matrix_bonnet](/img/matrix_bonnet.jpg)      |
 
-
 > 🎉 🧟‍♀️ It's Alive!!!
 >
 ![party_parrot](/img/party_parrot.gif)
