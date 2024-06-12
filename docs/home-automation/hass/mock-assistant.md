@@ -3,7 +3,6 @@ title: "🤡 Mock Assistant"
 authors: [zoe-codez]
 sidebar_position: 9
 ---
-## Overview
 
 Mock Assistant is a companion project that comes as part of the `@digital-alchemy/hass` project.
 It's role is to assist with the process of creating test fixtures, and injecting them into an application that is being tested.
@@ -23,7 +22,7 @@ npx mock-assistant
 node node_modules/@digital-alchemy/hass/dist/mock_assistant/main.js
 ```
 
-The configuration file from [type-writer](/type-writer) is compatible with the script.
+The configuration file from [type-writer](/docs/home-automation/type-writer) is compatible with the script.
 
 ```bash
 npx mock-assistant --config ./.type_writer

@@ -8,23 +8,22 @@ aliases:
 ---
 import ReactPlayer from 'react-player'
 
-## 📘 Overview
-
-Welcome to the `@digital-alchemy` [Home Automation](/home-automation) quickstart project!
+Welcome to the `@digital-alchemy` Home Automation quickstart project!
 
 This project is designed to work with **Supervised** and **HA OS** based installs, where **Addons** are supported. If you used a different installation method, you will need to make tweaks to the process.
 
 These instructions assume that [Studio Code Server Addon](https://github.com/hassio-addons/addon-vscode) has been installed on your setup, serving as both editor and workspace management tool.
 
 **Links!**
+
 - [Github repo](https://github.com/Digital-Alchemy-TS/automation-quickstart)
 - [Discord](https://discord.gg/JkZ35Gv97Y)
-- [Changelog](/home-automation/)
 
 ## 🚀 Setup
 
 > **Note**:
 > The below command works for:
+>
 > - Initial setup
 > - Fixing a broken environment
 > - Updating the `scripts` provided by quickstart repo with newer versions
@@ -34,21 +33,24 @@ Within the **Code Server Addon**:
 1. Open a terminal
    - Press **Ctrl-Shift-\`** (default keybind) to open a terminal, or go through `Menu` > `Terminal` > `New Terminal`
 2. Execute the command
+
 ```bash
 curl -fsSL https://setup.digital-alchemy.app -o setup.sh; bash setup.sh
 ```
+
 This script will:
+
 - Install NodeJS on your system
 - Pull down the [starter template](https://github.com/Digital-Alchemy-TS/automation-quickstart)
 - Install all necessary dependencies
-- Add the [local code runner](/automation-quickstart/addon) addon as a local addon
+- Add the [local code runner](/docs/home-automation/quickstart/automation-quickstart/addon) addon as a local addon
 
 The final install step is for you to install the addon.
 ![addon](/img/addon.png)
 
 > 🎉
 > You are now able to run Typescript code on your Home Assistant instance! 🎉
-> Check out the [next steps guide](/automation-quickstart/next-steps) for an orientation on the project you just set up
+
 ### 📺 In action
 
 No sound orientation videos, for a bit of context on what things should look like when everything goes right.
@@ -70,6 +72,7 @@ No sound orientation videos, for a bit of context on what things should look lik
 >
 
 A script has been provided to restore your environment if something goes wrong.
+
 ```bash
 ./scripts/environment.sh
 ```

@@ -2,7 +2,6 @@
 title: 🖇️ Wiring
 ---
 
-
 The wiring module is responsible for defining the structure of your application and ensuring all your code runs in the correct order. Code is divided up into modules based on purpose and is referred to as **libraries** or **applications**. They are largely the same thing, with the meaningful difference being that applications can be bootstrapped and there may be only 1 of them.
 
 ## 🔠 Types

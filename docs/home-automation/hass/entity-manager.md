@@ -3,7 +3,6 @@ title: "🎭 Entity Proxies"
 sidebar_position: 1
 authors: [zoe-codez]
 ---
-## 📚 Description
 
 On the inside, hass will maintain a copy of the current state as reported by Home Assistant.
 You are able to create references that will maintain always accurate state, allow easy service calls, and more!

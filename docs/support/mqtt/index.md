@@ -2,13 +2,10 @@
 title: MQTT
 ---
 
-## 📚 Description
-
 Welcome to `@digital-alchemy/mqtt-extension`!
 
 - [GitHub](https://github.com/Digital-Alchemy-TS/mqtt)
 - [NPM](https://www.npmjs.com/package/@digital-alchemy/mqtt-extension)
-- [Changelog](/mqtt/changelog/0.3.x)
 
 ## 💾 Install
 

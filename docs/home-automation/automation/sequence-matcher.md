@@ -2,7 +2,6 @@
 title: 🧾 Sequence Matcher
 sidebar_position: 4
 ---
-## 📚 Description
 
 The sequence catcher is an advanced tool for detecting patterns of events happening within your Home Assistant setup. To explain the tool better, we'll use the use case of wanting to add functionality to a [Lutron Pico Remote](https://www.amazon.com/Lutron-3-Button-Wireless-Lighting-PJ2-3BRL-WH-L01R/dp/B00KLAXFQ0).
 

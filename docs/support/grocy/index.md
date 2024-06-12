@@ -1,12 +1,9 @@
 ---
 title: Grocy
 ---
-## Description
 
 > https://grocy.info/
 > Grocy is a web-based self-hosted groceries & household management solution for your home.
-
-- [Changelog](/grocy/changelog/0.3.x)
 
 API adapters for the Grocy application. Contains basic adapters for:
 

@@ -3,7 +3,6 @@ title: "🔧 Usage"
 sidebar_position: 3
 authors: [zoe-codez]
 ---
-## 📄 Description
 
 This document covers the basic usage of the synapse library, creating entities, managing configurations, and attaching to events.
 It provides detailed examples and explanations to help users effectively implement and utilize the synapse library in their applications.

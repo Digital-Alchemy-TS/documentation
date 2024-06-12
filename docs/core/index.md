@@ -4,8 +4,6 @@ id: core_index
 sidebar_position: 1
 description: "Hub page for core library tools"
 ---
-## 📘 Overview
-
 Welcome to `@digital-alchemy/core`!
 
 This core library is a standard utilities library used by the other TypeScript repos in the project. It is built with minimal dependencies to keep your production builds light and snappy.

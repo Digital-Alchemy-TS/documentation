@@ -3,10 +3,9 @@ title: "📣 Call Proxy"
 authors: [zoe-codez]
 sidebar_position: 2
 ---
-## 📚 Description
 
 The call proxy is a deceptively simple service designed to provide a natural-feeling service calling interface for Home Assistant.
-It creates a general [proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) interface, and passes through any valid call to the [websocket](/hass/websocket-api) as a service call.
+It creates a general [proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) interface, and passes through any valid call to the [websocket](/docs/home-automation/hass/websocket-api) as a service call.
 
 > Issue a simple call via the call proxy
 
@@ -24,7 +23,7 @@ export function Example({ hass }: TServiceParams) {
 ### Custom Types
 
 On its own, the Call Proxy isn't all that smart. It simply makes a service call based on what you provide, hoping it's valid.
-The real magic comes in when [type-writer](/type-writer) gets involved.
+The real magic comes in when [type-writer](/docs/home-automation/type-writer) gets involved.
 The call proxy will adjust to match the specific set of services available on your install, with accurate parameter definitions for every service.
 
 ![custom services](/img/custom_services.png)

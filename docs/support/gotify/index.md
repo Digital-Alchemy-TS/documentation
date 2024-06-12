@@ -1,7 +1,6 @@
 ---
 title: Gotify
 ---
-## Description
 
 > https://gotify.net/
 > Gotify is a simple server for sending & receiving messages
@@ -10,7 +9,6 @@ Welcome to `@digital-alchemy/gotify-extension`!
 
 - [GitHub](https://github.com/Digital-Alchemy-TS/gotify)
 - [NPM](https://www.npmjs.com/package/@digital-alchemy/gotify-extension)
-- [Changelog](/gotify/changelog/0.3.x)
 
 ## 💾 Install
 

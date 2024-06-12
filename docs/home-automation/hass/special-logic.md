@@ -2,7 +2,6 @@
 title: "🚏 Special Logic"
 sidebar_position: 7
 ---
-## 📚 Description
 
 The `@digital-alchemy/hass` library provides some additional functionality that is more specialized.
 

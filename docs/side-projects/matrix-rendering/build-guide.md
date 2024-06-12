@@ -1,9 +1,8 @@
 ---
 title: Hardware Build
 ---
-## Overview
 
-This project details the construction of [Pi Matrix](/matrix-rendering) compatible hardware, and provides the software to do the rendering (coming soon)
+This project details the construction of Pi Matrix compatible hardware, and provides the software to do the rendering (coming soon)
 
 > Links provided for easy to find product reference, project can be made much more cost efficiently
 >

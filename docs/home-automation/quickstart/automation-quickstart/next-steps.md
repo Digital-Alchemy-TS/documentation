@@ -14,13 +14,17 @@ Let's take a quick tour of the repo to
 
 | The package.json contains useful workspace commands | [![npm_scripts](/img/npm_scripts.png)](/img/npm_scripts.png) |
 | --------------------------------------------------- | ----------------------------------------------------------------------- |
+
 You can run the commands from the command line if you are comfortable, or by using the buttons provided by VSCode.
 
 > **FAT**:
-Don't see the panel?
+> Don't see the panel?
+>
 > - Make sure the `NPM Scripts` option is checked.
 > - Sometimes VSCode may not make the panel visible until you open `package.json`
+
 ### 📁 [scripts/](https://github.com/Digital-Alchemy-TS/automation-quickstart/tree/main/scripts)
+
 This folder contains helper scripts for managing your workspace, and is utilized by the various commands in `package.json`. Re-running the setup script will upgrade the provided scripts with the newest version from the [quickstart](/docs/home-automation/quickstart/automation-quickstart/) repo. The most important one is the `environment.sh`, which is used to managed the NodeJS environment
 
 ```bash
@@ -28,13 +32,17 @@ This folder contains helper scripts for managing your workspace, and is utilized
 ```
 
 ### 📁 [addon/](https://github.com/Digital-Alchemy-TS/automation-quickstart/tree/main/addon)
-This is your [code runner addon](/automation-quickstart/addon), the source is provided as part of the project so you are able to tune the capabilities to your specific needs. By default, it is set up in a very minimal capacity. You are able to add incoming ports, ingress urls for dashboards, and more as part of the config file.
+
+This is your [code runner addon](/docs/home-automation/quickstart/automation-quickstart/addon), the source is provided as part of the project so you are able to tune the capabilities to your specific needs. By default, it is set up in a very minimal capacity. You are able to add incoming ports, ingress urls for dashboards, and more as part of the config file.
 
 ## 💻 Code
+
 You can find your project code under [`src/`](https://github.com/Digital-Alchemy-TS/automation-quickstart/tree/main/src).
+
 ### 🛢 Service functions
 
 Service functions are where all your logic goes. They have a relatively simple anatomy, a function that takes in `TServiceParams` as it's argument. You can read more about the nuances [here](/docs/core).
+
 ```typescript
 function ServiceFunction({ logger }: TServiceParams) {
   logger.info("hello world");
@@ -44,11 +52,13 @@ function ServiceFunction({ logger }: TServiceParams) {
 These functions contain your logic, and can be wired together into larger applications. Your services are provided back to you as property in the input. If you want a complete list of what's available, this is a simple trick -
 
 ![whats_in_this](/img/whats_in_this.png)
+
 ### 🧾 main.ts
 
 This file contains all the wiring for your application. You can define new configurations, import libraries, and attach your service functions so they run. Logic is **NOT SUPPOSED TO GO HERE**
 
 It is structured in 3 parts:
+
 #### Application Definition
 
 Below is the most important items for defining your application, see the type definitions in your editor or [wiring docs](/docs/core/wiring) for more details
@@ -86,6 +96,7 @@ const SUPER_AWESOME_APP = CreateApplication({
 For reference, here is an implementation of `Testing` to show how accessing your services via `TServiceParams` works.
 
 > **Important**:
+
 > 1. Utilizing dashes in your project/service names is discouraged
 > 2. Service function function definitions may be async
 > 3. Limit service return types to **undefined**/**void**, **function**, or **object** types
@@ -101,14 +112,14 @@ export function Example({ my_super_awesome_app, logger, lifecycle }: TServicePar
   my_super_awesome_app.helper;
 
   lifecycle.onReady(() => {
-  // format -
-  // {project name}.{service name}.{return object usage}
-	  my_super_awesome_app.Testing.superAwesomeFunction();
+    // format -
+    // {project name}.{service name}.{return object usage}
+    my_super_awesome_app.Testing.superAwesomeFunction();
   });
 
   return {
     superAwesomeFunction() {
-	  logger.info("Running via service call");
+      logger.info("Running via service call");
     }
   }
 }
@@ -129,7 +140,7 @@ declare module "@digital-alchemy/core" {
 > **ERROR**:
 > What happens when names don't align
 >
-> ![slowstart](/img/slowstart.png)
+> ![slow start](/img/slowstart.png)
 
 #### Bootstrap
 

@@ -2,7 +2,6 @@
 title: 🏡 Rooms
 sidebar_position: 5
 ---
-## 📚 Description
 
 Rooms offer a method to coordinate multiple entities together.
 This is primarily accomplished through the generation of scenes and other related entities, then using those to coordinate other entities.

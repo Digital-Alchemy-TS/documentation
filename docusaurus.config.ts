@@ -100,10 +100,6 @@ const config: Config = {
               to: "/blog",
             },
             {
-              label: "Changelog",
-              to: "/changelog",
-            },
-            {
               label: "GitHub Org",
               href: "https://github.com/Digital-Alchemy-TS",
             },

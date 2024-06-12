@@ -4,7 +4,6 @@ sidebar_position: 3
 ---
 import ReactPlayer from 'react-player'
 
-## 📝 Description
 
 Welcome to `@digital-alchemy/type-writer`!
 

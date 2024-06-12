@@ -3,7 +3,6 @@ title: "📇 Registry"
 authors: [zoe-codez]
 sidebar_position: 3
 ---
-## Description
 
 The `hass` library maintains a copy of the home assistant registry locally, and exposes a variety of tools for interacting with it.
 

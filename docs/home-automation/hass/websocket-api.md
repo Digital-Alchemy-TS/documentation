@@ -3,7 +3,6 @@ title: "🚄 Websocket API"
 authors: [zoe-codez]
 sidebar_position: 5
 ---
-## 📚 Description
 
 The Websocket API is a self-managed method of communicating with Home Assistant. It will automatically connect and auth, coordinate events and updates, and more!
 
