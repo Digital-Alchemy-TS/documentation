@@ -157,9 +157,3 @@ jest.advanceTimersByTime(2000);
 ```
 
 - [Implementation in test](https://github.com/Digital-Alchemy-TS/hass-unit-testing-sample/blob/main/src/tests/scheduled-actions.spec.ts#L23)
-
----
-
-In summary, Digital Alchemy offers a comprehensive solution for implementing unit testing in automation projects. By following the outlined workflow, you can effectively set up tests, mock dependencies, and maintain a stable testing environment. Utilize Jest and other supported frameworks to confidently verify your automations, ensuring reliability and code quality. Embrace unit testing with Digital Alchemy to streamline development and prevent regressions.
-
-Start testing now and elevate your automation journey!
