@@ -5,7 +5,7 @@ import type * as Preset from "@docusaurus/preset-classic";
 const config: Config = {
   title: "Digital Alchemy",
   tagline: "Automating with Typescript",
-  favicon: "assets/cropped.jpg",
+  favicon: "assets/favicon.png",
 
   // Set the production url of your site here
   url: "https://docs.digital-alchemy.app",
@@ -58,12 +58,12 @@ const config: Config = {
 
   themeConfig: {
     // Replace with your project's social card
-    image: "img/cropped.jpg",
+    image: "img/logo.png",
     navbar: {
       title: "Digital Alchemy",
       logo: {
         alt: "Digital Alchemy",
-        src: "img/cropped.jpg",
+        src: "img/logo.png",
       },
       items: [
         { to: "/docs/core", label: "Core", position: "left" },
