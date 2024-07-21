@@ -1,59 +1,80 @@
----
-title: Addon
----
+# 🏃‍♀️ Deployment Addon
 
-This addon acts as a simple configurable execution container for applications based on Digital Alchemy. The code runner addon comes with `NodeJS` installed inside of the container already, just hit go
+[![Add to Home Assistant](https://img.shields.io/badge/Add%20DA%20addons%20to%20my-Home%20Assistant-41BDF5?logo=home-assistant&style=for-the-badge)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2FDigital-Alchemy-TS%2Faddons)
 
-## 💾 Installing & Updating
+This addon acts as a simple configurable execution container for applications based on Digital Alchemy.
+It comes with `Node20`, and is intended for working with builds of `@digital-alchemy` Home Automation applications.
 
-This addon ships as part of the the automation template repo, and is intended to be installed as a local addon. To **install** / **update** the addon using the `package.json` script
+- Manual add link: https://github.com/Digital-Alchemy-TS/addons
+
+![addon store](/img/addon_store.png)
+
+## 🧲 Usage
+
+![code runner options](/img/code_runner_options.png)
+
+### 🏗️ Creating Builds
+
+The **Code Runner** addon is intended to run builds of automation code, instead of acting as a dev server that runs code from `src/`.
+Builds are stored in the `/share` folder, and are produced from inside the **Code Server** addon via package commands provided in the quickstart project.
 
 ```bash
-npm run setup:addon
+yarn build:deploy
 ```
 
-### Overview
+This command will:
 
-It is set up to be extremely minimal, relying on the library and your logic to perform most of the work. If you require access to additional system resoures above and beyond the defaults, you can adjust `config.yaml` to your needs and reinstall the addon
+1. Create a backup of the previous deploy
+2. Remove old deployment `src/`, `node_modules/`, & related lockfiles
+3. Update deployment `package.json`
+4. Produce a new deployment `src/`
 
-> See [add-on documentation](https://developers.home-assistant.io/docs/add-ons/configuration#optional-configuration-options) for valid options
+Dependencies are reinstalled at boot next boot using the addon to ensure proper compatibility.
+This makes the first boot after a deploy take slightly longer to start
 
-## 🗃️ Configuring
+### 🧯 Rollback
 
-Defaults should work for a basic applications
+In case your new build fails to live up to expectations, you roll back to the snapshot taken during the deployment process.
 
-### Option: Application Root
+```bash
+yarn rollback
+```
 
-The root folder where your `package.json` lives. Is normally in the format of `/config/{your_folder_name}/`
+> ⚠️ This will replace ALL data, including synapse database & `node_modules`
 
-### Option: Configuration File
+![example output](/img/rollback.png)
 
-The application can source configuration files from a variety of locations, but for a more predictable deployment it may be preferable to specify a single target file to load from.
+### 🔒 Providing Secrets
 
-Default operation is `app_root/.{application.name}`, same as development.
+`@digital-alchemy/core` has a built in configuration loader suitable for providing secrets to your application.
+A more complete description of the loader can be found in the [config documentation](https://docs.digital-alchemy.app/docs/core/configuration)
 
-### Option: Run Mode
+Your application will automatically have access to Home Assistant within the addon, but if you wish to integrate with other tools that require API keys, these can be provided by several mechanisms.
 
-| mode     | description                                                                 |
-| -------- | --------------------------------------------------------------------------- |
-| `deploy` | **(recommended)** run the code out of the `deploy/` folder                  |
-| `run`    | run code directly out of `src/`, quick and dirty                            |
-| `watch`  | run code directly out of `src/`, automatically reload server on code change |
+Using the example of setting the `TOKEN` configuration for your application (`config.home_automation.TOKEN` via `TServiceParams`):
 
-## 🚧 Working with deploys
+#### `env` file
 
-### Creating new deploys
+Applications will automatically look for a `.env` file as part of bootstrap.
 
-The `npm run build:deploy` command follows this workflow to create `deploy/`:
+> `/share/home_automation/.env`
 
-- take a snapshot of previous deploy (if present)
-- create production build of your code
-- generate dedicate set of `node_modules` for extra safety
+```env
+; {module_name}_{key}={value}
+HOME_AUTOMATION_TOKEN=super_special_api_key
+```
 
-The addon will need to be manually restarted in order to load new changes.
+#### config file
 
-### 😱 Something go wrong?
+You can also provide your configuration in structured configuration files.
+These can be `ini`, `json`, or `yaml` formatted.
 
-The snapshot taken during the deploy process lets you quickly restore. Use `npm run rollback` to bring back your previous `deploy/`
+> For yaml, these paths are valid:
+>
+> - `/share/home_automation/.home_automation.yaml`
+> - `/share/.home_automation.yaml`
 
-The development server may also be used in a pinch.
+```yaml
+home_automation:
+  TOKEN: "super_special_api_key"
+```
