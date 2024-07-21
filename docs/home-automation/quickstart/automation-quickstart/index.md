@@ -29,7 +29,7 @@ curl -fsSL https://setup.digital-alchemy.app -o setup.sh; bash setup.sh
 
 This command will:
 
-- Download [setup script](./scripts/setup.sh) & run it
+- Download [setup script](https://raw.githubusercontent.com/Digital-Alchemy-TS/automation-quickstart/main/scripts/setup.sh) & run it
 - Install NodeJS on your system
 - Clone this repository
 - Set up type definitions
