@@ -6,13 +6,13 @@ authors: [zoe-codez]
 
 > This guide is part of a series. Check out the previous steps here
 >
-> 1. Check out the [quickstart](/docs/home-automation/quickstart/automation-quickstart/) guide to create your own project
+> 1. Check out the [quickstart](/docs/home-automation/quickstart/haos/) guide to create your own project
 
 Now that we have a foundation on **what is a service** / **how to wire them together**, let's build on that by creating a basic automation.
 
 ## 🌐 Connecting to Home Assistant
 
-For this, we'll need to import the [hass](/docs/home-automation/hass/) library. If you used the [quickstart](/docs/home-automation/quickstart/automation-quickstart/) project, this should already be set up for you.
+For this, we'll need to import the [hass](/docs/home-automation/hass/) library. If you used the [quickstart](/docs/home-automation/quickstart/haos/) project, this should already be set up for you.
 
 ```typescript
 import { CreateApplication } from "@digital-alchemy/core";
