@@ -16,12 +16,13 @@ Tuned for [HAOS](https://developers.home-assistant.io/docs/operating-system/) & 
 Comes with an [addon](/docs/home-automation/quickstart/haos/addon) for running code builds in the background.
 
 
-## 🐳 Standalone
+## 💼 Standalone
 
 - 📓 [Docs](/docs/home-automation/quickstart/standalone)
 - 🔗 [Github](https://github.com/Digital-Alchemy-TS/standalone-template)
 
-
+A starting point without all of the HAOS specific tools.
+Perfect for those running containers, or just want to keep your code running on a separate machine.
 
 ## WIP
 
