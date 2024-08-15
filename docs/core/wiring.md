@@ -137,16 +137,13 @@ The major capability of applications to distinguish from libraries is the abilit
 
 | Property                 | Description                                                                                                                                     |
 | ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| `configuration`      | Provide an alternate set of default [Configuration](/docs/core/configuration) variables, overriding project-level defaults.                                             |
+| `configuration`      | Provide an alternate set of default [configuration](/docs/core/configuration) variables, overriding project-level defaults.                                             |
 | `customLogger`       | Use your logger instead of the default [built in one](/docs/core/logger).                                                                                |
 | `handleGlobalErrors`     | Should the library handle errors that bubble up to the global context?            |
 | `showExtraBootStats` | When bootstrap completes, log some statistics about what happened. If you are experiencing long boot times, this might help you figure out why. |
+| `bootLibrariesFirst` | Defer construction of application services until after `onBootstrap` has completed. |
 
 The promise for the `.bootstrap` method will resolve when all startup lifecycle events have been completed.
-
-### 👶 [Lifecycle](/docs/core/lifecycle)
-
-The application lifecycle is a key part to the way applications bootstrap.
 
 ## 🛑 Teardown
 

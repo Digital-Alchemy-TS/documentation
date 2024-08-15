@@ -1,5 +1,5 @@
 ---
-title: Tips
+title: 💡 Tips
 ---
 
 ## Tips and Tricks

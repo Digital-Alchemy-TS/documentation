@@ -55,3 +55,42 @@ function MyService({ logger, lifecycle }: TServiceParams) {
   }, -2);
 }
 ```
+
+## 🏎️ Boot Libraries First
+
+> `bootLibrariesFirst` is a flag that can be passed to the bootstrap command of your application.
+
+By passing this flag, the construction phase will be moved:
+
+- **from:** just after all the libraries are built
+- **to:** just after `onBootstrap` has completed
+
+### Applications
+
+By setting this flag, you get to ignore a lot of the library bootstrap process.
+
+- everything is configured from the start
+- home assistant services can be called any time
+- entities already have state
+
+> 💡 For **home automation** applications, it is recommended to set this
+>
+> ```typescript
+> myApplication.bootstrap({ bootLibrariesFirst: true });
+> ```
+
+### Libraries
+
+Working with the lifecycle events to ensure your resources are available at the correct time is essential.
+Internally wrapping a `lifecycle` call can be an easy way to provide a clean api while accounting for the lifecycle complexities.
+
+```typescript
+function SpecialBuilder({ logger, lifecycle }: TServiceParams) {
+
+  return function(data: ExampleOptions) {
+    lifecycle.onReady(async () => {
+      // waits for ready before running
+      // run immediately if ready already complete
+    })
+  }
+}

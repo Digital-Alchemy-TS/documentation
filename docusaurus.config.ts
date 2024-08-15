@@ -66,12 +66,25 @@ const config: Config = {
         src: "img/logo.png",
       },
       items: [
-        { to: "/docs/core", label: "Core", position: "left" },
-        { to: "/docs/home-automation", label: "Home Automation", position: "left" },
-        { to: "/docs/support", label: "Support Libraries", position: "left" },
+        { to: "/docs/core", label: "🧩 Core", position: "left" },
+        {
+          to: "/docs/home-automation",
+          label: "🏠 Home Automation",
+          position: "left",
+        },
+        {
+          to: "/docs/home-automation/quickstart",
+          label: "🚀 Quickstart",
+          position: "left",
+        },
+        {
+          to: "/docs/support",
+          label: "🔧 Support Libraries",
+          position: "left",
+        },
         {
           href: "https://github.com/Digital-Alchemy-TS",
-          label: "GitHub",
+          label: "🔗 GitHub",
           position: "right",
         },
       ],
@@ -82,10 +95,7 @@ const config: Config = {
         {
           title: "Community",
           items: [
-            {
-              label: "Discord",
-              href: "https://discord.gg/JkZ35Gv97Y",
-            },
+            { label: "Discord", href: "https://discord.gg/JkZ35Gv97Y" },
             {
               label: "HASS Community Guide",
               href: "https://community.home-assistant.io/t/building-automations-in-typescript-with-digital-alchemy/709902/4",
@@ -95,10 +105,7 @@ const config: Config = {
         {
           title: "More",
           items: [
-            {
-              label: "Blog",
-              to: "/blog",
-            },
+            { label: "Blog", to: "/blog" },
             {
               label: "GitHub Org",
               href: "https://github.com/Digital-Alchemy-TS",

@@ -11,9 +11,7 @@ import ReactPlayer from 'react-player'
 Welcome to the **Digital Alchemy** Home Automation quickstart project!
 
 This guide is built for [HAOS](https://developers.home-assistant.io/docs/operating-system/) & setups where the [Supervisor](https://developers.home-assistant.io/docs/supervisor/) is available.
-The is intended to run from inside of a [Local Addon](/docs/home-automation/quickstart/automation-quickstart/addon), and many workflows have been fined tuned for the specific use case.
-
-> 🦺 Docker based setups and those wanting to run code remotely should use the [Automation Standalone](https://github.com/Digital-Alchemy-TS/automation-standalone) project.
+The is intended to run from inside of an [addon](/docs/home-automation/quickstart/haos/addon), and many workflows have been fined tuned for the specific use case.
 
 ## 🚀 Setup
 
@@ -29,7 +27,7 @@ curl -fsSL https://setup.digital-alchemy.app -o setup.sh; bash setup.sh
 
 This command will:
 
-- Download [setup script](https://raw.githubusercontent.com/Digital-Alchemy-TS/automation-quickstart/main/scripts/setup.sh) & run it
+- Download [setup script](https://raw.githubusercontent.com/Digital-Alchemy-TS/haos-template/main/scripts/setup.sh) & run it
 - Install NodeJS on your system
 - Clone this repository
 - Set up type definitions
@@ -55,7 +53,7 @@ Once your environment is set up, you can use provided commands from within the `
 | NPM Command | Description |
 | ---- | ---- |
 | **`upgrade`** | ⏺️ Upgrade all `@digital-alchemy` dependencies<br />**Automatically runs `type-writer` afterwards** |
-| **`develop`** | ⏩ Run the development server<br />**Not intended for long term deployments!** |
-| **`develop:watch`** | 👀 Run the development server<br />**Automatically restart server on code changes** |
-| **`build:deploy`** | 🏗️ Create a build of your code in the `/share/digital_alchemy/` folder<br />**Addon has been set up to run from here** |
+| **`dev`** | ⏩ Run the development server<br />**Not intended for long term deployments!** |
+| **`watch`** | 👀 Run the development server<br />**Automatically restart server on code changes** |
+| **`build`** | 🏗️ Create a build of your code in the `/share/digital_alchemy/` folder<br />**Addon has been set up to run from here** |
 | **`type-writer`** | 🖨️ Rebuild custom type definitions for Home Assistant<br />**Run any time you modify your setup for more accurate definitions** |
