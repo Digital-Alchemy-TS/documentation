@@ -48,6 +48,12 @@ This configuration block can be added to your
   port=1883
 ```
 
+or as json in your `.env`
+
+```
+CLIENT_OPTIONS={"host":"localhost","port":1883}
+```
+
 ## 🛠 Usage
 
 > **Caution**: Library is in an "experimental" state
