@@ -1,5 +1,6 @@
 ---
-title: MQTT
+title: 📡 MQTT
+sidebar_position: 1
 ---
 
 Welcome to `@digital-alchemy/mqtt-extension`!

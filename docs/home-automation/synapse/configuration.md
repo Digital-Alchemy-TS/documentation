@@ -1,7 +1,7 @@
 ---
 title: "⚙️ Configuration"
 authors: [zoe-codez]
-sidebar_position: 4
+sidebar_position: 5
 ---
 
 This documentation provides a comprehensive overview of all configuration options available in the Synapse library. Configuration variables can be set through environment variables, CLI switches, or configuration files in `ini`, `yaml`, and `json` formats.
