@@ -4,60 +4,98 @@ authors: [zoe-codez]
 sidebar_position: 4
 ---
 
-Synapse entity locals are intended as a generic data cache that can be associated with a specific entity.
-Updates to locals do not go out to Home Assistant, and do not emit any entity update events.
+In addition to acting as entities for Home Assistant, `synapse` entities have the ability to store generic data locally.
+Data gets serialized and placed in the same sqlite database that maintains current state for your application.
 
-You have the ability to provide defaults, with current value being tracked in sqlite for easy restoration between instances of your app.
+Updates to `locals` persist across boots of your application, and modifications do not trigger update events.
+The system operates the same way for all entity domains.
 
-## 🪇 Example usage
+## 🚀 Creation
+
+Working with locals has 3 elements to keep in mind:
+
+1. type definitions
+2. default values
+3. runtime values
+
+Data is tracked by entity `unique_id` and property name, with the internals handling value resolution and storage.
+
+### ✏️ Defining types
+
+In order to keep typescript happy, you must **explicitly** provide type definitions for your locals for.
+Typescript will not infer these values properly for normal operations.
+
+> inline definition
 
 ```typescript
-const exampleSensor = synapse.sensor({
-  // ...
-  locals: { lastUpdate: Date.now() },
-});
-
-async function runSomeLogic() {
-  const ranRecently = dayjs().subtract(30, 'second').isAfter(exampleSensor.locals.lastUpdate);
-  if (ranRecently) {
-    // don't do anything
-    return;
-  }
-  // do some logic logic
-  exampleSensor.locals.lastUpdate = Date.now();
-}
+synapse.sensor<{
+  locals: {
+    offlineSince?: number;
+    operation: "idle" | "running" | "error";
+  };
+}>({ ... });
 ```
 
-## ⚙️ Defaults interactions
-
-Locals will source their value from data provided at runtime first, falling back to hard coded defaults.
-
+> separate type
 
 ```typescript
 type SensorLocals = {
-  lastUpdate: number;
-  operation?: string
-}
-const sensor = synapse.sensor<SensorStateType, SensorLocals>({
-  locals: { lastUpdate: Date.now() },
-});
-// current state
-sensor.locals.lastUpdate === time at boot
-sensor.locals.operation === undefined;
+  offlineSince?: number;
+  operation: "idle" | "running" | "error";
+};
 
-// updates as expected
-sensor.locals.lastUpdate = Date.now()
-sensor.locals.operation = "getting weird";
-
-delete sensor.locals.lastUpdate; // returns to time at boot
-delete sensor.locals.operation; // returns to undefined
+synapse.sensor<{ locals: SensorLocals }>({ ... });
 ```
 
-## 🎹 Language operators
+### ⚙️ Defaults & value resolution
 
-Locals attempt to act naturally with normal language operators, working with sqlite to match values as appropriate.
+You are able to provide defaults for fields to alter the way resolution works.
+
+If a field has not have a runtime value provided, the system will attempt to source from the defaults.
+
+#### Defaults & resetting
+
+For example, with
+
+```typescript
+const sensor = synapse.sensor<{ locals: SensorLocals }>({
+  locals: { operation: "idle" },
+});
+// current state
+sensor.locals.offlineSince === undefined;
+sensor.locals.operation === "idle";
+```
+
+Once set, values will be persisted returned as expected.
+
+```typescript
+sensor.locals.offlineSince = Date.now();
+sensor.locals.operation = "error";
+```
+
+The `delete` operator can be used to clear the current value from a specific field.
+
+```typescript
+delete sensor.locals.offlineSince;
+// returns to undefined
+
+delete sensor.locals.operation;
+// returns to "idle"
+```
+
+## 🪇 Supported operations
+
+### ownKeys
+
+`Object.keys` will return the list of keys with values + those available through defaults
+
+```typescript
+const allLocals = Object.keys(sensor.locals);
+```
 
 ### has
+
+Sources from the same list as `ownKeys` to allow operations that check for presence of properties.
 
 ```typescript
 if ("operation" in sensor.locals) {
@@ -65,26 +103,24 @@ if ("operation" in sensor.locals) {
 }
 ```
 
-### ownKeys
+### set & reset
+
+As shown above, individual keys can be set / reset as needed. The same concept applies to the `locals` object as a whole.
+The `delete` operator can be used directly on `locals` to reset to defaults.
 
 ```typescript
-const allLocals = Object.keys(sensor.locals); // ✅
+delete sensor.locals;
 ```
 
-### set
-
-In addition to operating against single properties, the locals can also be assigned to as an entire block.
-On the inside, the system will remove & set properties as appropriate to match the incoming data.
+This can also be done via assignment:
 
 ```typescript
-sensor.locals = { lastUpdate: Date.now(), operation: "example" };
+sensor.locals = {};
 ```
 
-### delete
-
-The delete operator can be used to clear data from locals (and remove from sqlite).
-You can use this with both single properties, and against the locals as a whole.
+The assignment operator can be used for code efficient batch updates
 
 ```typescript
-delete sensor.locals; // remove all locals data & reset to defaults
+// clears offlineSince if present
+sensor.locals = { operation: "running" };
 ```
