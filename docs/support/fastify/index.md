@@ -1,5 +1,5 @@
 ---
-title: Fastify
+title: 🌐 Fastify
 ---
 
 ## 🥡 Import Code
