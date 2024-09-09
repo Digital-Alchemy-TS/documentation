@@ -30,11 +30,6 @@ The call proxy will adjust to match the specific set of services available on yo
 
 ## ⚠️ Gotchas
 
-### Services With Responses
-
-Some services provide response data as part of the service call, for example `weather.get_forecasts`.
-See [issue](https://github.com/Digital-Alchemy-TS/hass/issues/34)
-
 ### Lifecycle availability
 
 Calling services cannot be done prior to the `onReady` lifecycle event.
