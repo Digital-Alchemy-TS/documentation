@@ -13,10 +13,10 @@ The `type-writer` script now provides more information about your setup in the f
 
 The project now has direct support for Home Assistant's new `label` feature, as well as bringing matching support for existing `area`, `floor`, and `device`. You are able to manage `label` & `area` for entities through convenient APIs, making for some easy migrations & writing quick batch operations for your system. Matching querying methods have also been provided:
 
-- `hass.entity.byArea`
-- `hass.entity.byFloor`
-- `hass.entity.byDevice`
-- `hass.entity.byLabel`
+- `hass.id.area`
+- `hass.id.floor`
+- `hass.id.device`
+- `hass.id.label`
 
 All of these methods are set up so they return string unions representing what you will receive at runtime. You are also able to filter by domain, quickly extracting a subset of entities from the existing groups.
 

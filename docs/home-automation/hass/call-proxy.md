@@ -50,7 +50,7 @@ export function Example({ hass, lifecycle }: TServiceParams) {
     hass.call.switch.turn_on(...)
   });
 
-  hass.entity.byId(...).onUpdate(() => {
+  hass.refBy.id(...).onUpdate(() => {
     // ✅ here works too
     hass.call.switch.turn_on(...)
   });

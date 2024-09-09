@@ -6,12 +6,6 @@ sidebar_position: 5
 
 | Domain                 | Verified |
 |------------------------|----------|
-| [Binary Sensor](https://developers.home-assistant.io/docs/core/entity/binary-sensor)        | *        |
-| [Button](https://developers.home-assistant.io/docs/core/entity/button)               | *        |
-| [Date](https://developers.home-assistant.io/docs/core/entity/date)                 | *        |
-| [Datetime](https://developers.home-assistant.io/docs/core/entity/datetime)             | *        |
-| [Lock](https://developers.home-assistant.io/docs/core/entity/lock)                 | *        |
-| [Number](https://developers.home-assistant.io/docs/core/entity/number)               | *        |
 | [Scene](https://developers.home-assistant.io/docs/core/entity/scene)                | *        |
 | [Select](https://developers.home-assistant.io/docs/core/entity/select)               | *        |
 | [Switch](https://developers.home-assistant.io/docs/core/entity/switch)               | *        |

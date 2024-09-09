@@ -88,7 +88,7 @@ It's super simple to build tests for these situations as well!
 Here is a quick function that sends a notification when a leak is detected:
 
 ```typescript
-hass.entity.byId("binary_sensor.water_heater_leak_sensor").onUpdate((new_state) => {
+hass.refBy.id("binary_sensor.water_heater_leak_sensor").onUpdate((new_state) => {
   if (new_state.state === "on") {
     // 😱 oh no!
     await hass.call.notify.notify({ message: "Water heater leak detected!" });

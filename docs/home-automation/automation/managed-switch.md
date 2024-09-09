@@ -14,7 +14,7 @@ Gone are the days of attaching to a series of events, building complex state tra
 A more traditional automation
 
 ```typescript
-const mySwitch = hass.entity.byId("switch.porch_light");
+const mySwitch = hass.refBy.id("switch.porch_light");
 scheduler.cron({
   schedule: CronExpression.EVERY_DAY_AT_8PM,
   exec: () => mySwitch.turn_on()
@@ -42,7 +42,7 @@ Things only get better as your logic gets more complex.
 Switch state can be recalculated on demand in response to other entities updating.
 
 ```typescript
-const houseMode = hass.entity.byId("select.house_mode");
+const houseMode = hass.refBy.id("select.house_mode");
 automation.managed_switch({
   context,
   entity_id: "switch.porch_light",

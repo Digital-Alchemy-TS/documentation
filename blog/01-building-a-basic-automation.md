@@ -42,7 +42,7 @@ It's finally time to the application do something productive! Let's start out wi
 import { TServiceParams } from "@digital-alchemy/core";
 
 export function BasicAutomation({ hass, logger }: TServiceParams) {
-  const mySensor = hass.entity.byId("binary_sensor.my_example_sensor");
+  const mySensor = hass.refBy.id("binary_sensor.my_example_sensor");
 
   mySensor.onUpdate(async (new_state, old_state) => {
     logger.info(
@@ -66,8 +66,8 @@ import { TServiceParams } from "@digital-alchemy/core";
 const REPEAT_NOTIFICATION_INTERVAL = 1000 * 60 * 5;
 
 export function GaragePester({ scheduler, logger, hass, internal }: TServiceParams) {
-  const isHome = hass.entity.byId("binary_sensor.i_am_home");
-  const garageIsOpen = hass.entity.byId("binary_sensor.garage_is_open");
+  const isHome = hass.refBy.id("binary_sensor.i_am_home");
+  const garageIsOpen = hass.refBy.id("binary_sensor.garage_is_open");
   let stop: () => void;
 
   // UPDATE TRIGGER
@@ -127,7 +127,7 @@ Timers don't need to just be set in response to events, they can be a central fe
 import { CronExpression, sleep, TServiceParams } from "@digital-alchemy/core";
 
 export function WeatherReport({ scheduler, logger, hass }: TServiceParams) {
-  const forecast = hass.entity.byId("weather.forecast_home");
+  const forecast = hass.refBy.id("weather.forecast_home");
 
   async function SendWeatherReport() {
     const [today] = forecast.attributes.forecast;

@@ -71,7 +71,7 @@ One is a native entity provided by Home Assistant, another is a synapse entity w
 The state of the binary sensor depends on some combination of the two states.
 
 ```typescript
-const entityA = hass.entity.byId( ... );
+const entityA = hass.refBy.id( ... );
 const switchB = synapse.switch( ... );
 synapse.binary_sensor({
   is_on: {
