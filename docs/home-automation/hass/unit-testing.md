@@ -44,7 +44,7 @@ You can explore the code in the repo, but as a light overview of the logic being
 > They encompass a set of objects or data that are instantiated before running specific test cases, ensuring a consistent environment for testing.
 > Fixtures help in setting up the initial conditions necessary for the tests to be conducted accurately and reliably, ultimately enhancing the repeatability and reliability of unit tests.
 
-The companion project [Mock Assistant](/docs/home-automation/hass/mock-assistant) has been provided as part of the `hass` library.
+The companion project [Mock Assistant](/docs/testing/automations/mock-assistant) has been provided as part of the `hass` library.
 It's role is to generate testing fixures for your application, and inject them into the application to assist the testing process.
 
 ## Building tests

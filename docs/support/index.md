@@ -1,6 +1,6 @@
 ---
 title: 🔧 Support Libraries
-sidebar_position: 20
+sidebar_position: 4
 ---
 
 > 📡 [MQTT](/docs/support/mqtt/)
@@ -11,7 +11,7 @@ Subscribe with wildcard, publish messages, and access the internal library for m
 
 > 🌐 [Fastify](/docs/support/fastify/)
 
-HTTP bindings, uses port `3000` by default.
+Basic HTTP bindings, uses port `3000` by default.
 
 > 🧠 [Gotify](/docs/support/gotify)
 

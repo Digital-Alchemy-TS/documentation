@@ -149,3 +149,5 @@ The promise for the `.bootstrap` method will resolve when all startup lifecycle 
 ## 🛑 Teardown
 
 The opposite workflow from the bootstrap. Clean up any resources, emit some "going offline" messages, flush caches, etc. The library will automatically listen for `SIGTERM`, as well as a few other events, in order to determine a proper time to run this flow.
+
+This will automatically be triggered in response to `SIGTERM` & `SIGINT` (ctrl-c & related).

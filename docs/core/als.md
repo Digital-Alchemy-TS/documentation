@@ -1,5 +1,5 @@
 ---
-title: 🧺 Cache
+title: 🧺 AsyncLocalStorage
 sidebar_position: 1
 description: "Library cache interfaces"
 ---

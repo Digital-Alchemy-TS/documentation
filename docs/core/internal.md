@@ -31,6 +31,5 @@ The `internal` is available on `TServiceParams` and provides some basic internal
 
 | Property        | Description                                                              |
 | --------------- | ------------------------------------------------------------------------ |
-| `fetch`         | Create a new instance of [fetcher](/docs/core/fetch)                      |
 | `configuration` | Interact with the [configuration](/docs/core/configuration) system, get metadata / update values |
 | `logger`        | Make tweaks to the way the [logger](/docs/core/logger) works                              |
