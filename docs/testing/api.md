@@ -22,22 +22,14 @@ describe("A bunch of tests", () => {
   });
 
   it("can accept applications", () => {
-    const runner = TestRunner({ application: MY_APPLICATION });
+    const runner = TestRunner({ target: MY_APPLICATION });
   });
 
   it("can accept libraries", () => {
-    const runner = TestRunner({ libraries: LIB_SPECIAL_SAUCE });
+    const runner = TestRunner({ target: LIB_SPECIAL_SAUCE });
   });
 });
 ```
-
-#### Params
-
-| Name | Description |
-| --- | --- |
-| `application` | Reference to app created by `CreateApplication` |
-| `library` | Reference to library created by `CreateLibrary` |
-| `name` | name to use with testing app (**default**: `testing`) |
 
 ## ⚙️ Configuration
 
@@ -102,21 +94,107 @@ const runner = TestRunner({ application: THING })
   .appendService(({ logger, ...etc }) => {}, "SpecialTestingService");
 ```
 
-or default to uuid
+or default to `uuid`
 
 ```typescript
 const runner = TestRunner({ application: THING })
   .appendService(({ logger }) => { logger.info("yolo"); });
 ```
 
-
 ### ♻️ Replace Library
+
+`.replaceLibrary` allows you to substitute a library in the dependency tree for another.
+
+> ⚠️ Compatibility is not enforced, careful with replacements
+
+```typescript
+const runner = TestRunner({ application: THING })
+  .replaceLibrary("hass", LIB_SPECIAL_HASS_REPLACEMENT);
+```
+
 ### 🩻 Replace Service
+
+`.replaceService` operates similarly to replacing libraries, but it iss intended to replace a single service in the module being tested instead.
+
+> ⚠️ Compatibility is not enforced, careful with replacements
+
+```typescript
+const runner = TestRunner({ application: THING })
+  .replaceLibrary("hass", LIB_SPECIAL_HASS_REPLACEMENT);
+```
+
+### 👉 Pick Service
+
+Pick a list of services to load from the target module, all others will not load as part of the test.
+
+> - Follow up calls replace list
+> - Cannot be combined with `.omitService`
+
+### 🔇 Omit Service
+
+Exclude a list of services from your target module, all others will load
+
+> - Follow up calls replace list
+> - Cannot be combined with `.pickService`
+
 
 ## 🧪 Test Lifecycle
 
 ### 🛠️ Setup
 
+Add a service that gets run before the test.
+
+```typescript
+const runner = TestRunner({ application: THING })
+  .setup(( logger, hass ) => {
+    // test setup logic
+  });
+```
+
+Internally, this service is wired into it's own library with dependencies all other modules.
+This forces the `setup` to run after all other libraries have initialized, but before your test runs.
+
 ### 🚀 Run
 
+It's time to actually run a test!
+
+`.run` will build a new application using
+
+```typescript
+await runner.run(({ hass }) => {
+  // your test logic here
+  expect(hass).toBeDefined();
+});
+```
+
 ### 🧹 Teardown
+
+By default, tests do not tear themselves down.
+For many minimal situations this is fine, other times you may need to gain direct control of when your app stops.
+
+Dealing with the scheduler is one situation where this is required
+
+```typescript
+const spy = jest.fn();
+
+// disconnect the clock from reality
+jest.useFakeTimers();
+
+// start the app
+const app = await runner.run(({ scheduler }) => {
+  scheduler.cron({
+    exec: spy,
+    schedule: CronExpression.EVERY_MINUTE,
+  });
+});
+
+// fast forward an hour
+jest.advanceTimersByTime(60 * 60 * 1000);
+expect(spy).toHaveBeenCalledTimes(60);
+
+// return to reality
+jest.useRealTimers();
+
+// teardown
+await app.teardown();
+```
