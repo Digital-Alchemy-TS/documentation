@@ -142,7 +142,7 @@ The major capability of applications to distinguish from libraries is the abilit
 | `handleGlobalErrors`     | Should the library handle errors that bubble up to the global context?            |
 | `showExtraBootStats` | When bootstrap completes, log some statistics about what happened. If you are experiencing long boot times, this might help you figure out why. |
 | `bootLibrariesFirst` | Defer construction of application services until after `onBootstrap` has completed. |
-| `loggerOptions`      | Additional options to fine tune the way the built in logger works |
+| `loggerOptions`      | Additional options to fine tune the way the built in logger works <sup>[logger docs](http://localhost:3001/docs/core/logger)</sup> |
 
 The promise for the `.bootstrap` method will resolve when all startup lifecycle events have been completed.
 
