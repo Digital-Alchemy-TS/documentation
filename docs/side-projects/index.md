@@ -1,7 +1,7 @@
 ---
-title: Side Projects
+title: 🏗️ Side Projects
 authors: [zoe-codez]
-sidebar_position: 4
+sidebar_position: 5
 ---
 
-Side Projects
+Other projects published under the org that aren't related to other sections.

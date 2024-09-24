@@ -2,12 +2,11 @@
 title: ⏰ Scheduler
 ---
 
-The scheduler is provided as a lifecycle aware method of executing functions on regular intervals. When using the scheduler:
+The `scheduler` option provided by `TServiceParams` provides a few mechanisms for creating different schedules.
+Operations set up by the `scheduler` are lifecycle aware, meaning that they will:
 
-- Automatic error trapping
-- Callbacks only start when it hits the "ready" state (after `onReady` completes)
-- Automatic termination on application teardown
-- Optional metrics on frequency and performance
+- only start when the application is fully ready
+- automatically stop when you teardown the application
 
 ## 🛠 Methods
 
@@ -18,12 +17,12 @@ The scheduler is provided as a lifecycle aware method of executing functions on 
 ```typescript
 scheduler.cron({
   schedule: CronExpression.MONDAY_TO_FRIDAY_AT_09_30AM,
-  exec:() => logger.info("running on a cron"),
+  exec: () => logger.info("running on a cron"),
 });
 
 scheduler.cron({
   schedule: "0 1-23/2 * * *",
-  exec:() => logger.info("complex schedules"),
+  exec: () => logger.info("complex schedules"),
 });
 ```
 

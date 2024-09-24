@@ -142,7 +142,7 @@ export function MyService({ logger, config, lifecycle }: TServiceParams) {
 
 Some workflows may require changing values for configurations as part of their logic. This can be accomplished through [Internal](/docs/core/internal)
 
-ServiceParams/internal methods. The `EVENT_CONFIGURATION_UPDATED` event is fired from [Event](/docs/core/event) on each config update.
+ServiceParams/internal methods. The `EVENT_CONFIGURATION_UPDATED` event is fired from `event` on each config update.
 
 ```typescript
 export function MyService({ logger, internal, lifecycle }: TServiceParams) {

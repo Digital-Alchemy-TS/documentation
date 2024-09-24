@@ -3,33 +3,35 @@ ignorePaths: []
 dictionaryDefinitions: []
 dictionaries: []
 words:
-  - codez
-  - webbertakken
-  - webber
-  - takken
-  - hass
-  - quickstart
-  - grocy
-  - fastify
-  - hacs
-  - pino
-  - dominikmicuta
-  - haos
-  - wago
-  - keyof
-  - quickboot
-  - execa
-  - keymap
-  - lutron
-  - pico
-  - swappable
-  - caseta
-  - hassio
-  - tsdoc
-  - tldr
-  - gotify
-  - typeof
-  - nestjs
   - automations
+  - caseta
+  - codez
+  - dominikmicuta
+  - esmodules
+  - execa
+  - fastify
+  - gotify
+  - grocy
+  - hacs
+  - haos
+  - hass
+  - hassio
+  - keymap
+  - keyof
+  - lutron
+  - nestjs
+  - pico
+  - pino
+  - quickboot
+  - quickstart
+  - skynet
+  - swappable
+  - takken
+  - tldr
+  - tsdoc
+  - typeof
+  - wago
+  - webber
+  - webbertakken
 ignoreWords: []
 import: []
