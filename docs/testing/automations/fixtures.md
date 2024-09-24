@@ -34,19 +34,17 @@ The file is intended to be shared between all tests, but you can specify a diffe
 
 ## 📝 Usage in tests
 
-### `hass`
-
 Once the fixtures file is created, all you need to do is append `LIB_MOCK_ASSISTANT` to your test.
 
 ```typescript
 testRunner.appendLibrary(LIB_MOCK_ASSISTANT)
 ```
 
-This module contains all the logic to [monkey patching](https://en.wikipedia.org/wiki/Monkey_patch) the internal `hass` library so it can use your fixtures file instead of the real socket.
+The library will automatically patch `hass` in a way that allows it to work off the target fixtures file instead of requiring live data.
 
-Library includes tools for:
+**Included data** -
 
-- registry interactions
+- registry data
   - zone
   - label
   - area
@@ -55,9 +53,5 @@ Library includes tools for:
   - floor
   - label
 - configuration setup
-- entity state setup & manipulation
-- fake socket connection
-- etc
-
-
-### `synapse`
+- entity states & attributes
+- available services
