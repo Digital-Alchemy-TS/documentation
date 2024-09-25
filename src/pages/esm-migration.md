@@ -41,6 +41,18 @@ Add this line to your package file
 ... rest of package file
 ```
 
+If you have `type-writer` installed, your `scripts` will also need to be updated -
+
+```json
+  "scripts": {
+    // before
+    "type-writer": "type-writer",
+
+    // after
+    "type-writer": "npx type-writer",
+  }
+```
+
 #### `tsconfig.json`
 
 > [Reference file](https://raw.githubusercontent.com/Digital-Alchemy-TS/haos-template/refs/heads/main/tsconfig.json)
