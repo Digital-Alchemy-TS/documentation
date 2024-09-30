@@ -1,6 +1,6 @@
 ---
 title: Project Home
-description: Ergonomic low dependency Typescript framework with custom tools for type safe Home Assistant interactions
+description: Read the docs, check out the current state of the project and extended notes on how to use the various features
 ---
 
 ## 👋 Welcome
