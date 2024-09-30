@@ -5,7 +5,7 @@ import type * as Preset from "@docusaurus/preset-classic";
 const config: Config = {
   title: "Digital Alchemy",
   tagline: "Ergonomic low dependency Typescript framework with custom tools for type safe Home Assistant interactions",
-  favicon: "assets/img/favicon.png",
+  favicon: "img/favicon.png",
 
   // Set the production url of your site here
   url: "https://docs.digital-alchemy.app",
