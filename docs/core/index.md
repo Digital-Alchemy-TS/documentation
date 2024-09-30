@@ -4,32 +4,35 @@ id: core_index
 sidebar_position: 1
 description: "Hub page for core library tools"
 ---
-Welcome to `@digital-alchemy/core`!
 
-The core library provides the basic utilities required to define services and wire them together into higher level modules.
-These utilities are not built for any predefined use case, and are suitable for large & complex applications, quick scripts, web servers, home automation, and more.
+[![codecov](https://codecov.io/github/Digital-Alchemy-TS/core/graph/badge.svg?token=IBGLY3RY68)](https://codecov.io/github/Digital-Alchemy-TS/core)
+[![version](https://img.shields.io/github/package-json/version/Digital-Alchemy-TS/core)](https://www.npmjs.com/package/@digital-alchemy/core)
+[![stars](https://img.shields.io/github/stars/Digital-Alchemy-TS/core)](https://github.com/Digital-Alchemy-TS/core)
 
-Easy type safety is at built into the framework from the start, using a combination of declaration merging and utility types to build a standard import for your code.
+The core library is a minimal dependency framework for building Typescript based applications and libraries.
+It aims to provide some basic workflows and tools that can be used to create a variety of different types of projects.
 
 ## 🌐 Core Library Overview
 
-Code is organized into 3 distinct types:
+### ⚙️ [Configuration](/docs/core/configuration)
 
-### 📚 Module definitions
+Define and load structured configuration data from files, merge data from environment variables, and more.
 
-These are created with the `CreateLibrary` / `CreateApplication` functions and define the way that module internally relates to itself, as well as the available configurations it can consume.
+### 📝 [Logger](/docs/core/logger/api)
 
-Modules are populated with services and configuration definitions. They can be then combined with each other and bootstrapped to form a running application.
+Advanced logging interface for detailed and customizable output, compatible with external libraries for specialized logging needs.
 
-### ⁉️ Tests
+### ⏲️ [Scheduler](/docs/core/scheduler)
 
-Testing is important and `@digital-alchemy` helps you to do that.
-The core library exports a series of utilities for [rebuilding modules](/docs/core/modules) and [testing](/docs/testing/) them to ensure your logic continues to operate as expected.
+Lifecycle-aware task scheduling, featuring flexible timing functions and robust error handling.
 
+### 🔄 [Lifecycle Hooks](/docs/core/lifecycle)
 
-### 📩 Helpers & utilities
+Run commands at a variety of predetermined times during your application's boot or shutdown sequence.
 
-Primarily type definitions, constants, etc. A few come as part of the `core` library, but all the important pieces of the library come as part of the services.
+### ⁉️ [Testing Utilities](/docs/testing/)
+
+Convert your application into a testing module - append extra libraries and reconfigure modules to get the coverage you're looking for.
 
 ---
 
