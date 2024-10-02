@@ -26,17 +26,6 @@ scheduler.cron({
 });
 ```
 
-### ⏳ Interval
-
-> `setInterval`, but goes away on shutdown.
-
-```typescript
-scheduler.interval({
-  interval: 1000 * 60 * 10, // Every 10 minutes
-  exec: () => logger.info("running on an interval"),
-});
-```
-
 ### 🕺 Sliding
 
 Sliding schedules are just as powerful as they are awkward to use.
@@ -53,4 +42,36 @@ scheduler.sliding({
   next: () => dayjs().add(Math.floor(Math.random() * 8 * 60), "minute"),
   exec: () => logger.info("random time during the workday"),
 });
+```
+
+### ⏳ setInterval / setTimeout
+
+These methods operate the same as their node counterparts, you can simply add `scheduler.` in front of the existing call to take advantage.
+
+> These are most helpful for unit tests, where timers need to be automatically stopped
+
+```typescript
+scheduler.setInterval(() => {
+  console.log("hello world");
+}, 1000);
+
+scheduler.setTimeout(() => {
+  console.log("hello world");
+}, 1000);
+```
+
+## 🛑 Stopping Schedules
+
+All schedules use the same rules for stopping & removal. When the application tears down, schedules will automatically be stopped.
+Schedules can additionally be stopped using the return of each method
+
+```typescript
+const stop = scheduler.setTimeout(() => {
+  // logic
+}, 5000);
+
+function onSpecialEvent() {
+  // remove the timer
+  stop();
+}
 ```
