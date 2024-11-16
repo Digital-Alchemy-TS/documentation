@@ -18,7 +18,7 @@ The project is organized as a framework, containing a generic core wiring librar
 
 ### ⚠️💣💥 ESM Migration
 
-Encountering issues after upgrading? See the [ESM Migration Guide](/esm-migration) / [Part 2](./esm-migration-pt2.md)
+Encountering issues after upgrading? See the [ESM Migration Guide](/esm-migration) / [Part 2](./esm-migration-pt2)
 
 ---
 

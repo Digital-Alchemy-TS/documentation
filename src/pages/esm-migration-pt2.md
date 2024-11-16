@@ -4,7 +4,7 @@ title: 💥 ESM Migration Guide (part 2)
 
 # 💥 ESM Migration Guide (pt2)
 
-This guide is the follow up to the [part 1 esm migration](./esm-migration.md).
+This guide is the follow up to the [part 1 esm migration](./esm-migration).
 
 The motivation for the changes leading up to this guide are from the standards being pushed by nodejs with regard to the format of ESM Modules
 
