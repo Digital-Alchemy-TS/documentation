@@ -46,7 +46,6 @@ You can also use reference points as events!
 
 ```typescript
 automation.solar.onEvent({
-  context,
   eventName: "dawn",
   exec() {
     logger.info("It is dawn!");
