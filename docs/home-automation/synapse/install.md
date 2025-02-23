@@ -21,31 +21,33 @@ npm i @digital-alchemy/synapse
 > **Add to code**
 
 ```typescript
-import { LIB_FASTIFY } from "@digital-alchemy/fastify-extension";
 import { LIB_HASS } from "@digital-alchemy/hass";
 import { LIB_SYNAPSE } from "@digital-alchemy/synapse";
 
 // 🏘️ applications
 const MY_APP = CreateApplication({
-  libraries: [LIB_HASS, LIB_SYNAPSE, LIB_FASTIFY],
+  libraries: [LIB_HASS, LIB_SYNAPSE],
   ...
 })
 
 // 📚 libraries
 export const MY_LIBRARY = CreateLibrary({
-  // fastify does not need to be declared here
-  depends: [LIB_HASS, LIB_SYNAPSE/*, LIB_FASTIFY*/],
+  depends: [LIB_HASS, LIB_SYNAPSE],
   ...
 })
 ```
 
-## ⚙️ Configure
+## 📑 Register application
 
-See [configuration guide](./configuration)
+Once you have you application started, and have the extension installed within Home Assistant, connecting the two is a straightforward process.
+From within Home Assistant, go to `+ ADD INTEGRATION` and select **Digital Alchemy**.
 
-## 🌐 HTTP
+When you start the config flow, Home Assistant will emit a discovery request to gather details about all connected applications.
+Then a list will be presented allowing you to select an application to register.
 
-In order to facilitate some of the initial setup & discovery features in Home Assistant, `synapse` has a HTTP dependency.
-See [fastify](/docs/support/fastify/) documentation for notes on how to configure / add your own routes.
+Once your application is registered, a few things will happen:
+- A device will be created to represent your application and contain entities
+- A "application is online" `binary_sensor` entity will be created
+- New entities will be generated to match your app
 
-Applications will use port `3000` by default.
+See the [sync](/docs/home-automation/synapse/syncing) page for specifics about when and how state is synced.

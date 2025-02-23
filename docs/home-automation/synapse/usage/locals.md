@@ -1,7 +1,7 @@
 ---
 title: "💼 Locals"
 authors: [zoe-codez]
-sidebar_position: 4
+sidebar_position: 5
 ---
 
 In addition to acting as entities for Home Assistant, `synapse` entities have the ability to store generic data locally.
