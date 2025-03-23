@@ -45,22 +45,3 @@ For setups outside an addon environment, a configuration file is needed. Create 
   BASE_URL=http://localhost:8123
   TOKEN=... # YOUR LONG LIVED ACCESS TOKEN
 ```
-
-## 📠 Output
-
-> ⚠️ You should consider 100% of this output of this script as private information ⚠️
-
-Type writer will take LARGE quantities of information about your setup and writes them to a type definitions file tp be consumed by `hass`.
-Every section of the file has the potential for identifying details about your setup.
-
-- entity state details
-- service calling interfaces
-- arrangement of entities relative to labels / areas / devices / platforms / etc
-- pre calculated definitions for editor optimizations
-- limited details about some scripts / blueprints / automations available for calling
-
-If you are curious to see the script output, you can write it to a local file like this
-
-```bash
-npx type-writer --TARGET_FILE ./output.d.ts
-```
