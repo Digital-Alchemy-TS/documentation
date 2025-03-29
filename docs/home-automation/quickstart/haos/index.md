@@ -38,6 +38,8 @@ This command will:
 
 ## ⚒️ Workspace Management
 
+[![Add to Home Assistant](https://img.shields.io/badge/Add%20DA%20addons%20to%20my-Home%20Assistant-41BDF5?logo=home-assistant&style=for-the-badge)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2FDigital-Alchemy-TS%2Faddons)
+
 In order to help **Code Server** to keep `node` installed, you need to add a the following script as an `init_command` in the **Configuration** tab.
 
 ```bash
