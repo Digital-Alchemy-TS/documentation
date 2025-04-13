@@ -19,6 +19,8 @@ export function Example({ hass }: TServiceParams) {
 }
 ```
 
+> 💡 examples use `entity_id` for simplity, but `device_id`, `area_id`, `label_id` are valid substitutes in many service calls.
+
 ## How it works
 
 ### Under the hood
