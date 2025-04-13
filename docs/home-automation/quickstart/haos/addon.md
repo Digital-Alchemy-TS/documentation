@@ -5,7 +5,7 @@ title: 📦 Deployments
 [![Add to Home Assistant](https://img.shields.io/badge/Add%20DA%20addons%20to%20my-Home%20Assistant-41BDF5?logo=home-assistant&style=for-the-badge)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2FDigital-Alchemy-TS%2Faddons)
 
 This addon acts as a simple configurable execution container for applications based on Digital Alchemy.
-It comes with `Node20`, and is intended for working with builds of `@digital-alchemy` Home Automation applications.
+The addon supports multiple runtimes, but `bun` is the recommended default for best compatibility
 
 - Manual add link: https://github.com/Digital-Alchemy-TS/addons
 
@@ -64,19 +64,4 @@ Applications will automatically look for a `.env` file as part of bootstrap.
 ```env
 ; {module_name}_{key}={value}
 HOME_AUTOMATION_TOKEN=super_special_api_key
-```
-
-#### config file
-
-You can also provide your configuration in structured configuration files.
-These can be `ini`, `json`, or `yaml` formatted.
-
-> For yaml, these paths are valid:
->
-> - `/share/home_automation/.home_automation.yaml`
-> - `/share/.home_automation.yaml`
-
-```yaml
-home_automation:
-  TOKEN: "super_special_api_key"
 ```
