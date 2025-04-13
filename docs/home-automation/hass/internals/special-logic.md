@@ -22,7 +22,7 @@ npx src/main.ts --VALIDATE_CONFIGURATION
 ```
 
 > **TLDR**: What to expect
-> Some of the output variations you might encounter as a result of the script. Demonstrated using [type-writer](/docs/home-automation/type-writer/).
+> Some of the output variations you might encounter as a result of the script. Demonstrated using [type-writer](/docs/home-automation/hass/setup/type-writer/).
 
 ### ✅ Valid
 

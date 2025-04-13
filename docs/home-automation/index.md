@@ -19,6 +19,6 @@ Build more complex logic with less code. Utility methods for doing solar & time 
 
 Install Digital Alchemy inside of a HAOS install. Use the built in Studio Code Server to edit your code, then build and run it within a dedicated Addon.
 
-> 🎬 [Type-Writer](/docs/home-automation/type-writer/)
+> 🎬 [Type-Writer](/docs/home-automation/hass/setup/type-writer/)
 
 Support script for translating your Home Assistant setup into Typescript to power your edit

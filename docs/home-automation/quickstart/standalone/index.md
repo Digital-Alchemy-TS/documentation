@@ -53,11 +53,6 @@ HASS_TOKEN=LONG_LIVED_ACCESS_TOKEN
 HASS_BASE_URL=http://localhost:8123
 ```
 
-Then configure each variable in `.env` so that the application can connect to your HA instance.
-
-- ⚙️ [Configuration system](/docs/core/configuration)
-- ⚙️ [HASS configuration options](/docs/home-automation/hass/configuration)
-
 ## 💻 Commands
 
 Once your environment is set up, you can use provided commands from within the `package.json` to manage your workspace.

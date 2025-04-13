@@ -65,7 +65,7 @@ Tools for interacting with Home Assistant: **entity** & **service** calling prox
 
 ---
 
-### 🎬 [Type Writer](/docs/home-automation/type-writer/)
+### 🎬 [Type Writer](/docs/home-automation/hass/setup/type-writer/)
 
 Support script for translating your Home Assistant setup into Typescript to power your edit
 

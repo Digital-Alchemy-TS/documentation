@@ -81,7 +81,7 @@ function setLightBrightness(entity_id: string, brightness: number) {
 
 ## AsyncLocalData
 
-Add your own types to the [als](/docs/core/als) extension!
+Add your own types to the als extension!
 
 ```typescript
 declare module "@digital-alchemy/core" {
