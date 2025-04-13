@@ -7,7 +7,7 @@ Welcome to the **Digital Alchemy** Home Automation quickstart project!
 
 There are many different ways to put together a project to meet your unique setup needs.
 
-## 🏠 HAOS
+## 🏡 HAOS
 
 - 📓 [Docs](/docs/home-automation/quickstart/haos)
 - 🔗 [Github](https://github.com/Digital-Alchemy-TS/haos-template)

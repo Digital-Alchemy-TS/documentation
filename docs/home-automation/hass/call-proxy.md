@@ -4,15 +4,14 @@ authors: [zoe-codez]
 sidebar_position: 2
 ---
 
-The call proxy is a deceptively simple service designed to provide a natural-feeling service calling interface for Home Assistant.
-It creates a general [proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) interface, and passes through any valid call to the [websocket](/docs/home-automation/hass/websocket-api) as a service call.
+The call proxy is an ergonomic type safe interface for issuing service calls to **🏡 Home Assistant**.
+It contains generated details based on all of the integrations you are currently running.
 
-> Issue a simple call via the call proxy
+## Basic Usage
 
 ```typescript
 export function Example({ hass }: TServiceParams) {
   async function onSomeEvent() {
-    // hass.call.{service_domain}.{service_name}({ ...data })
     await hass.call.switch.turn_on({
       entity_id: "switch.example_switch"
     });
@@ -20,20 +19,38 @@ export function Example({ hass }: TServiceParams) {
 }
 ```
 
-### Custom Types
+> 💡 examples use `entity_id` for simplity, but `device_id`, `area_id`, `label_id` are valid substitutes in many service calls.
 
-On its own, the Call Proxy isn't all that smart. It simply makes a service call based on what you provide, hoping it's valid.
-The real magic comes in when [type-writer](/docs/home-automation/type-writer) gets involved.
-The call proxy will adjust to match the specific set of services available on your install, with accurate parameter definitions for every service.
+## How it works
 
-![custom services](/img/custom_services.png)
+### Under the hood
 
-## ⚠️ Gotchas
+The call proxy operates by using a javascript [proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) object reformat your command into a service call to the websocket api.
+No runtime validation validation is done to confirm the validity of the call, only formatting messages and response handling.
+
+A command like this
+
+```typescript
+// hass.call.{domain}.{service}(service_data)
+hass.call.switch.turn_on({ entity: ["switch.example"] });
+```
+
+turns into an outgoing message of:
+
+```json
+{ domain, service, service_data, type: "call_service" }
+```
+
+The interface returns an `Promise` that will resolve after a confirmation message from **🏡 Home Assistant** is received.
+If the service provides a return response, that will be provided back also.
+
+> ❔ Service calls don't require `await` to work
 
 ### Lifecycle availability
 
-Calling services cannot be done prior to the `onReady` lifecycle event.
-Attempts to do that will not work, and will result an error message + stack trace.
+Calling services cannot be done prior to the `onReady` lifecycle event, where the connection to **🏡 Home Assistant** is available
+
+> Big debugging messages get printed to your console if you try
 
 ```typescript
 export function Example({ hass, lifecycle }: TServiceParams) {

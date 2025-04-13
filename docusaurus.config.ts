@@ -81,7 +81,7 @@ const config: Config = {
         },
         {
           to: "/docs/home-automation",
-          label: "🏠 Home Automation",
+          label: "🤖 Home Automation",
           position: "left",
         },
         {
