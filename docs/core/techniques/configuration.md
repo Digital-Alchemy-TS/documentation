@@ -140,7 +140,7 @@ export function MyService({ logger, config, lifecycle }: TServiceParams) {
 
 ### ✏️ Modifying Configurations
 
-Some workflows may require changing values for configurations as part of their logic. This can be accomplished through [Internal](/docs/core/internal)
+Some workflows may require changing values for configurations as part of their logic. This can be accomplished through [Internal](/docs/core/tools/internal)
 
 ServiceParams/internal methods. The `EVENT_CONFIGURATION_UPDATED` event is fired from `event` on each config update.
 

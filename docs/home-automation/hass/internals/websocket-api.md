@@ -8,7 +8,7 @@ The Websocket API is a self-managed method of communicating with Home Assistant.
 
 ## 🌐 Connection Management
 
-The websocket connection is not available until the [onReady](/docs/core/lifecycle) lifecycle event.
+The websocket connection is not available until the [onReady](/docs/core/techniques/lifecycle) lifecycle event.
 It operates completely on it's own to manage it's own state, periodically sending pings and re-establishing the connection if it ever drops.
 
 It will even proactively disconnect the socket as part of the shutdown process.
