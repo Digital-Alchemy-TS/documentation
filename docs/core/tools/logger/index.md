@@ -1,5 +1,5 @@
 ---
-title: 🧾 Logger
+title: Logger
 ---
 
 The provided logger is a standardized interface that wraps the Node.js console object.

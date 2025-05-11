@@ -1,5 +1,5 @@
 ---
-title: 📖 API
+title: API
 ---
 
 The logger is able to take in both objects and strings in order to generate log messages. The interface looks like this:

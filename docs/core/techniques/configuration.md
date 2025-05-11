@@ -1,5 +1,5 @@
 ---
-title: ⚙️ Configuration
+title: Configuration
 ---
 
 The configuration system is designed to provide a managed experience for applications. Definitions are built into modules, and the system sources values from both files and environment sources.

@@ -1,5 +1,5 @@
 ---
-title: ⏰ Scheduler
+title: Scheduler
 ---
 
 The `scheduler` option provided by `TServiceParams` provides a few mechanisms for creating different schedules.

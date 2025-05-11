@@ -1,5 +1,5 @@
 ---
-title: 🗂️ Internal
+title: Internal
 ---
 
 The `internal` is available on `TServiceParams` and provides some basic internal utilities and information by the core library.

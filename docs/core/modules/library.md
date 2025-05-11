@@ -1,5 +1,6 @@
 ---
 title: Library
+sidebar_position: 2
 ---
 
 Library modules are intended to help organize and contain groupings of logic.

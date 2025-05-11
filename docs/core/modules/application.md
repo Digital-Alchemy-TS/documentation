@@ -1,5 +1,6 @@
 ---
 title: Application
+sidebar_position: 1
 ---
 
 Application modules initialize your app. They behave like libraries but support the following additional properties:

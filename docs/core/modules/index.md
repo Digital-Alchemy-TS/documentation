@@ -1,5 +1,6 @@
 ---
-title: 🗃️ Modules
+title: 📦 Modules
+sidebar_position: 2
 ---
 
 Modules are the basic component for organizing logic within Digital Alchemy. They contain a few basic pieces of information:

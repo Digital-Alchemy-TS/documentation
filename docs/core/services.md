@@ -1,5 +1,6 @@
 ---
-title: Services
+title: 📑 Services
+sidebar_position: 1
 ---
 
 Service functions are the basic building block of logic for logic within applications.

@@ -1,5 +1,5 @@
 ---
-title: 👶 Lifecycle
+title: Lifecycle
 ---
 
 The `lifecycle` is available on `TServiceParams`, and helps to coordinate the way various elements of the application load relative to each other. It is divided into distinct phases, and different callbacks may be prioritized relative to each other to ensure all your dependencies have what they need, when they need it.

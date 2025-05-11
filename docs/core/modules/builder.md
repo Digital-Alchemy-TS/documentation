@@ -1,5 +1,6 @@
 ---
 title: Module Builder
+sidebar_position: 3
 ---
 
 Digital Alchemy `core` supports a builder pattern to help build up specialized modules for different use cases. The internal modules power:

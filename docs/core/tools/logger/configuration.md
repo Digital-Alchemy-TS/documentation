@@ -1,5 +1,5 @@
 ---
-title: ⚙️ Configuration
+title: Configuration
 ---
 
 By default the logger will output pretty logs to the console.
