@@ -1,5 +1,5 @@
 ---
-title: 👶 Lifecycle
+title: Lifecycle
 ---
 
 The `lifecycle` is available on `TServiceParams`, and helps to coordinate the way various elements of the application load relative to each other. It is divided into distinct phases, and different callbacks may be prioritized relative to each other to ensure all your dependencies have what they need, when they need it.
@@ -10,7 +10,7 @@ The `lifecycle` is available on `TServiceParams`, and helps to coordinate the wa
 | ---------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
 | `construct`          | `bootstrap` | An informal phase, describes the time when services are building their return output. Code should be limited to general configuration & wiring.                 | Code definitions & function wiring                                                  |
 | `onPreInit`          | `bootstrap` | Ran prior to gathering user configuration. Frequently used with alternate application flows.                                                                    | 1. check for `--help` flag, print configuration info, exit                |
-| (configure)            | `bootstrap` | When the [Configuration](/docs/core/configuration) does its processing to load user configurations.                                                                                     |                                                                                     |
+| (configure)            | `bootstrap` | When the [Configuration](/docs/core/techniques/configuration) does its processing to load user configurations.                                                                                     |                                                                                     |
 | `onPostConfig`       | `bootstrap` | User configs are populated into the library, libraries & applications can start utilizing that information to further self-configure / initialize dependencies. | Create a reference to an external library (ex: `fastify`)                           |
 | `onBootstrap`        | `bootstrap` | Configured libraries are available, and can be interacted with.                                                                                                 | Perform wiring actions with that library (ex: add routes)                           |
 | `onReady`            | `bootstrap` | Last chance to perform work before the application is officially "running".                                                                                     | Start servers / listen to ports / emit "hello world" messages to connected services |

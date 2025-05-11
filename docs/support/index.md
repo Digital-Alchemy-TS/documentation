@@ -9,10 +9,6 @@ Basic MQTT bindings.
 
 Subscribe with wildcard, publish messages, and access the internal library for more
 
-> 🌐 [Fastify](/docs/support/fastify/)
-
-Basic HTTP bindings, uses port `3000` by default.
-
 > 🧠 [Gotify](/docs/support/gotify)
 
 Create and manage virtual entities within Home Assistant. Modern config flow based integration with availability tied to the connection state of your app.

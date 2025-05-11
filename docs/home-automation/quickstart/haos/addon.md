@@ -49,7 +49,7 @@ yarn rollback
 ### 🔒 Providing Secrets
 
 `@digital-alchemy/core` has a built in configuration loader suitable for providing secrets to your application.
-A more complete description of the loader can be found in the [config documentation](https://docs.digital-alchemy.app/docs/core/configuration)
+A more complete description of the loader can be found in the [config documentation](https://docs.digital-alchemy.app/docs/core/techniques/configuration)
 
 Your application will automatically have access to Home Assistant within the addon, but if you wish to integrate with other tools that require API keys, these can be provided by several mechanisms.
 

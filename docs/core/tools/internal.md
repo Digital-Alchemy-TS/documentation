@@ -1,5 +1,5 @@
 ---
-title: 🗂️ Internal
+title: Internal
 ---
 
 The `internal` is available on `TServiceParams` and provides some basic internal utilities and information by the core library.
@@ -31,5 +31,5 @@ The `internal` is available on `TServiceParams` and provides some basic internal
 
 | Property        | Description                                                              |
 | --------------- | ------------------------------------------------------------------------ |
-| `configuration` | Interact with the [configuration](/docs/core/configuration) system, get metadata / update values |
-| `logger`        | Make tweaks to the way the [logger](/docs/core/logger) works                              |
+| `configuration` | Interact with the [configuration](/docs/core/techniques/configuration) system, get metadata / update values |
+| `logger`        | Make tweaks to the way the [logger](/docs/core/tools/logger/) works                              |

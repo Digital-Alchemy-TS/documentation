@@ -1,5 +1,5 @@
 ---
-title: 🛠️ Utilities
+title: Utilities
 ---
 
 ## Overview

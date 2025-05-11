@@ -80,7 +80,7 @@ tsx src/main.ts --heartbeat_interval 10
 
 ### 📁 File
 
-> If your file does not have an extension, [Configuration](/docs/core/configuration) will do auto
+> If your file does not have an extension, [Configuration](/docs/core/techniques/configuration) will do auto
 
 #### 📘 ini
 

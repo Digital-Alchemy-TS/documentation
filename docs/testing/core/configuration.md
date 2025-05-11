@@ -57,7 +57,7 @@ The full suite of options are exposed
 | --- | --- | --- | --- |
 | **Logging** | `emitLogs` | `false` | If true, default logger is left in place |
 | **Logging** | `customLogger` | `NOOP` / `default` | Provide alternate logger (`createMockLogger`) |
-| **Logging** | `loggerOptions` | `{}` | [Docs](/docs/core/logger/configuration) |
+| **Logging** | `loggerOptions` | `{}` | [Docs](/docs/core/tools/logger/) |
 | **Lifecycle** | `bootLibrariesFirst` | `false` | Set to `true` if testing an application with that requirement |
 | **Lifecycle** | `forceTeardown` | `false` | Set to `true` if your app requires running teardown hooks |
 | **Configuration** | `configuration` | `{}` | passed through to `.bootstrap` call |

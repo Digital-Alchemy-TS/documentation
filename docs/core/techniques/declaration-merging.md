@@ -1,5 +1,5 @@
 ---
-title: 📩 Declaration Merging
+title: Declaration Merging
 ---
 
 The core library allows for a number of tools for augmenting internal type definitions to make them more friendly to your situation.

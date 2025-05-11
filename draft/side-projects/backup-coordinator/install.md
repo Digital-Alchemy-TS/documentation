@@ -25,7 +25,7 @@ The `BORG_PASSPHRASE` will need to be matched in the configuration for your app 
 
 ## Config Files
 
-> See [configuration](/docs/core/configuration) docs for more options for providing keys to app
+> See [configuration](/docs/core/techniques/configuration) docs for more options for providing keys to app
 
 Create the file `~/.config/drone_app` (or match to your application's name).
 

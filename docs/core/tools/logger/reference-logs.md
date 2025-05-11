@@ -1,5 +1,5 @@
 ---
-title: 📑 Reference Log
+title: Reference Log
 ---
 
 ```typescript
