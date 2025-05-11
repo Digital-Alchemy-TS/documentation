@@ -2,7 +2,7 @@
 title: Module Builder
 ---
 
-Digital ALchemy `core` supports a builder pattern to help build up specialized modules for different use cases. The internal modules power:
+Digital Alchemy `core` supports a builder pattern to help build up specialized modules for different use cases. The internal modules power:
 
 - `CreateLibrary`
 - `CreateApplication`
@@ -24,8 +24,6 @@ import { createModule } from "@digital-alchemy/core";
 // only contains access to core tools
 const myModule = createModule();
 ```
-
-
 
 Modules can be blank, but most useful modules will be based off an existing one.
 

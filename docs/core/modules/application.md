@@ -2,28 +2,27 @@
 title: Application
 ---
 
-Applications modules provide an interface able to initialize your application.
-Similar to libraries, they take the following arguments.
+Application modules initialize your app. They behave like libraries but support the following additional properties:
 
-| name            | description                                                      |
-| --------------- | ---------------------------------------------------------------- |
-| `configuration` | A mapping of configuration options this module declares          |
-| `name`          | Application name influences **configuration** & `TServiceParams` |
-| `libraries`     | An array of dependency libraries your application should load    |
-| `services`      | An object containing all the services to load                    |
-| `priorityInit`  | Manually set the construction order of your services             |
+| name            | description                                                        |
+| --------------- | ------------------------------------------------------------------ |
+| `configuration` | A mapping of configuration options this module declares            |
+| `name`          | Application name — influences **configuration** & `TServiceParams` |
+| `libraries`     | An array of dependency libraries your application should load      |
+| `services`      | Object of service classes to register in the application           |
+| `priorityInit`  | Optional array to control service initialization order             |
 
 ### Libraries
 
-If an item in the `library` array includes dependency libraries, those must be explicitly included in the application module.
+If a library in the `libraries` array declares dependencies, those must also be included in the `libraries` array of the application module.
 
-The version of the dependency defined by the **application** module is the one that gets used for runtime, overriding the version provided in the library.
+The version of the dependency defined by the **application** module is the one used at runtime, overriding versions defined in libraries.
 
 ## Example Code
 
 ### Minimum
 
-The minimum you need is a name to load with, and some logic
+Only the application name and at least one service are required:
 
 ```typescript
 import { CreateApplication } from "@digital-alchemy/core";
@@ -47,7 +46,7 @@ declare module "@digital-alchemy/core" {
 
 ### Full
 
-Getting more complex with dependency libraries, configurations, and a more intricate service setup.
+More advanced setup with libraries, configuration, and prioritized services:
 
 ```typescript
 import { CreateApplication } from "@digital-alchemy/core";
@@ -61,6 +60,7 @@ import {
 import { ApplicationController } from "./controllers/index.mts";
 
 export const MY_APPLICATION = CreateApplication({
+  // Optional: declare configuration values used by services
   configuration: {
     DATABASE_URL: {
       type: "string",
@@ -69,6 +69,7 @@ export const MY_APPLICATION = CreateApplication({
   },
   libraries: [LIB_HTTP, LIB_UTILS],
   name: "my_app",
+  // Ensures database loads before loader
   priorityInit: ["database", "loader"],
   services: {
     ApplicationController,
@@ -87,59 +88,65 @@ declare module "@digital-alchemy/core" {
 
 ## Bootstrapping
 
-Once the module is defined, it can be bootstrapped into a running application. It's as easy as -
+Once defined, an application module can be bootstrapped with optional configuration overrides:
 
-```typescript
-MY_APPLICATION.bootstrap();
+```ts
+await MY_APPLICATION.bootstrap();
 ```
 
-### Options
+### Multiple entrypoints
 
-The bootstrap command can contain overrides to the module defined configurations.
-This makes it possible to set up several environment specific options.
+Separating `dev.main.mts` and `prod.main.mts` simplifies local development and production deployments:
 
-> dev.main.mts
+- **Local dev (`dev.main.mts`)** can use more development friendly options and verbose logging configurations
+- **Production (`prod.main.mts`)** can use more secure settings and provide additional context to logging systems
 
-```typescript
-import { MY_APPLICATION } from "./app.module.mts";
+This split allows each environment to operate with different assumptions while sharing the same application definition.
 
+### Extended example
+
+In this setup, the `utils` module forwards logs to an external logging service like Datadog. Configuration passed into `bootstrap` includes:
+
+- `CLOUD_LOGGER_API_KEY`: Enables the cloud logger at runtime.
+- `loggerOptions.mergeData`: Tags each log line with static metadata (like environment, hostname, or service name), making it easier to filter and group logs in a dashboard.
+
+```ts
 await MY_APPLICATION.bootstrap({
   configuration: {
-    boilerplate: {
-      LOG_LEVEL: "debug"
-    },
-    http: {
-      CORS: false
-    },
-    my_app: {
-      // set a
-      DATABASE_URL: "postgresql://postgres@localhost:5432/postgres"
-    }
-  }
-});
-```
-
-> prod.main.mts
-
-```typescript
-import { MY_APPLICATION } from "./app.module.mts";
-
-await MY_APPLICATION.bootstrap({
-  configuration: {
-    boilerplate: {
-      LOG_LEVEL: "info"
-    },
+    boilerplate: { LOG_LEVEL: "info" },
     utils: {
-      CLOUD_LOGGER_API_KEY: process.env.CLOUD_LOGGER_API_KEY
-    }
+      CLOUD_LOGGER_API_KEY: process.env.CLOUD_LOGGER_API_KEY,
+    },
   },
   loggerOptions: {
     als: true,
     mergeData: {
       NODE_ENV: process.env.NODE_ENV,
       host: hostname(),
-      service: "bedrock",
-    }
-  }
+      service: "special-microservice",
+    },
+  },
 });
 ```
+
+
+### `bootLibrariesFirst`
+
+In typical usage, `bootstrap()` constructs all libraries and application services first, then runs lifecycle hooks (`onBootstrap`, then `onReady`) for everything in sync. This works well for most full-featured applications.
+
+However, if you’re writing a **script, job runner, or anything lightweight**, it can be cumbersome to wait on external resources manually using lifecycle hooks.
+
+To solve this, you can pass:
+
+```ts
+await MY_APPLICATION.bootstrap({ bootLibrariesFirst: true });
+```
+
+This changes the startup sequence:
+
+1. **All libraries** are constructed first.
+2. The `lifecycle.onBootstrap()` hook is awaited for each library.
+3. **Then** application services are constructed.
+4. Finally, `lifecycle.onReady()` is called across all modules.
+
+This allows libraries (e.g., a database client, external API client, or telemetry pipeline) to be **fully initialized before your code runs**. That means you can safely start work in your own service logic without waiting or checking readiness.
