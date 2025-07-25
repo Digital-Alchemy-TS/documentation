@@ -18,8 +18,6 @@ Synapse has 2 major components to install in order to achieve proper functionali
 1. Custom component: [synapse-extension](/docs/home-automation/synapse/extension)
 2. Typescript library: [install guide](/docs/home-automation/synapse/install)
 
-[Configuration & fine tuning guide](/docs/home-automation/synapse/configuration)
-
 ## 👩‍🔧 Basic Usage
 
 Creating a new entity is easy! You can even attach to events inline with

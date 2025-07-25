@@ -7,7 +7,7 @@ description: Read the docs, check out the current state of the project and exten
 ![discord](https://img.shields.io/discord/1219758743848489147?label=Discord&logo=discord)
 
 Digital Alchemy is a Typescript based framework for building NodeJS based applications.
-It takes advantage of [declaration merging](/docs/core/techniques/declaration-merging) to provide a consistent interface into the available tooling across your code base.
+It takes advantage of declaration merging to provide a consistent interface into the available tooling across your code base.
 The project prioritizes modern ESModule based code, minimal dependencies, and support for multiple runtimes.
 
 ## 🧩 [Core Framework](/docs/core)
