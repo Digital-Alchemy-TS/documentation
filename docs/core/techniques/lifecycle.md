@@ -8,7 +8,7 @@ The `lifecycle` is available on `TServiceParams`, and helps to coordinate the wa
 
 | Lifecycle Phase        | Phase       | Description                                                                                                                                                     | Example Use                                                                         |
 | ---------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| `construct`          | `bootstrap` | An informal phase, describes the time when services are building their return output. Code should be limited to general configuration & wiring.                 | Code definitions & function wiring                                                  |
+| `construct`          | `bootstrap` | An informal phase, describes the time when services are building their return output. Code should be limited to general configuration & wiring. **Note:** This is not a formal lifecycle event - there is no `onConstruct` hook. | Code definitions & function wiring                                                  |
 | `onPreInit`          | `bootstrap` | Ran prior to gathering user configuration. Frequently used with alternate application flows.                                                                    | 1. check for `--help` flag, print configuration info, exit                |
 | (configure)            | `bootstrap` | When the [Configuration](/docs/core/techniques/configuration) does its processing to load user configurations.                                                                                     |                                                                                     |
 | `onPostConfig`       | `bootstrap` | User configs are populated into the library, libraries & applications can start utilizing that information to further self-configure / initialize dependencies. | Create a reference to an external library (ex: `fastify`)                           |
@@ -56,6 +56,15 @@ function MyService({ logger, lifecycle }: TServiceParams) {
 }
 ```
 
+## ⚙️ Implementation Details
+
+Lifecycle events are executed in three phases:
+1. **Positive priorities** (high to low) - executed sequentially
+2. **No priority** - executed in parallel
+3. **Negative priorities** (high to low) - executed sequentially
+
+After execution, events are cleaned up and removed from the lifecycle instance.
+
 ## 🏎️ Boot Libraries First
 
 > `bootLibrariesFirst` is a flag that can be passed to the bootstrap command of your application.
@@ -94,3 +103,50 @@ function SpecialBuilder({ logger, lifecycle }: TServiceParams) {
     })
   }
 }
+```
+
+## 🔧 Advanced Usage
+
+### Conditional Lifecycle Registration
+
+```typescript
+function ConditionalService({ logger, lifecycle, internal }: TServiceParams) {
+  // Only register if we're in a specific phase
+  if (internal.boot.phase === "bootstrap") {
+    lifecycle.onReady(() => {
+      logger.info("Application is ready!");
+    });
+  }
+}
+```
+
+### Debugging Lifecycle Issues
+
+```typescript
+function DebugService({ logger, lifecycle, internal }: TServiceParams) {
+  lifecycle.onBootstrap(() => {
+    // Check what events have completed
+    const completed = [...internal.boot.completedLifecycleEvents];
+    logger.debug("Completed events:", completed);
+
+    // Check current application phase
+    logger.debug("Current phase:", internal.boot.phase);
+  });
+}
+```
+
+### Performance Optimization
+
+```typescript
+function OptimizedService({ logger, lifecycle }: TServiceParams) {
+  // Use high priority for critical initialization
+  lifecycle.onPostConfig(() => {
+    logger.info("Critical config processing");
+  }, 1000);
+
+  // Use low priority for non-critical tasks
+  lifecycle.onReady(() => {
+    logger.info("Non-critical startup task");
+  }, -100);
+}
+```

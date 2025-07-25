@@ -2,17 +2,20 @@
 title: Scheduler
 ---
 
-The `scheduler` option provided by `TServiceParams` provides a few mechanisms for creating different schedules.
-Operations set up by the `scheduler` are lifecycle aware, meaning that they will:
+The `scheduler` option provided by `TServiceParams` provides mechanisms for creating different types of schedules. All scheduler operations are lifecycle-aware and integrate with the framework's performance metrics system.
 
-- only start when the application is fully ready
-- automatically stop when you teardown the application
+## Lifecycle Awareness
 
-## 🛠 Methods
+Scheduler operations automatically:
+- **Start only when the application is fully ready** (after the `Ready` lifecycle event)
+- **Stop automatically when the application tears down**
+- **Include performance metrics** for monitoring and debugging
+
+## Methods
 
 ### ⏰ Cron
 
-> A canned set of expressions are provided in the `CronExpression` enum. You may also provide an expression.
+Schedule operations using cron expressions. You can use predefined expressions from the `CronExpression` enum or provide custom expressions.
 
 ```typescript
 scheduler.cron({
@@ -28,13 +31,11 @@ scheduler.cron({
 
 ### 🕺 Sliding
 
-Sliding schedules are just as powerful as they are awkward to use.
-Their intent is to have a 2 part time calculation system:
-
+Sliding schedules use a two-part time calculation system:
 1. A function to calculate the next run time
-2. A schedule to re-calculate at
+2. A schedule to re-calculate the next run time
 
-This can be used to set up a schedule that resets at midnight, and happens at a random time within the day
+This is useful for dynamic scheduling, such as random times within a day.
 
 ```typescript
 scheduler.sliding({
@@ -44,34 +45,44 @@ scheduler.sliding({
 });
 ```
 
-### ⏳ setInterval / setTimeout
+**Note**: The `next` and `exec` functions are validated and must be provided.
 
-These methods operate the same as their node counterparts, you can simply add `scheduler.` in front of the existing call to take advantage.
+### ⏱️ setInterval / setTimeout
 
-> These are most helpful for unit tests, where timers need to be automatically stopped
+These methods work like their Node.js counterparts but with lifecycle awareness. They're most useful for unit tests where timers need automatic cleanup.
 
 ```typescript
 scheduler.setInterval(() => {
-  console.log("hello world");
+  logger.info("hello world");
 }, 1000);
 
 scheduler.setTimeout(() => {
-  console.log("hello world");
+  logger.info("hello world");
 }, 1000);
 ```
 
-## 🛑 Stopping Schedules
+## Stopping Schedules
 
-All schedules use the same rules for stopping & removal. When the application tears down, schedules will automatically be stopped.
-Schedules can additionally be stopped using the return of each method
+All schedules can be stopped manually using the return value from each method:
 
 ```typescript
 const stop = scheduler.setTimeout(() => {
-  // logic
+  logger.info("delayed operation");
 }, 5000);
 
 function onSpecialEvent() {
-  // remove the timer
+  // Stop the timer early
   stop();
 }
 ```
+
+Schedules are also automatically stopped when the application tears down.
+
+## Performance Metrics
+
+All scheduler operations automatically include performance metrics:
+- **Execution timing** for each scheduled operation
+- **Context information** for debugging
+- **Error tracking** for failed executions
+
+These metrics are available through the framework's metrics system for monitoring and alerting.
