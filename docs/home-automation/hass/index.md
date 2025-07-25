@@ -27,6 +27,14 @@ Pictures really only tell half the story, here is the editing experience in VSCo
 
 <ReactPlayer playing controls url='/intro.mp4' playing={false} />
 
+### 🔧 Advanced Capabilities
+
+- **Entity State Modification**: Directly set entity states and attributes
+- **Historical Data Access**: Query entity state history over time periods
+- **Unique ID Lookups**: Find entities by their unique identifiers
+- **Performance Diagnostics**: Monitor service calls and entity operations
+- **Rate Limiting**: Built-in protection against runaway code
+
 ## 📒 Library Configuration
 
 ### 🛠 Custom Types
@@ -37,7 +45,7 @@ This library has support for customizing type definitions to match a particular 
 > Add to `devDependencies`!
 
 ```bash
-npm i --save-dev @digital-alchemy/type-writer
+yarn add -D @digital-alchemy/type-writer
 npx type-writer
 ```
 

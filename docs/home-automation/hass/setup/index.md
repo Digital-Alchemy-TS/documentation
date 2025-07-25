@@ -54,6 +54,30 @@ HASS_TOKEN=YOUR LONG LIVED ACCESS TOKEN
 ```
 > Tokens can be generated via your user profile > **Security** tab > **Long-lived access tokens**
 
+### Advanced Configuration
+
+Additional configuration options for fine-tuning behavior:
+
+```bash
+# Debounce registry change events (default: 50ms)
+HASS_EVENT_DEBOUNCE_MS=50
+
+# Response timeout warnings (default: 5s)
+HASS_EXPECT_RESPONSE_AFTER=5
+
+# Rate limiting - crash if exceeded (default: 500/sec)
+HASS_SOCKET_CRASH_REQUESTS_PER_SEC=500
+
+# Rate limiting - warn if exceeded (default: 300/sec)
+HASS_SOCKET_WARN_REQUESTS_PER_SEC=300
+
+# Enable diagnostics system
+HASS_EMIT_DIAGNOSTICS=true
+
+# Retry interval for failed connections (default: 5s)
+HASS_RETRY_INTERVAL=5
+```
+
 ### Disabled Entities
 
 By default commands contained in `hass.idBy.*` will not return disabled entities.
@@ -74,3 +98,4 @@ HASS_FILTER_DISABLED_ENTITIES_ID_BY=false
 - Creating Services <sup>(docs todo)</sup>
 - [🎭 Entity Proxies](/docs/home-automation/hass/entity-proxy): access entity state, listen for changes, and issue targeted service calls
 - [📣 Call Proxy](/docs/home-automation/hass/call-proxy): access all the tools from the **Developer tools** > **ACTIONS** tab
+- [🔍 Diagnostics](/docs/home-automation/hass/diagnostics): monitor performance and debug issues
