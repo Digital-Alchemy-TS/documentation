@@ -8,43 +8,81 @@ The configuration system is designed to provide a managed experience for applica
 
 ### 🔝 Priorities
 
-The configuration system uses a set of priorities to determine the value of a given configuration variable. With some application flows, the value may differ depending on when you check. Values are loaded in the following order, which are the default intended ways to interact with the system:
+The configuration system uses a set of priorities to determine the value of a given configuration variable. Values are loaded in the following order:
 
 1. Hard-coded default in the library/application.
 2. Values provided to the bootstrap function.
 3. User data (determined after `onPreInit`, and before `onPostConfig`):
-    1. Files
-    2. Environment variables
-    3. Command line switches
+    1. Environment variables (including .env files)
+    2. Command line switches
+    3. Configuration files
 
-### 📂 File Based
+## 📐 Defining Configurations
 
-The file loader supports `ini`, `yaml`, and `json` formats. It searches for files in the following order:
+> Definitions are provided as part of the library/application creation
 
-> Set of extensions checked for each file:
-
-- **auto** > `.json` > `.ini` > `.yaml` > `.yml`
-
-Omitting the extension (**auto**) causes the loader to attempt to guess the file format:
-
-1. Attempt `json`
-2. Attempt `yaml`
-3. Fallback to `ini`
-
-> Search paths:
-
-- `cwd()`/`.app_name`
-- `cwd()`/`..` (recursively to root)/`.app_name`
-- `~/.config/{app_name}`
-- `~/.config/{app_name}/config`
-
-> The loader checks the `--config` switch as part of determining which file to load. If passed, the provided file will be the only one used.
-
-```bash
-tsx main.ts --config ./development_configuration
+```typescript
+const MY_LIB = CreateLibrary({
+  configuration: {
+    STRING_CONFIG: {
+      type: "string",
+      description: "An example string configuration",
+      default: "foo"
+    },
+    ENUM_CONFIG: {
+      type: "string",
+      description: "Another example string configuration",
+      default: "foo",
+      enum: ["foo","bar"]
+    } as StringConfig<"foo" | "bar">,
+    NUMBER_CONFIG: {
+      type: "number",
+      description: "A numeric configuration",
+      default: 8080
+    },
+    BOOLEAN_CONFIG: {
+      type: "boolean",
+      description: "A boolean configuration",
+      default: false
+    }
+  },
+  name: "my_lib"
+});
 ```
 
-### 🌍 Environment Based
+This creates the following configuration variables:
+
+- `config.my_lib.STRING_CONFIG` (generic `string`)
+- `config.my_lib.ENUM_CONFIG` (string union)
+- `config.my_lib.NUMBER_CONFIG` (`number`)
+- `config.my_lib.BOOLEAN_CONFIG` (`boolean`)
+
+### Supported Types
+
+| Type       | Notes                                                            | Extras                                                                             |
+| ---------- | ---------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `string`   | Strings and things that extend them                              | `enum: string[]` property may also be supplied                                     |
+| `string[]` | An array of strings                                              |                                                                                    |
+| `boolean`  | Simple boolean configurations                                    | Using CLI switches, just passing `--CONFIG_NAME` can be used for passing true     |
+| `number`   | Simple number configurations                                     |                                                                                    |
+| `record`   | `Record<string, string>` for defining key/value pairs of strings |                                                                                    |
+
+For complex configuration types, see [Advanced Configuration](/docs/core/techniques/configuration-advanced).
+
+## 🔑 Accessing Configurations
+
+> Values are provided via service params and are accessible in `.project.value` format.
+
+```typescript
+export function MyService({ logger, config, lifecycle }: TServiceParams) {
+  lifecycle.onPostConfig(() => {
+    // Properly cast to the string union
+    logger.info(`value for ENUM_CONFIG is`, config.my_lib.ENUM_CONFIG);
+  });
+}
+```
+
+## 🌍 Environment Variables
 
 Environment variables are **case insensitive**, and `-` & `_` may be swapped. For the configuration example `CACHE_PROVIDER`, these are allowed variations:
 
@@ -52,7 +90,30 @@ Environment variables are **case insensitive**, and `-` & `_` may be swapped. Fo
 - `cache-provider`
 - `caChE-PrOvIDERE`
 
-> These can be used as environment variables or command line switches for your application.
+### Built-in .env Support
+
+The system automatically loads environment variables from `.env` files using [@dotenvx/dotenvx](https://www.npmjs.com/package/@dotenvx/dotenvx). The loading priority is:
+
+1. `--env-file` CLI switch
+2. `envFile` option in bootstrap configuration
+3. Default `.env` file in current working directory
+
+```bash
+# Use a specific .env file
+tsx main.ts --env-file ./production.env
+
+# Or set in bootstrap options
+const app = CreateApplication({
+  // ... other options
+  bootstrap: {
+    envFile: "./production.env"
+  }
+});
+```
+
+> **Note**: The system uses [@dotenvx/dotenvx](https://www.npmjs.com/package/@dotenvx/dotenvx) which supports encrypted environment variables, allowing you to securely store sensitive configuration values in your `.env` files.
+
+### Setting Environment Variables
 
 #### via environment variables
 
@@ -73,105 +134,34 @@ tsx main.ts --CACHE_PROVIDER=redis
 tsx main.ts --CACHE_PROVIDER redis
 ```
 
-## 🛠️ Usage
+## 📂 File Based Configuration
 
-### 📐 Defining Configurations
+The system supports configuration files in multiple formats. For detailed information about file format support, search paths, and advanced file loading options, see [Advanced Configuration](/docs/core/techniques/configuration-advanced).
 
-> Definitions are provided as part of the library/application creation
+## 🔧 Bootstrap Configuration
+
+Configuration can be provided directly during bootstrap, which takes priority over module defaults:
 
 ```typescript
-type NestedLibraryConfiguration = {
-  port: number;
-  foo?: string;
-  bar?: boolean;
-}
-const MY_LIB = CreateLibrary({
-  configuration: {
-    STRING_CONFIG: {
-      type: "string",
-      description: "An example string configuration",
-      default: "foo"
-    },
-    ENUM_CONFIG: {
-      type: "string",
-      description: "Another example string configuration",
-      default: "foo",
-      enum: ["foo","bar"]
-    } as StringConfig<"foo" | "bar">,
-    COMPLEX_CONFIG: {
-      type: "internal",
-      description: "A configuration object needed by a separate library",
-      default: { port: 8080 }
-    } as InternalConfig<NestedLibraryConfiguration>
-  },
-  name: "my_lib"
+const app = CreateApplication({
+  // ... other options
+  bootstrap: {
+    configuration: {
+      my_lib: {
+        STRING_CONFIG: "override_value"
+      }
+    }
+  }
 });
 ```
 
-This creates the following configuration variables (*referenced in examples below*):
+## 🔄 Advanced Topics
 
-- `config.my_lib.STRING_CONFIG` (generic `string`)
-- `config.my_lib.ENUM_CONFIG` (string union)
-- `config.my_lib.COMPLEX_CONFIG` (`NestedLibraryConfiguration`)
+For advanced configuration topics including:
+- Custom configuration loaders
+- Dynamic configuration changes
+- Complex configuration types (`InternalConfig`)
+- File format support details
+- Lifecycle integration
 
-Types may be in the following formats:
-
-| Type       | Notes                                                            | Extras                                                                             |
-| ---------- | ---------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `string`   | Strings and things that extend them                              | `enum: string[]` property may also be supplied                                     |
-| `string[]` | An array of strings                                              |                                                                                    |
-| `boolean`  | Simple boolean configurations                                    | Using CLI switches, just passing `--CONFIG_NAME` can be used for passing true     |
-| `number`   | Simple number configurations                                     |                                                                                    |
-| `record`   | `Record<string, string>` for defining key/value pairs of strings |                                                                                    |
-| `internal` | Complex objects not captured by other config types               |                                                                                    |
-
-### 🔑 Accessing Configurations
-
-> Values are provided via service params and are accessible in `.project.value` format.
-
-```typescript
-export function MyService({ logger, config, lifecycle }: TServiceParams) {
-  lifecycle.onPostConfig(() => {
-    // Properly cast to the string union
-    logger.info(`value for ENUM_CONFIG is`, config.my_lib.ENUM_CONFIG);
-  });
-}
-```
-
-### ✏️ Modifying Configurations
-
-Some workflows may require changing values for configurations as part of their logic. This can be accomplished through [Internal](/docs/core/tools/internal)
-
-ServiceParams/internal methods. The `EVENT_CONFIGURATION_UPDATED` event is fired from `event` on each config update.
-
-```typescript
-export function MyService({ logger, internal, lifecycle }: TServiceParams) {
-  lifecycle.onPreInit(() => {
-    internal.config.set("project", "CONFIG", newValue);
-  });
-}
-```
-
-### 🛒 Custom Loaders
-
-> Any function that returns a compatible configuration object can be used in place of the default `file` / `environment` loaders.
-
-```typescript
-// the loader, not registered as a service
-async function MyCustomLoader({ application, configs, logger }: ConfigLoaderParams) {
-  logger.trace("sending request");
-  const data = await fetchMyConfiguration();
-  logger.trace("done!");
-  return data;
-}
-
-// service to do attachment
-export function MyService({ logger, internal, lifecycle }: TServiceParams) {
-  internal.config.setConfigLoaders([
-    MyCustomLoader,
-    // not using file loaders for plot reasons
-    // ConfigLoaderFile,
-    ConfigLoaderEnvironment,
-  ]);
-}
-```
+See [Advanced Configuration](/docs/core/techniques/configuration-advanced).
