@@ -5,7 +5,7 @@ sidebar_position: 5
 ---
 
 In addition to acting as entities for Home Assistant, `synapse` entities have the ability to store generic data locally.
-Data gets serialized and placed in the same sqlite database that maintains current state for your application.
+Data gets serialized and placed in the same database that maintains current state for your application.
 
 Updates to `locals` persist across boots of your application, and modifications do not trigger update events.
 The system operates the same way for all entity domains.

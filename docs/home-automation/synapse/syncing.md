@@ -9,11 +9,11 @@ This document covers how `synapse` handles syncing state with Home Assistant, ma
 ## State Syncing
 
 The `synapse` library operates off of a **push** model. When making changes to entity configuration / locals:
-1. written to local sqlite database
+1. written to local database (SQLite by default, or PostgreSQL/MySQL)
 2. if change should be reflect in ha (state / config update), immediately emit via websocket event
 3. receive by python `synapse-extension`, and reflect change in entity config
 
-The sqlite database exists to track current state, it does not contain any historical information.
+The database exists to track current state, it does not contain any historical information.
 It's primary purpose to to restore state during application reboots (expected or otherwise), and it's data should reflect what is currently in memory by your app
 
 > **Note**: removing entities from code will **NOT** clean up from database automatically

@@ -18,6 +18,16 @@ Synapse has 2 major components to install in order to achieve proper functionali
 1. Custom component: [synapse-extension](/docs/home-automation/synapse/extension)
 2. Typescript library: [install guide](/docs/home-automation/synapse/install)
 
+## 🗄️ Database Support
+
+Synapse uses [Drizzle ORM](https://orm.drizzle.team/) to support multiple database types:
+
+- **SQLite** (default) - Local file-based storage
+- **PostgreSQL** - Production-ready relational database
+- **MySQL** - Alternative relational database
+
+Database configuration is handled through environment variables or application configuration. See the [configuration section](/docs/home-automation/synapse/usage/advanced#database-configuration) for details.
+
 ## 👩‍🔧 Basic Usage
 
 Creating a new entity is easy! You can even attach to events inline with

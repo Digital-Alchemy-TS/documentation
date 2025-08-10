@@ -97,3 +97,40 @@ function MyService({ synapse, lifecycle }) {
   })
 }
 ```
+
+## 🗄️ Database Configuration
+
+Synapse supports multiple database types through Drizzle ORM. Configure your database using environment variables or application configuration:
+
+### Environment Variables
+
+```bash
+# Database type (sqlite, postgresql, mysql)
+SYNAPSE_DATABASE_TYPE=postgresql
+
+# Database connection URL
+SYNAPSE_DATABASE_URL=postgresql://user:password@localhost:5432/synapse
+```
+
+### Application Configuration
+
+```typescript
+HOME_AUTOMATION.bootstrap({
+  configuration: {
+    synapse: {
+      DATABASE_TYPE: "postgresql",
+      DATABASE_URL: "postgresql://user:password@localhost:5432/synapse"
+    }
+  },
+});
+```
+
+### Database Types
+
+| Type | Default URL | Description |
+|------|-------------|-------------|
+| `sqlite` | `file:./synapse_storage.db` | Local file-based storage |
+| `postgresql` | Custom | Production-ready relational database |
+| `mysql` | Custom | Alternative relational database |
+
+> **Note**: For PostgreSQL and MySQL, you must provide a valid connection URL in the `DATABASE_URL` environment variable.

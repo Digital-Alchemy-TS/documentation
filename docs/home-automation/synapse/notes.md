@@ -49,8 +49,8 @@ HOME_AUTOMATION.bootstrap({
 
 - running BOTH setups at the same time may lead to undefined behavior
   - stop `prod` before starting `dev`
-- stored state in sqlite database is **NOT** automatically synced, and will match the machine
-- no critical information is stored in sqlite db, and it may be removed to "reset" at any time
+- stored state in database is **NOT** automatically synced, and will match the machine
+- no critical information is stored in the database, and it may be removed to "reset" at any time
 
 ## Sync not working
 
@@ -60,7 +60,7 @@ The fix for this is to fully reset the app/integration.
 1. remove device ([🖼️](/img/synapse_delete.png))
 2. stop your application
 3. reboot home assistant
-4. *optional:* remove synapse db
+4. *optional:* remove synapse database
 5. start app and re-add to home assistant
 
 ## 🛠️ Managed Domains
