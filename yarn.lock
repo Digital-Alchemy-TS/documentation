@@ -7998,7 +7998,7 @@ __metadata:
     prism-react-renderer: "npm:^2.4.1"
     react: "npm:^19.1.1"
     react-dom: "npm:^19.1.0"
-    react-player: "npm:^3.3.1"
+    react-player: "npm:^3.3.2"
     typescript: "npm:~5.9.2"
   languageName: unknown
   linkType: soft
@@ -13350,9 +13350,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-player@npm:^3.3.1":
-  version: 3.3.1
-  resolution: "react-player@npm:3.3.1"
+"react-player@npm:^3.3.2":
+  version: 3.3.2
+  resolution: "react-player@npm:3.3.2"
   dependencies:
     "@mux/mux-player-react": "npm:^3.5.1"
     cloudflare-video-element: "npm:^1.3.3"
@@ -13368,7 +13368,7 @@ __metadata:
     "@types/react": ^17.0.0 || ^18 || ^19
     react: ^17.0.2 || ^18 || ^19
     react-dom: ^17.0.2 || ^18 || ^19
-  checksum: 10/2d803c95f2913b97ea2a36e71a5f901a90cf961e2aa1ef99fef6352933efc8dc0f0fd5c212c36027cb9e6de306961fbf275b78c9a84f3ec338a77034bbe55a30
+  checksum: 10/207e40eb68732aaf05ab80a27715b4e49eae0b23f8854534e616c2e484ff00e7a9af1f3dcf27bacc26a0098d6f5c3770e14da1ac6b76441ba6736185c3e81c7a
   languageName: node
   linkType: hard
 
