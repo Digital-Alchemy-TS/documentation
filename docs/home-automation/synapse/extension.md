@@ -1,7 +1,7 @@
 ---
 title: "🧱 Custom Component"
 authors: [zoe-codez]
-sidebar_position: 2
+sidebar_position: 3
 ---
 
 Welcome to the Synapse custom component for Home Assistant!

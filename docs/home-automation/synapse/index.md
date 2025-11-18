@@ -4,12 +4,7 @@ sidebar_position: 2
 authors: [zoe-codez]
 ---
 
-Welcome to `@digital-alchemy/synapse`!
-
-This project builds on the functions provided by [hass](/docs/home-automation/hass/) to provide the ability to generate entities within your Home Assistant install.
-
-🏗️ You are able to create entities from a wide variety of domains, ranging from helpers to real world device types.
-Easily update state in response to events, or use internal triggers to manage for you!
+The Digital Alchemy synapse project builds on top of the basic API calling functionality provided by [hass](/docs/home-automation/hass/) and provides bindings that allow you define your own services and entities within Home Assistant.
 
 ## 🚀 Setup
 
