@@ -19,7 +19,7 @@ You can generate these types using the script.
 ```bash
 npx mock-assistant
 # or
-node node_modules/@digital-alchemy/hass/dist/mock_assistant/main.js
+node node_modules/@digital-alchemy/hass/dist/mock_assistant/main.mts
 ```
 
 The configuration file from [type-writer](/docs/home-automation/hass/setup/type-writer/) is compatible with the script.
