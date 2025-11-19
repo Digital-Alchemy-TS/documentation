@@ -19,8 +19,8 @@ Scheduler operations automatically:
 ```typescript
 import { TServiceParams } from "@digital-alchemy/core";
 
-export function ServiceWithScheduler({ scheduler }: TServiceParams) {
-  // Run schedules in the root of your service
+export function ServiceWithScheduler({ scheduler, logger }: TServiceParams) {
+  const CALLBACK = () => logger.info("I ran!");
   scheduler.cron({ ... });
 }
 ```
@@ -29,19 +29,105 @@ export function ServiceWithScheduler({ scheduler }: TServiceParams) {
 
 In addition to the traditional numeric milliseconds to represent dureations, `scheduler` methods are also able to to work with other formats:
 
+
+
 These are all the same operation
 
 ```typescript
-scheduler.setTimeout(() => { /* some operation */ }, 5000);
-scheduler.setTimeout(() => { /* some operation */ }, "5s");
-scheduler.setTimeout(() => { /* some operation */ }, [5, "second"]);
-scheduler.setTimeout(() => { /* some operation */ }, { second: 5 });
+// number - milliseconds
+scheduler.setTimeout(NOOP, 5000);
+// string - ISO 8601 Partial
+scheduler.setTimeout(NOOP, "5s");
+// array - [qty, unit]
+scheduler.setTimeout(NOOP, [5, "second"]);
+// object - DurationUnitsObjectType
+scheduler.setTimeout(NOOP, { second: 5 });
 ```
 
-#### ISO 8601 Partial
+### number - millisecond
 
-#### Day.js Duration
+```typescript
+// number - milliseconds
+scheduler.setTimeout(NOOP, 5 * 1000);
+```
 
+The `number` / millisecond input input is the traditional javascript approach to providing duration.
+
+> `1000 ms` = `1 second`
+
+### ISO 8601 Partial
+
+```typescript
+// string - ISO 8601 Partial
+scheduler.setTimeout(NOOP, "5s");
+```
+
+The string format allows time to be entered as a HMS format - `[{qty}H][{qty}M][{qty}S]`
+
+Any combination of at least 1 unit is usable.
+
+| Value | Description |
+| ----- | ----------- |
+| `5h`  | 5 hours |
+| `3H2M`| 3 hours 2 minutes |
+| `0.5H`| Half hour |
+| `0.5s`| 500ms |
+
+Units are case insenstive bt must be provided in order, and numbers may come with decimal points.
+
+### Quantity + Unit
+
+```typescript
+// array - [qty, unit]
+scheduler.setTimeout(NOOP, [5, "second"]);
+```
+#### Available Units
+
+| Type | Valid Units |
+| ---- | ----------- |
+| Week | `week`, `weeks`, `w` |
+| Millisecond | `ms`, `millisecond`, `milliseconds` |
+| Second | `s`, `second`, `seconds` |
+| Minute | `m`, `minute`, `minutes` |
+| Hour | `h`, `hour`, `hours` |
+| Day | `d`, `D`, `day`, `days` |
+| Month | `M`, `month`, `months` |
+| Year | `y`, `year`, `years` |
+
+### DurationUnitsObject
+
+```typescript
+// object - DurationUnitsObjectType
+scheduler.setTimeout(NOOP, { second: 5 });
+```
+
+#### Possible Units
+- `milliseconds`
+- `seconds`
+- `minutes`
+- `hours`
+- `days`
+- `months`
+- `years`
+
+### Day.js Duration
+
+```typescript
+// dayjs duration
+scheduler.setTimeout(NOOP, dayjs.duration({ hours: 2, minutes: 30 }));
+```
+
+Duration objects can be created as part of library workflows, and are used as an intermediate step in other units.
+Other formats are typically more useful to end users.
+
+### Function
+
+```typescript
+// function returning -> valid unit
+scheduler.setTimeout(NOOP, () => 5000);
+```
+
+A sync function returning a valid unit (above) may also be used. This can be used by libraries to easily create logic that decides on the correct duration at the time it's needed.
 
 ## Methods
 
@@ -95,13 +181,13 @@ scheduler.setTimeout(() => {
   logger.info("hello world");
 }, 1000);
 ```
-### 💤 sleep
 
 ## Stopping Schedules
 
 All schedules can be stopped manually using the return value from each method:
 
 ```typescript
+// const { remove } = scheduler... also works
 const remove = scheduler.setTimeout(() => {
   logger.info("delayed operation");
 }, 5000);
@@ -113,6 +199,68 @@ function onSpecialEvent() {
 ```
 
 Schedules are also automatically stopped when the application tears down.
+
+
+## 💤 sleep
+
+> **Note**: this is also importable as a standalone function
+
+```typescript
+import { sleep } from "@digital-alchemy/core";
+
+// sleep() is same as scheduler.sleep()
+```
+
+When awaited, the function will pause for the defined time then return `void`
+
+```typescript
+async function DoSomeLogic() {
+  // logic
+  await sleep({ second: 5 });
+  // more logic
+}
+```
+
+### Cancelling
+
+Sleeps can be cancelled with different possible effects. For basic usage
+
+```typescript
+import { SleepReturn } from "@digital-alchemy/core";
+
+// reference accessible between runs
+let timer: SleepReturn;
+
+function runAfter5() {
+  // if timer currently exists, stop it
+  if (timer) {
+    timer.kill();
+  }
+
+  // create new timer in accessible possition
+  timer = sleep({ second: 5 })
+
+  // wait for it to complete
+  await timer;
+
+  // this will not happen if something else kills timer
+  logger.info("timer completed");
+  timer = undefined;
+}
+```
+
+#### params
+
+```typescript
+timer.kill("stop"); // default value
+timer.kill("continue");
+```
+
+#### Stop vs Continue
+
+Using the `stop` workflow causes the timer to be discarded, letting node clean up from there.
+
+Using the `continue` workflow causes the related timer to immediately complete regardless of time left.
 
 ## Performance Metrics
 
