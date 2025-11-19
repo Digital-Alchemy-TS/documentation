@@ -1,5 +1,5 @@
 ---
 title: Registries
 id: hass-registries-index
-sidebar_position: 2
+sidebar_position: 3
 ---

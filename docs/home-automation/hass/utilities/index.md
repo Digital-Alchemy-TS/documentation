@@ -1,5 +1,5 @@
 ---
 title: Utilities
 id: hass-utilities
-sidebar_position: 3
+sidebar_position: 4
 ---
