@@ -1,24 +1,3 @@
-Core Framework
-+ Creating services
-  - Builtin
-    - Logger
-    - Scheduler
-    - Internal
-    - Event
-  - Techniques
-+ Creating applications
-  - bootstrapping / boot options
-+ Creating libraries
-+ Configuration
-+ Testing
-+ Advanced
-  + Application lifecycle
-  + bootstrap sequence
-  + ServiceRunner
-  + Advanced logging
-  + AsyncLocalStorage
-  + Theory
-
 Home Automation
 + Hass
   + Installation
