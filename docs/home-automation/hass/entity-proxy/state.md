@@ -3,55 +3,73 @@ title: States
 id: hass-entity-proxy-states
 ---
 
-## State lookups
+Entity proxies provide a variety of tools for interacting with state, always having logic updated to reflect current point in time.
 
-The most common way to access state is via the `.state` & `.attributes` properties.
+## state
 
-```typescript
-const mySwitch = hass.refBy.id("switch.example");
-logger.info(`current state is ${mySwitch.state}`); // on
-```
-
-These perform lookups against an internal entity state registry within `hass` to retrieve the current value at that moment.
-You may also perform lookups against the immediately previous state
+The type definition for `state` provided to any particular entity is set up to reflect the value in Home Assistant.
+Some domains, like `binary_sensor`, may feature string unions instead of simple primitives.
 
 ```typescript
-logger.info(`previous state was ${mySwitch.previous.state}`);
+import { TServiceparams } from "@digital-alchemy/core";
+
+export function EntityStates({ hass, lifecycle, logger }: TServiceParams) {
+  const mySensor = hass.refBy.id("sensor.outdoor_temperature");
+  lifecycle.onReady(() => {
+    logger.info("current outdoor temperature is %s", mySensor.state);
+  });
+
+  mySensor.onUpdate(new_state => {
+    // new_state.state === mySensor.state
+    // both are valid and refer to the same thing
+    logger.info("current outdoor temperature is now %s", mySensor.state);
+  });
+}
 ```
 
-> **Note**: internal registry state changes are performed before emitting update events
+### assignments
 
-## Modifying Entity State
+Assignments to the `state` property are possible, with a special call being made to attempt to set the state.
 
-Entity proxies support direct modification of state and attributes:
+This relies on some quirks within Home Assistant to work right, and may not always do what you think it should.
+You should seek to use proper service calls to set state when possible.
+
+## attributes
+
+Like state, the entity `attributes` are always available on demand (and do have assignment support).
 
 ```typescript
-const myEntity = hass.refBy.id("sensor.temperature");
-
-// Set state directly
-myEntity.state = 72;
-
-// Update attributes
-myEntity.attributes = {
-  unit_of_measurement: "°F",
-  friendly_name: "Living Room Temp"
-};
+logger.info("friendly_name = %s", mySensor.attributes.friendly_name);
 ```
 
-> **Note**: State modifications are sent via REST API and may not be supported by all entity types
+## previous
 
-## Historical Data
+The `previous` property provides a simple path to accessing the immediate previous state / attributes of the entity from any workflow.
 
+```typescript
+mySensor.onUpdate((new_state, old_state) => {
+  // Both of these are equivalent
+  // old_state.state === mySensor.previous.state
+});
+```
+
+## history
+
+If you need more than just the current / previous state, entities expose a history querying function
 Access historical state changes for an entity:
 
 ```typescript
-const mySensor = hass.refBy.id("sensor.outdoor_temperature");
+const now = dayjs();
+const from = now.substract(1, "day");
 
 // Get history for the last 24 hours
-const history = await mySensor.history(
-  dayjs().subtract(24, 'hours'),
-  dayjs()
-);
-
-// history contains array of { state, attributes, date } objects
+const history = await mySensor.history(from, now);
 ```
+
+## `last_changed` / `last_*`
+
+Entities also expose a few readonly timestamps for tracking:
+
+- `last_changed`
+- `last_reported`
+- `last_updated`

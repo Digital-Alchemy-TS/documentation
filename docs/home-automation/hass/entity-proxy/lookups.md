@@ -3,7 +3,6 @@ title: Lookups
 id: hass-entity-proxy-lookups
 sidebar_position: 2
 ---
-## Creating references
 
 The most common method of creating references is using `hass.refBy.id`:
 
