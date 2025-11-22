@@ -1,5 +1,5 @@
 ---
 title: Services
 id: synapse-typescript-services
-sidebar_position: 1
+sidebar_position: 3
 ---

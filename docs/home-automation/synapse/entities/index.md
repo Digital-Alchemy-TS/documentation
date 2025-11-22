@@ -1,5 +1,5 @@
 ---
 title: Entities
 id: synapse-entities
-sidebar_position: 1
+sidebar_position: 2
 ---
