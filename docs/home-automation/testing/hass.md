@@ -1,5 +1,5 @@
 ---
-title: 🌐 Hass
+title: Hass
 ---
 
 In order to validate your automations are working as expected, `@digital-alchemy/hass` includes a variety of utilities for manipulating state and patching `hass` to allow for safe assertions to be made.

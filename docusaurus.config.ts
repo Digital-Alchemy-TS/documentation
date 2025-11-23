@@ -80,11 +80,6 @@ const config: Config = {
           position: "left",
         },
         {
-          to: "/docs/home-automation/quickstart",
-          label: "🚀 Quickstart",
-          position: "left",
-        },
-        {
           to: "/docs/support",
           label: "🔧 Support Libraries",
           position: "left",

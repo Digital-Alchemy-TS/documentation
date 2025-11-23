@@ -1,5 +1,5 @@
 ---
-title: 🧠 Synapse
+title: Synapse
 ---
 
 > ⚠️ Synapse testing tools are under active development
