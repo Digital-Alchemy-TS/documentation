@@ -38,7 +38,3 @@ export function SynapseServiceCreate({
   }
 }
 ```
-
-## Fields vs Target
-
-Both `fields` & `target` will affect the data that your service can be called with, in different ways.
