@@ -58,12 +58,12 @@ await testRunner
     });
   })
 
-  .run(({ hass, mock_assistant }) => {
+  .run(async ({ hass, mock_assistant }) => {
     // watch for service calls to be made
     const spy = jest.spyOn(hass.call.fan, "turn_off");
 
     // emit state change
-    await mock_assistant.entity.emitChange(binary_sensor.living_room_occupied, {
+    await mock_assistant.entity.emitChange("binary_sensor.living_room_occupied", {
       state: "off"
     });
 
