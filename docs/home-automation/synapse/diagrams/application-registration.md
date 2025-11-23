@@ -1,7 +1,6 @@
 ---
 title: Application Registration Flow
 id: synapse-application-registration-flow
-sidebar_position: 1
 ---
 
 This document explains the complete flow for registering a synapse application with Home Assistant.
