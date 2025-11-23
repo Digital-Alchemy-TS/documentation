@@ -1,6 +1,6 @@
 ---
 title: 🤖 Automation
-sidebar_position: 4
+sidebar_position: 3
 ---
 Welcome to `@digital-alchemy/automation`!
 

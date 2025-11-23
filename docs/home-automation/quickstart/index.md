@@ -1,6 +1,6 @@
 ---
-title: 🚀 Quickstart
-sidebar_position: 5
+title: Quickstart
+sidebar_position: 0
 ---
 
 Welcome to the **Digital Alchemy** Home Automation quickstart project!

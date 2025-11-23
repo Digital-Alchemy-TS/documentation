@@ -13,7 +13,7 @@ The project prioritizes modern ESModule based code, minimal dependencies, and su
 ## 🧩 [Core Framework](/docs/core)
 
 The base tooling used to power the everything else.
-Build and wire [testable](/docs/testing/) services using a flexible module loader and included configuration, logging, and lifecycle management tools.
+Build and wire [testable](/docs/core/testing/) services using a flexible module loader and included configuration, logging, and lifecycle management tools.
 
 > [![version](https://img.shields.io/github/package-json/version/Digital-Alchemy-TS/core)](https://www.npmjs.com/package/@digital-alchemy/core)
 > [![lastupdate](https://img.shields.io/github/last-commit/Digital-Alchemy-TS/core)](https://github.com/Digital-Alchemy-TS/core)

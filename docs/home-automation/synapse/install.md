@@ -1,53 +1,89 @@
 ---
-title: "🚀 Installation"
+title: Installation
+id: synapse-install
 sidebar_position: 1
-authors: [zoe-codez]
 ---
 
-| [NPM](https://www.npmjs.com/package/@digital-alchemy/synapse) | [GitHub](https://github.com/Digital-Alchemy-TS/synapse) |
-| --- | --- |
+> ⚠️ This library requires a custom component to be installed in side Home Assistant to operate
 
-## 💾 Install
-
-> **Attention**:
-> Depends on  [@digital-alchemy/hass](/docs/home-automation/hass/) and the [synapse custom component](/docs/home-automation/synapse/extension)
-
-Add as a dependency, and add to your imports. Nice and easy
+`@digital-alchemy/synapse` installs as a basic dependency, depending on `@digital-alchemy/hass` for it's ability to connect to Home Assistant.
 
 ```bash
-npm i @digital-alchemy/synapse
+yarn add @digital-alchemy/synapse
 ```
 
-> **Add to code**
+## Importing into code
+
+### Modules
 
 ```typescript
-import { LIB_HASS } from "@digital-alchemy/hass";
+import { CreateApplication } from "@digital-alchemy/core";
 import { LIB_SYNAPSE } from "@digital-alchemy/synapse";
+import { LIB_HASS } from "@digital-alchemy/hass";
 
-// 🏘️ applications
-const MY_APP = CreateApplication({
-  libraries: [LIB_HASS, LIB_SYNAPSE],
-  ...
-})
+export const HOME_AUTOMATION = CreateApplication({
+  name: "home_automation",
+  libraries: [LIB_SYNAPSE, LIB_HASS],
+  //          ^^^^^^^^ add to your libraries array
+});
+```
 
-// 📚 libraries
-export const MY_LIBRARY = CreateLibrary({
-  depends: [LIB_HASS, LIB_SYNAPSE],
-  ...
+### Services
+
+```typescript
+import { TServiceParams } from "@digital-alchemy/core";
+
+export function ExampleService({ synapsem, context }: TServiceParams) {
+  const sensor = synapse.sensor({
+    context,
+    name: "Magic Sensor"
+  })
+}
+```
+
+## Configuration Considerations
+
+### Unique ID
+
+The synapse integration can be set up with many apps connecting to a central Home Assistant instance.
+In order to keep track of everything, each application requires a configuration property `METADATA_UNIQUE_ID`.
+
+By default, this value is generated based on the `hostname` + folder path for where the code is running.
+
+It is recommended that you create and hard code a `METADATA_UNIQUE_ID` property into the bootstrap command of your app so your app so it will always be a stable value.
+
+```typescript
+import { HOME_AUTOMATION } from "./application.module.mts";
+
+HOME_AUTOMATION.bootstrap({
+  configuration: {
+    synapse: {
+      METADATA_UNIQUE_ID: "f4f75495-8928-4f8d-895b-22fbef47f549"
+      // any unique value works ^^^^^^^^
+    }
+  }
 })
 ```
 
-## 📑 Register application
+### Pesistence
 
-Once you have you application started, and have the extension installed within Home Assistant, connecting the two is a straightforward process.
-From within Home Assistant, go to `+ ADD INTEGRATION` and select **Digital Alchemy**.
+Entity state can change at runtime, but your application will occasionally need to restart.
+In order to make sure your application restores in the same state that it shut down in, a database is required.
 
-When you start the config flow, Home Assistant will emit a discovery request to gather details about all connected applications.
-Then a list will be presented allowing you to select an application to register.
+The `synapse` library has support for the following backends
+- `SQLite` (default)
+- `Postgres`
+- `MySQL` / `MariaDB`
 
-Once your application is registered, a few things will happen:
-- A device will be created to represent your application and contain entities
-- A "application is online" `binary_sensor` entity will be created
-- New entities will be generated to match your app
+The default sqlite will store state in a file within your repository (you should `.gitignore`).
 
-See the [sync](/docs/home-automation/synapse/syncing) page for specifics about when and how state is synced.
+For a more seamless experience working with multiple environments, you should consider `postgresql` or `mysql` backends.
+These both support multiple applications within a single database at the same time and have no issues with remote connections.
+
+```
+# valid values: sqlite | postgresql | mysql
+SYNAPSE_DATABASE_TYPE=sqlite
+
+# shared var: file path for sqlite, connection string for others
+SYNAPSE_DATABASE_URL=file:./synapse_storage.sql
+```

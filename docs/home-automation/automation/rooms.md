@@ -1,5 +1,5 @@
 ---
-title: 🏡 Rooms
+title: Rooms
 sidebar_position: 5
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: 🧾 Sequence Matcher
+title: Sequence Matcher
 sidebar_position: 4
 ---
 

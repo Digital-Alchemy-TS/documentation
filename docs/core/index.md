@@ -21,4 +21,4 @@ The core framework provides all the basic tools needed to get a production grade
 The project places a strong focus on code ergonomics and type safety within applications.
 Services and modules are automatically assembled into a convenient api, making feature discovery within your modules a breeze!
 
-Tools are built in an ESModule first strategy, leveraging native tooling when possible to reduce dependencies and keep your applications light weight.
+Tools are built on top of a minimal ESModule based stack for minimal overhead and easy prortability to your favorite runtime.
