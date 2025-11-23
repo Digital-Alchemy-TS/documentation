@@ -1,5 +1,5 @@
 ---
-title: Custom Component
+title: 📑 Custom Component
 id: synapse-custom-component
 sidebar_position: 2
 ---
