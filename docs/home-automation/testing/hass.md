@@ -63,12 +63,9 @@ await testRunner
     const spy = jest.spyOn(hass.call.fan, "turn_off");
 
     // emit state change
-    await mock_assistant.entity.emitChange(
-      "binary_sensor.living_room_occupied",
-      {
-        state: "off",
-      }
-    );
+    await mock_assistant.entity.emitChange("binary_sensor.living_room_occupied", {
+      state: "off"
+    });
 
     // observe result
     expect(spy).toHaveBeenCalledWith({ entity_id: "fan.living_room_fan" });
