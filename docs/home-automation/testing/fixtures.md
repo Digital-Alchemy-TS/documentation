@@ -22,7 +22,7 @@ npx mock-assistant
 node node_modules/@digital-alchemy/hass/dist/mock_assistant/main.mjs
 ```
 
-The configuration file from [type-writer](/docs/home-automation/hass/setup/type-writer/) is compatible with the script.
+The configuration file from [type-writer](/docs/home-automation/hass/installation/hass-type-writer) is compatible with the script.
 
 ```bash
 npx mock-assistant --config ./.type_writer

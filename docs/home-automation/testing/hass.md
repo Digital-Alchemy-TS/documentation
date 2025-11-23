@@ -4,7 +4,7 @@ title: Hass
 
 In order to validate your automations are working as expected, `@digital-alchemy/hass` includes a variety of utilities for manipulating state and patching `hass` to allow for safe assertions to be made.
 
-> 🚟 See [fixtures](/docs/testing/automations/fixtures) documentation for details on other parts of the process
+> 🚟 See [fixtures](/docs/home-automation/testing/fixtures) documentation for details on other parts of the process
 >
 > ⚠️ Testing features are still under development. If the tools don't support operations you want to test, please open an issue
 
