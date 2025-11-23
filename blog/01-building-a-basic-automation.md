@@ -170,7 +170,7 @@ export function WeatherReport({ scheduler, logger, hass }: TServiceParams) {
 }
 ```
 
-> See [Scheduler](/docs/core/tools/scheduler) for more specific documentation.
+> See [Scheduler](/docs/core/services/builtin/core_scheduler) for more specific documentation.
 
 ## 🎬 Bringing it all together
 

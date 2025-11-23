@@ -57,7 +57,7 @@ This creates the following configuration variables:
 | `number`   | Simple number configurations                                     |                                                                                    |
 | `record`   | `Record<string, string>` for defining key/value pairs of strings |                                                                                    |
 
-For complex configuration types, see [Advanced Configuration](/docs/core/techniques/configuration-advanced).
+For more details on configuration sourcing and advanced usage, see [Configuration Sourcing](/docs/core/configuration/core-configuration-sourcing).
 
 ## Using configs
 
