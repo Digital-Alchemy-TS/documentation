@@ -75,11 +75,6 @@ const config: Config = {
       items: [
         { to: "/docs/core", label: "🧩 Core", position: "left" },
         {
-          to: "/docs/testing",
-          label: "⁉️ Testing",
-          position: "left",
-        },
-        {
           to: "/docs/home-automation",
           label: "🤖 Home Automation",
           position: "left",
