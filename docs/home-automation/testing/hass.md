@@ -29,10 +29,10 @@ const livingRoomOccupied = hass.refBy.id("binary_sensor.living_room_occupied");
 livingRoomOccupied.onUpdate((new_state, old_state) => {
   if (old_state.state === "on" && new_state.state === "off") {
     hass.call.fan.turn_off({
-      entity_id: "fan.living_room_fan"
+      entity_id: "fan.living_room_fan",
     });
   }
-})
+});
 ```
 
 #### Testing the example
@@ -58,14 +58,17 @@ await testRunner
     });
   })
 
-  .run(({ hass, mock_assistant }) => {
+  .run(async ({ hass, mock_assistant }) => {
     // watch for service calls to be made
     const spy = jest.spyOn(hass.call.fan, "turn_off");
 
     // emit state change
-    await mock_assistant.entity.emitChange(binary_sensor.living_room_occupied, {
-      state: "off"
-    });
+    await mock_assistant.entity.emitChange(
+      "binary_sensor.living_room_occupied",
+      {
+        state: "off",
+      }
+    );
 
     // observe result
     expect(spy).toHaveBeenCalledWith({ entity_id: "fan.living_room_fan" });
