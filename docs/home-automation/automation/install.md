@@ -1,5 +1,5 @@
 ---
-title: 🚀 Install
+title: Install
 sidebar_position: 0
 ---
 
@@ -19,7 +19,6 @@ npm i @digital-alchemy/automation
 ```typescript
 import { LIB_HASS } from "@digital-alchemy/hass";
 import { LIB_SYNAPSE } from "@digital-alchemy/synapse";
-import { LIB_FASTIFY } from "@digital-alchemy/fastify-extension";
 import { LIB_AUTOMATION } from "@digital-alchemy/automation";
 
 // application
@@ -30,10 +29,7 @@ const MY_APP = CreateApplication({
 
 // library
 export const MY_LIBRARY = CreateLibrary({
-  // fastify optional for libraries
-  depends: [LIB_HASS, LIB_SYNAPSE, LIB_AUTOMATION/*, LIB_FASTIFY*/],
+  depends: [LIB_HASS, LIB_SYNAPSE, LIB_AUTOMATION],
   name: "special_logic",
 })
 ```
-
-> 🎉

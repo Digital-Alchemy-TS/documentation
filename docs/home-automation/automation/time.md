@@ -1,5 +1,5 @@
 ---
-title: 🕟 Time
+title: Time
 sidebar_position: 2
 ---
 The `automation.time` extension provides tools for quickly performing automation calculations involving time.

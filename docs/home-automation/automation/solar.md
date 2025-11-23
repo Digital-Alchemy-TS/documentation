@@ -1,5 +1,5 @@
 ---
-title: 🌝 Solar
+title: Solar
 sidebar_position: 3
 ---
 
