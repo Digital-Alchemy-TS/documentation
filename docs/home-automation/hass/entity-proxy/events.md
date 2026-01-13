@@ -11,7 +11,7 @@ The most straightforward way to create one is via the `refBy` command
 import { TServiceParams } from "@digital-alchemy/core";
 
 export function ExampleEntityProxyService({ hass }: TServiceParams) {
-  const mySwitch = hass.refByid("switch.my_switch");
+  const mySwitch = hass.refBy.id("switch.my_switch");
 }
 ```
 
