@@ -130,12 +130,46 @@ logger.debug({ context }, "current context");
 
 ### `internal.utils`
 
+#### `getIntervalMs(offset)`
+
+Converts any [`TOffset`](../builtins/scheduler.md#toffset) value to a number of milliseconds. Useful when you need the raw ms value for a native API or your own timer logic.
+
+```typescript
+import { MINUTE } from "@digital-alchemy/core";
+
+internal.utils.getIntervalMs("30m")           // 1_800_000
+internal.utils.getIntervalMs(5 * MINUTE)      // 300_000
+internal.utils.getIntervalMs([2, "hours"])    // 7_200_000
+internal.utils.getIntervalMs({ seconds: 90 }) // 90_000
+```
+
+#### `getIntervalTarget(offset)`
+
+Converts any `TOffset` to a `Dayjs` representing `now + duration`. Useful when you need an absolute target time rather than a relative duration.
+
+```typescript
+const target = internal.utils.getIntervalTarget("5m");
+// target is a Dayjs 5 minutes from now
+
+// Example: sleep until a dynamic future time
+const next = internal.utils.getIntervalTarget(someOffset);
+await sleep(next);
+```
+
+#### `relativeDate(past, future?)`
+
+Human-readable relative time string.
+
+```typescript
+internal.utils.relativeDate(Date.now() - 3 * MINUTE) // "3 minutes ago"
+internal.utils.relativeDate(someDate, futureDate)     // "in 2 hours"
+```
+
+#### Other utilities
+
 | Method/Property | Description |
 |---|---|
 | `titleCase(str)` | Convert snake_case or camelCase to Title Case |
-| `getIntervalMs(offset)` | Parse a `TOffset` string to milliseconds |
-| `getIntervalTarget(offset)` | Parse a `TOffset` string to a target `Dayjs` datetime |
-| `relativeDate(past, future?)` | Human-readable relative time: "3 minutes ago" |
 | `object.get(obj, path)` | Dot-notation read from nested object |
 | `object.set(obj, path, value)` | Dot-notation write into nested object |
 | `object.del(obj, path)` | Dot-notation delete from nested object |

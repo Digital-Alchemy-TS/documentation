@@ -26,11 +26,23 @@ All registered jobs are automatically stopped at `PreShutdown`.
 
 `TOffset` is a flexible duration type accepted by `setInterval`, `setTimeout`, and `sliding`. It can be:
 
+- A `number` in milliseconds: `30_000`, `5 * MINUTE`, `HOUR`
 - A human-readable string: `"5s"`, `"30m"`, `"2h"`, `"1d"`
 - A dayjs `DurationUnitsObjectType`: `{ minutes: 5, seconds: 30 }`
 - An ISO 8601 partial duration string: `"PT5M30S"`
 - A `[quantity, unit]` tuple: `[5, "minutes"]`
 - A function returning any of the above (for dynamic durations)
+
+```typescript
+import { MINUTE, HOUR } from "@digital-alchemy/core";
+
+scheduler.setInterval(() => cleanup(), 30 * MINUTE);  // number
+scheduler.setInterval(() => cleanup(), "30m");         // string
+scheduler.setInterval(() => cleanup(), [30, "minutes"]); // tuple
+scheduler.setInterval(() => cleanup(), { minutes: 30 }); // object
+```
+
+To convert a `TOffset` to milliseconds or a `Dayjs` target outside of a scheduler call, use [`internal.utils.getIntervalMs` and `internal.utils.getIntervalTarget`](../services/service-params.mdx#internalutils).
 
 ## Methods
 

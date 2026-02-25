@@ -16,7 +16,7 @@ export function configureMonacoForEmbeddedEditor(
 	initDone = true
 
 	monacoInstance.languages.typescript.typescriptDefaults.setCompilerOptions({
-		target: monacoInstance.languages.typescript.ScriptTarget.ES2022,
+		target: monacoInstance.languages.typescript.ScriptTarget.ES2020,
 		module: monacoInstance.languages.typescript.ModuleKind.ESNext,
 		moduleResolution:
 			monacoInstance.languages.typescript.ModuleResolutionKind.NodeJs,
@@ -54,6 +54,10 @@ export function configureMonacoForEmbeddedEditor(
  * packages they import. Each editor instance gets its own virtualRoot so
  * multiple editors on the same page don't share a virtual filesystem.
  *
+ * Returns an array of disposables — call .dispose() on each when the editor
+ * unmounts to remove the extra libs and prevent declare module augmentations
+ * from one example contaminating the TypeScript context of another.
+ *
  * @param monacoInstance - The Monaco instance from beforeMount
  * @param virtualRoot    - Unique base path, e.g. "file:///example-quickstart"
  * @param files          - Map of filename → source content
@@ -62,11 +66,15 @@ export function registerExampleFiles(
 	monacoInstance: typeof Monaco,
 	virtualRoot: string,
 	files: Record<string, string>,
-): void {
+): Monaco.IDisposable[] {
+	const disposables: Monaco.IDisposable[] = []
+
 	for (const [name, content] of Object.entries(files)) {
-		monacoInstance.languages.typescript.typescriptDefaults.addExtraLib(
-			content,
-			`${virtualRoot}/${name}`,
+		disposables.push(
+			monacoInstance.languages.typescript.typescriptDefaults.addExtraLib(
+				content,
+				`${virtualRoot}/${name}`,
+			),
 		)
 	}
 
@@ -76,4 +84,6 @@ export function registerExampleFiles(
 			ataInstance(content)
 		}
 	}
+
+	return disposables
 }

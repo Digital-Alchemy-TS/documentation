@@ -13,3 +13,5 @@ Guides are narrative explanations with diagrams. Where the reference answers "wh
 | [Application Structure](./application-structure.md) | Organizing a real multi-service, multi-library application |
 | [Config and Environments](./config-and-environment.md) | Config flow from definition to validated values; multi-environment patterns |
 | [Testing Strategies](./testing-strategies.md) | Philosophy, unit vs integration, mocking approaches |
+| [Log Streaming](./log-streaming.md) | `addTarget`, fire-and-forget delivery, `mergeData`, and ALS tagging |
+| [Config in Production](./config-in-production.md) | Per-type patterns, manifest files, adapter toggles |

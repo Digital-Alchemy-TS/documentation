@@ -20,5 +20,6 @@ Work through them in order on your first pass. If you're returning for a specifi
 | [Building a Library](./06-building-a-library.md) | `CreateLibrary`, `depends`, and sharing code between apps |
 | [Testing Basics](./07-testing-basics.mdx) | `TestRunner`, the fluent builder, and teardown |
 | [What Next?](./08-what-next.md) | Summary and where to go from here |
+| [Custom Config Loaders](./09-custom-config-loader.md) | Write a loader that reads config from any external source |
 
 If you've already read the [Quickstart](../get-started/quickstart.mdx), the first tutorial covers the same material with more depth and a second service added. You can skip to [Adding Services](./02-adding-services.md) if you're comfortable with the basics.

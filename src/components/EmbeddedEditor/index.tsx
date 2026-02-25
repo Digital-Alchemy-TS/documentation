@@ -48,10 +48,21 @@ const EmbeddedEditor: React.FC<EmbeddedEditorProps> = ({
 			: `file:///example-${++instanceCounter}`,
 	).current
 
+	// Track disposables so we can clean up extra libs on unmount, preventing
+	// declare module augmentations from leaking into other editor instances.
+	const extraLibsRef = React.useRef<import("monaco-editor").IDisposable[]>([])
+
+	React.useEffect(() => {
+		return () => {
+			for (const d of extraLibsRef.current) d.dispose()
+			extraLibsRef.current = []
+		}
+	}, [])
+
 	const handleBeforeMount = React.useCallback(
 		(monaco: { languages: typeof import("monaco-editor").languages }) => {
 			configureMonacoForEmbeddedEditor(monaco)
-			registerExampleFiles(monaco, virtualRoot, files)
+			extraLibsRef.current = registerExampleFiles(monaco, virtualRoot, files)
 		},
 		// virtualRoot is stable; files reference may change but content rarely does
 		[virtualRoot, files],
