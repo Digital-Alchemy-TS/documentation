@@ -48,7 +48,7 @@ const config: Config = {
           breadcrumbs: true,
           showLastUpdateAuthor: true,
           editUrl:
-            "https://github.com/Digital-Alchemy-TS/documentation/tree/main/packages/create-docusaurus/templates/shared/",
+            "https://github.com/Digital-Alchemy-TS/documentation/tree/main/docs",
         },
         blog: {
           showReadingTime: true,
