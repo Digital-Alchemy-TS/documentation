@@ -51,6 +51,12 @@ npx type-writer
 
 3. reload editor
 
+### Watch mode
+
+`WATCH_MODE=true npx type-writer`
+
+In watch mode,`type-writer` will remain running and output new types every time something is changed within Home Assistant.
+
 ## Custom Attributes
 
 With some entities, attributes can appear and disappear while your code is running.
