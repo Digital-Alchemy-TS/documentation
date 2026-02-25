@@ -1,0 +1,107 @@
+---
+title: Quickstart
+sidebar_position: 3
+description: "Build and run your first Digital Alchemy application."
+---
+
+import EmbeddedEditor from '@site/src/components/EmbeddedEditor';
+import { files, defaultFile } from '@site/src/examples/core/01-getting-started/first-app';
+
+This guide walks you through building a minimal Digital Alchemy application from scratch. By the end you'll have a running app and understand the three core building blocks: **services**, **modules**, and **bootstrap**.
+
+## Install
+
+```bash
+yarn add @digital-alchemy/core
+```
+
+## Step 1 — Write a service
+
+A service is a plain TypeScript function that receives a single parameter: `TServiceParams`. This object contains everything your service needs — the logger, lifecycle hooks, config, other services, and more.
+
+```typescript title="src/hello.service.mts"
+import type { TServiceParams } from "@digital-alchemy/core";
+
+export function HelloService({ logger, lifecycle }: TServiceParams) {
+  lifecycle.onReady(() => {
+    logger.info("Hello, Digital Alchemy!");
+  });
+}
+```
+
+A few things to notice:
+- The function signature always receives a single destructured `TServiceParams`.
+- **No code runs at function call time** — you register callbacks for lifecycle stages (here, `onReady`). This is how you control *when* things happen.
+- The logger is pre-configured with your service's context (`my_app:hello`), so every log line is automatically tagged.
+
+## Step 2 — Create an application module
+
+An application module wires services together and gives the app a name.
+
+```typescript title="src/application.mts"
+import { CreateApplication } from "@digital-alchemy/core";
+import { HelloService } from "./hello.service.mts";
+
+export const MY_APP = CreateApplication({
+  name: "my_app",
+  services: {
+    hello: HelloService,
+  },
+});
+
+// Extend LoadedModules so TypeScript knows what's on TServiceParams
+declare module "@digital-alchemy/core" {
+  export interface LoadedModules {
+    my_app: typeof MY_APP;
+  }
+}
+```
+
+The `declare module` block is how Digital Alchemy makes cross-service types work. After this declaration, any service in `my_app` can access `my_app.hello` from `TServiceParams` and TypeScript will know its full type.
+
+## Step 3 — Bootstrap
+
+Create an entrypoint that starts the application.
+
+```typescript title="src/main.mts"
+import { MY_APP } from "./application.mts";
+
+await MY_APP.bootstrap();
+```
+
+Then run it:
+
+```bash
+npx tsx src/main.mts
+```
+
+You should see output like:
+
+```
+[Mon 09:00:00.000] [INFO][my_app:hello]: Hello, Digital Alchemy!
+```
+
+## Try it live
+
+The editor below shows the same three files. Click between them, read the types, and try making changes.
+
+<EmbeddedEditor files={files} defaultFile={defaultFile} exampleId="quickstart" />
+
+## What just happened?
+
+When `bootstrap()` is called, the framework:
+
+1. Creates the lifecycle manager
+2. Wires boilerplate services (logger, config, scheduler)
+3. Calls `HelloService` — building its `TServiceParams` from the wired context
+4. Runs lifecycle stages in order: `PreInit` → `PostConfig` → `Bootstrap` → `Ready`
+
+Your `onReady` callback fires at step 4. By that point, all services are initialized and config is validated.
+
+For the full picture of what happens during bootstrap, see [Bootstrapping](../02-core-concepts/bootstrapping.md).
+
+## Next steps
+
+- Add a second service and have them talk to each other → [Services](../03-module-system/services.md)
+- Add typed configuration → [Configuration](../05-configuration/index.md)
+- Understand the lifecycle → [Lifecycle](../04-lifecycle/index.md)

@@ -1,0 +1,10 @@
+{
+  "label": "Module System",
+  "position": 3,
+  "collapsible": true,
+  "collapsed": true,
+  "link": {
+    "type": "doc",
+    "id": "core/03-module-system/index"
+  }
+}

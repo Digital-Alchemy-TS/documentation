@@ -1,1 +1,0 @@
-![confirm](/img/confirm.png)
