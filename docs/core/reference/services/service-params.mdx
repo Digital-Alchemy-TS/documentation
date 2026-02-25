@@ -1,0 +1,199 @@
+---
+title: TServiceParams
+sidebar_position: 2
+description: "Complete reference for all TServiceParams properties."
+---
+
+import EmbeddedEditor from '@site/src/components/EmbeddedEditor';
+import { files, defaultFile } from '@site/src/examples/core/reference/service-params';
+
+`TServiceParams` is the single parameter every service function receives. It is built from the dependency graph at wiring time and carries everything the service needs.
+
+```typescript
+export function MyService({ logger, lifecycle, config, scheduler }: TServiceParams) {
+  // ...
+}
+```
+
+## Properties
+
+| Property | Type | Description |
+|---|---|---|
+| `logger` | `GetLogger` | Scoped logger, pre-bound to `module:service` context |
+| `lifecycle` | `TLifecycleBase` | Register startup and shutdown callbacks |
+| `config` | `TInjectedConfig` | Typed config object, one namespace per module |
+| `scheduler` | `TScheduler` | Schedule cron jobs, intervals, and timeouts |
+| `event` | `EventEmitter` | App-wide shared event bus |
+| `als` | `AlsExtension` | Async Local Storage — context propagation |
+| `context` | `TContext` | String identifier for this service: `"my_app:service_name"` |
+| `internal` | `InternalDefinition` | Utilities, boot metadata, and internal hooks |
+| `params` | `TServiceParams` | Self-reference — useful when passing params into a sub-system |
+| `my_app` | `GetApis<typeof MY_APP>` | Other services in your app (after `LoadedModules` declaration) |
+
+## `logger`
+
+A `GetLogger` instance pre-bound to this service's context string (`my_app:service_name`). Every log line is automatically tagged.
+
+```typescript
+logger.info("message");
+logger.debug({ key: "value" }, "structured log");
+logger.warn({ error }, "something went wrong");
+```
+
+Levels: `trace`, `debug`, `info`, `warn`, `error`, `fatal`, `silent`.
+
+See [Logger](../builtins/logger.md) for the full API.
+
+## `lifecycle`
+
+Registers callbacks for lifecycle stages. All methods accept an optional priority number.
+
+```typescript
+lifecycle.onPostConfig(() => { /* config available */ });
+lifecycle.onBootstrap(async () => { /* open connections */ });
+lifecycle.onReady(() => { /* start serving */ });
+lifecycle.onPreShutdown(() => { /* stop accepting work */ });
+lifecycle.onShutdownStart(async () => { /* flush and close */ });
+lifecycle.onShutdownComplete(() => { /* final cleanup */ });
+```
+
+See [Hooks](../lifecycle/hooks.md) for details on all seven hooks.
+
+## `config`
+
+The typed config object. Each module's config lives under its own namespace:
+
+```typescript
+config.my_app.PORT          // number
+config.my_lib.BASE_URL      // string
+config.boilerplate.LOG_LEVEL // "trace" | "debug" | "info" | ...
+```
+
+Only safe to read after `PostConfig`. At wiring time, only `default` values are available.
+
+See [Accessing Config](../config/access.md).
+
+## `scheduler`
+
+Schedules work on intervals, cron schedules, or timeouts. All methods return a `RemoveCallback`.
+
+```typescript
+const stop = scheduler.setInterval(() => doWork(), "30s");
+const stopCron = scheduler.cron({ schedule: "0 * * * *", exec: () => hourlyTask() });
+// stop() / stop.remove() to cancel
+```
+
+Scheduler jobs do not fire until `Ready` stage. All registered jobs are automatically stopped at `PreShutdown`.
+
+See [Scheduler](../builtins/scheduler.md).
+
+## `event`
+
+The app-wide Node.js `EventEmitter`. The same instance is shared across all services.
+
+```typescript
+event.on("user:created", (user: User) => { ... });
+event.emit("user:created", newUser);
+```
+
+The emitter is created fresh at each bootstrap and destroyed at teardown. See [Event Bus](../builtins/event.md).
+
+## `als`
+
+`AlsExtension` wraps Node.js `AsyncLocalStorage`. Use it to attach contextual data that propagates through async call chains without passing it explicitly.
+
+```typescript
+als.run({ logs: { correlationId: "abc-123" } }, () => {
+  // every log emitted from this callback chain includes correlationId automatically
+  doAsyncWork();
+});
+
+// Elsewhere in the call chain:
+const store = als.getStore();
+const correlationId = store?.logs?.correlationId;
+```
+
+See [Async Local Storage](../../advanced/async-local-storage.md).
+
+## `context`
+
+A branded string identifying this service: `"my_app:service_name"`. Used internally for log tagging and introspection. Can be passed to `internal.safeExec` to tag error logs.
+
+```typescript
+logger.debug({ context }, "current context");
+// context === "my_app:service_name"
+```
+
+## `internal`
+
+`InternalDefinition` provides utilities and boot metadata. Mostly useful for framework-level code and advanced service patterns.
+
+### `internal.utils`
+
+| Method/Property | Description |
+|---|---|
+| `titleCase(str)` | Convert snake_case or camelCase to Title Case |
+| `getIntervalMs(offset)` | Parse a `TOffset` string to milliseconds |
+| `getIntervalTarget(offset)` | Parse a `TOffset` string to a target `Dayjs` datetime |
+| `relativeDate(past, future?)` | Human-readable relative time: "3 minutes ago" |
+| `object.get(obj, path)` | Dot-notation read from nested object |
+| `object.set(obj, path, value)` | Dot-notation write into nested object |
+| `object.del(obj, path)` | Dot-notation delete from nested object |
+| `object.deepExtend(target, ...src)` | Deep merge objects |
+| `is` | Reference to the `is` singleton (type guards) |
+
+### `internal.boot`
+
+Introspection into the running application:
+
+```typescript
+internal.boot.loadedModules      // Map<name, service APIs>
+internal.boot.moduleMappings     // Map<name, service functions>
+internal.boot.serviceConstructionTimes  // [{module, service, duration}]
+internal.boot.completedLifecycleEvents  // Set<LifecycleStages>
+internal.boot.phase              // "bootstrap" | "running" | "teardown"
+internal.boot.startup            // Date when bootstrap began
+internal.boot.options            // BootstrapOptions passed to bootstrap()
+internal.boot.application        // ApplicationDefinition
+```
+
+### `internal.safeExec`
+
+Runs a callback, catches any thrown error, and logs it instead of propagating. Returns `undefined` on error.
+
+```typescript
+await internal.safeExec({
+  context,
+  exec: async () => {
+    await riskyOperation();
+  },
+});
+```
+
+### `internal.removeFn`
+
+Creates a `RemoveCallback` — a function that is both directly callable and has a `.remove()` method. Useful for cleanup patterns where you want to support both `callback()` and `callback.remove()` call styles:
+
+```typescript
+const cleanup = internal.removeFn(() => { closeConnection(); });
+
+cleanup();          // works
+cleanup.remove();   // also works
+```
+
+## Module services
+
+After declaring `LoadedModules`, your application and library services appear on `TServiceParams` under their module names:
+
+```typescript
+export function MyService({ my_app, my_lib }: TServiceParams) {
+  my_app.otherService.doThing();
+  my_lib.httpClient.get("/items");
+}
+```
+
+TypeScript infers the type of each key from the corresponding module's service return types.
+
+## Interactive reference
+
+<EmbeddedEditor files={files} defaultFile={defaultFile} exampleId="reference-service-params" />

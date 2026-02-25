@@ -1,0 +1,123 @@
+---
+title: Testing Basics
+sidebar_position: 8
+description: "TestRunner, the fluent builder, run vs serviceParams, and teardown."
+---
+
+import EmbeddedEditor from '@site/src/components/EmbeddedEditor';
+import { files, defaultFile } from '@site/src/examples/core/tutorials/testing-basics';
+
+Digital Alchemy has a first-class testing API built into `@digital-alchemy/core`. It boots your real application in a test environment, gives you access to every service, and tears everything down cleanly between tests.
+
+## TestRunner
+
+`TestRunner` takes your application (or library) and returns a fluent builder:
+
+```typescript
+import { TestRunner } from "@digital-alchemy/core";
+import { MY_APP } from "./application.mts";
+
+const runner = TestRunner(MY_APP);
+```
+
+## .run()
+
+`.run()` boots the application, runs your test callback with `TServiceParams`, then tears down:
+
+```typescript
+it("increments the count", async () => {
+  await TestRunner(MY_APP)
+    .run(async ({ my_app }) => {
+      expect(my_app.counter.value).toBe(0);
+      my_app.counter.increment();
+      expect(my_app.counter.value).toBe(1);
+    });
+});
+```
+
+The callback receives the same `TServiceParams` your service functions receive — including `my_app`, `config`, `logger`, and all other service APIs.
+
+## Teardown
+
+When `.run()` completes (or throws), it automatically tears down the application. All lifecycle shutdown hooks fire, and the application is ready for the next test.
+
+If you need manual control — for example, to keep the app running across multiple `it` blocks — get the teardown function directly:
+
+```typescript
+describe("CounterService", () => {
+  let teardown: () => Promise<void>;
+
+  afterEach(async () => {
+    await teardown?.();
+  });
+
+  it("increments", async () => {
+    await TestRunner(MY_APP)
+      .run(async ({ my_app, teardown: td }) => {
+        teardown = td;
+        my_app.counter.increment();
+        expect(my_app.counter.value).toBe(1);
+      });
+  });
+});
+```
+
+:::caution Always call teardown
+If teardown doesn't run, the next test will share state with the previous one. Always call teardown in `afterEach` when using manual control, or let `.run()` handle it automatically.
+:::
+
+## Configuration in tests
+
+By default, no config files or environment variables are loaded in tests — the environment is isolated. Override config values using `.configure()`:
+
+```typescript
+await TestRunner(MY_APP)
+  .configure({
+    my_app: { PORT: 9999, DEBUG: true },
+  })
+  .run(async ({ config }) => {
+    expect(config.my_app.PORT).toBe(9999);
+  });
+```
+
+## Replacing services for mocking
+
+`.appendLibrary()` and `.replaceLibrary()` let you inject test doubles. See [Module Replacements](../reference/testing/module-replacements.md) for the full API.
+
+## Try it live
+
+<EmbeddedEditor files={files} defaultFile={defaultFile} exampleId="tutorials-testing" />
+
+## .serviceParams()
+
+`.run()` boots, runs your callback, and tears down. If you need access to `TServiceParams` outside of a single function — for example, to set up state before tests and then inspect services in multiple `it` blocks — use `.serviceParams()` instead:
+
+```typescript
+describe("CounterService", () => {
+  let params: TServiceParams;
+  let teardown: () => Promise<void>;
+
+  beforeAll(async () => {
+    const result = await TestRunner(MY_APP).serviceParams();
+    params = result;
+    teardown = result.teardown;
+  });
+
+  afterAll(async () => {
+    await teardown();
+  });
+
+  it("starts at zero", () => {
+    expect(params.my_app.counter.value).toBe(0);
+  });
+
+  it("increments", () => {
+    params.my_app.counter.increment();
+    expect(params.my_app.counter.value).toBe(1);
+  });
+});
+```
+
+For the full `TestRunner` API reference, see [TestRunner](../reference/testing/test-runner.md).
+
+Next: [What Next? →](./08-what-next.md)

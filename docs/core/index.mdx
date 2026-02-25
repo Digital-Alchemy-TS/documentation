@@ -1,0 +1,32 @@
+---
+title: 🧩 Core Framework
+sidebar_label: Overview
+sidebar_position: 0
+description: "Digital Alchemy Core — ergonomic, type-safe Node.js application framework"
+---
+
+import EmbeddedEditor from '@site/src/components/EmbeddedEditor';
+import { files, defaultFile } from '@site/src/examples/core/get-started/first-app';
+
+[![codecov](https://codecov.io/github/Digital-Alchemy-TS/core/graph/badge.svg?token=IBGLY3RY68)](https://codecov.io/github/Digital-Alchemy-TS/core)
+[![version](https://img.shields.io/github/package-json/version/Digital-Alchemy-TS/core)](https://www.npmjs.com/package/@digital-alchemy/core)
+
+Digital Alchemy Core is a batteries-included, low-dependency TypeScript framework for building Node.js applications. It provides dependency injection, a structured lifecycle, type-safe configuration, and testing utilities — with no magic, no decorators, and no reflection. Just plain functions.
+
+The framework is runtime-agnostic (Node, Bun, Deno, tsx) and places a strong emphasis on **ergonomics**: your editor knows exactly what services are available in every function, without any extra tooling.
+
+## Interactive example
+
+The three files below form a complete Digital Alchemy application. Edit them — IntelliSense is live.
+
+<EmbeddedEditor files={files} defaultFile={defaultFile} exampleId="core-index" />
+
+## What's in this section
+
+| | |
+|---|---|
+| [Get Started](./get-started/index.md) | Install, first app, next steps |
+| [Tutorials](./tutorials/index.md) | Step-by-step learning path |
+| [Reference](./reference/index.md) | Complete API reference |
+| [Guides](./guides/index.md) | Deep dives into how things work |
+| [Advanced](./advanced/index.md) | ALS, boot metrics, project tuning |

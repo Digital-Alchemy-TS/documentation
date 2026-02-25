@@ -1,0 +1,115 @@
+---
+title: Typed Configuration
+sidebar_position: 5
+description: "Declare config entries in your module and get a fully typed config object."
+---
+
+import EmbeddedEditor from '@site/src/components/EmbeddedEditor';
+import { files, defaultFile } from '@site/src/examples/core/tutorials/typed-configuration';
+
+Configuration in Digital Alchemy is declared as part of your module definition. The framework collects those declarations at boot, merges values from environment variables, config files, and argv, validates that required entries are present, and hands you a typed `config` object where every key has the right TypeScript type.
+
+## Declaring configuration
+
+Configuration entries go in the `configuration` property of `CreateApplication` or `CreateLibrary`:
+
+```typescript
+export const MY_APP = CreateApplication({
+  name: "my_app",
+  configuration: {
+    API_URL: {
+      type: "string",
+      description: "Base URL for the upstream API",
+      required: true,
+    },
+    PORT: {
+      type: "number",
+      default: 3000,
+    },
+    DEBUG: {
+      type: "boolean",
+      default: false,
+    },
+    ALLOWED_ORIGINS: {
+      type: "string[]",
+      default: ["http://localhost:3000"],
+    },
+    ENVIRONMENT: {
+      type: "string",
+      enum: ["local", "staging", "production"] as const,
+      default: "local",
+    },
+  },
+  services: { ... },
+});
+```
+
+## Using configuration in a service
+
+Once declared, `config.my_app` is fully typed. TypeScript infers the type of each key from the `type` and `enum` fields:
+
+```typescript
+export function ApiService({ config }: TServiceParams) {
+  lifecycle.onPostConfig(() => {
+    const port: number = config.my_app.PORT;
+    const env: "local" | "staging" | "production" = config.my_app.ENVIRONMENT;
+    const debug: boolean = config.my_app.DEBUG;
+    const origins: string[] = config.my_app.ALLOWED_ORIGINS;
+  });
+}
+```
+
+Config values are only guaranteed to be their final values after `PostConfig`. Read them in `onPostConfig` or any later callback.
+
+## required vs default
+
+| Pattern | Behavior |
+|---|---|
+| `required: true`, no `default` | Bootstrap halts with `REQUIRED_CONFIGURATION_MISSING` if unset — use for secrets |
+| `default: value` | Value used when no external source provides one |
+| Both | Default satisfies `required`; external source overrides the default |
+| Neither | Config entry is optional; value is `undefined` when not set |
+
+:::tip
+Use `required: true` without a `default` for secrets (API keys, database URLs). This gives a clear boot failure rather than a confusing runtime error when the secret is missing.
+:::
+
+## Setting values at runtime
+
+Values come from three sources, merged in this order (later sources win):
+
+1. `default` in the declaration
+2. Environment variables and argv
+3. `configuration` in `bootstrap()` options — **highest priority**
+
+```typescript
+await MY_APP.bootstrap({
+  configuration: {
+    my_app: { API_URL: "https://api.example.com", PORT: 8080 },
+    boilerplate: { LOG_LEVEL: "debug" },
+  },
+});
+```
+
+From environment variables, the key format is `MY_APP__PORT=8080` (module name doubled underscore key, all caps).
+
+## Try it live
+
+The editor below has an app with five config entries — string, number, boolean, string[], and enum. Open `api.service.mts` and hover over `config.my_app` to see the types.
+
+<EmbeddedEditor files={files} defaultFile={defaultFile} exampleId="tutorials-typed-config" />
+
+## Config types
+
+| `type` value | TypeScript type | Notes |
+|---|---|---|
+| `"string"` | `string` | With `enum`, narrows to a union literal type |
+| `"number"` | `number` | Parsed from string in env (e.g. `"3000"` → `3000`) |
+| `"boolean"` | `boolean` | `"true"`, `"1"`, `"yes"` → `true`; `"false"`, `"0"`, `"no"` → `false` |
+| `"string[]"` | `string[]` | Comma-separated in env: `"a,b,c"` → `["a","b","c"]` |
+| `"record"` | `Record<string, unknown>` | JSON string in env |
+| `"internal"` | any | Used by built-in services; not for user config |
+
+For the full type reference with examples, see [Configuration Types](../reference/config/types.mdx).
+
+Next: [Service Returns →](./05-service-returns.md)

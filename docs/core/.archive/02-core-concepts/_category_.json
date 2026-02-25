@@ -1,0 +1,10 @@
+{
+  "label": "Core Concepts",
+  "position": 2,
+  "collapsible": true,
+  "collapsed": true,
+  "link": {
+    "type": "doc",
+    "id": "core/02-core-concepts/index"
+  }
+}
