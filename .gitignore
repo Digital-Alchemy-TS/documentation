@@ -28,6 +28,8 @@ HEAD
 .gitignore
 objects
 config
+!docs/**/config
+!docs/**/config/**
 .zshrc
 .zprofile
 .ripgreprc
