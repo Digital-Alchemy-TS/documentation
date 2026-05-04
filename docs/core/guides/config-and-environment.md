@@ -44,6 +44,8 @@ Both the module name and key name are all uppercase, separated by a double under
 | `my_lib.BASE_URL` | `MY_LIB__BASE_URL` |
 | `boilerplate.LOG_LEVEL` | `BOILERPLATE__LOG_LEVEL` |
 
+The single-underscore form (`MY_APP_DATABASE_URL`) and a bare key (`DATABASE_URL`, no module prefix) are also accepted as fallbacks — see [Lookup precedence](../reference/config/sourcing.md#lookup-precedence) in the reference. Prefer the double-underscore form: it's unambiguous when module names contain underscores.
+
 ## Multi-environment patterns
 
 The most reliable pattern: use `bootstrap.configuration` to inject environment-specific defaults, and rely on environment variables for per-deployment values.
