@@ -1,0 +1,10 @@
+{
+  "label": "Testing",
+  "position": 7,
+  "collapsible": true,
+  "collapsed": true,
+  "link": {
+    "type": "doc",
+    "id": "core/07-testing/index"
+  }
+}

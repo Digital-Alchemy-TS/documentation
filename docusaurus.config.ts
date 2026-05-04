@@ -35,7 +35,7 @@ const config: Config = {
     defaultLocale: "en",
     locales: ["en"],
   },
-  plugins: [],
+  plugins: ["./plugins/webpack-fallback.ts"],
 
   presets: [
     [

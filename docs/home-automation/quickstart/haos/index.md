@@ -6,8 +6,6 @@ aliases:
   - blog/00
   - blog/Quickstart
 ---
-import ReactPlayer from 'react-player'
-
 Welcome to the **Digital Alchemy** Home Automation quickstart project!
 
 This guide is built for [HAOS](https://developers.home-assistant.io/docs/operating-system/) & setups where the [Supervisor](https://developers.home-assistant.io/docs/supervisor/) is available.
@@ -32,8 +30,6 @@ This command will:
 - Clone this repository
 - Set up type definitions
 - Provide next steps
-
-<ReactPlayer playing controls url='/haos_quickstart.mp4' playing={false} />
 
 
 ## ⚒️ Workspace Management

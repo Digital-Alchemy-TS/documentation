@@ -1,0 +1,126 @@
+---
+title: First Application
+sidebar_position: 2
+description: "Build a full first app — two services talking to each other."
+---
+
+import EmbeddedEditor from '@site/src/components/EmbeddedEditor';
+import { files, defaultFile } from '@site/src/examples/core/tutorials/first-application';
+
+This tutorial builds a small application with two services. The goal is to see how services reference each other through `TServiceParams` and why the `declare module` block is the type system's load-bearing piece.
+
+If you completed the [Quickstart](../get-started/quickstart.mdx), most of this will be review. Slow down at the sections marked with a callout.
+
+## What we're building
+
+Two services:
+
+- **NameService** — holds a set of names, exposes `add` and `list`
+- **GreeterService** — reads from `NameService` and logs a greeting for each name on startup
+
+Neither service imports the other directly. They communicate through `TServiceParams`.
+
+## Step 1 — NameService
+
+```typescript title="src/name.service.mts"
+import type { TServiceParams } from "@digital-alchemy/core";
+
+export function NameService({ logger }: TServiceParams) {
+  const names = new Set<string>(["world"]);
+
+  return {
+    add: (name: string) => {
+      names.add(name);
+      logger.debug({ name }, "added name");
+    },
+    list: () => [...names],
+  };
+}
+```
+
+`NameService` returns an object. That object becomes the service's public API — what other services see when they access `my_app.names`.
+
+## Step 2 — GreeterService
+
+```typescript title="src/greeter.service.mts"
+import type { TServiceParams } from "@digital-alchemy/core";
+
+export function GreeterService({ logger, lifecycle, my_app }: TServiceParams) {
+  lifecycle.onReady(() => {
+    for (const name of my_app.names.list()) {
+      logger.info(`Hello, ${name}!`);
+    }
+  });
+}
+```
+
+`GreeterService` destructures `my_app` from `TServiceParams`. This is how services access each other — not by importing directly, but by pulling from the injected params object.
+
+The `my_app.names.list()` call is inside `lifecycle.onReady()`. That's intentional — by the time `onReady` fires, all services are wired and their return values are available.
+
+:::caution Wiring order
+If you call `my_app.names.list()` at the **top level** of the service function (outside any lifecycle callback), it runs during wiring. At that moment, `NameService` may not have wired yet, and `my_app.names` would be `undefined`. Always put cross-service calls inside lifecycle callbacks, or declare the other service in `priorityInit`. See [priorityInit](../reference/services/priority-init.md).
+:::
+
+## Step 3 — Application module
+
+```typescript title="src/application.mts"
+import { CreateApplication } from "@digital-alchemy/core";
+import { GreeterService } from "./greeter.service.mts";
+import { NameService } from "./name.service.mts";
+
+export const MY_APP = CreateApplication({
+  name: "my_app",
+  services: {
+    greeter: GreeterService,
+    names: NameService,
+  },
+});
+
+declare module "@digital-alchemy/core" {
+  export interface LoadedModules {
+    my_app: typeof MY_APP;
+  }
+}
+```
+
+:::note Why the declare module block?
+`LoadedModules` is an interface in `@digital-alchemy/core` that starts empty. By augmenting it here, you're telling TypeScript: "when any service destructures `my_app` from `TServiceParams`, the type of `my_app` is `typeof MY_APP`."
+
+TypeScript infers `typeof MY_APP` from the `services` object — including the return types of each service function. So `my_app.names.list()` is typed as `string[]` without any explicit annotation anywhere.
+
+This module augmentation lives in the application definition file, not in each service file, so it only needs to be declared once.
+:::
+
+## Step 4 — Bootstrap
+
+```typescript title="src/main.mts"
+import { MY_APP } from "./application.mts";
+
+await MY_APP.bootstrap();
+```
+
+Run it:
+
+```bash
+npx tsx src/main.mts
+```
+
+Output:
+
+```
+[INFO][my_app:greeter]: Hello, world!
+```
+
+## Try it live
+
+<EmbeddedEditor files={files} defaultFile={defaultFile} exampleId="tutorials-first-app" />
+
+## What you've seen
+
+- Services are plain functions. Their return values become the module's API.
+- Services reference each other via `TServiceParams` — not direct imports.
+- The `declare module` augmentation is what makes TypeScript know the shape of `my_app`.
+- Cross-service calls belong inside lifecycle callbacks, not at the top level of the function.
+
+Next: [Adding Services →](./02-adding-services.md)

@@ -1,0 +1,139 @@
+---
+title: Configuration Types
+sidebar_position: 2
+description: "All six configuration value types with TypeScript mappings and casting rules."
+---
+
+import EmbeddedEditor from '@site/src/components/EmbeddedEditor';
+import { files, defaultFile } from '@site/src/examples/core/reference/config-types';
+
+Every config entry has a `type` field that determines its TypeScript type and how string values from environment variables are parsed.
+
+## Type reference
+
+| `type` value | TypeScript type | Notes |
+|---|---|---|
+| `"string"` | `string` | With `enum`, narrows to a union literal type |
+| `"number"` | `number` | Parsed from string: `"3000"` → `3000` |
+| `"boolean"` | `boolean` | String coercion: see rules below |
+| `"string[]"` | `string[]` | Comma-separated in env; array in code |
+| `"record"` | `Record<string, unknown>` | JSON string in env |
+| `"internal"` | `VALUE` (generic) | Used by built-in services; not for user config |
+
+## string
+
+A plain string value.
+
+```typescript
+API_URL: {
+  type: "string",
+  required: true,
+}
+```
+
+TypeScript type: `string`.
+
+### enum narrowing
+
+Add an `enum` array to restrict values and narrow the TypeScript type to a union:
+
+```typescript
+ENVIRONMENT: {
+  type: "string",
+  enum: ["local", "staging", "production"] as const,
+  default: "local",
+}
+```
+
+TypeScript type: `"local" | "staging" | "production"`.
+
+If the runtime value isn't in the enum list, bootstrap halts with `REQUIRED_CONFIGURATION_MISSING` (unless `required` is false, in which case the value is silently accepted — validate manually if needed).
+
+## number
+
+A numeric value. Parsed from a string when sourced from env/argv.
+
+```typescript
+PORT: {
+  type: "number",
+  default: 3000,
+}
+```
+
+TypeScript type: `number`.
+
+`"3000"` in the environment becomes `3000`. `NaN` is possible if the value isn't a valid number — no runtime validation is done beyond the type conversion.
+
+## boolean
+
+A boolean value. String coercion uses the following rules:
+
+| String value | Result |
+|---|---|
+| `"true"`, `"y"`, `"1"` | `true` |
+| `"false"`, `"n"`, `"0"` (or anything else) | `false` |
+
+```typescript
+DEBUG_MODE: {
+  type: "boolean",
+  default: false,
+}
+```
+
+TypeScript type: `boolean`.
+
+## string[]
+
+An array of strings.
+
+```typescript
+ALLOWED_ORIGINS: {
+  type: "string[]",
+  default: ["http://localhost:3000"],
+}
+```
+
+TypeScript type: `string[]`.
+
+In environment variables, pass a comma-separated string:
+```
+MY_APP__ALLOWED_ORIGINS=https://app.example.com,https://admin.example.com
+```
+
+From CLI argv: repeat the flag: `--my_app.ALLOWED_ORIGINS=a --my_app.ALLOWED_ORIGINS=b`.
+
+## record
+
+A `Record<string, unknown>` — arbitrary key/value pairs.
+
+```typescript
+FEATURE_FLAGS: {
+  type: "record",
+  default: {},
+}
+```
+
+TypeScript type: `Record<string, unknown>`.
+
+In environment variables, provide a JSON string:
+```
+MY_APP__FEATURE_FLAGS={"new_ui":true,"beta":false}
+```
+
+## internal
+
+Used by built-in framework services to store complex structured values that don't map cleanly to the other types. Not intended for user config — use `"record"` if you need arbitrary key/value pairs.
+
+```typescript
+// Framework internal — not for user config
+SOME_CONFIG: {
+  type: "internal",
+  default: { complex: "object" },
+}
+```
+
+## Try it live
+
+The editor below has an app with one entry of each type.
+
+<EmbeddedEditor files={files} defaultFile={defaultFile} exampleId="reference-config-types" />

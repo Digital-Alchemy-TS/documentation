@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
-    "start": "docusaurus start",
+    "upgrade": "ncu --upgrade && truncate -s 0 yarn.lock && yarn install",
+    "start": "docusaurus start --host 0.0.0.0",
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
@@ -15,21 +16,24 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "@docusaurus/core": "^3.9.2",
-    "@docusaurus/preset-classic": "^3.9.2",
-    "@docusaurus/theme-mermaid": "^3.9.2",
+    "@docusaurus/core": "^3.10.1",
+    "@docusaurus/preset-classic": "^3.10.1",
+    "@docusaurus/theme-mermaid": "^3.10.1",
     "@mdx-js/react": "^3.1.1",
+    "@monaco-editor/react": "4.7.0",
+    "@typescript/ata": "^0.9.8",
     "clsx": "^2.1.1",
+    "monaco-editor": "^0.55.1",
     "prism-react-renderer": "^2.4.1",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
-    "react-player": "^3.3.3"
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "^3.9.2",
-    "@docusaurus/tsconfig": "^3.9.2",
-    "@docusaurus/types": "^3.9.2",
-    "typescript": "~5.9.3"
+    "@docusaurus/module-type-aliases": "^3.10.1",
+    "@docusaurus/tsconfig": "^3.10.1",
+    "@docusaurus/types": "^3.10.1",
+    "npm-check-updates": "^22.1.0",
+    "typescript": "~6.0.3"
   },
   "browserslist": {
     "production": [
@@ -46,5 +50,5 @@
   "engines": {
     "node": ">=18.0"
   },
-  "packageManager": "yarn@4.10.3"
+  "packageManager": "yarn@4.14.1"
 }
