@@ -100,8 +100,23 @@ declare module "@digital-alchemy/core" {
 
 `@digital-alchemy/core` folds every `LoadedRollups` entry into `TServiceParams`, so `params.analytics_ingest` is fully typed downstream — even when the app imports only `analyticsPlugin`.
 
-:::note `implies` usually does not need this
-The libraries in an `implies` list are named modules that the **implying** library imports directly. Because the app imports the implier (to list it), those members' `LoadedModules` augmentations travel with it. Only if an implied member is published without a named type would you also register a `LoadedRollups` block.
+:::caution `implies` needs the same registration
+`implies` has the **same** cross-package limitation as rollups, not a lighter one. The implier's `.d.ts` carries no type edge to its implied members (the `implies` field is `RollupMember[]`, not a captured tuple), so a consumer importing only the implier gets the bundle at runtime but **not** its types — `params.member` is untyped. Register the implied bundle on `LoadedRollups` in the implier's module, exactly as shown above for a rollup.
+
+```typescript title="analytics/src/front.mts"
+export const ANALYTICS_FRONT = CreateLibrary({
+  name: "analytics_front",
+  implies: [ANALYTICS_STORE, ANALYTICS_API],
+  services: { ... },
+});
+
+declare module "@digital-alchemy/core" {
+  interface LoadedModules { analytics_front: typeof ANALYTICS_FRONT; }
+  interface LoadedRollups {
+    analytics_front: { analytics_store: typeof ANALYTICS_STORE; analytics_api: typeof ANALYTICS_API };
+  }
+}
+```
 :::
 
 ### Membership-only consequence

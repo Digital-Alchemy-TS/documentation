@@ -77,8 +77,8 @@ export const ANALYTICS_FRONT = CreateLibrary({
 
 Rollups ([`RollupLibraries`](./rollup-libraries)) are accepted in `implies` and are flattened recursively.
 
-:::note Types of implied members
-Because the implied libraries are named modules that the implying library imports directly, their `LoadedModules` augmentations travel with it — so their service APIs appear on `TServiceParams` for any app that includes the implier. See [Library composition](../../guides/library-composition) for the full cross-package typing rule.
+:::caution Types of implied members across packages
+`implies` has the **same** cross-package typing limitation as rollups. The implier's emitted `.d.ts` carries no type edge to its implied members (the `implies` field is `RollupMember[]`, not a captured tuple), so a consumer that imports *only* the implier does **not** receive the members' types — they wire at runtime, but `params.member` is untyped. To expose them, register the bundle on `LoadedRollups` in the implier's module, exactly like a rollup. See [Library composition](../../guides/library-composition).
 :::
 
 ### `priorityInit`
