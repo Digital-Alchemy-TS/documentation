@@ -15,6 +15,7 @@ export const MY_LIB = CreateLibrary({
   configuration: { ... },
   depends: [...],
   optionalDepends: [...],
+  implies: [...],
   priorityInit: [...],
 });
 ```
@@ -28,6 +29,7 @@ export const MY_LIB = CreateLibrary({
 | `configuration` | `ModuleConfiguration` | — | Config entry declarations for this library |
 | `depends` | `LibraryDefinition[]` | — | Hard dependencies — must also be in the app's `libraries` array |
 | `optionalDepends` | `LibraryDefinition[]` | — | Soft dependencies — wired first if present, no error if absent |
+| `implies` | `(LibraryDefinition \| LibraryRollup)[]` | — | Transitive bundle — libraries pulled into *membership* (not ordering) when this one loads |
 | `priorityInit` | `string[]` | — | Services to wire first within this library |
 
 ### `depends` vs `optionalDepends`
@@ -54,6 +56,30 @@ export const MY_LIB = CreateLibrary({
   },
 });
 ```
+
+### `implies` — transitive membership bundle
+
+`implies` contributes **membership**, not ordering. When this library is loaded, every library in its `implies` list is pulled into the application's resolved library set and deduped — so a consumer can include just this one library and the bundle travels with it.
+
+This is the key distinction from `depends`:
+
+- `depends` / `optionalDepends` are **ordering + validation**. They control *what wires before what*, and `depends` is validated against the app's `libraries` array (`MISSING_DEPENDENCY` if absent). They do **not** add a library to membership.
+- `implies` is **membership**. It adds the listed libraries to the app's membership and dedupes them by object identity. It adds no ordering edge — ordering still flows from each member's own `depends`.
+
+```typescript
+export const ANALYTICS_FRONT = CreateLibrary({
+  name: "analytics_front",
+  depends: [SHARED_DB],                       // ordering: wired after SHARED_DB
+  implies: [ANALYTICS_STORE, ANALYTICS_API],  // membership: these travel with me
+  services: { ... },
+});
+```
+
+Rollups ([`RollupLibraries`](./rollup-libraries)) are accepted in `implies` and are flattened recursively.
+
+:::note Types of implied members
+Because the implied libraries are named modules that the implying library imports directly, their `LoadedModules` augmentations travel with it — so their service APIs appear on `TServiceParams` for any app that includes the implier. See [Library composition](../../guides/library-composition) for the full cross-package typing rule.
+:::
 
 ### `priorityInit`
 

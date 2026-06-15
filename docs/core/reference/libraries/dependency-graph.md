@@ -1,6 +1,6 @@
 ---
 title: Dependency Graph
-sidebar_position: 2
+sidebar_position: 3
 description: "How buildSortOrder works, BAD_SORT, and MISSING_DEPENDENCY errors."
 ---
 

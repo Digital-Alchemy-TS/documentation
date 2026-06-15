@@ -1,6 +1,6 @@
 ---
 title: Module Extension
-sidebar_position: 3
+sidebar_position: 4
 description: "createModule and ModuleExtension — the chainable API for composing and extending modules."
 ---
 
