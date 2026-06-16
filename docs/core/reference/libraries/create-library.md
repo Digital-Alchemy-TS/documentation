@@ -77,8 +77,10 @@ export const ANALYTICS_FRONT = CreateLibrary({
 
 Rollups ([`RollupLibraries`](./rollup-libraries)) are accepted in `implies` and are flattened recursively.
 
-:::caution Types of implied members across packages
-`implies` has the **same** cross-package typing limitation as rollups. The implier's emitted `.d.ts` carries no type edge to its implied members (the `implies` field is `RollupMember[]`, not a captured tuple), so a consumer that imports *only* the implier does **not** receive the members' types — they wire at runtime, but `params.member` is untyped. To expose them, register the bundle on `LoadedRollups` in the implier's module, exactly like a rollup. See [Library composition](../../guides/library-composition).
+:::tip Types of implied members travel automatically — with named `function` services
+`CreateLibrary` captures `implies` as a `const` tuple (a third type parameter on `LibraryDefinition`), so the implier's emitted `.d.ts` references each implied member by `typeof import("./member.mjs").Service` — a real module edge. The member's own `LoadedModules` augmentation rides that edge, so a consumer that imports **only** the implier gets each member's service APIs on `TServiceParams`, both **typed and wired**, with no `LoadedRollups` block and no manual re-export.
+
+This holds **only when the implied library's services are literal named `function` declarations**. An arrow / anonymous service is serialized structurally inline with no import edge, so its augmentation never travels — the member still wires, but `params.member` is untyped. For an implied member that must ship arrow services, fall back to registering the bundle on `LoadedRollups`, like a nameless rollup. See [Library composition](../../guides/library-composition).
 :::
 
 ### `priorityInit`

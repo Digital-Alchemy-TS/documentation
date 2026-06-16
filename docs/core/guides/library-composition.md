@@ -100,23 +100,28 @@ declare module "@digital-alchemy/core" {
 
 `@digital-alchemy/core` folds every `LoadedRollups` entry into `TServiceParams`, so `params.analytics_ingest` is fully typed downstream — even when the app imports only `analyticsPlugin`.
 
-:::caution `implies` needs the same registration
-`implies` has the **same** cross-package limitation as rollups, not a lighter one. The implier's `.d.ts` carries no type edge to its implied members (the `implies` field is `RollupMember[]`, not a captured tuple), so a consumer importing only the implier gets the bundle at runtime but **not** its types — `params.member` is untyped. Register the implied bundle on `LoadedRollups` in the implier's module, exactly as shown above for a rollup.
+:::tip `implies` carries types automatically — with named `function` services
+`implies` is the **easier** case, not the same one. Unlike a nameless rollup, `CreateLibrary` captures `implies` as a `const` tuple (a third type parameter on `LibraryDefinition`), so the implier's emitted `.d.ts` references each implied member by `typeof import("./member.mjs").Service` — **a real module edge**, not an inlined anonymous shape. The member's own `LoadedModules` augmentation rides that edge into any consumer that imports only the implier, so `params.<member>` is **typed and wired** with no `LoadedRollups` block and no re-export.
 
-```typescript title="analytics/src/front.mts"
-export const ANALYTICS_FRONT = CreateLibrary({
-  name: "analytics_front",
-  implies: [ANALYTICS_STORE, ANALYTICS_API],
-  services: { ... },
-});
+The catch is the **same one** that determines whether a rollup member's types inline anonymously: it works only when the implied library's services are literal named `function` declarations.
 
-declare module "@digital-alchemy/core" {
-  interface LoadedModules { analytics_front: typeof ANALYTICS_FRONT; }
-  interface LoadedRollups {
-    analytics_front: { analytics_store: typeof ANALYTICS_STORE; analytics_api: typeof ANALYTICS_API };
-  }
-}
+```typescript title="analytics/src/store.mts"
+// ✅ named function declaration → emits `typeof import(...).Ingest`: a real edge
+export function Ingest({ logger }: TServiceParams) { /* ... */ }
+export const ANALYTICS_STORE = CreateLibrary({ name: "analytics_store", services: { Ingest } });
 ```
+
+An arrow (or anonymous / function-expression) service is serialized structurally inline with **no** import edge, so its augmentation never travels — `params.<member>` is untyped even though it wires at runtime:
+
+```typescript
+// ❌ arrow service → inlined anonymously, no edge → types do NOT travel through implies
+export const ANALYTICS_STORE = CreateLibrary({
+  name: "analytics_store",
+  services: { Ingest: ({ logger }: TServiceParams) => ({ /* ... */ }) },
+});
+```
+
+If an implied member must ship arrow/anonymous services, fall back to the rollup mechanism — register the bundle on `LoadedRollups` in the implier's module, exactly as shown above for a rollup.
 :::
 
 ### Membership-only consequence
