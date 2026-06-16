@@ -1,0 +1,93 @@
+---
+title: "The one-keyword bug: when your library's types vanish across a package boundary"
+date: 2026-06-16
+description: "A named function and an arrow that do the exact same thing emit different .d.ts — and only one carries your types across packages. Here's the mechanism, and why it's not the distinction you think it is."
+---
+
+import EmbeddedEditor from '@site/src/components/EmbeddedEditor';
+import { files, defaultFile } from '@site/src/examples/blog/declaration-emit';
+
+Here are two services. Same body, same return type, same everything a linter or a reviewer would look at:
+
+```typescript
+export function Lights({ logger }: TServiceParams) { /* ... */ }
+export const Lights = ({ logger }: TServiceParams) => { /* ... */ };
+```
+
+Swap one for the other inside a published library, pull that library into a downstream app through `implies` (or a rollup), and the runtime is identical — but with the arrow, the app silently loses every type the library was supposed to bring. `params.lighting` goes from fully-typed to gone. Nothing errors. The build is green. The types just aren't there.
+
+I hit this building library composition for core. The cause turned out to live in one of the quieter corners of TypeScript's declaration emitter, and it's worth a writeup — because the rule people reach for ("arrows are the problem") is *wrong*, and the real rule is one line.
+
+<!--truncate-->
+
+## Why a type even needs to "travel"
+
+`TServiceParams` is assembled from the global `LoadedModules` interface. Every library extends it by declaration merging — a `declare module "@digital-alchemy/core" { interface LoadedModules { ... } }` block in the library's source. That block only takes effect if the file containing it is part of *your* compilation.
+
+When you import a library directly, you import that file, so the augmentation comes along. The interesting case is `implies`: you list library **A**, and A pulls in library **B** transitively. You never import B. For B's types to reach you, B's augmentation has to ride into your program on the back of *something you do import* — and that something is A's emitted `.d.ts`.
+
+So the whole question reduces to: **does A's `.d.ts` contain a reference back to B's module?**
+
+## What the compiler actually emits
+
+`CreateLibrary` captures `implies` as a `const` tuple, so the implier's declaration file spells out each member. Here is the real emit when the implied library's service is a **named function declaration**:
+
+```typescript title="living-room.d.mts  (member service = function declaration)"
+export declare const LIVING_ROOM: LibraryDefinition<
+  { Scenes: typeof Scenes },
+  OptionalModuleConfiguration,
+  readonly [LibraryDefinition<{
+    Lights: typeof import("./lighting.mjs").Lights;   // ← a real edge to lighting.mjs
+  }, OptionalModuleConfiguration, readonly []>]
+>;
+```
+
+That `typeof import("./lighting.mjs").Lights` is a genuine reference to the lighting module. When your program resolves it, it loads `lighting.d.mts` — which carries `declare module "@digital-alchemy/core" { interface LoadedModules { lighting } }`. The augmentation fires. `params.lighting` lights up. You never typed the word `lighting`.
+
+Now the **arrow** version of the exact same service — same logic, same shape:
+
+```typescript title="living-room.d.mts  (member service = arrow const)"
+export declare const LIVING_ROOM: LibraryDefinition<
+  { Scenes: typeof Scenes },
+  OptionalModuleConfiguration,
+  readonly [LibraryDefinition<{
+    Lights: ({ logger }: TServiceParams) => {          // ← inlined structurally, no edge
+      dim(toPercent: number): void;
+      readonly brightness: number;
+    };
+  }, OptionalModuleConfiguration, readonly []>]
+>;
+```
+
+No `import("./lighting.mjs")` anywhere. The function's *shape* got inlined instead of a reference to it. Your program never loads `lighting.d.mts`, the augmentation never runs, and `params.lighting` is untyped — even though the service wires and runs perfectly at boot. Runtime works, types vanish.
+
+## It is not "arrow vs function." It is "binding vs declaration."
+
+The reflex is to blame arrows. That's not it. I emitted four forms of the same service and checked which keep the edge:
+
+| How the service is written | Emitted in the consumer's `.d.ts` | Edge survives? |
+|---|---|---|
+| `function Svc() {}` | `Svc: typeof import("./src").Svc` | ✅ yes |
+| `const Svc = () => {}` | `Svc: (p: TServiceParams) => {…}` | ❌ no |
+| `const Svc = function () {}` | `Svc: (p: TServiceParams) => {…}` | ❌ no |
+| `const Svc = function Named() {}` | `Svc: (p: TServiceParams) => {…}` | ❌ no |
+
+Only the **function declaration** survives. A declaration gives the emitter a named symbol it can point back to — `export declare function Svc(...)`, and every reference becomes `typeof import(...).Svc`. Every `const` form emits `export declare const Svc: <structural type>` and inlines that structure at each use site. No name to point at, no import, no edge.
+
+The last row is the trap worth remembering: a **named function expression** *looks* named, but the name is internal to the expression — the binding is still a `const`, so it inlines with the rest. "It has a name" is not the property that matters. "It is a declaration" is.
+
+## See it locally — and why you can't
+
+Both files below type-check *identically* right here. That's the point: in a single program, types resolve through source, so the difference genuinely does not exist yet. Hover `Lights` in each — same inferred type. The divergence only appears once TypeScript emits `.d.ts` and a *different package* reads it.
+
+<EmbeddedEditor files={files} defaultFile={defaultFile} exampleId="blog-declaration-emit" />
+
+## The rule
+
+Write services as named `function` declarations. Not arrows, not `const x = function`. core ships a regression guard (`examples/implies-propagation`) that compiles a real two-package workspace and fails if this edge ever stops working, and there's an eslint rule — `service-factory-must-be-declaration` — so the wrong form fails in CI instead of silently dropping a downstream package's types six months from now.
+
+**Takeaways:**
+
+- A named `function` and a `const` arrow are not interchangeable in a *published* library — they emit different `.d.ts`.
+- Only the declaration form leaves an import edge, and that edge is what carries `declare module` augmentations across a package boundary.
+- "Runtime works, types vanish" downstream of a composed library? Check how its services are declared before you check anything else.
