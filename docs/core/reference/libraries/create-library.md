@@ -27,60 +27,67 @@ export const MY_LIB = CreateLibrary({
 | `name` | `keyof LoadedModules` | ✅ | Library name — must match the key in `LoadedModules` |
 | `services` | `ServiceMap` | ✅ | Service functions exposed by this library |
 | `configuration` | `ModuleConfiguration` | — | Config entry declarations for this library |
-| `depends` | `LibraryDefinition[]` | — | Hard dependencies — must also be in the app's `libraries` array |
-| `optionalDepends` | `LibraryDefinition[]` | — | Soft dependencies — wired first if present, no error if absent |
-| `implies` | `(LibraryDefinition \| LibraryRollup)[]` | — | Transitive bundle — libraries pulled into *membership* (not ordering) when this one loads |
+| `depends` | `LibraryDefinition[]` | — | Hard dependencies — pulled into membership transitively; adds an ordering edge |
+| `optionalDepends` | `LibraryDefinition[]` | — | Soft dependencies — ordered first if present; no membership pull; stays untyped |
+| `implies` | `(LibraryDefinition \| LibraryGroup)[]` | — | Membership-only bundle — pulled into membership with no ordering edge |
 | `priorityInit` | `string[]` | — | Services to wire first within this library |
 
-### `depends` vs `optionalDepends`
+### `depends`, `implies`, and `optionalDepends`
 
-**`depends`** — Hard dependency. The framework will:
-1. Ensure this dependency wires before the current library
-2. Throw `MISSING_DEPENDENCY` at boot if the application hasn't included it in `libraries`
+These three fields all relate to peer libraries, but differ by exactly one bit — whether they add an ordering edge:
 
-Use for services your library actively calls. If the dependency is missing, your library can't work.
+| | Membership pull | Ordering edge | Typed on `params` | Missing = error |
+|---|:---:|:---:|:---:|:---:|
+| `depends` | ✅ (transitive closure) | ✅ | ✅ | ✅ |
+| `implies` | ✅ | ❌ | ✅ | — |
+| `optionalDepends` | ❌ | ✅ (if present) | ❌ | — |
 
-**`optionalDepends`** — Soft dependency. The framework will:
-1. Ensure this dependency wires first *if it's present*
-2. Not throw an error if it's absent
+**`depends`** — Hard dependency. The framework:
+1. Pulls this library (and its transitive `depends`) into the wired set (closure-as-membership)
+2. Ensures this dependency wires before the current library
+3. Throws `MISSING_DEPENDENCY` at boot if the dependency is somehow absent after membership resolution
+
+Use for services your library actively calls at wiring time. The `const` tuple capture means the dependency's types also travel to consumers that import only this library.
+
+**`optionalDepends`** — Soft dependency. The framework:
+1. Ensures this dependency wires first *if it's present in membership*
+2. Does **not** pull it into membership and does **not** error if it's absent
+3. Leaves the dependency untyped on `params`
 
 Use for optional integrations. Your service code must handle the case where the dependency's services are `undefined`.
+
+**`implies`** — Membership-only escape hatch. Prefer `depends` for ordering + membership. Use `implies` only when loading this library should pull in others but this library does not call them at wiring time and therefore does not need them to wire first.
 
 ```typescript
 export const MY_LIB = CreateLibrary({
   name: "my_lib",
-  depends: [DATABASE_LIB],         // always required
-  optionalDepends: [CACHE_LIB],    // nice to have
+  depends: [DATABASE_LIB],         // ordering + membership + types — always required
+  optionalDepends: [CACHE_LIB],    // order if present, no pull, untyped
   services: {
     repo: RepositoryService,
   },
 });
 ```
 
-### `implies` — transitive membership bundle
+### `implies` — membership without an ordering edge
 
-`implies` contributes **membership**, not ordering. When this library is loaded, every library in its `implies` list is pulled into the application's resolved library set and deduped — so a consumer can include just this one library and the bundle travels with it.
-
-This is the key distinction from `depends`:
-
-- `depends` / `optionalDepends` are **ordering + validation**. They control *what wires before what*, and `depends` is validated against the app's `libraries` array (`MISSING_DEPENDENCY` if absent). They do **not** add a library to membership.
-- `implies` is **membership**. It adds the listed libraries to the app's membership and dedupes them by object identity. It adds no ordering edge — ordering still flows from each member's own `depends`.
+`implies` contributes **membership** without adding an ordering edge. When this library is loaded, every library in its `implies` list is pulled into the application's resolved library set and deduped — but no ordering guarantee is added. Use this only when the carrier does not call the implied libraries at wiring time.
 
 ```typescript
 export const ANALYTICS_FRONT = CreateLibrary({
   name: "analytics_front",
-  depends: [SHARED_DB],                       // ordering: wired after SHARED_DB
-  implies: [ANALYTICS_STORE, ANALYTICS_API],  // membership: these travel with me
+  depends: [SHARED_DB],                       // ordering + membership: wired after SHARED_DB
+  implies: [ANALYTICS_STORE, ANALYTICS_API],  // membership only: these travel with me, no ordering
   services: { ... },
 });
 ```
 
-Rollups ([`RollupLibraries`](./rollup-libraries)) are accepted in `implies` and are flattened recursively.
+Groups ([`LibraryGroup`](./rollup-libraries)) are accepted in `implies` and are flattened recursively.
 
-:::tip Types of implied members travel automatically — with named `function` services
-`CreateLibrary` captures `implies` as a `const` tuple (a third type parameter on `LibraryDefinition`), so the implier's emitted `.d.ts` references each implied member by `typeof import("./member.mjs").Service` — a real module edge. The member's own `LoadedModules` augmentation rides that edge, so a consumer that imports **only** the implier gets each member's service APIs on `TServiceParams`, both **typed and wired**, with no `LoadedRollups` block and no manual re-export.
+:::tip Types of `depends` and `implies` members travel automatically — with named `function` services
+`CreateLibrary` captures both `depends` and `implies` as `const` tuples (type parameters on `LibraryDefinition`), so the carrier's emitted `.d.ts` references each dependency and implied member by `typeof import("./member.mjs").Service` — a real module edge. The member's own `LoadedModules` augmentation rides that edge, so a consumer that imports **only** the carrier gets each member's service APIs on `TServiceParams`, both **typed and wired**, with no `LoadedRollups` block and no manual re-export.
 
-This holds **only when the implied library's services are literal named `function` declarations**. An arrow / anonymous service is serialized structurally inline with no import edge, so its augmentation never travels — the member still wires, but `params.member` is untyped. For an implied member that must ship arrow services, fall back to registering the bundle on `LoadedRollups`, like a nameless rollup. See [Library composition](../../guides/library-composition).
+This holds **only when the depended-on / implied library's services are literal named `function` declarations**. An arrow / anonymous service is serialized structurally inline with no import edge, so its augmentation never travels — the member still wires, but `params.member` is untyped. For a member that must ship arrow services, fall back to registering the bundle on `LoadedRollups`. See [Library composition](../../guides/library-composition).
 :::
 
 ### `priorityInit`
@@ -109,9 +116,10 @@ Any application that imports this file gets the type augmentation for free. No r
 
 | Error cause | What it means |
 |---|---|
-| `MISSING_DEPENDENCY` | This library's `depends` entry is not in the app's `libraries` array |
+| `MISSING_DEPENDENCY` | This library's `depends` entry is not reachable in the resolved membership set |
 | `MISSING_PRIORITY_SERVICE` | A name in `priorityInit` doesn't exist in `services` |
+| `DUPLICATE_LIBRARY` | Two distinct objects share the same library name — two physical copies are installed; run `yarn dedupe` |
 
-## Version mismatch
+## Duplicate installs
 
-If an application includes two versions of the same library (e.g., direct dependency and transitive dependency resolve to different versions), the framework emits a warning and uses whichever version the application declared directly. No error is thrown.
+`DUPLICATE_LIBRARY` means two physically distinct library objects share the same name. This is not a version-arbitration case the framework can resolve — the singleton-held-globally contract means only one copy can exist. The error names both copies and points at `yarn dedupe` or manual version alignment. The framework deliberately does not pick a winner.

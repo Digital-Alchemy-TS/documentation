@@ -100,3 +100,25 @@ This is exactly the kind of cross-package, cross-version behavior that quietly r
 - `libraries` arrays that compose instead of enumerate — bundle with `RollupLibraries`, or let a library drag its dependents along with `implies`.
 - Implied members typed *and* wired across a package boundary, with no manual registration — provided their services are named `function` declarations.
 - A clean split between membership and ordering, enforced by the runtime's wire-time snapshot rather than by convention.
+
+---
+
+## Update (2026-06-17): `depends` now carries types too, and `RollupLibraries` is `LibraryGroup`
+
+Two things changed in core after this post was written:
+
+**`RollupLibraries` is renamed `LibraryGroup({ name?, members, registry? })`** — same semantics, new object-options signature. A named group earns a `LoadedModules` key and a `config.<name>` namespace. Adding `registry` synthesizes a `priorityInit` registry service (the "trench-coat" pattern from the plugin-registry post).
+
+**`depends` now carries types AND contributes membership (closure-as-membership).** The `const` tuple capture that `implies` always had now also applies to `depends`. A library's `depends` list is pulled transitively into the wired set — you no longer hand-list transitive base libraries — and those dependencies appear on `params` as typed entries in any consumer that imports the carrier library.
+
+The ordering-edge bit is now the *only* distinction between `depends` and `implies`:
+
+| | Membership | Ordering edge | Typed on `params` |
+|---|:---:|:---:|:---:|
+| `depends` | ✅ (transitive) | ✅ | ✅ |
+| `implies` | ✅ | ❌ | ✅ |
+| `optionalDepends` | ❌ | ✅ (if present) | ❌ |
+
+`implies` is now documented as the niche "membership without an ordering edge" escape hatch rather than a headline primitive. Prefer `depends` for the common case where you call into a peer at wiring time.
+
+The cross-package type-travel mechanism described in this post — named `function` declarations emitting real module edges — is unchanged. It now applies to both `depends` and `implies` members.
