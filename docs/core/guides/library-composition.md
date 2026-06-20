@@ -70,7 +70,7 @@ const analyticsPlugin = LibraryGroup({
   members: [ANALYTICS_INGEST, ANALYTICS_API, ANALYTICS_STORE],
 });
 
-// named group — earns a LoadedModules key and a config.<name> namespace
+// named group — no DI identity on its own; only a registry-bearing group earns a LoadedModules key
 const analyticsPlugin = LibraryGroup({
   name: "analytics",
   members: [ANALYTICS_INGEST, ANALYTICS_API, ANALYTICS_STORE],
@@ -88,7 +88,7 @@ const ANALYTICS_GROUP = LibraryGroup({
 
 ### `name` and `LoadedModules`
 
-A named group earns a `LoadedModules` key and reserves a `config.<name>` namespace. An unnamed group is still a valid membership unit — it just has no DI identity.
+A plain named group does **not** by itself earn a `LoadedModules` key or a `config.<name>` namespace. Only a `registry`-bearing group synthesizes a carrier library named `<name>` that earns the `LoadedModules` key. An unnamed group is a valid membership unit — it just has no DI identity.
 
 ### `registry` option — the plugin-registry pattern
 
@@ -118,7 +118,7 @@ export function RouterService({ analytics }: TServiceParams) {
 
 - **Identity dedup.** Members must be module-singleton exports (not constructed inline), so the same library reached through two groups or two `depends` paths collapses to one.
 - **Diamonds are fine.** When a shared base library is reached via two paths, it is deduped and boot emits a hygiene `warn` — consider declaring it a shared base dependency. With `showExtraBootStats`, the manifest shows every member and the path(s) that brought it in.
-- **Same name, different object → `DUPLICATE_LIBRARY`.** Two distinct objects sharing a name is a broken install — the error names both copies and points at `yarn dedupe`. The framework does not arbitrate between versions; the singleton-held-globally contract is deliberate.
+- **Same name, different object → `DUPLICATE_LIBRARY`.** A library is constructed once and held as a global singleton, so exactly one object boots per name. Three cases apply: (1) the library is declared in the app module → it is authoritative; (2) exactly one instance exists anywhere → it is used; (3) two distinct objects share the same name and neither is app-declared → **crash**. The error states the fact only: `Duplicate library names detected: "<name>" (×N: copy#1 vs copy#2)`. The framework deliberately does not arbitrate between versions — the package manager owns that.
 - **Cycles → `COMPOSITION_CYCLE`.** A group that transitively contains itself, or a mutual `implies`/`depends` chain.
 
 ## The cross-package typing rule
@@ -140,7 +140,13 @@ The result is "runtime works, types vanish": the services wire and run, but `par
 
 ### Type priority
 
-Directly-listed libraries and named-group members always have their `LoadedModules` augmentations applied directly. `LoadedRollups` is a **fallback** channel — it fills keys not already present from a direct listing. If a library is listed both directly and via a group, the direct listing wins.
+Directly-listed (`LoadedModules`) types win over hoisted ones. The effective merge is:
+
+```typescript
+TServiceParams = GlobalParams & Omit<RollupApis, keyof LoadedModules>
+```
+
+`LoadedRollups` is a **fallback** channel — it can only add keys not already present in `LoadedModules`. If a library is listed both directly and via a group, the direct listing wins and the fallback channel cannot override it.
 
 ### The fix: register on `LoadedRollups`
 

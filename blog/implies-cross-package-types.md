@@ -107,7 +107,7 @@ This is exactly the kind of cross-package, cross-version behavior that quietly r
 
 Two things changed in core after this post was written:
 
-**`RollupLibraries` is renamed `LibraryGroup({ name?, members, registry? })`** — same semantics, new object-options signature. A named group earns a `LoadedModules` key and a `config.<name>` namespace. Adding `registry` synthesizes a `priorityInit` registry service (the "trench-coat" pattern from the plugin-registry post).
+**`RollupLibraries` is renamed `LibraryGroup({ name?, members, registry? })`** — same semantics, new object-options signature. A plain named group does **not** by itself earn a `LoadedModules` key or a `config.<name>` namespace. Only a `registry`-bearing group synthesizes a carrier library named `<name>` that earns the `LoadedModules` key and config namespace. Adding `registry: "<service-name>"` synthesizes a `priorityInit` registry service (the "trench-coat" pattern from the plugin-registry post).
 
 **`depends` now carries types AND contributes membership (closure-as-membership).** The `const` tuple capture that `implies` always had now also applies to `depends`. A library's `depends` list is pulled transitively into the wired set — you no longer hand-list transitive base libraries — and those dependencies appear on `params` as typed entries in any consumer that imports the carrier library.
 

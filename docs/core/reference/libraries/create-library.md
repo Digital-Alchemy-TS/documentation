@@ -118,8 +118,14 @@ Any application that imports this file gets the type augmentation for free. No r
 |---|---|
 | `MISSING_DEPENDENCY` | This library's `depends` entry is not reachable in the resolved membership set |
 | `MISSING_PRIORITY_SERVICE` | A name in `priorityInit` doesn't exist in `services` |
-| `DUPLICATE_LIBRARY` | Two distinct objects share the same library name — two physical copies are installed; run `yarn dedupe` |
+| `DUPLICATE_LIBRARY` | Two distinct objects share the same library name and neither is app-declared — an unbootable state |
 
 ## Duplicate installs
 
-`DUPLICATE_LIBRARY` means two physically distinct library objects share the same name. This is not a version-arbitration case the framework can resolve — the singleton-held-globally contract means only one copy can exist. The error names both copies and points at `yarn dedupe` or manual version alignment. The framework deliberately does not pick a winner.
+`DUPLICATE_LIBRARY` is governed by a fixed three-case rule. A library is constructed once and held as a global singleton, so exactly one object boots per name:
+
+1. **Declared in the app module** → it is authoritative.
+2. **Exactly one instance exists anywhere** → it is used.
+3. **Two distinct objects share a name, neither is app-declared** → crash. This is an unbootable, illegal state.
+
+The error states the fact only: `Duplicate library names detected: "<name>" (×N: copy#1 vs copy#2)`. The framework deliberately does not arbitrate between versions — the package manager owns that.

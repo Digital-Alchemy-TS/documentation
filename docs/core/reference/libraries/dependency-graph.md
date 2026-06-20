@@ -37,46 +37,32 @@ B depends on A
 `BAD_SORT` is a hard error. The framework does not use proxies or deferred imports. Circular dependencies are detected immediately at boot and must be resolved structurally.
 :::
 
-## MISSING_DEPENDENCY — hard dep not in libraries
+## MISSING_DEPENDENCY — dependency object not resolvable
 
-`MISSING_DEPENDENCY` is thrown when a library has `depends: [X]` but `X` is not in the application's `libraries` array:
+`MISSING_DEPENDENCY` is thrown when a library's `depends` entry could not be resolved to any object at all after the full membership closure is computed — meaning the library object was somehow not reachable through any path. This is rare in practice because `depends` itself transitively pulls dependencies into the wired set (closure-as-membership), so a `depends` entry that is a real imported singleton is auto-pulled.
 
-```typescript
-// MY_LIB requires DATABASE_LIB
-export const MY_LIB = CreateLibrary({
-  name: "my_lib",
-  depends: [DATABASE_LIB],  // hard dependency
-  services: { ... },
-});
-
-// APPLICATION doesn't include DATABASE_LIB → MISSING_DEPENDENCY at boot
-export const MY_APP = CreateApplication({
-  libraries: [MY_LIB],   // ← DATABASE_LIB missing!
-  services: { ... },
-});
-```
-
-**Fix:** Add the missing library to `libraries`:
-
-```typescript
-export const MY_APP = CreateApplication({
-  libraries: [DATABASE_LIB, MY_LIB],
-  services: { ... },
-});
-```
+`MISSING_DEPENDENCY` means "could not resolve to any object at all" — it is not triggered merely by omitting a library from the app's `libraries` array (closure-as-membership handles that). The auto-pulled libraries are narrated in the boot log.
 
 `optionalDepends` entries are exempt — they log a message and continue if absent.
 
-## Version mismatch
+## Duplicate library names (`DUPLICATE_LIBRARY`)
 
-If the application includes the same library twice (directly and transitively), the framework emits a `warn` log and uses the version declared directly in the application's `libraries` array. No error is thrown.
+A library is constructed once and held as a global singleton. The framework applies a fixed three-case rule:
+
+1. **Declared in the app module** → it is authoritative.
+2. **Exactly one instance exists anywhere** → it is used.
+3. **Two distinct objects share the same name and neither is app-declared** → crash (`DUPLICATE_LIBRARY`).
+
+The error states the fact only: `Duplicate library names detected: "<name>" (×N: copy#1 vs copy#2)`. The framework deliberately does not arbitrate between versions — the package manager owns that.
+
+A diamond (the same singleton reached through multiple `depends` or group paths) is fine — identity dedup collapses it to one entry and boot emits a hygiene `warn`.
 
 ```mermaid
 graph LR
   App --> MY_LIB
-  App --> DATABASE_LIB_v2
-  MY_LIB --> DATABASE_LIB_v1
-  Note["Database lib version mismatch: warn emitted, v2 used"]
+  App --> DATABASE_LIB
+  MY_LIB --> DATABASE_LIB
+  Note["Same object reached via two paths: deduped, warn emitted"]
 ```
 
 ## Example dependency graph

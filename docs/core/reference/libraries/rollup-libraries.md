@@ -44,16 +44,16 @@ function LibraryGroup<const M extends readonly RollupMember[]>({
 | Param | Type | Description |
 |---|---|---|
 | `members` | `(LibraryDefinition \| LibraryGroup)[]` | Libraries and/or nested groups to compose |
-| `name` | `string` | Optional group name — earns a `LoadedModules` key and reserves a `config.<name>` namespace |
+| `name` | `string` | Optional group name — required when using `registry`; a plain named group does not earn a `LoadedModules` key by itself |
 | `registry` | `string` | Optional registry-service name — requires `name`; generates a `priorityInit` registry service |
 
 ## Semantics
 
 - **Membership only.** A group contributes membership; it adds **no ordering edge**. Ordering stays entirely on each member's own `depends`, topologically sorted as always.
-- **Named group.** When `name` is provided, the group earns a `LoadedModules` key and a reserved `config.<name>` namespace. Useful when the group itself should be introspectable or when consumers need a named config block.
+- **Named group.** When `name` is provided, the group has a human-readable label and is required for the `registry` option. A plain named group does **not** by itself earn a `LoadedModules` key or a `config.<name>` namespace — only a `registry`-bearing group synthesizes a carrier library named `<name>` that earns those.
 - **Dedup by object identity.** The same singleton library reached through multiple groups (or `implies` or `depends` closure) collapses to one entry.
 - **Nested groups flatten recursively.**
-- **Same name, different object → error.** Two distinct objects sharing a name survive flattening and are rejected by the duplicate-name guard (`DUPLICATE_LIBRARY`) — the error names both copies and points at `yarn dedupe`.
+- **Same name, different object → error.** Two distinct objects sharing a name survive flattening and are rejected by the duplicate-name guard (`DUPLICATE_LIBRARY`). The error states: `Duplicate library names detected: "<name>" (×N: copy#1 vs copy#2)`. See the three-case rule under [Validation errors](#validation-errors).
 - **Cycle detection.** A group that transitively contains itself throws `COMPOSITION_CYCLE`.
 - **Multi-path hygiene warning.** When a library enters membership via more than one path (a diamond), boot emits an informational `warn`. With `showExtraBootStats`, the boot manifest lists each member and the path(s) that contributed it.
 
@@ -136,7 +136,7 @@ A library delivered **only** through an unnamed group gets its service APIs on `
 | Error cause | What it means |
 |---|---|
 | `COMPOSITION_CYCLE` | A group transitively contains itself, or an `implies`/`depends` chain forms a cycle |
-| `DUPLICATE_LIBRARY` | Two different objects sharing a name reached membership — likely two physical copies installed; run `yarn dedupe` |
+| `DUPLICATE_LIBRARY` | Two distinct objects share the same name and neither is app-declared — an unbootable state. Three-case rule: (1) app-declared → authoritative; (2) exactly one instance anywhere → used; (3) two distinct objects, neither app-declared → crash. Error: `Duplicate library names detected: "<name>" (×N: copy#1 vs copy#2)`. |
 | `REGISTRY_REQUIRES_NAME` | `registry` was provided without a `name` |
 
 ## Related
