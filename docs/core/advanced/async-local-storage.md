@@ -51,7 +51,6 @@ Sets the ALS data for the current context without creating a new scope. Mutates 
 ```typescript
 interface AsyncLogData {
   duration?: () => number;  // returns ms since entry — appended to log lines
-  logger?: GetLogger;       // thread-local child logger override
 }
 
 interface AsyncLocalData {
@@ -66,8 +65,7 @@ To extend `AsyncLocalData` with your own fields, use declaration merging:
 ```typescript
 declare module "@digital-alchemy/core" {
   export interface AsyncLocalData {
-    logs: AsyncLogData;      // keep the existing field
-    requestId?: string;      // add your own
+    requestId?: string;      // add your own request-scoped fields
     userId?: string;
   }
 }

@@ -74,12 +74,10 @@ When `my_lib` is in `inject`, it carries all of `MY_LIB`'s service return values
 
 ## What LoadedModules actually does
 
-`LoadedModules` is an interface in `@digital-alchemy/core` that starts with only one entry:
+`LoadedModules` is an interface — re-exported by `@digital-alchemy/core` from the frozen `@digital-alchemy/symbols` package — that starts empty:
 
 ```typescript
-export interface LoadedModules {
-  boilerplate: typeof LIB_BOILERPLATE;
-}
+export interface LoadedModules {}
 ```
 
 It's designed for TypeScript interface augmentation. When you write:
@@ -96,7 +94,6 @@ TypeScript merges your declaration into the existing interface. The result is:
 
 ```typescript
 interface LoadedModules {
-  boilerplate: typeof LIB_BOILERPLATE;
   my_app: typeof MY_APP;
 }
 ```
