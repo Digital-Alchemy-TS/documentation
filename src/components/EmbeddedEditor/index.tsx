@@ -1,4 +1,4 @@
-import { Editor } from "@monaco-editor/react"
+import { Editor, type BeforeMount, type Monaco } from "@monaco-editor/react"
 import React from "react"
 
 import {
@@ -59,8 +59,8 @@ const EmbeddedEditor: React.FC<EmbeddedEditorProps> = ({
 		}
 	}, [])
 
-	const handleBeforeMount = React.useCallback(
-		(monaco: { languages: typeof import("monaco-editor").languages }) => {
+	const handleBeforeMount: BeforeMount = React.useCallback(
+		(monaco: Monaco) => {
 			configureMonacoForEmbeddedEditor(monaco)
 			extraLibsRef.current = registerExampleFiles(monaco, virtualRoot, files)
 		},

@@ -1,88 +1,96 @@
 ---
 title: Accessing Config
 sidebar_position: 4
-description: "Reading config values, timing, required entries, and the source property."
+description: "Read final configuration values, understand construction previews, and restrict loader sources."
 ---
 
 ## Reading config values
 
-Config is accessed through `config` on `TServiceParams`. Each module's entries live under their module name:
+Config is injected on `TServiceParams`. Each module's entries live under its module name:
 
 ```typescript
-export function MyService({ config }: TServiceParams) {
+export function MyService({ config, lifecycle, logger }: TServiceParams) {
   lifecycle.onPostConfig(() => {
-    const url  = config.my_app.DATABASE_URL;  // string
-    const port = config.my_app.PORT;          // number
-    const env  = config.my_app.ENVIRONMENT;   // "local" | "staging" | "production"
+    const url = config.my_app.DATABASE_URL; // string
+    const port = config.my_app.PORT; // number
+    const env = config.my_app.ENVIRONMENT; // provider output type
+    logger.info({ url, port, env }, "config ready");
   });
 }
 ```
 
-TypeScript infers the type of each key from the config entry declaration. No annotation needed.
+TypeScript derives each key from its declaration. A schema transform or codec can make the injected output type differ from the input accepted by bootstrap and loaders.
 
 ## When values are available
 
-Config goes through two phases:
+Configuration has a construction preview and a finalized phase:
 
-1. **At wiring time:** Only `default` values are available. External sources (env, argv, file) have not been applied yet.
-2. **After `PostConfig`:** All sources merged, `required` entries validated. This is the correct time to read config.
+1. **Construction and `PreInit`:** Services are wired before external loaders run. Legacy defaults are visible. An explicit TypeBox root default may also be available, with an isolated clone; a known bootstrap value may replace that preview. Raw bootstrap and loader values can be visible to later loaders, but they are not guaranteed to be processed output. Nested TypeBox defaults/effects and Zod or opaque Standard Schema defaults are finalization-only.
+2. **After `PostConfig`:** Environment/argv, the optional file loader, and registered custom loaders have settled. Core has processed schemas and published the complete output snapshot. This is the first point where final `config.*` values are guaranteed.
+
+Read configuration in `onPostConfig` or a later hook:
 
 ```typescript
-export function MyService({ config, lifecycle }: TServiceParams) {
-  // ❌ Wrong: wiring time — only defaults, may be wrong or undefined
-  const url = config.my_app.DATABASE_URL;
-
-  // ✅ Correct: PostConfig — all sources applied, validated
+export function ApiService({ config, lifecycle }: TServiceParams) {
+  // Do not make final-value decisions in the service factory.
   lifecycle.onPostConfig(() => {
     const url = config.my_app.DATABASE_URL;
+    startClient(url);
   });
 }
 ```
 
-Reading in `onBootstrap` or `onReady` is also fine — they run after `PostConfig`.
+If a schema provider rejects the winning value, `onPostConfig` callbacks do not run and no partial processed snapshot is published.
 
-## required: true
+## Legacy `required: true`
 
-A `required: true` entry with no value causes bootstrap to throw `REQUIRED_CONFIGURATION_MISSING` during the `PostConfig` stage — before any `onPostConfig` callbacks run. The error message includes the full dotted path to the missing config entry.
+`required` belongs only to legacy `type` entries:
 
 ```typescript
 DATABASE_URL: {
   type: "string",
-  required: true,  // no default — bootstrap fails if not set from an external source
+  required: true,
 }
 ```
 
-This is the idiomatic way to handle secrets: fail loudly at boot time rather than getting a confusing runtime error when the service first tries to use the missing value.
+A missing legacy value throws `REQUIRED_CONFIGURATION_MISSING` during finalization. A legacy default satisfies `required: true`.
 
-## Combining required and default
-
-A `default` value satisfies `required: true`. The entry is only "missing" if both the default and all external sources fail to provide a value:
+Schema entries express presence through native provider constructs instead:
 
 ```typescript
-LOG_LEVEL: {
-  type: "string",
-  enum: ["debug", "info", "warn", "error"] as const,
-  default: "info",
-  required: true,  // always satisfied — default ensures a value exists
-}
+API_KEY: { schema: Type.String() },
+OPTIONAL_LABEL: { schema: Type.Optional(Type.String()) },
 ```
 
-This pattern is useful when you want to guarantee a non-undefined value in TypeScript but still want to allow override from the environment.
+A missing bare schema currently fails with `CONFIG_SCHEMA_INVALID`; there is no `CONFIG_SCHEMA_REQUIRED` diagnostic. Optional schemas preserve the provider's undefined behavior, and an optional schema with a native default uses that default.
 
-## source restriction
+## Source restriction
 
-The `source` property restricts which loaders can set a config entry:
+The `source` property restricts which loaders can set an entry:
 
 ```typescript
 SECRET_KEY: {
-  type: "string",
-  required: true,
-  source: ["env"],  // only settable via environment variable, not argv or file
+  schema: Type.String(),
+  source: ["env"],
 }
 ```
 
-If a loader that isn't in the `source` array tries to set the value, it's silently ignored. The value remains at its default or whatever a permitted source set.
+A loader whose name is not allowed is ignored for that key. `source` filters loader output only; it does not block an explicit `bootstrap({ configuration })` seed or output-shaped values supplied through the public `set()` and `merge()` APIs.
 
-## config is read-only from services
+## Read-only injected config
 
-`config` is a Proxy that returns copies of config namespaces. Modifying `config.my_app.PORT` does nothing — the change doesn't persist. To modify config programmatically, use `internal.boilerplate.configuration.set(project, property, value)`. See [Config Sourcing](./sourcing.md#programmatic-updates).
+The injected `config` proxy is read-only. Mutating a returned namespace does not persist:
+
+```typescript
+config.my_app.PORT = 9000; // not a supported update
+```
+
+For a programmatic update, use the internal configuration service:
+
+```typescript
+internal.boilerplate.configuration.set("my_app", "PORT", 9000);
+```
+
+`set()` and `merge()` accept output-shaped values and emit/update the live store without running schema decoding or validation again. A transform or codec therefore must be given its already-decoded output type at this boundary.
+
+See [Schema-backed Configuration](./schemas.mdx#input-and-output-types) for the input/output distinction and [Config Sourcing](./sourcing.md) for loader order.

@@ -1,156 +1,162 @@
 ---
 title: Config Sourcing
 sidebar_position: 3
-description: "ConfigLoaderSource: argv, env, file — merge order and custom loaders."
+description: "Environment, CLI, file, and custom loader inputs, precedence, and source restrictions."
 ---
 
-Configuration values come from multiple sources. The framework merges them in a defined order, with later sources overriding earlier ones.
+Configuration values are collected from declarations and enabled loaders. Core settles source precedence first, then processes each winning schema value through its native provider.
 
-## Sources
+## Source order
 
-| Source | How it works |
-|---|---|
-| `default` | Declared in the config entry definition |
-| `env` | Environment variables (`MY_APP__PORT=3000`) |
-| `argv` | CLI flags (`--my_app.PORT=3000`) |
-| `file` | Config file at the path specified by `boilerplate.CONFIG` or `.env` |
-
-## Merge order
-
-```
-defaults → env + argv → file → bootstrap.configuration
+```text
+declaration defaults / bootstrap inputs
+  → env + argv (argv wins within this pass)
+  → optional file loader
+  → registered custom loaders, in registration order
+  → native schema processing
+  → onPostConfig
 ```
 
-Later sources win. `bootstrap.configuration` has the highest priority — it overrides everything.
+`bootstrap({ configuration })` and `TestRunner.configure()` provide early input values. They are not an unconditional highest-priority override: an enabled later loader can replace them. Legacy values retain their historical merge behavior; schema values replace atomically at the configuration-key boundary.
 
-:::note
-`env` and `argv` are processed together in a single pass. There is no ordering between them.
-:::
+All loaders settle before native processing and one complete processed snapshot is published. A later custom loader can inspect raw previews from earlier loaders, but should not treat them as final provider output.
 
-## Environment variable format
+## Built-in loaders
 
-Keys follow this pattern: `MODULE_NAME__KEY_NAME` (module name + double underscore + key name, all uppercase).
+| Loader | Enabled by default in normal bootstrap | Input |
+|---|---:|---|
+| `env` | Yes | Environment variables, including dotenv values |
+| `argv` | Yes | CLI switches |
+| `file` | No; opt in with `configSources.file: true` | JSON, YAML, or INI config files |
+
+Disable or enable channels with `configSources`:
+
+```typescript
+await MY_APP.bootstrap({
+  configSources: {
+    env: true,
+    argv: false,
+    file: true,
+  },
+});
+```
+
+The `source` field on an entry is a per-key allow-list for these loader names and for registered custom names. It does not block explicit bootstrap input or output-shaped public mutation.
+
+## Environment variables and CLI
+
+For a module named `my_app` and key `PORT`, use the double-underscore form:
 
 ```bash
 MY_APP__PORT=8080
-MY_APP__DATABASE_URL=postgres://localhost/mydb
-MY_LIB__BASE_URL=https://api.example.com
+node dist/app.mjs --my_app__PORT=8080
 ```
-
-For the boilerplate module: `BOILERPLATE__LOG_LEVEL=debug`.
 
 ### Lookup precedence
 
-For each config entry, the loader searches the env (and argv) for the first matching name, in this order:
+For each configuration key, core searches environment variables and CLI switches in this order:
 
-1. `MODULE_NAME__KEY_NAME` (double underscore) — **preferred**; unambiguous when module names contain underscores, and friendlier to env var names with embedded special characters
-2. `MODULE_NAME_KEY_NAME` (single underscore) — classic format, accepted for compatibility
-3. `KEY_NAME` (bare, no module prefix) — fallback for app-wide overrides like `NODE_ENV`
+1. `MODULE__KEY` — preferred
+2. `MODULE_KEY` — compatibility form
+3. `KEY` — bare fallback
 
-Module names with hyphens are normalized to underscores before matching (`my-lib` matches `MY_LIB__KEY` and `MY_LIB_KEY`). Use the double-underscore form in deployment scripts and `.env` files; the single-underscore form is loss-prone when a module name itself contains an underscore.
+The same lookup order is used for CLI switches and environment variables, but a matching CLI switch wins over an environment value. Module hyphens and underscores are treated as interchangeable during lookup. Use underscore forms in deployment commands; dot notation such as `--my_app.PORT=8080` is not the documented key form.
 
-## CLI argv format
-
-Keys follow dot notation with the module name: `--module.KEY=value`.
+The file switch is separate from a configuration key:
 
 ```bash
-node dist/app.js --my_app.PORT=8080 --boilerplate.LOG_LEVEL=debug
+node dist/app.mjs --config ./config/production.yaml
 ```
 
-Use `--config ./path/to/config.yaml` (via `boilerplate.CONFIG`) to specify a config file path.
+`--config` selects the file loader's path; it is not a `my_app` key. The boilerplate `CONFIG` entry can also provide the path when the file loader is enabled.
 
-## Config file
+## Dotenv is separate from the config-file loader
 
-The framework reads a config file if `boilerplate.CONFIG` is set (via `--config ./file`) or if a `.env` file exists in the working directory. The file path is configurable via `envFile` in `BootstrapOptions`.
+The environment loader can load dotenv values into `process.env` before it searches environment keys. `envFile` and the `--env-file` switch select that dotenv file; `.env` in the working directory is the fallback.
 
-Config files support YAML, JSON, and `.env` formats. Structure mirrors the `configuration` object in `bootstrap()`:
+```typescript
+await MY_APP.bootstrap({
+  envFile: ".env.production",
+});
+```
+
+Dotenv is not the configuration-file format. The opt-in `file` loader reads JSON, YAML, and INI files and maps their object structure to module and key names. A `.env` file supplies environment variables instead.
+
+## File configuration
+
+Enable the file loader explicitly:
+
+```typescript
+await MY_APP.bootstrap({
+  configSources: { file: true },
+});
+```
+
+With no explicit path, core searches its standard application config locations. `--config path` or `boilerplate.CONFIG` selects one file. Supported formats are JSON, YAML/YML, and INI:
 
 ```yaml
 my_app:
   DATABASE_URL: postgres://localhost/mydb
   PORT: 8080
-my_lib:
-  BASE_URL: https://api.example.com
 ```
 
-## Restricting sources per entry
+For a file-backed schema object, use JSON text where the winning value reaches a TypeBox object, record, or array root. Native schema processing then performs conversion, defaults, validation, and decoding. A JSON-looking value for a normal TypeBox string remains a string.
 
-Use the `source` property on a config entry to restrict which loaders can set it:
-
-```typescript
-CONFIG: {
-  type: "string",
-  source: ["argv"],  // only settable via CLI flag, not env or file
-}
-```
-
-The `boilerplate.CONFIG` entry uses `source: ["argv"]` — it can only be set via the command line.
-
-## Disabling sources
-
-Disable specific config loaders globally via `configSources` in `BootstrapOptions`:
+## Restricting a key to a source
 
 ```typescript
-await MY_APP.bootstrap({
-  configSources: {
-    env:  false,  // ignore environment variables
-    argv: false,  // ignore CLI flags
-    file: false,  // ignore config files
+const MY_APP = CreateApplication({
+  name: "my_app",
+  configuration: {
+    SECRET_KEY: {
+      schema: Type.String(),
+      source: ["env"],
+    },
+    PORT: {
+      schema: Type.Integer({ default: 3000 }),
+      source: ["env", "argv"],
+    },
   },
+  services: {},
 });
 ```
 
-All sources default to enabled.
-
-## Reacting to config changes
-
-`configuration.onUpdate(callback, project?, property?)` subscribes to runtime config updates. Fires when `configuration.set()` is called programmatically:
-
-```typescript
-export function MyService({ internal }: TServiceParams) {
-  // Subscribe to all config changes
-  internal.boilerplate.configuration.onUpdate((project, property) => {
-    logger.info({ project, property }, "config updated");
-  });
-
-  // Subscribe to changes in my_app only
-  internal.boilerplate.configuration.onUpdate(
-    (project, property) => { /* ... */ },
-    "my_app",
-  );
-
-  // Subscribe to a specific key
-  internal.boilerplate.configuration.onUpdate(
-    (project, property) => { /* ... */ },
-    "my_app",
-    "PORT",
-  );
-}
-```
-
-## Programmatic updates
-
-`configuration.set(project, property, value)` updates a config value at runtime and emits `"event_configuration_updated"`:
-
-```typescript
-internal.boilerplate.configuration.set("my_app", "PORT", 9000);
-```
+A file or custom loader cannot replace `SECRET_KEY`. An explicit bootstrap value still seeds it because `source` is a loader allow-list, not a general mutation guard.
 
 ## Custom loaders
 
-Register a custom loader with `registerLoader(loader, name)`. The loader is a function that returns a `Partial<AbstractConfig>` — a deep partial of the full config shape:
+Register a custom loader during service construction or `onPreInit`, before configuration initialization:
 
 ```typescript
-export type ConfigLoader = (params: ConfigLoaderParams) => Promise<Partial<AbstractConfig>>;
+export function RemoteConfigService({ internal, lifecycle }: TServiceParams) {
+  lifecycle.onPreInit(() => {
+    internal.boilerplate.configuration.registerLoader(
+      async () => ({
+        my_app: {
+          // Return schema input; final native processing happens later.
+          PORT: "8080",
+        },
+      }),
+      "remote",
+    );
+  });
+}
 ```
 
+Custom loaders run after the built-in env/argv and optional file loaders, in registration order. Declare the custom name in `ConfigLoaderSource` if you want it accepted by the typed `registerLoader` and `configSources` surfaces:
+
 ```typescript
-internal.boilerplate.configuration.registerLoader(
-  async ({ application, configs, internal, logger }) => {
-    // Fetch from a remote config service, read from a database, etc.
-    const values = await fetchRemoteConfig();
-    return values; // shape: { my_app: { PORT: 8080 } }
-  },
-  "my_custom_source", // arbitrary type name
-);
+declare module "@digital-alchemy/core" {
+  interface ConfigLoaderSource {
+    remote: true;
+  }
+}
 ```
+
+Disable a custom loader with `configSources.remote: false`. See [Custom Config Loaders](../../tutorials/09-custom-config-loader.md) for metadata scanning, error handling, and a complete remote example.
+
+## Programmatic updates
+
+`internal.boilerplate.configuration.set(project, property, value)` emits an update event for one live value. `merge()` applies a bulk output-shaped update without emitting per-key events. Neither method re-runs schema processing, so transformed entries must receive their provider output type.
+
+For final-value timing and previews, see [Accessing Config](./access.md). For provider input/output and migration rules, see [Schema-backed Configuration](./schemas.mdx).

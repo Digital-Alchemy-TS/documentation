@@ -1,115 +1,133 @@
 ---
 title: Typed Configuration
 sidebar_position: 5
-description: "Declare config entries in your module and get a fully typed config object."
+description: "Declare native schemas in your module and receive validated, typed configuration output."
 ---
 
 import EmbeddedEditor from '@site/src/components/EmbeddedEditor';
 import { files, defaultFile } from '@site/src/examples/core/tutorials/typed-configuration';
 
-Configuration in Digital Alchemy is declared as part of your module definition. The framework collects those declarations at boot, merges values from environment variables, config files, and argv, validates that required entries are present, and hands you a typed `config` object where every key has the right TypeScript type.
+Digital Alchemy can use a provider's native schema as the configuration contract. The schema owns defaults, descriptions, optionality, validation, and transforms; the injected `config` object exposes the provider's output type.
 
-## Declaring configuration
+## Install a provider
 
-Configuration entries go in the `configuration` property of `CreateApplication` or `CreateLibrary`:
+`@digital-alchemy/core` declares TypeBox and Zod as optional peers. Install the provider used by your application:
+
+```bash
+yarn add @digital-alchemy/core typebox
+```
+
+Zod 4 is also supported directly:
+
+```bash
+yarn add @digital-alchemy/core zod
+```
+
+## Declare schemas
+
+Use exactly one of `schema` or the legacy `type` field per entry. Put defaults and descriptions inside the native schema:
 
 ```typescript
+import { Type } from "typebox";
+import { CreateApplication } from "@digital-alchemy/core";
+
 export const MY_APP = CreateApplication({
   name: "my_app",
   configuration: {
     API_URL: {
-      type: "string",
-      description: "Base URL for the upstream API",
-      required: true,
+      schema: Type.String({ description: "Base URL for the upstream API" }),
     },
     PORT: {
-      type: "number",
-      default: 3000,
+      schema: Type.Integer({ default: 3000, description: "HTTP port" }),
     },
     DEBUG: {
-      type: "boolean",
-      default: false,
+      schema: Type.Boolean({ default: false }),
     },
     ALLOWED_ORIGINS: {
-      type: "string[]",
-      default: ["http://localhost:3000"],
+      schema: Type.Array(Type.String(), {
+        default: ["http://localhost:3000"],
+      }),
     },
     ENVIRONMENT: {
-      type: "string",
-      enum: ["local", "staging", "production"] as const,
-      default: "local",
+      schema: Type.Union([
+        Type.Literal("local"),
+        Type.Literal("staging"),
+        Type.Literal("production"),
+      ], { default: "local" }),
+    },
+    LABEL: {
+      schema: Type.Optional(Type.String({ description: "Optional status label" })),
     },
   },
-  services: { ... },
+  services: { /* ... */ },
 });
 ```
 
-## Using configuration in a service
+A bare schema such as `Type.String()` rejects a missing value during final processing. Use `Type.Optional(...)` when omission is valid. There is no outer `required` flag for schema entries.
 
-Once declared, `config.my_app` is fully typed. TypeScript infers the type of each key from the `type` and `enum` fields:
+## Read the output after `PostConfig`
+
+Service factories run before external sources settle. Register configuration-dependent work in `onPostConfig` or a later hook:
 
 ```typescript
-export function ApiService({ config }: TServiceParams) {
+export function ApiService({ config, lifecycle }: TServiceParams) {
   lifecycle.onPostConfig(() => {
     const port: number = config.my_app.PORT;
-    const env: "local" | "staging" | "production" = config.my_app.ENVIRONMENT;
-    const debug: boolean = config.my_app.DEBUG;
+    const environment: "local" | "staging" | "production" =
+      config.my_app.ENVIRONMENT;
     const origins: string[] = config.my_app.ALLOWED_ORIGINS;
+
+    startServer({ port, environment, origins });
   });
 }
 ```
 
-Config values are only guaranteed to be their final values after `PostConfig`. Read them in `onPostConfig` or any later callback.
+The `config` types above are schema outputs. If a schema transforms input—for example, a TypeBox codec or a Zod transform—the input accepted by bootstrap and loaders can be a different type. See [Schema-backed Configuration](../reference/config/schemas.mdx).
 
-## required vs default
+## Supplying values
 
-| Pattern | Behavior |
-|---|---|
-| `required: true`, no `default` | Bootstrap halts with `REQUIRED_CONFIGURATION_MISSING` if unset — use for secrets |
-| `default: value` | Value used when no external source provides one |
-| Both | Default satisfies `required`; external source overrides the default |
-| Neither | Config entry is optional; value is `undefined` when not set |
-
-:::tip
-Use `required: true` without a `default` for secrets (API keys, database URLs). This gives a clear boot failure rather than a confusing runtime error when the secret is missing.
-:::
-
-## Setting values at runtime
-
-Values come from three sources, merged in this order (later sources win):
-
-1. `default` in the declaration
-2. Environment variables and argv
-3. `configuration` in `bootstrap()` options — **highest priority**
+Normal bootstrap reads environment and CLI sources, then an optional config file and custom loaders. The bootstrap `configuration` object is an early schema-input seed, not an unconditional highest-priority override:
 
 ```typescript
 await MY_APP.bootstrap({
   configuration: {
-    my_app: { API_URL: "https://api.example.com", PORT: 8080 },
-    boilerplate: { LOG_LEVEL: "debug" },
+    my_app: {
+      API_URL: "https://api.example.com",
+      PORT: 8080,
+      ENVIRONMENT: "staging",
+    },
+  },
+  configSources: {
+    file: false,
   },
 });
 ```
 
-From environment variables, the key format is `MY_APP__PORT=8080` (module name doubled underscore key, all caps).
+Use the documented underscore form for environment and CLI keys:
+
+```bash
+MY_APP__PORT=8080 node dist/app.mjs --my_app__ENVIRONMENT=staging
+```
+
+Within the environment/argv pass, a matching CLI value wins over an environment value. All enabled sources settle before native schema processing and `onPostConfig`.
 
 ## Try it live
 
-The editor below has an app with five config entries — string, number, boolean, string[], and enum. Open `api.service.mts` and hover over `config.my_app` to see the types.
+The editor uses TypeBox schemas for the app, including an optional value and provider-native defaults. Open `api.service.mts` to inspect the inferred output types.
 
-<EmbeddedEditor files={files} defaultFile={defaultFile} exampleId="tutorials-typed-config" />
+<EmbeddedEditor files={files} defaultFile={defaultFile} exampleId="tutorials-schema-backed-config" />
 
-## Config types
+## Legacy entries during migration
 
-| `type` value | TypeScript type | Notes |
-|---|---|---|
-| `"string"` | `string` | With `enum`, narrows to a union literal type |
-| `"number"` | `number` | Parsed from string in env (e.g. `"3000"` → `3000`) |
-| `"boolean"` | `boolean` | `"true"`, `"1"`, `"yes"` → `true`; `"false"`, `"0"`, `"no"` → `false` |
-| `"string[]"` | `string[]` | Comma-separated in env: `"a,b,c"` → `["a","b","c"]` |
-| `"record"` | `Record<string, unknown>` | JSON string in env |
-| `"internal"` | any | Used by built-in services; not for user config |
+The legacy form remains valid and can be mixed with schemas:
 
-For the full type reference with examples, see [Configuration Types](../reference/config/types.mdx).
+```typescript
+configuration: {
+  OLD_PORT: { type: "number", default: 3000 },
+  NEW_PORT: { schema: Type.Integer({ default: 3000 }) },
+}
+```
+
+Legacy `enum` narrows TypeScript but does not enforce runtime membership, and legacy `string[]` keeps its CSV parsing. Use native schemas when you need runtime validation or provider-owned structured input. See [Legacy Configuration Types](../reference/config/types.mdx) for compatibility behavior.
 
 Next: [Service Returns →](./05-service-returns.md)

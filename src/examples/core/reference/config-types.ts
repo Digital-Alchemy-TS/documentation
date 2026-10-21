@@ -1,5 +1,5 @@
 /**
- * Example: All configuration types
+ * Example: legacy type-based configuration
  * Used on: docs/core/reference/config/types.mdx
  */
 export const files: Record<string, string> = {
@@ -9,39 +9,39 @@ import { AppService } from "./app.service.mts";
 export const MY_APP = CreateApplication({
   name: "my_app",
   configuration: {
-    // string — plain string value
+    // Legacy string — plain string value
     API_URL: {
       type: "string",
       description: "Base URL for the upstream API",
       required: true,
     },
 
-    // string with enum — TypeScript narrows to a union literal type
+    // Legacy enum — narrows TypeScript, but does not runtime-validate
     ENVIRONMENT: {
       type: "string",
       enum: ["local", "staging", "production"] as const,
       default: "local",
     },
 
-    // number — parsed from string in env ("3000" → 3000)
+    // Legacy number — parsed with Number (invalid input may become NaN)
     PORT: {
       type: "number",
       default: 3000,
     },
 
-    // boolean — "true"/"1"/"y" → true; "false"/"0"/"n" → false
+    // Legacy boolean — only "true" and "y" strings become true
     DEBUG_MODE: {
       type: "boolean",
       default: false,
     },
 
-    // string[] — comma-separated in env: "a,b,c" → ["a","b","c"]
+    // Legacy string[] — CSV input remains supported
     ALLOWED_ORIGINS: {
       type: "string[]",
       default: ["http://localhost:3000"],
     },
 
-    // record — arbitrary key/value pairs; JSON string in env
+    // Legacy record — string input is parsed as JSON
     FEATURE_FLAGS: {
       type: "record",
       default: {},
@@ -62,22 +62,14 @@ declare module "@digital-alchemy/core" {
 
 export function AppService({ config, lifecycle, logger }: TServiceParams) {
   lifecycle.onPostConfig(() => {
-    // Hover over each config value to see its TypeScript type
-
     const apiUrl: string = config.my_app.API_URL;
-
-    // enum narrows to "local" | "staging" | "production"
     const env: "local" | "staging" | "production" = config.my_app.ENVIRONMENT;
-
     const port: number = config.my_app.PORT;
-
     const debug: boolean = config.my_app.DEBUG_MODE;
-
     const origins: string[] = config.my_app.ALLOWED_ORIGINS;
+    const flags: Record<string, string> = config.my_app.FEATURE_FLAGS;
 
-    const flags: Record<string, unknown> = config.my_app.FEATURE_FLAGS;
-
-    logger.info({ apiUrl, env, port, debug, origins, flags }, "config loaded");
+    logger.info({ apiUrl, env, port, debug, origins, flags }, "legacy config loaded");
   });
 }
 `,
@@ -94,6 +86,6 @@ await MY_APP.bootstrap({
   },
 });
 `,
-}
+};
 
-export const defaultFile = "application.mts"
+export const defaultFile = "application.mts";

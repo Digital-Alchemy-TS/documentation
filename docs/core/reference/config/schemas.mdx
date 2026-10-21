@@ -1,0 +1,232 @@
+---
+title: Schema-backed Configuration
+sidebar_position: 2.5
+description: "Use TypeBox, Zod, or Standard Schema values as native Digital Alchemy configuration definitions."
+---
+
+Schema-backed configuration lets a module use a provider's native validation, defaults, descriptions, optionality, coercion, and transforms. A module can mix schema-backed entries with the legacy `type` entries; each entry uses exactly one form.
+
+For the migration from legacy entries, see [Migrating to schemas](#migrating-from-legacy-entries). For the complete source and lifecycle rules, see [Config Sourcing](./sourcing.md) and [Hooks](../lifecycle/hooks.md).
+
+## The declaration shape
+
+Put the provider value under `schema`:
+
+```typescript
+import { Type } from "typebox";
+import { CreateApplication } from "@digital-alchemy/core";
+
+export const MY_APP = CreateApplication({
+  name: "my_app",
+  configuration: {
+    API_URL: {
+      schema: Type.String({
+        description: "Upstream API base URL",
+      }),
+    },
+    PORT: {
+      schema: Type.Integer({
+        default: 3000,
+        description: "HTTP port",
+      }),
+    },
+    LABEL: {
+      schema: Type.Optional(Type.String({ description: "Optional display label" })),
+    },
+    SETTINGS: {
+      schema: Type.Object({
+        timeoutMs: Type.Integer({ default: 5_000 }),
+        enabled: Type.Boolean({ default: true }),
+      }),
+      source: ["env"],
+    },
+  },
+  services: {},
+});
+```
+
+The outer entry contains `schema` and may include the entry-level `source` allow-list and custom loader metadata added through declaration merging of `BaseConfig`, such as `remote: { key: "api-key" }`. See [Per-entry metadata](../../tutorials/09-custom-config-loader.md#per-entry-metadata) for an example. It must not contain `type`, `default`, `description`, or `required`. Put schema descriptions and defaults on the native schema instead; loader-specific metadata stays on the entry. A schema-backed entry cannot use the legacy `required` flag: the provider's own optionality determines whether a missing value is accepted.
+
+A definition must provide exactly one of `type` or `schema`, so a module can adopt schemas one key at a time. The legacy and schema forms can coexist in the same module.
+
+## Supported providers
+
+Core recognizes these provider surfaces directly. No adapter registration or custom bootstrap import is needed:
+
+| Provider | Install | Native behavior |
+|---|---|---|
+| [TypeBox](https://github.com/sinclairzx81/typebox) | `typebox` `>=1.3.0 <2.0.0` | Native defaults, conversion, validation, and codec decoding |
+| [Zod](https://zod.dev/) | `zod` `>=4.0.0 <5.0.0` | Native synchronous or asynchronous parsing, defaults, and transforms |
+| Standard Schema v1 | The provider's package | The provider's `~standard.validate` input/output contract |
+
+The `typebox` and `zod` peers of `@digital-alchemy/core` are optional because applications only need to install the provider they use:
+
+```bash
+yarn add @digital-alchemy/core typebox
+# or
+yarn add @digital-alchemy/core zod
+```
+
+Do not serialize or reconstruct a schema between declaration and bootstrap. Core retains the raw schema identity for processing and keeps a separate safe metadata view for tooling.
+
+## Input and output types
+
+A schema has two type positions. Core preserves them at its public boundaries:
+
+| Boundary | Type position | Example for a string-to-number codec |
+|---|---|---|
+| `bootstrap({ configuration })` | schema input | `"42"` |
+| `TestRunner(...).configure(...)` | schema input | `"42"` |
+| env, argv, file, and custom loader results | raw schema input | `"42"` |
+| injected `config.*` after `PostConfig` | schema output | `42` |
+| `configuration.set()` and `configuration.merge()` | schema output | `42` |
+
+After all loaders settle, final provider validation, transforms, and codecs run once before the processed snapshot is published. An explicit TypeBox root default may still be prepared earlier for a construction preview; that preview preparation is separate from final processing. `set()` and `merge()` are output-shaped mutation APIs; they do not run a schema decoder or validator again. Use them with values that already satisfy the schema's output type.
+
+For example, a TypeBox codec can accept an encoded string at bootstrap and inject the decoded number:
+
+```typescript
+import { Type } from "typebox";
+import {
+  CreateApplication,
+  type TServiceParams,
+} from "@digital-alchemy/core";
+
+const retryCount = Type.Codec(Type.String())
+  .Decode(value => Number(value))
+  .Encode(value => String(value));
+
+function RetryService({ config, lifecycle, logger }: TServiceParams) {
+  lifecycle.onPostConfig(() => {
+    const retries: number = config.my_app.RETRIES; // schema output
+    logger.info({ retries }, "configuration loaded");
+  });
+}
+
+const MY_APP = CreateApplication({
+  name: "my_app",
+  configuration: {
+    RETRIES: { schema: retryCount },
+  },
+  services: { retry: RetryService },
+});
+
+declare module "@digital-alchemy/core" {
+  export interface LoadedModules {
+    my_app: typeof MY_APP;
+  }
+}
+
+await MY_APP.bootstrap({
+  configuration: {
+    my_app: { RETRIES: "42" }, // schema input
+  },
+});
+```
+
+The usual `LoadedModules` declaration supplies the module typing used by `TServiceParams`; schema entries need no special registration.
+
+The same distinction applies to Zod transforms. For an asynchronous Zod transform, core calls the provider's native async parser once and injects its output.
+
+## Optionality, defaults, and metadata
+
+Schema optionality is provider-native:
+
+```typescript
+import { Type } from "typebox";
+import { z } from "zod";
+
+const TYPEBOX_OPTIONAL = Type.Optional(Type.String());
+const ZOD_OPTIONAL = z.string().optional().describe("Optional label");
+```
+
+A bare `Type.String()` or `z.string()` rejects a missing value. An optional schema accepts omission and produces `string | undefined`. An optional schema with a native default still produces its native default when the input is missing. For Standard Schema providers, use the provider's own optional and default constructs.
+
+Descriptions, titles, examples, defaults, and other supported metadata belong on the schema. For Zod, put the description after optionality when that is how the provider exposes it:
+
+```typescript
+const LABEL = z.string().optional().describe("Shown in the status page");
+```
+
+The configuration service exposes two different views:
+
+- `getDefinitions()` retains the raw definitions and schema object identity. It is for runtime consumers that need the original provider value; it is not a serialization format.
+- `getMetadata()` returns a safe, read-only descriptor for help or scanner tooling. Provider metadata can be absent or unknown: the view does not execute default factories or provider callbacks, and dynamic defaults are not guaranteed to be extractable. Supported dynamic values are marked as dynamic; unsupported metadata is omitted or marked unknown.
+
+## Processing and source precedence
+
+Core settles source precedence before it runs native schema processing. The order is:
+
+```text
+declaration defaults / bootstrap inputs
+  → environment and CLI (CLI wins within this pass)
+  → optional config-file loader
+  → registered custom loaders, in registration order
+  → native schema processing and atomic publication
+  → onPostConfig callbacks
+```
+
+The `configuration` object passed to `bootstrap()` or `TestRunner.configure()` is an early seed, not a highest-priority override. A later enabled loader can replace it. An entry's `source` allow-list filters loader values (`env`, `argv`, `file`, or a registered custom name); it does not reject an explicit bootstrap value or a value supplied through the public mutation APIs.
+
+Environment and argv loading is enabled by default in normal bootstrap. The file loader is opt-in with `configSources.file: true`. See [Config Sourcing](./sourcing.md) for key lookup and file search details.
+
+### Container strings
+
+For a winning TypeBox object, record, or array root, a string from env, argv, a file, or a custom loader is parsed as JSON before native conversion, defaults, validation, and decoding. This automatic container normalization is TypeBox-only. Zod and opaque Standard Schema values receive their native raw loader inputs; if they need JSON text decoded, define that preprocessing in the provider schema. A normal TypeBox string schema—and a string-backed codec—keeps JSON-looking text as a string. Legacy `string[]` entries retain their CSV behavior.
+
+Only the winning source is processed. A malformed JSON value from a source that is later replaced does not fail boot. A malformed winning JSON value, provider validation failure, or provider processing failure stops bootstrap with a sanitized diagnostic that identifies the module, key, and failure category without echoing the raw value.
+
+## Construction previews and lifecycle
+
+Service factories run before external loaders. During construction and `PreInit`:
+
+- legacy defaults are available as before;
+- an explicit TypeBox root default can be prepared for construction, with native cloning for isolation and a root factory invoked once;
+- a known bootstrap value can supersede that TypeBox root default;
+- raw bootstrap and loader previews may be visible to later loaders, but they are not guaranteed to be processed output;
+- nested TypeBox defaults/effects and Zod or opaque Standard Schema defaults remain finalization-only.
+
+Construction previews are usable when an application deliberately accepts later-source overrides, but they are not final validated values. Use `onPostConfig` or a later hook for final validated values. Constructor defaults were added to support real service-factory reads; they are not a prohibition on reading a deliberate preview. Core waits for every enabled loader, processes schemas, and publishes one complete processed snapshot before `onPostConfig` runs. A schema failure does not publish a partial processed snapshot.
+
+## Schema failures
+
+Schema failures are bootstrap errors. The most useful causes are:
+
+| Cause | Meaning |
+|---|---|
+| `CONFIGURATION_DEFINITION_INVALID` | The entry has both or neither discriminator, or puts legacy metadata on a schema entry. |
+| `CONFIG_SCHEMA_UNSUPPORTED` | The schema is malformed or exposes an unsupported provider surface. |
+| `CONFIG_SCHEMA_AMBIGUOUS` | One schema exposes more than one recognized provider marker. |
+| `CONFIG_SCHEMA_PROVIDER_UNSUPPORTED` | A recognized Zod value does not expose the compatible native surface. |
+| `CONFIG_SCHEMA_PEER_MISSING` | TypeBox is used but the `typebox` peer cannot be resolved. |
+| `CONFIG_SCHEMA_PEER_BROKEN` | TypeBox is present but its `typebox/value` surface is unusable. |
+| `CONFIG_SCHEMA_INVALID` | The winning value is missing or fails native provider validation. |
+| `CONFIG_SCHEMA_PROCESSING_FAILED` | A provider callback, conversion, clone, decode, or result shape fails. |
+
+Schema entries do not produce `CONFIG_SCHEMA_REQUIRED`. A missing bare schema value is reported as `CONFIG_SCHEMA_INVALID`; optional schemas preserve the provider's undefined behavior. `REQUIRED_CONFIGURATION_MISSING` remains the legacy `required: true` error.
+
+## Migrating from legacy entries
+
+Migrate one entry at a time. Keep legacy entries when their compatibility behavior is intentional; use a schema when runtime validation, provider-native defaults, transforms, or structured values matter.
+
+| Legacy declaration | Schema migration |
+|---|---|
+| `{ type: "number", default: 3000, description: "port" }` | `{ schema: Type.Integer({ default: 3000, description: "port" }) }` |
+| `{ type: "string", required: true }` | `{ schema: Type.String() }` (a missing value fails native validation) |
+| Legacy optional entry without `required` | `Type.Optional(Type.String())`, `z.string().optional()`, or the provider's equivalent |
+| `required: false` | Remove the outer flag and express optionality in the schema |
+| `{ type: "string", enum: ["dev", "prod"] }` | `Type.Union([Type.Literal("dev"), Type.Literal("prod")])` or `z.enum(["dev", "prod"])` |
+| `{ type: "string[]" }` | `Type.Array(Type.String())` (TypeBox source strings are JSON) or `z.array(z.string())` (add provider preprocessing if source strings contain JSON) |
+| `{ type: "record" }` | A provider object/record schema that describes the keys and value types |
+
+Legacy `enum` narrows TypeScript types but is not runtime validation in the legacy parser. If runtime rejection matters, migrate to a native union or enum schema. Legacy boolean parsing accepts case-insensitive `true` and `y`; it does not treat `1` or `yes` as true.
+
+After migration:
+
+1. Install the provider used by the migrated entry.
+2. Move `default` and `description` inside the schema.
+3. Replace legacy `required` with provider-native optionality or a bare schema.
+4. For a root TypeBox array value from env, argv, a file, or a custom loader, use a JSON array literal such as `["https://app.example"]`; add provider preprocessing when a Zod or opaque schema needs to decode JSON text.
+5. Read the output type after `onPostConfig`; a transform or codec may change it from the input type.
+
+The [typed configuration tutorial](../../tutorials/04-typed-configuration.mdx) shows a complete TypeBox declaration and live example. The [legacy configuration types](./types.mdx) page documents the compatibility form.
