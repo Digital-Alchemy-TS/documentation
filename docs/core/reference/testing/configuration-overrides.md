@@ -10,7 +10,7 @@ description: "TestRunner configuration inputs, schema output types, source isola
 import { TestRunner } from "@digital-alchemy/core";
 import { MY_APP } from "./application.mts";
 
-const runner = TestRunner(MY_APP);
+const runner = TestRunner({ target: MY_APP });
 ```
 
 ## `.configure()` uses schema input
@@ -21,7 +21,7 @@ For a schema entry, `.configure()` accepts the provider's input type. Native pro
 
 ```typescript
 // RETRIES uses a TypeBox codec: input is string, output is number.
-await TestRunner(MY_APP)
+await TestRunner({ target: MY_APP })
   .configure({
     my_app: {
       RETRIES: "5",
@@ -36,14 +36,14 @@ await TestRunner(MY_APP)
 
 For legacy entries, `.configure()` keeps the legacy injected type and parsing behavior. Chained configuration calls merge legacy objects deeply. Schema keys are replaced atomically, so a later value replaces the earlier value for that configuration key rather than being deep-merged into the schema input.
 
-`TestRunner(MY_APP)` is shorthand for `TestRunner({ target: MY_APP })`. `.run()` tears down the bootstrapped application only when the test calls or awaits the returned teardown path; always clean up resources in the test lifecycle used by your suite.
+`.run()` tears down the bootstrapped application only when the test calls or awaits the returned teardown path; always clean up resources in the test lifecycle used by your suite.
 
 ## Explicit source isolation
 
 The runner forwards `configSources` to bootstrap. For a deterministic unit test that must not read the host environment, process arguments, or config files, disable every built-in channel explicitly:
 
 ```typescript
-await TestRunner(MY_APP)
+await TestRunner({ target: MY_APP })
   .setOptions({
     configSources: {
       env: false,
@@ -68,7 +68,7 @@ This explicit map matters because normal bootstrap defaults `env` and `argv` to 
 To exercise one real source, enable only that channel:
 
 ```typescript
-const runner = TestRunner(MY_APP).setOptions({
+const runner = TestRunner({ target: MY_APP }).setOptions({
   configSources: {
     env: true,
     argv: false,
@@ -95,7 +95,7 @@ A missing bare schema value fails with `CONFIG_SCHEMA_INVALID`. An optional sche
 The object supplied through `.configure()` is bootstrap input and is processed through the schema. By contrast, `internal.boilerplate.configuration.set()` and `.merge()` are output-shaped APIs. They do not run native decoding or validation again; provide the output type when using them in setup code.
 
 ```typescript
-await TestRunner(MY_APP)
+await TestRunner({ target: MY_APP })
   .setOptions({
     configSources: { env: false, argv: false, file: false },
   })
@@ -117,7 +117,7 @@ For a legacy required entry, provide a value through `.configure()`:
 // Legacy declaration:
 API_KEY: { type: "string", required: true }
 
-await TestRunner(MY_APP)
+await TestRunner({ target: MY_APP })
   .setOptions({ configSources: { env: false, argv: false, file: false } })
   .configure({ my_app: { API_KEY: "test-key" } })
   .run(async ({ config, lifecycle }) => {
@@ -134,7 +134,7 @@ For a schema declaration, choose a provider-native default or optional schema in
 `.run()` boots the application and invokes the test callback with typed service parameters. When using `.serviceParams()`, retain the runner and call its `.teardown()` method after assertions:
 
 ```typescript
-const runner = TestRunner(MY_APP).setOptions({
+const runner = TestRunner({ target: MY_APP }).setOptions({
   configSources: { env: false, argv: false, file: false },
 });
 const params = await runner.serviceParams();

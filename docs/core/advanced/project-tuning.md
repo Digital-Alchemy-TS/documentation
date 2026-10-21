@@ -102,7 +102,7 @@ The file loader reads JSON, YAML/YML, and INI. `--config path` and `boilerplate.
 For tests that must not read host sources, disable all three channels explicitly:
 
 ```typescript
-TestRunner(MY_APP).setOptions({
+TestRunner({ target: MY_APP }).setOptions({
   configSources: { env: false, argv: false, file: false },
 });
 ```

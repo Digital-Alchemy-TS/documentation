@@ -41,7 +41,7 @@ sequenceDiagram
         B->>L: exec("Ready")
     else bootLibrariesFirst: true
         B->>L: exec("PreInit") for libraries
-        B->>L: initialize and finalize library config
+        B->>L: initialize and finalize all registered config (including application definition)
         B->>L: exec("PostConfig")
         B->>L: exec("Bootstrap") for libraries
         WS->>WS: Wire application services

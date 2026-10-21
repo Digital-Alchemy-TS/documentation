@@ -19,7 +19,11 @@ A loader should return a partial module/key object. For schema-backed entries, r
 Register a loader during service construction or `onPreInit`. Registering from `onBootstrap` is too late for the current configuration pass.
 
 ```typescript
-import type { TServiceParams } from "@digital-alchemy/core";
+import type {
+  AbstractConfig,
+  ConfigLoader,
+  TServiceParams,
+} from "@digital-alchemy/core";
 
 export function RemoteConfigService({ internal, lifecycle }: TServiceParams) {
   lifecycle.onPreInit(() => {
@@ -112,7 +116,7 @@ export const MY_APP = CreateApplication({
 `params.configs` is a map from module names to their raw config definitions. Scan it for your extension metadata:
 
 ```typescript
-async ({ configs }) => {
+const remoteMetadataLoader: ConfigLoader = async ({ configs, internal }) => {
   const result: Partial<AbstractConfig> = {};
 
   for (const [moduleName, moduleConfigs] of configs.entries()) {
@@ -120,8 +124,7 @@ async ({ configs }) => {
       if (!entry.remote) continue;
 
       const value = await fetchRemote(entry.remote.key, entry.remote.namespace);
-      result[moduleName] ??= {};
-      result[moduleName][key] = value;
+      internal.utils.object.set(result, `${moduleName}.${key}`, value);
     }
   }
 
@@ -136,7 +139,7 @@ The raw `schema` value retains provider identity. Do not serialize it as part of
 For independent remote requests, collect promises and await them together:
 
 ```typescript
-async ({ configs }) => {
+const parallelRemoteLoader: ConfigLoader = async ({ configs, internal }) => {
   const result: Partial<AbstractConfig> = {};
   const waiting: Promise<void>[] = [];
 
@@ -147,8 +150,7 @@ async ({ configs }) => {
       waiting.push(
         (async () => {
           const value = await fetchRemote(entry.remote.key, entry.remote.namespace);
-          result[moduleName] ??= {};
-          result[moduleName][key] = value;
+          internal.utils.object.set(result, `${moduleName}.${key}`, value);
         })(),
       );
     }
@@ -156,7 +158,7 @@ async ({ configs }) => {
 
   await Promise.all(waiting);
   return result;
-}
+};
 ```
 
 Later custom loaders see raw previews from earlier loaders. They should not rely on a transform having already run.
@@ -166,14 +168,15 @@ Later custom loaders see raw previews from earlier loaders. They should not rely
 Throw a `BootstrapException` for a fatal remote failure so bootstrap stops with a contextual error:
 
 ```typescript
+import type { TContext } from "@digital-alchemy/core";
 import { BootstrapException } from "@digital-alchemy/core";
 
-async function loadRemoteValue(context: string) {
-  return fetchRemote("database-url").catch(error => {
+async function loadRemoteValue(context: TContext) {
+  return fetchRemote("database-url").catch(() => {
     throw new BootstrapException(
       context,
       "REMOTE_CONFIG_FETCH_FAILED",
-      `Could not load remote configuration: ${error.message}`,
+      "Could not load remote configuration.",
     );
   });
 }

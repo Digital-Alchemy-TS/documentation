@@ -107,7 +107,7 @@ In production: inject secrets via environment variables (`MY_APP__DATABASE_URL=.
 In tests, disable host sources explicitly and provide test values via `.configure()`:
 
 ```typescript
-await TestRunner(MY_APP)
+await TestRunner({ target: MY_APP })
   .setOptions({ configSources: { env: false, argv: false, file: false } })
   .configure({
     my_app: {
@@ -138,7 +138,7 @@ The allow-list does not block an explicit bootstrap seed or the output-shaped `s
 
 ```typescript
 // In test: required entries must be provided explicitly
-await TestRunner(MY_APP)
+await TestRunner({ target: MY_APP })
   .setOptions({ configSources: { env: false, argv: false, file: false } })
   .configure({
     my_app: { DATABASE_URL: "postgres://test", API_KEY: "test" },
