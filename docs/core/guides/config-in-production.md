@@ -1,211 +1,159 @@
 ---
 title: Config in Production
 sidebar_position: 7
-description: "Practical patterns for production config: per-type best practices, manifest files, process interrupts, and adapter toggles."
+description: "Production patterns for native schemas, source restrictions, manifests, and loader selection."
 ---
 
-DA's config system is flexible, but that flexibility means there's always a question of which type to use and how to structure entries. This guide covers patterns that emerge from real production applications.
+Production configuration should make the input boundary, validation behavior, and ownership of each value obvious. Prefer a native schema when the value needs runtime validation, structured coercion, provider defaults, or a transformed output type. The legacy `type` form remains available for compatibility.
 
-For the full type reference, see [Config Types](../reference/config/types.mdx). For source priority and the env variable format, see [Config and Environments](./config-and-environment.md).
+For the complete provider contract, see [Schema-backed Configuration](../reference/config/schemas.mdx). For source precedence and file controls, see [Config Sourcing](../reference/config/sourcing.md).
 
-## Per-type use cases
+## Secrets and required values
 
-### string — URLs, names, connection strings
-
-Most config entries are `string`. Use it for anything that's a URL, a connection string, a service name, or a path.
+A bare native schema rejects a missing value during finalization. Use it for secrets that must exist:
 
 ```typescript
-DATABASE_URL: { type: "string", required: true },
-SERVICE_NAME: { type: "string", default: "my-service" },
-CACHE_URL: { type: "string" },
+import { Type } from "typebox";
+
+configuration: {
+  API_KEY: {
+    schema: Type.String({ description: "Upstream API key" }),
+    source: ["env"],
+  },
+  DATABASE_URL: {
+    schema: Type.String({ description: "Primary database URL" }),
+    source: ["env"],
+  },
+}
 ```
 
-### string + required, no default — secrets that must exist
+`source: ["env"]` prevents env-loader peers such as argv or file from supplying the key. It does not block an explicit bootstrap seed or a public `set()`/`merge()` call, so keep those boundaries under deployment and application ownership.
 
-A `required: true` entry with no `default` forces the value to come from the environment. The application won't boot if it's missing:
+The failure is `CONFIG_SCHEMA_INVALID` for a missing or invalid schema value. The legacy equivalent is `type: "string", required: true`, which reports `REQUIRED_CONFIGURATION_MISSING`.
+
+## Typed operational settings
+
+Use native schemas for ports, limits, flags, and structured settings:
 
 ```typescript
-API_KEY:    { type: "string", required: true },
-JWT_SECRET: { type: "string", required: true },
+configuration: {
+  PORT: { schema: Type.Integer({ default: 3000, minimum: 1 }) },
+  REQUEST_TIMEOUT_MS: { schema: Type.Integer({ default: 5000, minimum: 1 }) },
+  ENABLE_METRICS: { schema: Type.Boolean({ default: true }) },
+  ALLOWED_ORIGINS: {
+    schema: Type.Array(Type.String(), {
+      default: ["https://app.example.com"],
+    }),
+  },
+  FEATURE_FLAGS: {
+    schema: Type.Record(Type.String(), Type.Boolean(), { default: {} }),
+  },
+}
 ```
 
-The boot failure is clear: `REQUIRED_CONFIGURATION_MISSING` with the module and key name. This is better than a runtime `undefined` deep inside a service.
+A winning TypeBox object, record, or array value supplied as a string is parsed as JSON before native conversion and validation. Schema arrays therefore use JSON input; the legacy `string[]` form retains its CSV compatibility behavior.
 
-### string + source: ["env"] — secrets that must never be in a file
-
-`source` restricts which loaders can provide a value. Use `["env"]` for secrets that should never appear in a config file committed to version control:
+Zod provides the same boundary with its own native constructs:
 
 ```typescript
-SECRET_KEY: {
-  type: "string",
-  required: true,
-  source: ["env"],  // env variable only; ignored if set via file or argv
-},
+import { z } from "zod";
+
+configuration: {
+  PORT: { schema: z.coerce.number().int().positive().default(3000) },
+  ENVIRONMENT: { schema: z.enum(["staging", "production"]) },
+  LABEL: { schema: z.string().optional().describe("Status label") },
+}
 ```
 
-Combine with `required: true` to get an error if the env variable is missing rather than silently running without the secret.
+The injected config type is the provider output. A transform or codec can make that output differ from the input accepted by bootstrap and loaders.
 
-### number — limits, timeouts, ports
+## Source selection
 
-Use `number` for tunable values that operations teams might want to adjust without a code change:
+Normal bootstrap uses env and argv by default. The file loader is opt-in; disable argv or env when the host should not control those channels:
 
 ```typescript
-PORT:                { type: "number", default: 3000 },
-CONNECTION_POOL_SIZE: { type: "number", default: 10 },
-REQUEST_TIMEOUT_MS:   { type: "number", default: 5000 },
-MAX_RETRY_ATTEMPTS:   { type: "number", default: 3 },
+await MY_APP.bootstrap({
+  configSources: {
+    env: true,
+    argv: false,
+    file: false,
+    remote: true,
+  },
+});
 ```
 
-### boolean — feature flags and capability toggles
+The source order is bootstrap/declaration values, env plus argv (argv wins within that pass), optional file, then registered custom loaders. All loaders settle before schema processing. See [Config Sourcing](../reference/config/sourcing.md).
 
-Use `boolean` for things that are on or off. Default to `true` or `false` depending on whether the feature should be on by default.
+Dotenv loading is separate from the config-file loader. `envFile` or `--env-file` selects a dotenv file that populates `process.env`; the file loader reads JSON, YAML/YML, and INI when `configSources.file` is true.
 
-```typescript
-ENABLE_METRICS:  { type: "boolean", default: true },
-CACHE_ENABLED:   { type: "boolean", default: true },
-DEBUG_RESPONSES: { type: "boolean", default: false },
-```
+## Manifest files
 
-Environment variable format: `MY_APP__ENABLE_METRICS=false` (the string `"false"` is coerced to the boolean `false`).
-
-### boolean for process interrupts
-
-A `boolean` with no `default` works well for one-off process modes — flags you set explicitly to trigger a specific behavior:
-
-```typescript
-VALIDATE_CONFIG: { type: "boolean" },  // default undefined → falsy
-DRY_RUN:         { type: "boolean" },
-```
-
-These are never `true` in normal operation. Set them via environment variable or `bootstrap.configuration` to activate the behavior.
-
-For the full validate-config pattern, see [Platform Entrypoints](../advanced/platform-entrypoints.md).
-
-### string[] — lists of values
-
-Use `string[]` for lists of identifiers, origins, or names:
-
-```typescript
-ENABLED_BACKENDS: {
-  type: "string[]",
-  default: ["backend_a"],
-},
-ALLOWED_ORIGINS: {
-  type: "string[]",
-  default: [],
-},
-```
-
-Environment variable format: comma-separated string — `MY_APP__ENABLED_BACKENDS=backend_a,backend_b`.
-
-### record — key-value maps
-
-`record` stores a `Record<string, string>` — free-form key-value data. Use it for label sets, metadata maps, or feature flag dictionaries that you don't want to declare as individual entries:
-
-```typescript
-FEATURE_FLAGS: {
-  type: "record",
-  default: {},
-},
-DEPLOYMENT_LABELS: {
-  type: "record",
-  default: {},
-},
-```
-
-### internal — framework-managed values
-
-The `internal` type is for values managed by the framework itself, not user configuration. You won't use this type in application code. The canonical example is `boilerplate.CONFIG`, which points to the config file path and can only be set via `source: ["argv"]`.
-
----
-
-## The manifest file pattern
-
-In containerized or CI/CD deployments, it's useful to separate secrets (which ops/security controls) from deployment metadata (which infrastructure tooling generates). The manifest file pattern handles this split cleanly.
-
-Infrastructure tooling — a CI pipeline, an IaC tool, a deployment system — writes a `.manifest.yaml` to the application's working directory at deploy time. It contains non-secret metadata:
+A deployment system can generate a non-secret manifest file and opt into the file loader:
 
 ```yaml title=".manifest.yaml"
-boilerplate:
-  LOG_LEVEL: info
 my_app:
   ENVIRONMENT: production
   SERVICE_NAME: my-api
   REGION: us-east-1
   FEATURE_FLAGS:
-    new_checkout_flow: "true"
+    new_checkout_flow: true
 ```
 
-The application auto-detects and loads it by setting `boilerplate.CONFIG`:
+Select it explicitly:
 
 ```typescript
-import { existsSync } from "node:fs";
-
-if (existsSync(".manifest.yaml")) {
-  options.configuration ??= {};
-  options.configuration.boilerplate ??= {};
-  options.configuration.boilerplate.CONFIG = ".manifest.yaml";
-}
-```
-
-`boilerplate.CONFIG` is the path to the config file. When set, it overrides the framework's default file discovery (which looks for `.env`). The file can be YAML, JSON, or `.env` format.
-
-Secrets never go in the manifest. They live in environment variables (or a remote secrets loader — see [Custom Config Loaders](../tutorials/09-custom-config-loader.md)).
-
-**Rule of thumb:**
-- Infrastructure generates it → manifest file
-- Ops/security controls it → environment variable
-- Changes at runtime without a redeploy → remote loader
-
-This pattern is most useful when many services share the same deployment toolchain. Each service gets its own manifest generated at deploy time; the bootstrap wrapper auto-loads it.
-
----
-
-## The adapter enable/disable pattern
-
-When an application bundles multiple optional backends, use a `boolean` config entry per adapter to control which ones are active in a given environment:
-
-```typescript title="src/libraries/provider-a/index.mts"
-export const LIB_PROVIDER_A = CreateLibrary({
-  name: "provider_a",
+await MY_APP.bootstrap({
   configuration: {
-    IS_ACTIVE: { type: "boolean", default: true },
-    API_URL:   { type: "string", required: true },
-    API_KEY:   { type: "string", required: true, source: ["env"] },
+    boilerplate: {
+      CONFIG: ".manifest.yaml",
+    },
   },
-  // ...
+  configSources: {
+    file: true,
+    argv: false,
+  },
 });
 ```
 
-The adapter's service checks `IS_ACTIVE` before doing anything:
+The `boilerplate.CONFIG` path is the legacy file-loader control. It is separate from `envFile`, which selects dotenv. Keep secrets in environment variables or a custom secrets loader rather than in a committed manifest.
+
+A useful division of ownership is:
+
+- deployment metadata generated by infrastructure → a file-loader manifest;
+- secrets controlled by operations/security → an env-only or remote-loader entry;
+- values that change without a redeploy → a registered custom loader.
+
+## Optional adapters
+
+When an application bundles optional backends, use a native boolean to select the active adapter and make inactive-only credentials optional:
 
 ```typescript
-export function ProviderAService({ config, registry }: TServiceParams) {
-  if (!config.provider_a.IS_ACTIVE) return;  // skip registration in this environment
+const PROVIDER_A = CreateLibrary({
+  name: "provider_a",
+  configuration: {
+    IS_ACTIVE: { schema: Type.Boolean({ default: true }) },
+    API_URL: { schema: Type.Optional(Type.String()) },
+    API_KEY: {
+      schema: Type.Optional(Type.String()),
+      source: ["env"],
+    },
+  },
+  services: {},
+});
+```
 
-  registry.registry.register({
-    name: "provider_a",
-    // ...
+The library is still wired and its configuration still finalizes when inactive. A bare required schema would fail before the service can inspect `IS_ACTIVE`; either make the credential optional and validate it when active, or split the adapter into a separately loaded module.
+
+```typescript
+export function ProviderAService({ config, lifecycle }: TServiceParams) {
+  lifecycle.onPostConfig(() => {
+    if (!config.provider_a.IS_ACTIVE) return;
+    if (!config.provider_a.API_URL || !config.provider_a.API_KEY) {
+      throw new Error("provider_a API_URL and API_KEY are required when the adapter is active");
+    }
+    connect(config.provider_a.API_URL, config.provider_a.API_KEY);
   });
 }
 ```
 
-In a dev environment where only one backend is needed:
-
-```bash
-PROVIDER_B__IS_ACTIVE=false
-PROVIDER_C__IS_ACTIVE=false
-```
-
-The libraries are still wired and their config still loads — which means `required: true` entries for inactive adapters will still fail at boot if not provided. Handle this by not marking API keys as `required` when the adapter might be inactive, or by guarding:
-
-```typescript
-API_KEY: {
-  type: "string",
-  // Don't use required: true here — the adapter might be IS_ACTIVE: false
-},
-```
-
-This gives you a single deployment image that runs correctly in any environment, selectively enabling backends via configuration alone.
-
-For the full plugin/adapter registry pattern, see the [Building a Plugin Registry](/blog/building-a-plugin-registry) blog post.
+For remote stores, registration timing, and source extension, see [Custom Config Loaders](../tutorials/09-custom-config-loader.md).

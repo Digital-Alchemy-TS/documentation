@@ -1,152 +1,152 @@
 ---
 title: Custom Config Loaders
 sidebar_position: 10
-description: "Build a config loader that reads values from any external source and integrates natively with DA's configuration system."
+description: "Load configuration from a remote store or other external source before native schema finalization."
 ---
 
-The built-in sources — environment variables, CLI flags, and config files — cover most use cases. But any external store (a secrets manager, a remote key-value API, a database) requires a custom loader. This tutorial shows the complete shape.
+Environment variables, CLI switches, and the optional file loader cover common deployments. A custom loader connects another source—such as a secrets manager, remote key/value API, or database—to the same configuration lifecycle.
 
-## What a config loader is
+## Loader timing and contract
 
-A config loader is a function that runs during the `PostConfig` lifecycle phase, after defaults are applied but before `onPostConfig` callbacks fire. It receives the full config definition — all declared entries for every module in the application — and returns a partial config object to merge into the running config.
+A loader runs after the built-in env/argv pass and optional file loader, in the order it was registered. Core waits for every enabled loader, settles source precedence, and then processes schema-backed values through their native providers before `onPostConfig` callbacks run.
 
 ```typescript
 type ConfigLoader = (params: ConfigLoaderParams) => Promise<Partial<AbstractConfig>>;
 ```
 
-The return type `Partial<AbstractConfig>` mirrors the `bootstrap.configuration` shape:
+A loader should return a partial module/key object. For schema-backed entries, return the schema's input representation. A codec or transform is applied once during finalization; do not return the already-decoded output unless that is also the schema input.
 
-```typescript
-// Return values are merged like this:
-{
-  my_app: { DATABASE_URL: "postgres://remote-host/mydb" },
-  my_lib: { API_KEY: "secret-from-vault" },
-}
-```
-
-## Registering a loader
-
-Loaders are registered from a service using `internal.boilerplate.configuration.registerLoader`:
+Register a loader during service construction or `onPreInit`. Registering from `onBootstrap` is too late for the current configuration pass.
 
 ```typescript
 import type { TServiceParams } from "@digital-alchemy/core";
 
 export function RemoteConfigService({ internal, lifecycle }: TServiceParams) {
-  lifecycle.onBootstrap(() => {
+  lifecycle.onPreInit(() => {
     internal.boilerplate.configuration.registerLoader(
-      async (params) => {
-        // fetch and return config values
-        return {};
-      },
-      "remote", // loader name — must match a key in ConfigLoaderSource
+      async () => ({
+        my_app: {
+          DATABASE_URL: await fetchDatabaseUrl(),
+          // A TypeBox codec could receive its encoded string here.
+          RETRIES: "5",
+        },
+      }),
+      "remote",
     );
   });
 }
 ```
 
-The second argument is the loader name. It must be a key in `ConfigLoaderSource` — which means you need to declare it before you can register it.
+## Extending `ConfigLoaderSource`
 
-## Extending ConfigLoaderSource
+Declare a custom name when it should be accepted by `registerLoader` and `configSources`:
 
-`ConfigLoaderSource` is an extensible interface. The built-in keys are `env`, `argv`, and `file`. Add your own key to make it a valid loader name and a valid `configSources` toggle:
-
-```typescript title="src/config-loader.mts"
+```typescript
+// src/config-loader.mts
 declare module "@digital-alchemy/core" {
-  export interface ConfigLoaderSource {
+  interface ConfigLoaderSource {
     remote: true;
   }
 }
 ```
 
-Once declared, `"remote"` is a valid name for `registerLoader` and can be toggled in `configSources`:
+Then a bootstrap can disable it for a local run:
 
 ```typescript
 await MY_APP.bootstrap({
   configSources: {
-    remote: false,  // skip remote loader in dev
+    remote: false,
   },
 });
 ```
 
-## Adding per-entry metadata with BaseConfig
+Absence from `configSources` leaves a registered custom loader enabled. `configSources` is a loader-channel toggle; it does not disable explicit bootstrap configuration or public output-shaped mutations.
 
-The real power of a custom loader is the ability to annotate config entries with metadata that tells the loader which entries it should fetch. Do this by extending `BaseConfig`:
+## Per-entry metadata
 
-```typescript title="src/config-loader.mts"
+Extend `BaseConfig` when the remote store needs a key or namespace for each entry:
+
+```typescript
+// src/config-loader.mts
 declare module "@digital-alchemy/core" {
-  export interface ConfigLoaderSource {
+  interface ConfigLoaderSource {
     remote: true;
   }
 
-  export interface BaseConfig {
-    remote?: { key: string; namespace?: string };
+  interface BaseConfig {
+    remote?: {
+      key: string;
+      namespace?: string;
+    };
   }
 }
 ```
 
-Now any config entry can declare `remote: { key: "..." }`:
+Schema metadata still belongs on the schema itself:
 
 ```typescript
+import { Type } from "typebox";
+
 export const MY_APP = CreateApplication({
   name: "my_app",
   configuration: {
     DATABASE_URL: {
-      type: "string",
-      required: true,
+      schema: Type.String({ description: "Primary database URL" }),
       remote: { key: "db-connection-string", namespace: "shared" },
+      source: ["remote"],
     },
     API_KEY: {
-      type: "string",
-      required: true,
+      schema: Type.String(),
       remote: { key: "api-key" },
-      source: ["remote"],  // restrict to remote only — never from env or file
+      source: ["remote"],
     },
   },
-  // ...
+  services: {},
 });
 ```
 
-## Scanning config entries
+`source: ["remote"]` prevents env, argv, and file loader values from replacing the key. It does not prevent an explicit bootstrap seed or a later output-shaped `set()`/`merge()` call.
 
-`params.configs` is a `Map<string, Record<string, AnyConfig>>` — a map from module name to its config definitions. Iterate it to find entries with your metadata:
+## Scanning definitions
+
+`params.configs` is a map from module names to their raw config definitions. Scan it for your extension metadata:
 
 ```typescript
-async (params) => {
+async ({ configs }) => {
   const result: Partial<AbstractConfig> = {};
 
-  for (const [moduleName, moduleConfigs] of params.configs.entries()) {
+  for (const [moduleName, moduleConfigs] of configs.entries()) {
     for (const [key, entry] of Object.entries(moduleConfigs)) {
-      if (!entry.remote) continue; // skip entries without our metadata
+      if (!entry.remote) continue;
 
-      const value = await fetchFromRemote(entry.remote.key, entry.remote.namespace);
-
+      const value = await fetchRemote(entry.remote.key, entry.remote.namespace);
       result[moduleName] ??= {};
       result[moduleName][key] = value;
     }
   }
 
   return result;
-}
+};
 ```
 
-`entry.remote` is typed because we merged into `BaseConfig` — TypeScript knows the shape.
+The raw `schema` value retains provider identity. Do not serialize it as part of a remote manifest. If a scanner or help command needs metadata, use `internal.boilerplate.configuration.getMetadata()`, which returns a safe view without executing default factories or provider callbacks.
 
 ## Parallel loading
 
-For many entries, sequential fetches are slow. Build a list of promises and await them together:
+For independent remote requests, collect promises and await them together:
 
 ```typescript
-async (params) => {
+async ({ configs }) => {
   const result: Partial<AbstractConfig> = {};
   const waiting: Promise<void>[] = [];
 
-  for (const [moduleName, moduleConfigs] of params.configs.entries()) {
+  for (const [moduleName, moduleConfigs] of configs.entries()) {
     for (const [key, entry] of Object.entries(moduleConfigs)) {
       if (!entry.remote) continue;
 
       waiting.push(
         (async () => {
-          const value = await fetchFromRemote(entry.remote!.key, entry.remote!.namespace);
+          const value = await fetchRemote(entry.remote.key, entry.remote.namespace);
           result[moduleName] ??= {};
           result[moduleName][key] = value;
         })(),
@@ -159,169 +159,59 @@ async (params) => {
 }
 ```
 
-All fetch calls run concurrently. The result map is built up safely because each promise writes to a different key.
+Later custom loaders see raw previews from earlier loaders. They should not rely on a transform having already run.
 
 ## Error handling
 
-Use `BootstrapException` for fatal failures — errors that should halt the application rather than boot with a missing value:
+Throw a `BootstrapException` for a fatal remote failure so bootstrap stops with a contextual error:
 
 ```typescript
 import { BootstrapException } from "@digital-alchemy/core";
 
-// ...
-const value = await fetchFromRemote(entry.remote.key).catch((error) => {
-  throw new BootstrapException(
-    context,
-    "REMOTE_CONFIG_FETCH_FAILED",
-    `Failed to load config key "${entry.remote.key}": ${error.message}`,
-  );
-});
-```
-
-`BootstrapException` triggers a clean shutdown with a logged error. The process exits before `onPostConfig` runs — so `required: true` entries that weren't populated never trigger the generic "missing required config" error; they get your specific error instead.
-
-## Full example
-
-A `RemoteConfigService` that fetches from a generic HTTP config endpoint:
-
-```typescript title="src/services/remote-config.service.mts"
-import { BootstrapException } from "@digital-alchemy/core";
-import type { TServiceParams } from "@digital-alchemy/core";
-
-export function RemoteConfigService({
-  config,
-  context,
-  internal,
-  lifecycle,
-  logger,
-}: TServiceParams) {
-  lifecycle.onBootstrap(() => {
-    internal.boilerplate.configuration.registerLoader(async (params) => {
-      const endpoint = config.my_app.CONFIG_SERVICE_URL;
-      const token = config.my_app.CONFIG_SERVICE_TOKEN;
-
-      if (!endpoint) {
-        logger.debug("no config service URL set, skipping remote loader");
-        return {};
-      }
-
-      const result: Record<string, Record<string, string>> = {};
-      const waiting: Promise<void>[] = [];
-
-      for (const [moduleName, moduleConfigs] of params.configs.entries()) {
-        for (const [key, entry] of Object.entries(moduleConfigs)) {
-          if (!entry.remote) continue;
-
-          waiting.push(
-            (async () => {
-              const url = `${endpoint}/config/${entry.remote!.namespace ?? "default"}/${entry.remote!.key}`;
-              const response = await globalThis.fetch(url, {
-                headers: { Authorization: `Bearer ${token}` },
-              }).catch((error) => {
-                throw new BootstrapException(
-                  context,
-                  "CONFIG_FETCH_FAILED",
-                  `Could not reach config service for "${entry.remote!.key}": ${error.message}`,
-                );
-              });
-
-              if (!response.ok) {
-                throw new BootstrapException(
-                  context,
-                  "CONFIG_FETCH_HTTP_ERROR",
-                  `Config service returned ${response.status} for key "${entry.remote!.key}"`,
-                );
-              }
-
-              const { value } = await response.json();
-              result[moduleName] ??= {};
-              result[moduleName][key] = value;
-              logger.trace({ key: entry.remote!.key, moduleName }, "loaded remote config");
-            })(),
-          );
-        }
-      }
-
-      await Promise.all(waiting);
-      logger.debug({ count: waiting.length }, "remote config loaded");
-      return result;
-    }, "remote");
+async function loadRemoteValue(context: string) {
+  return fetchRemote("database-url").catch(error => {
+    throw new BootstrapException(
+      context,
+      "REMOTE_CONFIG_FETCH_FAILED",
+      `Could not load remote configuration: ${error.message}`,
+    );
   });
 }
 ```
 
-## Using the loader in config entries
+Provider failures from the final schema pass use the sanitized `CONFIG_SCHEMA_*` causes. Do not echo secrets or raw input values in a custom error message.
 
-Config entries that should come from the remote loader declare the `remote` property:
+## Development and production
+
+A local run can disable the remote loader and provide explicit schema input:
 
 ```typescript
-export const MY_APP = CreateApplication({
-  name: "my_app",
-  configuration: {
-    // Values from the config service
-    DATABASE_URL: {
-      type: "string",
-      required: true,
-      remote: { key: "database-url" },
-    },
-    THIRD_PARTY_API_KEY: {
-      type: "string",
-      required: true,
-      remote: { key: "third-party-api-key", namespace: "shared-secrets" },
-      source: ["remote"],  // can't be overridden by env or file
-    },
-
-    // Non-remote values (normal env/file sources)
-    CONFIG_SERVICE_URL: {
-      type: "string",
-    },
-    CONFIG_SERVICE_TOKEN: {
-      type: "string",
-      required: true,
-      source: ["env"],
-    },
-  },
-  // ...
-});
-```
-
-## Dev vs prod
-
-In development, skip the remote loader entirely using `configSources`:
-
-```typescript title="src/main.mts  (local development)"
 await MY_APP.bootstrap({
   configSources: {
-    remote: false,  // use env/file in dev
+    remote: false,
+    file: false,
   },
   configuration: {
     my_app: {
       DATABASE_URL: "postgres://localhost/myapp_dev",
-      THIRD_PARTY_API_KEY: "dev-test-key",
+      API_KEY: "dev-test-key",
     },
   },
 });
 ```
 
-```typescript title="src/main.mts  (production)"
+In production, enable the remote loader and disable file or argv channels as appropriate:
+
+```typescript
 await MY_APP.bootstrap({
   configSources: {
-    file: false,   // no config files in prod
-    argv: false,   // no CLI flags
-    remote: true,  // remote loader active (this is also the default if not specified)
+    file: false,
+    argv: false,
+    remote: true,
   },
 });
 ```
 
-The loader code itself doesn't need to change between environments — the `configSources` toggle handles it.
+The loader code stays the same. Source restrictions, provider validation, and final output processing remain in the core lifecycle.
 
-## Summary
-
-- Extend `ConfigLoaderSource` to register your loader name as a valid key
-- Extend `BaseConfig` to add per-entry metadata that config authors use to annotate which entries your loader handles
-- In your loader, iterate `params.configs.entries()` to find annotated entries
-- Use `Promise.all()` for parallel fetches
-- Throw `BootstrapException` for fatal failures
-- Toggle the loader with `configSources` so it only runs in deployed environments
-
-For existing config source patterns and merge order, see [Config Sourcing](../reference/config/sourcing.md).
+For built-in source precedence, see [Config Sourcing](../reference/config/sourcing.md). For provider input/output and construction previews, see [Schema-backed Configuration](../reference/config/schemas.mdx).

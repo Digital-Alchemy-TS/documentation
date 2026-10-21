@@ -1,28 +1,28 @@
 ---
-title: Configuration Types
+title: Legacy Configuration Types
 sidebar_position: 2
-description: "All six configuration value types with TypeScript mappings and casting rules."
+description: "The legacy type-based configuration form and its compatibility parsing rules."
 ---
 
 import EmbeddedEditor from '@site/src/components/EmbeddedEditor';
 import { files, defaultFile } from '@site/src/examples/core/reference/config-types';
 
-Every config entry has a `type` field that determines its TypeScript type and how string values from environment variables are parsed.
+This page documents the legacy `type` form. It remains supported, and it can be mixed with schema-backed entries in the same module. For new runtime validation, native defaults, transforms, and structured values, use [Schema-backed Configuration](./schemas.mdx).
+
+Every legacy entry has a `type` field. `default`, `description`, `required`, `enum`, and `source` are legacy entry metadata.
 
 ## Type reference
 
-| `type` value | TypeScript type | Notes |
+| `type` value | Injected TypeScript type | Notes |
 |---|---|---|
-| `"string"` | `string` | With `enum`, narrows to a union literal type |
-| `"number"` | `number` | Parsed from string: `"3000"` → `3000` |
-| `"boolean"` | `boolean` | String coercion: see rules below |
-| `"string[]"` | `string[]` | Comma-separated in env; array in code |
-| `"record"` | `Record<string, unknown>` | JSON string in env |
-| `"internal"` | `VALUE` (generic) | Used by built-in services; not for user config |
+| `"string"` | `string` | `enum` narrows TypeScript only; the legacy parser does not reject an out-of-enum runtime value |
+| `"number"` | `number` | Parsed with `Number`; invalid input can become `NaN` |
+| `"boolean"` | `boolean` | String input is true only for case-insensitive `"true"` and `"y"` |
+| `"string[]"` | `string[]` | CSV strings are split on commas; a JSON array string is also accepted |
+| `"record"` | `Record<string, string>` | Object values pass through; string values are parsed as JSON |
+| `"internal"` | The declared value shape | Reserved for framework-managed or library-internal values |
 
 ## string
-
-A plain string value.
 
 ```typescript
 API_URL: {
@@ -31,11 +31,11 @@ API_URL: {
 }
 ```
 
-TypeScript type: `string`.
+`required: true` is checked during finalization. If no value is available, bootstrap throws `REQUIRED_CONFIGURATION_MISSING`.
 
 ### enum narrowing
 
-Add an `enum` array to restrict values and narrow the TypeScript type to a union:
+`enum` narrows the TypeScript type:
 
 ```typescript
 ENVIRONMENT: {
@@ -45,13 +45,9 @@ ENVIRONMENT: {
 }
 ```
 
-TypeScript type: `"local" | "staging" | "production"`.
-
-If the runtime value isn't in the enum list, bootstrap halts with `REQUIRED_CONFIGURATION_MISSING` (unless `required` is false, in which case the value is silently accepted — validate manually if needed).
+The injected TypeScript type is `"local" | "staging" | "production"`. The legacy runtime parser still treats the value as a string; it does not enforce membership in the enum list. Use a native schema union or enum when runtime rejection is required.
 
 ## number
-
-A numeric value. Parsed from a string when sourced from env/argv.
 
 ```typescript
 PORT: {
@@ -60,18 +56,9 @@ PORT: {
 }
 ```
 
-TypeScript type: `number`.
-
-`"3000"` in the environment becomes `3000`. `NaN` is possible if the value isn't a valid number — no runtime validation is done beyond the type conversion.
+Environment and CLI strings are passed to `Number`. A non-numeric value is not rejected by the legacy parser and may produce `NaN`.
 
 ## boolean
-
-A boolean value. String coercion uses the following rules:
-
-| String value | Result |
-|---|---|
-| `"true"`, `"y"`, `"1"` | `true` |
-| `"false"`, `"n"`, `"0"` (or anything else) | `false` |
 
 ```typescript
 DEBUG_MODE: {
@@ -80,11 +67,16 @@ DEBUG_MODE: {
 }
 ```
 
-TypeScript type: `boolean`.
+The legacy string conversion is intentionally narrow:
+
+| String input | Result |
+|---|---|
+| `"true"`, `"TRUE"`, `"y"`, `"Y"` | `true` |
+| `"1"`, `"yes"`, `"false"`, `"n"`, `"0"`, or any other string | `false` |
+
+Native schemas have provider-specific boolean parsing and validation; do not infer schema behavior from this legacy table.
 
 ## string[]
-
-An array of strings.
 
 ```typescript
 ALLOWED_ORIGINS: {
@@ -93,18 +85,21 @@ ALLOWED_ORIGINS: {
 }
 ```
 
-TypeScript type: `string[]`.
+A normal string is split as CSV:
 
-In environment variables, pass a comma-separated string:
-```
+```text
 MY_APP__ALLOWED_ORIGINS=https://app.example.com,https://admin.example.com
 ```
 
-From CLI argv: repeat the flag: `--my_app.ALLOWED_ORIGINS=a --my_app.ALLOWED_ORIGINS=b`.
+The parser also accepts a string beginning with `[` as JSON. Repeated CLI switches arrive as an array:
+
+```text
+--my_app__ALLOWED_ORIGINS=https://app.example.com --my_app__ALLOWED_ORIGINS=https://admin.example.com
+```
+
+Schema arrays use native provider input; use JSON rather than relying on the legacy CSV convention.
 
 ## record
-
-A `Record<string, unknown>` — arbitrary key/value pairs.
 
 ```typescript
 FEATURE_FLAGS: {
@@ -113,27 +108,18 @@ FEATURE_FLAGS: {
 }
 ```
 
-TypeScript type: `Record<string, unknown>`.
-
-In environment variables, provide a JSON string:
-```
-MY_APP__FEATURE_FLAGS={"new_ui":true,"beta":false}
-```
+A string value is parsed as JSON, while an object value is retained. The default legacy value type is `Record<string, string>`; use a schema when the map needs runtime value validation.
 
 ## internal
 
-Used by built-in framework services to store complex structured values that don't map cleanly to the other types. Not intended for user config — use `"record"` if you need arbitrary key/value pairs.
+The `internal` type is a legacy escape hatch for framework-managed structured values. It is not intended for ordinary application configuration. Prefer a native object or record schema when the value has a user-facing contract.
 
-```typescript
-// Framework internal — not for user config
-SOME_CONFIG: {
-  type: "internal",
-  default: { complex: "object" },
-}
-```
+## source and required
+
+`source` is an entry-level allow-list for loader channels such as `env`, `argv`, `file`, or a registered custom loader. `required` only applies to legacy entries. See [Config Sourcing](./sourcing.md) and [Accessing Config](./access.md).
 
 ## Try it live
 
-The editor below has an app with one entry of each type.
+This editor intentionally shows the legacy form so its compatibility parsing is visible. For the schema-backed TypeBox example, open the [typed configuration tutorial](../../tutorials/04-typed-configuration.mdx).
 
-<EmbeddedEditor files={files} defaultFile={defaultFile} exampleId="reference-config-types" />
+<EmbeddedEditor files={files} defaultFile={defaultFile} exampleId="reference-legacy-config-types" />

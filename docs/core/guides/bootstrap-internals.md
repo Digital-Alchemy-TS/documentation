@@ -1,10 +1,10 @@
 ---
 title: Bootstrap Internals
 sidebar_position: 2
-description: "The full boot sequence — wiring phases, lifecycle stages, and shutdown — explained in depth."
+description: "The boot sequence—wiring phases, configuration finalization, lifecycle stages, and shutdown."
 ---
 
-When you call `MY_APP.bootstrap()`, a lot happens before your first `onReady` callback fires. This guide walks through every phase.
+When you call `MY_APP.bootstrap()`, core wires the dependency graph before the first `onReady` callback. This guide focuses on where configuration enters that sequence.
 
 ## The full sequence
 
@@ -21,14 +21,11 @@ sequenceDiagram
     B->>WS: Create EventEmitter
     B->>WS: Wire boilerplate (als, config, logger, scheduler)
     Note over WS: LOAD_PROJECT for boilerplate config
-    B->>WS: Merge bootstrap.configuration overrides
-    B->>WS: Apply appendLibrary options
-
     B->>WS: buildSortOrder(libraries)
     Note over WS: Throws BAD_SORT on cycles
 
     loop Each library (topological order)
-        WS->>WS: LOAD_PROJECT (register config defs)
+        WS->>WS: LOAD_PROJECT (register config defs and previews)
         WS->>WS: wireOrder(priorityInit, services)
         WS->>WS: Call each service function (serial)
     end
@@ -36,16 +33,19 @@ sequenceDiagram
     alt bootLibrariesFirst: false (default)
         WS->>WS: Wire application services
         B->>L: exec("PreInit")
+        B->>L: initialize configuration loaders
+        Note over L: env/argv → optional file → custom loaders
+        B->>L: finalize native schemas
         B->>L: exec("PostConfig")
-        Note over L: Config sourced & validated here
         B->>L: exec("Bootstrap")
         B->>L: exec("Ready")
     else bootLibrariesFirst: true
         B->>L: exec("PreInit") for libraries
-        B->>L: exec("PostConfig") for libraries
+        B->>L: initialize and finalize library config
+        B->>L: exec("PostConfig")
         B->>L: exec("Bootstrap") for libraries
         WS->>WS: Wire application services
-        B->>L: exec("Ready") for everything
+        B->>L: exec("Ready") (everything)
     end
 
     B-->>U: TServiceParams (Ready complete)
@@ -59,71 +59,65 @@ sequenceDiagram
 
 ## Phase 1 — Boilerplate
 
-Before any user code runs, four boilerplate services are wired: `als` (AsyncLocalStorage), `configuration`, `logger`, and `scheduler`. These form the basis of `TServiceParams` — every subsequent service gets access to them.
+Before user services run, four boilerplate services are wired: `als`, `configuration`, `logger`, and `scheduler`. They form the basis of `TServiceParams`.
 
-The boilerplate module's config definitions are also registered via `LOAD_PROJECT`. This happens before any library code runs, so boilerplate config keys like `LOG_LEVEL` and `NODE_ENV` are always available.
-
-After boilerplate wiring, any overrides from `bootstrap.configuration` are merged in. These have the highest priority — they override everything, including env vars and config files.
+The boilerplate config definitions are registered before library code runs. Legacy defaults are populated immediately. If a TypeBox entry has an explicit root default, core can prepare an isolated construction preview; a known bootstrap value can supersede it. External loaders have not run.
 
 ## Phase 2 — Dependency sorting
 
-`buildSortOrder()` runs a topological sort on `app.libraries`. It repeatedly selects the next library whose dependencies are all already in the output list. The result is a deterministic load order.
+`buildSortOrder()` performs a topological sort on `app.libraries`. It selects the next library whose dependencies are already in the output list. A `BAD_SORT` error means the dependency graph is circular.
 
-This runs before any library services are wired. A `BAD_SORT` error here means circular dependencies — fix the structure, not the code.
-
-If `appendLibrary` was passed in `BootstrapOptions`, those libraries are merged into `app.libraries` before sorting.
+If `appendLibrary` was passed in `BootstrapOptions`, those libraries are merged before sorting.
 
 ## Phase 3 — Library wiring
 
 Libraries wire in topological order. For each library:
-1. `LOAD_PROJECT` registers its config definitions (defaults applied immediately)
-2. `wireOrder(priorityInit, services)` determines the service wiring sequence
-3. Each service function is called once, serially, receiving a `TServiceParams` built from everything wired so far
 
-**What's in `TServiceParams` during library wiring:**
-- All boilerplate services (`logger`, `config`, `scheduler`, `als`)
-- All services from previously-wired libraries
-- `config.*` with defaults (not yet env/argv/file values)
+1. `LOAD_PROJECT` registers its config definitions and validates the entry/provider shape.
+2. Schema metadata is recorded without executing provider callbacks; root TypeBox defaults may be prepared for the construction preview.
+3. `wireOrder(priorityInit, services)` determines the service order.
+4. Each service function is called once with the services wired so far.
 
-## Phase 4 — Application wiring (default mode)
+During wiring, `config.*` does not contain final external values. A service may see legacy defaults, a TypeBox root-default preview, a known bootstrap value, or raw values made visible by earlier setup. It must wait for `onPostConfig` for provider-processed output.
 
-The application's services wire the same way as library services. By this point, all library services are available in `TServiceParams`.
+## Phase 4 — Application wiring
 
-`priorityInit` controls the order within the application module — same algorithm as libraries.
+The application's services wire after its libraries in the default mode. The application definition is registered in the same way, and its bootstrap configuration seed is available before its service factories run. With `bootLibrariesFirst: true`, application wiring is deferred until after library Bootstrap callbacks.
 
-## Phase 5 — Lifecycle stages
+## Phase 5 — Configuration and lifecycle
 
-After all services are wired, the lifecycle runs four stages in sequence. The framework awaits each stage before starting the next.
+After all services are wired, core runs `PreInit`. This is the last early stage for registering custom loaders. Configuration initialization then runs:
 
-**PreInit:** Runs before config is sourced from external sources. Only defaults are available in `config.*`. Use for registering custom config loaders or very early setup.
+1. the env/argv loader, with argv winning when both provide a value;
+2. the file loader only when `configSources.file` is true;
+3. registered custom loaders in registration order, skipping names explicitly set to false;
+4. native schema processing and legacy finalization.
 
-**PostConfig:** Config is sourced and validated here. The `initialize()` function in the configuration service runs the env/argv loader and file loader, then calls `validateConfig()`. If any `required: true` entry has no value, `REQUIRED_CONFIGURATION_MISSING` is thrown. All `onPostConfig` callbacks run after validation.
+Bootstrap configuration is an early seed in this process. It is not a highest-priority override, and an entry's `source` allow-list filters loader values rather than explicit bootstrap input.
 
-**Bootstrap:** All services are wired and config is validated. This is the main initialization stage — open connections, load data, start background processes.
+For schema entries, all raw sources settle before provider processing. TypeBox object, record, and array roots parse winning string values as JSON; normal strings remain strings. Core publishes one complete processed snapshot atomically. A provider or legacy required failure aborts before `PostConfig`.
 
-**Ready:** Application is fully started. Safe to serve traffic, accept connections, and start scheduled jobs. The `scheduler` service activates at this stage — jobs registered before `Ready` didn't fire, and now start on their first scheduled time.
+`PostConfig` is therefore the first stage where all `config.*` values are final. `Bootstrap` is the main initialization stage, and `Ready` is the point where the application is fully started.
 
 ## What's in RAM at Ready
 
-At `Ready`, every service's return value is accessible. The `internal.boot.loadedModules` map contains all modules, each with all their service return values. `internal.boot.completedLifecycleEvents` contains `["PreInit", "PostConfig", "Bootstrap", "Ready"]`.
+At `Ready`, every service's return value is accessible. `internal.boot.loadedModules` contains all modules and service APIs, and `internal.boot.completedLifecycleEvents` contains `PreInit`, `PostConfig`, `Bootstrap`, and `Ready`.
 
-No service function will ever be called again. The service return values are immutable (though the objects they point to can change state). The dependency graph is fixed.
+No service function is called again. The dependency graph is fixed. Runtime `configuration.set()` and `merge()` updates change the live output-shaped store; they do not re-run native schema decoding or validation.
 
 ## Shutdown
 
-Shutdown is triggered by `SIGTERM`, `SIGINT`, or `app.teardown()` directly. The process:
+Shutdown is triggered by `SIGTERM`, `SIGINT`, or `app.teardown()`:
 
-1. All active `sleep()` calls are killed (`ACTIVE_SLEEPS` set is drained)
-2. `PreShutdown`, `ShutdownStart`, `ShutdownComplete` run in that order
-3. The event emitter's listeners are removed
-4. If triggered by signal, `process.exit()` is called with the appropriate exit code
+1. Active `sleep()` calls are killed.
+2. `PreShutdown`, `ShutdownStart`, and `ShutdownComplete` run in order.
+3. Event listeners are removed.
+4. Signal-triggered shutdown exits with 143 (`SIGTERM`) or 130 (`SIGINT`).
 
-On `SIGTERM` → exit 143. On `SIGINT` → exit 130. On bootstrap failure → exit 1. On clean teardown without signal → process exits naturally.
+A bootstrap failure exits with 1 in normal app mode. A clean teardown without a signal lets the Node.js process exit naturally.
 
 ## Why wiring is separate from lifecycle
 
-This is the central design decision. During wiring, service functions run and return their APIs. At that moment, `TServiceParams` is built incrementally as each service completes. The return values of not-yet-wired services are `undefined`.
+During wiring, service functions run and return their APIs. `TServiceParams` is built incrementally, so services can only read APIs from modules already wired. Lifecycle callbacks run after the graph is constructed, when ordering and service APIs are stable.
 
-By keeping wiring and lifecycle separate, `priorityInit` can control the dependency order within a module, and `depends`/`libraries` can control it between modules. By the time lifecycle stages run, every service's API is fully available.
-
-If wiring and `onBootstrap` were the same thing, you'd need a way to declare "my bootstrap callback depends on service X's bootstrap callback completing first" — a much harder problem. The current model eliminates that entire class of initialization ordering bugs.
+Keeping wiring and lifecycle separate lets `priorityInit`, `depends`, and `libraries` control construction order without conflating construction with async initialization. Configuration follows the same boundary: previews may support construction, while final provider output is guaranteed only from `PostConfig` onward.

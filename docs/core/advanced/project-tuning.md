@@ -73,31 +73,41 @@ Keys are `"module"` or `"module:service"`. Values are any `LOG_LEVEL` string: `"
 
 ## configSources
 
-By default, DA reads configuration from three sources: environment variables (`env`), CLI arguments (`argv`), and a `.env` file (`file`). Use `configSources` to disable specific loaders:
+Configuration sources are processed in this order:
+
+```text
+declaration defaults / bootstrap inputs
+  → env + argv (argv wins within this pass)
+  → optional file loader
+  → registered custom loaders
+  → native schema processing
+```
+
+In normal bootstrap, `env` and `argv` default to enabled. The `file` loader is opt-in:
 
 ```typescript
 await MY_APP.bootstrap({
   configSources: {
-    argv: false,  // don't read from CLI arguments
-    file: false,  // don't read from .env file
-    env: true,    // still read from environment variables (default: true)
+    env: true,
+    argv: false,
+    file: false,
   },
 });
 ```
 
-All three keys default to `true` if not specified. Setting a key to `false` removes that source from the merge.
+Custom loader names are enabled unless set to `false`. These flags control loader channels, not explicit bootstrap configuration or the output-shaped `configuration.set()` and `merge()` APIs. An entry-level `source` array can further restrict a key to `env`, `argv`, `file`, or a custom loader name.
 
-### When to disable sources
+The file loader reads JSON, YAML/YML, and INI. `--config path` and `boilerplate.CONFIG` select its path. Dotenv loading is separate: `envFile` or `--env-file` selects a dotenv file that populates `process.env` for the environment loader.
 
-**`file: false`** — In containerized deployments where secrets come only from environment variables, disabling file loading prevents accidentally picking up a stray `.env` file.
+For tests that must not read host sources, disable all three channels explicitly:
 
-**`argv: false`** — In scripts or background workers where you don't control the process arguments and don't want arbitrary argv to affect configuration.
+```typescript
+TestRunner(MY_APP).setOptions({
+  configSources: { env: false, argv: false, file: false },
+});
+```
 
-**`env: false`** — Rarely useful in production. Primarily for isolated test environments where you want complete determinism from `bootstrap.configuration` alone.
-
-:::note
-In tests, `TestRunner` defaults `file: false` automatically. `env` and `argv` are also disabled unless you call `runner.setOptions({ loadConfigs: true })`.
-:::
+See [Config Sourcing](../reference/config/sourcing.md) for lookup details and [Schema-backed Configuration](../reference/config/schemas.mdx) for provider processing.
 
 ## customLogger
 
@@ -166,7 +176,7 @@ await MY_APP.bootstrap({
     },
   },
   configSources: {
-    file: false,                       // no .env files in prod
+    file: false,                       // no config-file loader in prod
   },
   handleGlobalErrors: true,            // explicit, for documentation clarity
 });
