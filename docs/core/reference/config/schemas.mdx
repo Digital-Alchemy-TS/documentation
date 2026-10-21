@@ -45,7 +45,7 @@ export const MY_APP = CreateApplication({
 });
 ```
 
-The outer entry may contain `schema` and the entry-level `source` allow-list. It must not contain `type`, `default`, `description`, or `required`. Put metadata and defaults on the native schema instead. A schema-backed entry cannot use the legacy `required` flag: the provider's own optionality determines whether a missing value is accepted.
+The outer entry contains `schema` and may include the entry-level `source` allow-list and custom loader metadata added through declaration merging of `BaseConfig`, such as `remote: { key: "api-key" }`. See [Per-entry metadata](../../tutorials/09-custom-config-loader.md#per-entry-metadata) for an example. It must not contain `type`, `default`, `description`, or `required`. Put schema descriptions and defaults on the native schema instead; loader-specific metadata stays on the entry. A schema-backed entry cannot use the legacy `required` flag: the provider's own optionality determines whether a missing value is accepted.
 
 A definition must provide exactly one of `type` or `schema`, so a module can adopt schemas one key at a time. The legacy and schema forms can coexist in the same module.
 

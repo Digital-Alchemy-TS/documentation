@@ -113,4 +113,20 @@ lifecycle.onBootstrap(optionalMetrics, -10);
 
 If a startup stage has already completed, a newly registered callback fires immediately. If a shutdown stage has already completed, a newly registered callback is silently dropped.
 
+## TParentLifecycle.child()
+
+Core exports the extended `TParentLifecycle` interface, which declares `child(): TLifecycleBase`. When an integration supplies this extended interface, its child lifecycle exposes the same hook registration methods:
+
+```typescript
+import type { TParentLifecycle } from "@digital-alchemy/core";
+
+function registerScopedHooks(parent: TParentLifecycle) {
+  const childLifecycle = parent.child();
+  childLifecycle.onBootstrap(() => { /* scoped setup */ });
+  childLifecycle.onShutdownStart(() => { /* scoped teardown */ });
+}
+```
+
+The ordinary `lifecycle` injected through `TServiceParams` is `TLifecycleBase`; it does not expose `child()`. The provider of a `TParentLifecycle` is responsible for creating and driving its child scopes.
+
 For the full configuration preview and finalization model, see [Accessing Config](../config/access.md) and [Schema-backed Configuration](../config/schemas.mdx#construction-previews-and-lifecycle).
