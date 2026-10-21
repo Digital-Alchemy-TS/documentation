@@ -52,13 +52,15 @@ MY_APP__PORT=8080
 node dist/app.mjs --my_app__PORT=8080
 ```
 
-Core searches each key in these forms, in order:
+### Lookup precedence
+
+For each configuration key, core searches environment variables and CLI switches in this order:
 
 1. `MODULE__KEY` — preferred
 2. `MODULE_KEY` — compatibility form
 3. `KEY` — bare fallback
 
-The same search is performed for CLI switches and environment variables, but a matching CLI switch wins over an environment value. Module hyphens and underscores are treated as interchangeable during lookup. Use underscore forms in deployment commands; dot notation such as `--my_app.PORT=8080` is not the documented key form.
+The same lookup order is used for CLI switches and environment variables, but a matching CLI switch wins over an environment value. Module hyphens and underscores are treated as interchangeable during lookup. Use underscore forms in deployment commands; dot notation such as `--my_app.PORT=8080` is not the documented key form.
 
 The file switch is separate from a configuration key:
 
